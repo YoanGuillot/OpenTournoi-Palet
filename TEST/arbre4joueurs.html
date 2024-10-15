@@ -40,13 +40,25 @@
     }
 
     .bracket-edit{
+        display:block;
         height:30px;
-        text-align: right;
+        text-align: center;
+        width: 30px;
+        float: right;
     }
 
     .bracket-edit img{
         height: 25px;
         padding-top: 2px;
+    }
+
+    .bracket-position{
+        display:block;
+        width: 100px;
+        height:30px;
+        line-height: 30px;
+        font-size: 12px;
+        float:left;
     }
 
     .bracket-equipe-num {
@@ -100,6 +112,8 @@
         background-image: url(img/bracket-i.png);
     }
 
+ 
+
 </style>
 <body>
    <table>
@@ -125,6 +139,7 @@
         </tr>
         <tr>
             <td>
+                <div class="bracket-position">1-4</div>
                 <div class="bracket-edit">
                     <img src="img/edit.png" />
                 </div>
@@ -174,6 +189,7 @@
 
             </td>
             <td>
+                <div class="bracket-position">1-2</div>
                 <div class="bracket-edit">
                     <img src="img/edit.png" />
                 </div>
@@ -205,11 +221,13 @@
             </td>
             <td class="bracket-i">  
             </td>
-            <td>  
+            <td>
+                <div class="bracket-position">1</div>  
             </td>
         </tr>
         <tr>
             <td>
+                <div class="bracket-position">1-4</div>
                 <div class="bracket-edit">
                     <img src="img/edit.png" />
                 </div>
@@ -249,6 +267,59 @@
             <td>  
             </td>
             <td>  
+            </td>
+        </tr>
+   </table>
+   <hr />
+   <table>
+        <tr>
+            <td>
+                <div class="bracket-equipe">
+                    <div class="bracket-equipe-num">
+                        PF1
+                    </div>
+                    <div class="bracket-equipe-score">
+                      0
+                    </div>
+                </div>  
+            </td>
+            <td class="bracket-haut">  
+            </td>
+            <td>  
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="bracket-position">3-4</div>
+                <div class="bracket-edit">
+                    <img src="img/edit.png" />
+                </div>
+            </td>
+            <td class="bracket-t">
+            </td>
+            <td>
+                <div class="bracket-equipe bracket-vainqueur">
+                    <div class="bracket-equipe-num">
+                        VPF1
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="bracket-equipe">
+                    <div class="bracket-equipe-num">
+                        PF2
+                    </div>
+                    <div class="bracket-equipe-score">
+                      0
+                    </div>
+                </div>  
+            </td>
+            <td class="bracket-bas">  
+            </td>
+            <td>
+                <div class="bracket-position">3</div>
             </td>
         </tr>
    </table> 

@@ -38,6 +38,14 @@
         width: 30px;
         float: right;
     }
+	
+	.bracket-edit-r{
+        display:block;
+        height:30px;
+        text-align: center;
+        width: 30px;
+        float: left;
+    }
 
     .bracket-edit img{
         height: 25px;
@@ -82,12 +90,26 @@
         height:30px;
         background-image: url(../img/bracket-h.png);
     }
+	
+	.bracket-haut-r{
+        display:block;
+        width: 40px;
+        height:30px;
+        background-image: url(../img/bracket-hr.png);
+    }
     
     .bracket-bas{
         display:block;
         width: 40px;
         height:30px;
         background-image: url(../img/bracket-b.png);
+    } 
+
+	.bracket-bas-r{
+        display:block;
+        width: 40px;
+        height:30px;
+        background-image: url(../img/bracket-br.png);
     }
 
     .bracket-t{
@@ -95,6 +117,13 @@
         width: 40px;
         height: 30px;
         background-image: url(../img/bracket-t.png);
+    }
+
+	.bracket-tr{
+        display:block;
+        width: 40px;
+        height: 30px;
+        background-image: url(../img/bracket-tr.png);
     }
     
     .bracket-i{

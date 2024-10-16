@@ -103,3 +103,7 @@
         height: 30px;
         background-image: url(../img/bracket-i.png);
     }
+
+	#arbre_classement{
+		column-count: 2;
+	}

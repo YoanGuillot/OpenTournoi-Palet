@@ -25,7 +25,7 @@ include 'includes/fonctions.inc.php';
 <body>
 <?php
 
-print_r($_POST);
+//print_r($_POST);
 //die();
 
 
@@ -46,6 +46,7 @@ include 'includes/actions.inc.php';
 
 //renvoi vers le dashboard dashboard
 include 'includes/dashboard.inc.php';
+
 ?>
 
 </body>

@@ -83,7 +83,8 @@ defined('_LPDT') or die;
 							</div>
 	
 							<input type="hidden" name="action" class="uk-input" value="miseajourParametres"></input>
-							<button type="submit" class="uk-button uk-button-primary uk-margin-right">Sauvegarder</button>	
+							<input type="hidden" name="idTournoi" class="uk-input" value="<?php echo $idTournoi; ?>"></input>
+							<button type="submit" class="uk-button uk-button-primary uk-margin-right">Sauvegarder</button>
 					</form>						
 				</div>
 			</div>

@@ -1,5 +1,6 @@
 <?php
 defined('_LPDT') or die; 
+
 if (isset($_GET['idtournoi'])){
 	$infosTournoi = infosTournoi($idTournoi);
 	$listeEquipes = listeEquipes($idTournoi);
@@ -10,10 +11,6 @@ if (isset($_GET['idtournoi'])){
 		statsEquipe($idTournoi, $row['num_equipe']);
 	}
 }
-
-
-
-
 
 
 ?>
@@ -29,6 +26,7 @@ if (isset($_GET['idtournoi'])){
 					</div>
 					<div class="uk-navbar-right">
 <?php
+
 	// Si aucun tournoi en cours
 	if ($page != "accueil"){
 ?>
@@ -110,6 +108,7 @@ if (isset($_GET['idtournoi'])){
 <?php 
 	//Fin condition accueil
 	}
+	
 ?>
 		</aside>
 		<!-- /LEFT BAR -->

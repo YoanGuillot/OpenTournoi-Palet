@@ -116,30 +116,38 @@ function statsEquipe($idTournoi, $numEquipe)
 {
 	global $db;
 	$resultats = $db->query('SELECT * FROM matchs_qualifs WHERE id_tournoi == '.$idTournoi.' AND ( equipe1 == '. $numEquipe.' OR equipe2 == '. $numEquipe.')');
-	while ($row = $resultats->fetchArray(1)) {
-		$listeMatchsEquipe[] = $row;
+	
+	while ($rowResults = $resultats->fetchArray(1)) {
+		$listeMatchsEquipe[] = $rowResults;
 	}
 	
 	$ptsPour = 0;
 	$ptsContre = 0;
 	$nbVictoires = 0;
-	foreach ($listeMatchsEquipe as $row){
-		if ($numEquipe == $row['equipe1']){
-			$ptsPour = $ptsPour + $row['score1'];
-			$ptsContre = $ptsContre + $row['score2'];
-			if ($row['score1'] > $row['score2']){
-				$nbVictoires = $nbVictoires + 1;
-			}
-		}else{
-			$ptsPour = $ptsPour + $row['score2'];
-			$ptsContre = $ptsContre + $row['score1'];
-			if ($row['score1'] < $row['score2']){
-				$nbVictoires = $nbVictoires + 1;
+	
+	// probleme ici si null
+	if(!empty($listeMatchsEquipe)){
+		foreach ($listeMatchsEquipe as $row){
+			if ($numEquipe == $row['equipe1']){
+				$ptsPour = $ptsPour + $row['score1'];
+				$ptsContre = $ptsContre + $row['score2'];
+				if ($row['score1'] > $row['score2']){
+					$nbVictoires = $nbVictoires + 1;
+				}
+			}else{
+				$ptsPour = $ptsPour + $row['score2'];
+				$ptsContre = $ptsContre + $row['score1'];
+				if ($row['score1'] < $row['score2']){
+					$nbVictoires = $nbVictoires + 1;
+				}
 			}
 		}
 	}
-	$ptsDiff = $ptsPour - $ptsContre;
-	$db->exec("UPDATE equipes SET nb_victoires = \"$nbVictoires\", pts_pour = \"$ptsPour\", pts_contre = \"$ptsContre\", pts_diff = \"$ptsDiff\" WHERE id_tournoi == '$idTournoi' AND num_equipe == '$numEquipe'");
+	// Fin probleme
+		$ptsDiff = $ptsPour - $ptsContre;
+		$db->exec("UPDATE equipes SET nb_victoires = \"$nbVictoires\", pts_pour = \"$ptsPour\", pts_contre = \"$ptsContre\", pts_diff = \"$ptsDiff\" WHERE id_tournoi == '$idTournoi' AND num_equipe == '$numEquipe'");
+	
+	
 }
 
 function tiragePhaseQualif($nbEquipes, $numPhase)

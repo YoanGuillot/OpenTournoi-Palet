@@ -9,13 +9,6 @@ if (isset($_POST['creerPhase'])){
 	creerPhaseQualif($idTournoi, $numPhase, $nbEquipes);	
 }
 
-
-
-
-$infosPhaseFinale = infosPhaseFinale($idTournoi);
-print_r($infosPhaseFinale);
-
-
 $infosPhase = infosPhase($idTournoi);
 echo "Equipes inscrites : ". $nbEquipes."<br/><br/>";
 
@@ -111,8 +104,8 @@ if ($infosPhase == ''){
 			$equipe1 = $row['equipe1'];
 			$equipe2 = $row['equipe2'];
 			$indexSelect = 0;
-			$selectOptions1 = "<option value=\"\"></option>";
-			$selectOptions2 = "<option value=\"\"></option>";
+			$selectOptions1 = "<option value=\"0\">0</option>";
+			$selectOptions2 = "<option value=\"0\">0</option>";
 			
 			while ($indexSelect < $infosTournoi['pts_qualifs']){
 				$realValue = $indexSelect + 1;

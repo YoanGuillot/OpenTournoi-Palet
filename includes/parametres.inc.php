@@ -43,7 +43,9 @@ defined('_LPDT') or die;
 									<option value="68"<?php if ($infosTournoi['max_equipes'] == '68'){ echo " selected";} ?>>68</option>
 									<option value="80"<?php if ($infosTournoi['max_equipes'] == '80'){ echo " selected";} ?>>80</option>
 									<option value="96"<?php if ($infosTournoi['max_equipes'] == '96'){ echo " selected";} ?>>96</option>
-									<option value="128"<?php if ($infosTournoi['max_equipes'] == '127'){ echo " selected";} ?>>128</option>
+									<option value="128"<?php if ($infosTournoi['max_equipes'] == '128'){ echo " selected";} ?>>128</option>
+									<option value="144"<?php if ($infosTournoi['max_equipes'] == '144'){ echo " selected";} ?>>144</option>
+									<option value="160"<?php if ($infosTournoi['max_equipes'] == '160'){ echo " selected";} ?>>160</option>
 								</select>
 							</div>
 							

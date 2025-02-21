@@ -9,7 +9,7 @@ function activateLink(idLink, side, ptsV, idMatch){
 	$("#"+idLink).removeClass('disabled');
 	$("#"+idLink).css('color', 'green');
 	
-	if (event.target.value != ptsV){
+	if (event.target.value != ptsV && event.target.value != 0){
 		$("#match-"+idMatch+"-"+side).val(ptsV);
 		$("#formMatch-"+idMatch).submit();
 	}

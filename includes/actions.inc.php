@@ -87,6 +87,111 @@ if(isset($_POST['action'])){
 			}
 			
 		}
+
+		if ($_POST['action'] == 'restauration'){
+			 /**
+			 * function formatFileName
+			 * @access public
+			 * @param string - nom de fichier à formater
+			 * @param int - longueur maximale autorisée pour le nom de fichier
+			 * @return string - nom de fichier formaté
+			 * @desc Tronque éventuellement le nom de fichier, le convertit en minuscules et
+			 *           y élimine les caractères potentiellement dangereux.
+			 */         
+			function formatFileName($aFileName, $aMaxLength = 50) {
+				$aFileName = "tournois.db";
+				
+				return $aFileName;
+			} // end of function formatFileName() /2
+
+			/* PARAMETRES DE CONFIGURATION DU SCRIPT
+			*/
+			
+			// chemin d'accès au répertoire d'upload (vers où le fichier uploadé temporaire sera transféré)
+			// ce répertoire doit EXISTER et être ACCESSIBLE EN ECRITURE !!
+			$destination_dir = './includes/conf';
+			
+			// taille maximale en octets du fichier à uploader
+			$file_max_size = 10000000;
+			
+			// extensions de fichiers autorisées
+			$authorized_extensions = array('db');
+
+			
+			/* TRAITEMENT PRINCIPAL
+			*/   
+			
+			// vérifie l'existence du répertoire de destination
+			if (!is_dir($destination_dir)) {
+				echo 'Veuillez indiquer un r&eacute;pertoire destination correct !';
+				die(); 
+			}
+
+			// vérifie que répertoire de destination a des droits en écriture
+			if (!is_writeable($destination_dir)) {
+				echo 'Veuillez spécifier des droits en écriture pour le r&eacute;pertoire destination !';
+				die();      
+			}   
+			
+			// réception du formulaire
+			if (isSet($_POST['submitFile'])) {
+
+				// vérifie qu'un fichier a bien été soumis
+				if (isSet($_FILES) && is_array($_FILES)) {
+			
+				// pas d'erreur lors de l'upload
+				if ($_FILES['aFile']['error'] == UPLOAD_ERR_OK) {
+					
+					// vérifie la taille en octets
+					if ($_FILES['aFile']['size'] <= $file_max_size) {
+
+					// vérifie l'extension du fichier recu
+					// il est aussi possible (et sans doute mieux) de se baser sur $_FILES['aFile']['type']
+					// qui retourne le type MIME correspondant (par exemple: image/pjpeg)         
+					$lastPos = strRChr($_FILES['aFile']['name'], ".");
+					if ($lastPos !== false && in_array(strToLower(subStr($lastPos, 1)), $authorized_extensions)) {
+			
+						// définit un nom de fichier destination unique à partir du nom du fichier original formaté
+						//$destination_file = time().formatFileName($_FILES['aFile']['name']);            
+						$destination_file = $_FILES['aFile']['name'];            
+
+						// déplace le fichier uploadé du répertoire temporaire
+						// vers les répertoire/fichier destination spécifiés
+						if (move_uploaded_file($_FILES['aFile']['tmp_name'],
+													$destination_dir.DIRECTORY_SEPARATOR.$destination_file)) {
+						echo 'Fichier valide et upload&eacute; correctement.';   
+						} else { // error sur move_uploaded_file
+						echo 'Le fichier n\'a pas &eacute;t&eacute; upload&eacute; correctement !';
+						}
+					} else { // pas d'extension ou mauvaise extension
+						echo 'Mauvaise extension !';
+					}      
+					} else { // Taille maximale dépassée
+					echo 'Fichier trop volumineux !';
+					}
+				} else { // Erreur lors de l'upload
+					switch ($_FILES['aFile']['error']){
+					case UPLOAD_ERR_INI_SIZE:
+						echo 'Le fichier upload&eacute; d&eacute;passe la valeur sp&eacute;cifi&eacute;e 
+								pour upload_max_filesize dans php.ini.';
+						break;
+					case UPLOAD_ERR_FORM_SIZE:
+						echo 'Le fichier upload&eacute; d&eacute;passe la valeur sp&eacute;cifi&eacute;e
+								pour MAX_FILE_SIZE dans le formulaire d\'upload.';
+						break;
+					case UPLOAD_ERR_PARTIAL:
+						echo 'Le fichier n\'a &eacute;t&eacute que partiellement upload&eacute;.';
+						break;                            
+					default:
+						echo 'Aucun fichier n\'a &eacute;t&eacute upload&eacute;.';
+					} // switch
+				}   
+				} else { // aucun fichier reçu
+				echo 'Pas de fichier recu';
+				}
+			} // fin de réception de formulaire
+			header("Location: index.php");
+		}
 }
 
 

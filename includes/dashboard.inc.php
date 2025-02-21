@@ -3,8 +3,8 @@ defined('_LPDT') or die;
 
 if (isset($_GET['idtournoi'])){
 	$infosTournoi = infosTournoi($idTournoi);
+	$listeEquipes = listeEquipes($idTournoi);
 	if(!empty($listeEquipes)){
-		$listeEquipes = listeEquipes($idTournoi);
 		$nbEquipes = count($listeEquipes);
 	
 		$listeEquipes = listeEquipes($idTournoi);

@@ -39,13 +39,15 @@ defined('_LPDT') or die;
 			<div class="uk-card-body">
 				<div uk-overflow-auto>
 					<div class="uk-panel uk-text-center">
-                    <form name="form" method="post" action="page_receptrice.php" enctype="multipart/form-data">
+                    <form name="form" method="post" action="index.php?idtournoi=<?php echo $idTournoi; ?>&page=backup" enctype="multipart/form-data">
                         <!-- Taille maximale en octets. Non sécurisé car facilement contournable !! -->
                         <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
                         
                         <input type="file" name="aFile" />
                         <br />
                         <br />
+						<input type="hidden" name="idTournoi" value="<?php echo $idTournoi; ?>" />
+						<input type="hidden" name="action" value="restauration" />
                         <input type="submit" name="submitFile" value="restaurer la sauvegarde" />
                         </form>
                     </div>

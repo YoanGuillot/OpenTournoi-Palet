@@ -125,7 +125,7 @@ function statsEquipe($idTournoi, $numEquipe)
 	$ptsContre = 0;
 	$nbVictoires = 0;
 	
-	// probleme ici si null
+	
 	if(!empty($listeMatchsEquipe)){
 		foreach ($listeMatchsEquipe as $row){
 			if ($numEquipe == $row['equipe1']){
@@ -143,7 +143,7 @@ function statsEquipe($idTournoi, $numEquipe)
 			}
 		}
 	}
-	// Fin probleme
+	
 		$ptsDiff = $ptsPour - $ptsContre;
 		$db->exec("UPDATE equipes SET nb_victoires = \"$nbVictoires\", pts_pour = \"$ptsPour\", pts_contre = \"$ptsContre\", pts_diff = \"$ptsDiff\" WHERE id_tournoi == '$idTournoi' AND num_equipe == '$numEquipe'");
 	

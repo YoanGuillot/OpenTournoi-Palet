@@ -130,8 +130,7 @@ if (isset($_GET['idtournoi'])){
 					<li class="uk-nav-divider"></li>
 					<li><a href="#"><span class="uk-margin-small-right uk-icon" data-uk-icon="icon: trash"></span> Item</a></li>
 				</ul>
-				<h3>Title</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				
 			</div>
 		</div>
 		<!-- /OFFCANVAS -->

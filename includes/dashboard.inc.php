@@ -3,12 +3,16 @@ defined('_LPDT') or die;
 
 if (isset($_GET['idtournoi'])){
 	$infosTournoi = infosTournoi($idTournoi);
-	$listeEquipes = listeEquipes($idTournoi);
-	$nbEquipes = count($listeEquipes);
+	if(!empty($listeEquipes)){
+		$listeEquipes = listeEquipes($idTournoi);
+		$nbEquipes = count($listeEquipes);
 	
-	$listeEquipes = listeEquipes($idTournoi);
-	foreach ($listeEquipes as $row){
-		statsEquipe($idTournoi, $row['num_equipe']);
+		$listeEquipes = listeEquipes($idTournoi);
+		foreach ($listeEquipes as $row){
+			statsEquipe($idTournoi, $row['num_equipe']);
+		}
+	} else {
+		$nbEquipes = 0;
 	}
 }
 
@@ -75,6 +79,7 @@ if (isset($_GET['idtournoi'])){
 					
 					<li class="uk-nav-header">MAINTENANCE</li>
 					<li><a href="index.php?idtournoi=<?php echo $idTournoi; ?>&page=maintenance"><span data-uk-icon="icon: unlock" class="uk-margin-small-right"></span>Dévérouillage</a></li>					
+					<li><a href="index.php?idtournoi=<?php echo $idTournoi; ?>&page=backup"><span data-uk-icon="icon: history" class="uk-margin-small-right"></span>Sauvegarde<br />Restauration</a></li>					
 				</ul>
 				<div class="left-content-box uk-margin-top">
 					

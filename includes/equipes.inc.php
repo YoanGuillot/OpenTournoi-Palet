@@ -95,27 +95,29 @@ defined('_LPDT') or die;
 <?php
 	$listeEquipes = listeEquipes($idTournoi);
 	$numEquipe = 1;
-	foreach($listeEquipes as $row) {
-		echo "<tr id=\"idequipe-". $row['id_equipe'] ."\">
-				<td style=\"with:100%\">
-				<form id=\"formEquipe-". $row['id_equipe'] ."\" class=\"uk-form\" method=\"POST\" action=\"index.php?idtournoi=$idTournoi&page=equipes\">
-					
-					<div style=\"display:inline-block;width: 10%\" >". $numEquipe ."</div>
-					<div style=\"display:inline-block;width: 17%\" ><input name=\"nomEquipe\" class=\"uk-input\" value=\"". $row['nom_equipe'] ."\"></input></div>
-					<div style=\"display:inline-block;width: 17%\" ><input name=\"joueur1\" class=\"uk-input\" value=\"". $row['joueur1'] ."\"></input></div>
-					<div style=\"display:inline-block;width: 17%\" ><input name=\"joueur2\" class=\"uk-input\" value=\"". $row['joueur2'] ."\"></input></div>
-					<div style=\"display:inline-block;width: 17%\" ><input name=\"joueur3\" class=\"uk-input\" value=\"". $row['joueur3'] ."\"></input></div>
-					<div style=\"display:inline-block;width: 10%\" >
-						<input type=\"hidden\" name=\"idEquipe\" value=\"". $row['id_equipe'] ."\" />
-						<input type=\"hidden\" name=\"idTournoi\" value=\"". $idTournoi. "\" />
-						<input type=\"hidden\" name=\"action\" value=\"miseajourEquipe\" />
-						<a style=\"color: green\" href=\"javascript:document.getElementById('formEquipe-". $row['id_equipe'] ."').submit();\" class=\"uk-margin-medium-right\"  uk-icon=\"check\"></a>
-						<a style=\"color: red\" onclick=\"supprEquipe(". $idTournoi .",". $row['id_equipe'] .")\" uk-icon=\"trash\" uk-toggle=\"target: #supprEquipe\"></a>
-					</div>
-				</form>
-				</td>
-			</tr>";
-			$numEquipe = $numEquipe +1;
+	if(!empty($listeEquipes)){
+		foreach($listeEquipes as $row) {
+			echo "<tr id=\"idequipe-". $row['id_equipe'] ."\">
+					<td style=\"with:100%\">
+					<form id=\"formEquipe-". $row['id_equipe'] ."\" class=\"uk-form\" method=\"POST\" action=\"index.php?idtournoi=$idTournoi&page=equipes\">
+						
+						<div style=\"display:inline-block;width: 10%\" >". $numEquipe ."</div>
+						<div style=\"display:inline-block;width: 17%\" ><input name=\"nomEquipe\" class=\"uk-input\" value=\"". $row['nom_equipe'] ."\"></input></div>
+						<div style=\"display:inline-block;width: 17%\" ><input name=\"joueur1\" class=\"uk-input\" value=\"". $row['joueur1'] ."\"></input></div>
+						<div style=\"display:inline-block;width: 17%\" ><input name=\"joueur2\" class=\"uk-input\" value=\"". $row['joueur2'] ."\"></input></div>
+						<div style=\"display:inline-block;width: 17%\" ><input name=\"joueur3\" class=\"uk-input\" value=\"". $row['joueur3'] ."\"></input></div>
+						<div style=\"display:inline-block;width: 10%\" >
+							<input type=\"hidden\" name=\"idEquipe\" value=\"". $row['id_equipe'] ."\" />
+							<input type=\"hidden\" name=\"idTournoi\" value=\"". $idTournoi. "\" />
+							<input type=\"hidden\" name=\"action\" value=\"miseajourEquipe\" />
+							<a style=\"color: green\" href=\"javascript:document.getElementById('formEquipe-". $row['id_equipe'] ."').submit();\" class=\"uk-margin-medium-right\"  uk-icon=\"check\"></a>
+							<a style=\"color: red\" onclick=\"supprEquipe(". $idTournoi .",". $row['id_equipe'] .")\" uk-icon=\"trash\" uk-toggle=\"target: #supprEquipe\"></a>
+						</div>
+					</form>
+					</td>
+				</tr>";
+				$numEquipe = $numEquipe +1;
+		}
 	}
 ?>	
 					</table>

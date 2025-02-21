@@ -167,7 +167,9 @@ if ($infosPhase == ''){
 		
 		$tableauMatchs = $tableauMatchs."</table>";
 		$tableauMatchsPrint = $tableauMatchsPrint."</table>";
-		
+		if(empty($content)){
+			$content="";
+		}
 		$content = $content."<div class=\"uk-width-1-1 uk-width-1-2@l uk-width-1-2@xl\">
 						<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
 							<div class=\"uk-card-header\">

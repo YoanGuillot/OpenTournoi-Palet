@@ -42,8 +42,9 @@ function infosPhase($idTournoi)
 	while ($row = $resultats->fetchArray(1)) {
 		$infosPhase[] = $row;
 	}
-	return $infosPhase;
-	
+	if(!empty($infosPhase)){
+		return $infosPhase;
+	}
 }
 
 function infosPhaseFinale($idTournoi)
@@ -53,7 +54,10 @@ function infosPhaseFinale($idTournoi)
 	while ($row = $resultats->fetchArray(1)) {
 		$infosPhaseFinale[] = $row;
 	}
-	return $infosPhaseFinale;
+	if(!empty($infosPhaseFinale)){
+		return $infosPhaseFinale;
+	}
+	
 	
 }
 
@@ -86,8 +90,12 @@ function listeEquipes($idTournoi)
 	while ($row = $resultats->fetchArray(1)) {
 		$listeEquipes[] = $row;
 	}
-	
-	return $listeEquipes;
+	if(!empty($listeEquipes)){
+		return $listeEquipes;
+	}else{
+		$listeEquipes = "";
+		return $listeEquipes;
+	}
 }
 
 function listeMatchsQualif($idTournoi, $numPhase)

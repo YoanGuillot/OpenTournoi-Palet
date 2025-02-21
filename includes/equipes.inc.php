@@ -85,9 +85,10 @@ defined('_LPDT') or die;
 									
 									<div style="display:inline-block;width: 10%">N°Equipe</div>
 									<div style="display:inline-block;width: 17%">Nom équipe</div>
-									<div style="display:inline-block;width: 17%">Joueur 1</div>
-									<div style="display:inline-block;width: 17%">Joueur 2</div>
-									<div style="display:inline-block;width: 17%">Joueur 3</div>
+									<div style="display:inline-block;width: 15%">Joueur 1</div>
+									<div style="display:inline-block;width: 15%">Joueur 2</div>
+									<div style="display:inline-block;width: 15%">Joueur 3</div>
+									<div style="display:inline-block;width: 6%">Bonus Qualifs</div>
 									<div style="display:inline-block;width: 10%">Actions</div>
 								</th>
 							</tr>
@@ -103,11 +104,14 @@ defined('_LPDT') or die;
 						
 						<div style=\"display:inline-block;width: 10%\" >". $numEquipe ."</div>
 						<div style=\"display:inline-block;width: 17%\" ><input name=\"nomEquipe\" class=\"uk-input\" value=\"". $row['nom_equipe'] ."\"></input></div>
-						<div style=\"display:inline-block;width: 17%\" ><input name=\"joueur1\" class=\"uk-input\" value=\"". $row['joueur1'] ."\"></input></div>
-						<div style=\"display:inline-block;width: 17%\" ><input name=\"joueur2\" class=\"uk-input\" value=\"". $row['joueur2'] ."\"></input></div>
-						<div style=\"display:inline-block;width: 17%\" ><input name=\"joueur3\" class=\"uk-input\" value=\"". $row['joueur3'] ."\"></input></div>
+						<div style=\"display:inline-block;width: 15%\" ><input name=\"joueur1\" class=\"uk-input\" value=\"". $row['joueur1'] ."\"></input></div>
+						<div style=\"display:inline-block;width: 15%\" ><input name=\"joueur2\" class=\"uk-input\" value=\"". $row['joueur2'] ."\"></input></div>
+						<div style=\"display:inline-block;width: 15%\" ><input name=\"joueur3\" class=\"uk-input\" value=\"". $row['joueur3'] ."\"></input></div>
+						<div style=\"display:inline-block;width: 6%\" ><input name=\"bonusQualifs\" class=\"uk-input\" value=\"". $row['bonus_qualifs'] ."\"></input></div>
+						
 						<div style=\"display:inline-block;width: 10%\" >
 							<input type=\"hidden\" name=\"idEquipe\" value=\"". $row['id_equipe'] ."\" />
+							<input type=\"hidden\" name=\"numEquipe\" value=\"". $numEquipe ."\" />
 							<input type=\"hidden\" name=\"idTournoi\" value=\"". $idTournoi. "\" />
 							<input type=\"hidden\" name=\"action\" value=\"miseajourEquipe\" />
 							<a style=\"color: green\" href=\"javascript:document.getElementById('formEquipe-". $row['id_equipe'] ."').submit();\" class=\"uk-margin-medium-right\"  uk-icon=\"check\"></a>

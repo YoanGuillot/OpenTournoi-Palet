@@ -28,7 +28,8 @@ if(isset($_POST['action'])){
 					$joueur1 = $_POST['joueur1'];
 					$joueur2 = $_POST['joueur2'];
 					$joueur3 = $_POST['joueur3'];
-					$db->exec("UPDATE equipes SET num_equipe = \"$numEquipe\", nom_equipe = \"$nomEquipe\", joueur1 = \"$joueur1\", joueur2 = \"$joueur2\", joueur3 = \"$joueur3\" WHERE id_equipe == '$idEquipe'");
+					$bonusQualifs = $_POST['bonusQualifs'];
+					$db->exec("UPDATE equipes SET num_equipe = \"$numEquipe\", nom_equipe = \"$nomEquipe\", joueur1 = \"$joueur1\", joueur2 = \"$joueur2\", joueur3 = \"$joueur3\", bonus_qualifs = \"$bonusQualifs\" WHERE id_equipe == '$idEquipe'");
 					
 					header("Location: index.php?idtournoi=$idTournoi&page=equipes");
 		}

@@ -12,7 +12,9 @@ function infosTournoi($idTournoi)
 	while ($row = $resultats->fetchArray(1)) {
 		$infosTournoi = $row;
 	}
-	return $infosTournoi;
+	if(!empty($infosTournoi)){
+		return $infosTournoi;
+	}
 }
 
 function infosEquipe($idEquipe)
@@ -69,7 +71,9 @@ function listeTournois()
 		$listeTournois[] = $row;
 	}
 	
-	return $listeTournois;
+	if(!empty($listeTournois)){
+		return $listeTournois;
+	}
 }
 
 function classementQualifs($idTournoi)

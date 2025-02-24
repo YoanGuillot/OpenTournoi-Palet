@@ -52,14 +52,19 @@ defined('_LPDT') or die;
 						</thead>
 <?php
 	$listeTournois = listeTournois();
-	foreach($listeTournois as $row) {
-		echo "<tr><td>". $row['id_tournoi'] ."</td>
+	if(!empty($listeTournois)){
+		foreach($listeTournois as $row) {
+			echo "<tr><td>". $row['id_tournoi'] ."</td>
 				<td>". $row['nom_tournoi'] ."</td>
 				<td>
 					<a href=\"index.php?idtournoi=". $row['id_tournoi'] ."\"><button class=\"uk-button uk-button-primary uk-button-small\">Ouvrir</button></a>
 					<a class=\"uk-float-right\" style=\"color: red\" href=\"\" onclick=\"supprTournoi(". $row['id_tournoi'] .")\" uk-icon=\"icon: trash; ratio: 1.2\" uk-toggle=\"target: #supprTournoi\"></a>
+					<a class=\"uk-float-right\" style=\"margin-right: 15px;\" href=\"./includes/conf/". $row['id_tournoi'] .".db\" uk-icon=\"icon: download; ratio: 1.2\"></a>
 				</td>
 			</tr>";
+		}
+	}else{
+		echo "<tr><td></td><td>Aucun Tournoi !</td><td></td></tr>";
 	}
 ?>	
 					</table>
@@ -68,6 +73,42 @@ defined('_LPDT') or die;
 		</div>
 	</div>
 	<!-- /panel -->
+</div>
+
+<div class="uk-grid uk-grid-medium" data-uk-grid uk-sortable="handle: .sortable-icon">		
+
+		<!-- panel -->
+	<div class="uk-width-1-2">
+		<div class="uk-card uk-card-default uk-card-hover">
+			<div class="uk-card-header">
+				<div class="uk-grid uk-grid-small">
+					<div class="uk-width-auto"><h4>Restaurer une sauvegarde</h4></div>
+					<div class="uk-width-expand uk-text-right panel-icons">
+						
+					</div>
+				</div>
+			</div>
+			<div class="uk-card-body">
+				<div uk-overflow-auto>
+					<div class="uk-panel uk-text-center">
+                    <form name="form" method="post" action="index.php?idtournoi=<?php echo $idTournoi; ?>&page=backup" enctype="multipart/form-data">
+                        <!-- Taille maximale en octets. Non sécurisé car facilement contournable !! -->
+                        <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+                        
+                        <input type="file" name="aFile" />
+                        <br />
+                        <br />
+						<input type="hidden" name="idTournoi" value="<?php echo $idTournoi; ?>" />
+						<input type="hidden" name="action" value="restauration" />
+                        <input type="submit" name="submitFile" value="restaurer la sauvegarde" />
+                        </form>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /panel -->
+		
 </div>
 
 <div id="supprTournoi" uk-modal>

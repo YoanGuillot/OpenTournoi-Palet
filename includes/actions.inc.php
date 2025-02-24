@@ -5,8 +5,16 @@ if(isset($_POST['action'])){
 	
 		if ($_POST['action'] == 'creationTournoi'){
 				$nomTournoi = $_POST['nomTournoi'];
-				$db->exec("INSERT INTO tournois (nom_tournoi) VALUES ('". $nomTournoi ."')");
-				$idTournoi = dernierTournoi();
+				$idTournoi = date('YmdHis');
+				$idTournoi = intval($idTournoi);
+				copy('./includes/conf/models/idtournoi.db', './includes/conf/'. $idTournoi .'.db');
+				$db->exec("INSERT INTO tournois (id_tournoi, nom_tournoi) VALUES ('". $idTournoi ."', '". $nomTournoi ."')");
+				
+				//Connexion à la nouvelle base de donnée
+				$db = new SQLite3('includes/conf/'. $idTournoi .'.db');
+				$db->exec("INSERT INTO tournois (id_tournoi, nom_tournoi) VALUES ('". $idTournoi ."', '". $nomTournoi ."')");
+				//$idTournoi = dernierTournoi();
+				
 				header("Location: index.php?idtournoi=$idTournoi");
 		}
 
@@ -208,9 +216,12 @@ if(isset($_GET['action'])){
 		}
 		
 		if($_GET['action'] == 'supprtournoi'){
-
+			//Connexion à la base de donnée
+			$db->close();
+			$db = new SQLite3('includes/conf/tournois.db');
 			$db->exec("DELETE FROM tournois WHERE id_tournoi == ". $idTournoi ."");
-			
+			unlink('./includes/conf/'. $idTournoi .'.db');
+		
 			header("Location: index.php");			
 		}
 		

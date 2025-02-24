@@ -1,11 +1,7 @@
 <?php
-
 //Interdit l'accès directe
 define( '_LPDT', 1 );
-//Connexion à la base de donnée
-$db = new SQLite3('includes/conf/tournois.db');
-//Chargement des fonctions
-include 'includes/fonctions.inc.php';
+date_default_timezone_set("Europe/Paris");
 ?>
 <!DOCTYPE html>
 <head>
@@ -31,14 +27,23 @@ include 'includes/fonctions.inc.php';
 
 if (isset($_GET['idtournoi'])){
 	$idTournoi = $_GET['idtournoi'];
+
+	//Connexion à la base de donnée
+	$db = new SQLite3('includes/conf/' .$idTournoi. '.db');
 	if (!empty($_GET['page'])){
 		$page = $_GET['page'];
 	}else{
 		$page = "gestion";
 	}
 }else{
+	//Connexion à la base de donnée
+	$db = new SQLite3('includes/conf/tournois.db');
+
 	$page="accueil";
 }
+
+//Chargement des fonctions
+include 'includes/fonctions.inc.php';
 
 //Inclure les actions
 include 'includes/actions.inc.php';

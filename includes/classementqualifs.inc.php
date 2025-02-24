@@ -44,21 +44,24 @@ defined('_LPDT') or die;
 	$classementQualifs = classementQualifs($idTournoi);
 		
 	$placeEquipe = 1;
-	foreach($classementQualifs as $row) {
-		echo "<tr id=\"idplace-". $placeEquipe ."\">
-				<td style=\"with:100%\">
-					<div style=\"display:inline-block;width: 10%\" >". $placeEquipe ."</div>
-					<div style=\"display:inline-block;width: 10%\" >". $row['num_equipe'] ."</div>
-					<div style=\"display:inline-block;width: 30%\" >". $row['nom_equipe'] ."</div>
-					<div style=\"display:inline-block;width: 8%\" >". $row['nb_victoires'] ."</div>
-					<div style=\"display:inline-block;width: 8%\" >". $row['pts_pour'] ."</div>
-					<div style=\"display:inline-block;width: 8%\" >". $row['pts_contre'] ."</div>
-					<div style=\"display:inline-block;width: 8%\" >". $row['pts_diff'] ."</div>
-				</form>
-				</td>
-			</tr>";
-		$placeEquipe = $placeEquipe + 1;
+	if(!empty($classementQualifs)){
+		foreach($classementQualifs as $row) {
+			echo "<tr id=\"idplace-". $placeEquipe ."\">
+					<td style=\"with:100%\">
+						<div style=\"display:inline-block;width: 10%\" >". $placeEquipe ."</div>
+						<div style=\"display:inline-block;width: 10%\" >". $row['num_equipe'] ."</div>
+						<div style=\"display:inline-block;width: 30%\" >". $row['nom_equipe'] ."</div>
+						<div style=\"display:inline-block;width: 8%\" >". $row['nb_victoires'] ."</div>
+						<div style=\"display:inline-block;width: 8%\" >". $row['pts_pour'] ."</div>
+						<div style=\"display:inline-block;width: 8%\" >". $row['pts_contre'] ."</div>
+						<div style=\"display:inline-block;width: 8%\" >". $row['pts_diff'] ."</div>
+					</form>
+					</td>
+				</tr>";
+			$placeEquipe = $placeEquipe + 1;
+		}	
 	}
+
 ?>	
 					</table>
 				</div>

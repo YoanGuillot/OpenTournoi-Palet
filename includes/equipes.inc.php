@@ -94,10 +94,18 @@ defined('_LPDT') or die;
 							</tr>
 						</thead>
 <?php
-	$listeEquipes = listeEquipes($idTournoi);
+	$infosPhase = infosPhase();
+	$listeEquipes = listeEquipes();
 	$numEquipe = 1;
+	
 	if(!empty($listeEquipes)){
 		foreach($listeEquipes as $row) {
+			
+			if(empty($infosPhase)){
+				$deleteEquipe = "<a style=\"color: red\" onclick=\"supprEquipe(" .$row['id_equipe'] .")\" uk-icon=\"trash\" uk-toggle=\"target: #supprEquipe\"></a>";
+			}else{
+				$deleteEquipe = "";
+			}
 			echo "<tr id=\"idequipe-". $row['id_equipe'] ."\">
 					<td style=\"with:100%\">
 					<form id=\"formEquipe-". $row['id_equipe'] ."\" class=\"uk-form\" method=\"POST\" action=\"index.php?idtournoi=$idTournoi&page=equipes\">
@@ -115,11 +123,12 @@ defined('_LPDT') or die;
 							<input type=\"hidden\" name=\"idTournoi\" value=\"". $idTournoi. "\" />
 							<input type=\"hidden\" name=\"action\" value=\"miseajourEquipe\" />
 							<a style=\"color: green\" href=\"javascript:document.getElementById('formEquipe-". $row['id_equipe'] ."').submit();\" class=\"uk-margin-medium-right\"  uk-icon=\"check\"></a>
-							<a style=\"color: red\" onclick=\"supprEquipe(". $idTournoi .",". $row['id_equipe'] .")\" uk-icon=\"trash\" uk-toggle=\"target: #supprEquipe\"></a>
+							". $deleteEquipe ."
 						</div>
 					</form>
 					</td>
 				</tr>";
+				updateNumEquipe($row['id_equipe'], $numEquipe);
 				$numEquipe = $numEquipe +1;
 		}
 	}

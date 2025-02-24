@@ -23,7 +23,7 @@ if(isset($_POST['action'])){
 					$joueur1 = $_POST['joueur1'];
 					$joueur2 = $_POST['joueur2'];
 					$joueur3 = $_POST['joueur3'];
-					$db->exec("INSERT INTO equipes (id_tournoi, nom_equipe, joueur1, joueur2, joueur3) VALUES ('". $idTournoi ."', '". $nomEquipe ."', '". $joueur1 ."', '". $joueur2 ."', '". $joueur3 ."')");
+					$db->exec("INSERT INTO equipes (nom_equipe, joueur1, joueur2, joueur3) VALUES ('". $nomEquipe ."', '". $joueur1 ."', '". $joueur2 ."', '". $joueur3 ."')");
 					
 					header("Location: index.php?idtournoi=$idTournoi&page=equipes");
 		}

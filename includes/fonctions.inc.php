@@ -37,26 +37,32 @@ function dernierTournoi()
 	return $dernierIdTournoi;
 }
 
-function infosPhase($idTournoi)
+function infosPhase()
 {
 	global $db;
-	$resultats = $db->query('SELECT * FROM phases_qualif WHERE id_tournoi == '. $idTournoi .'');
+	$resultats = $db->query('SELECT * FROM phases_qualif');
 	while ($row = $resultats->fetchArray(1)) {
 		$infosPhase[] = $row;
 	}
 	if(!empty($infosPhase)){
 		return $infosPhase;
+	}else{
+		$infosPhase = "";
+		return $infosPhase;
 	}
 }
 
-function infosPhaseFinale($idTournoi)
+function infosPhaseFinale()
 {
 	global $db;
-	$resultats = $db->query('SELECT * FROM phases_finales WHERE id_tournoi == '. $idTournoi .'');
+	$resultats = $db->query('SELECT * FROM phases_finales');
 	while ($row = $resultats->fetchArray(1)) {
 		$infosPhaseFinale[] = $row;
 	}
 	if(!empty($infosPhaseFinale)){
+		return $infosPhaseFinale;
+	}else{
+		$infosPhasefinale = "";
 		return $infosPhaseFinale;
 	}
 	
@@ -76,21 +82,22 @@ function listeTournois()
 	}
 }
 
-function classementQualifs($idTournoi)
+function classementQualifs()
 {
 	global $db;
-	$resultats = $db->query('SELECT * FROM equipes WHERE id_tournoi == '.$idTournoi.' ORDER BY nb_victoires DESC, pts_pour DESC, pts_diff DESC');
+	$resultats = $db->query('SELECT * FROM equipes ORDER BY nb_victoires DESC, pts_pour DESC, pts_diff DESC');
 	while ($row = $resultats->fetchArray(1)) {
 		$classementQualifs[] = $row;
 	}
-	
-	return $classementQualifs;
+	if(!empty($classementQualifs)){
+		return $classementQualifs;
+	}
 }
 
-function listeEquipes($idTournoi)
+function listeEquipes()
 {
 	global $db;
-	$resultats = $db->query('SELECT * FROM equipes WHERE id_tournoi == '.$idTournoi.'');
+	$resultats = $db->query('SELECT * FROM equipes');
 	while ($row = $resultats->fetchArray(1)) {
 		$listeEquipes[] = $row;
 	}
@@ -101,6 +108,16 @@ function listeEquipes($idTournoi)
 		return $listeEquipes;
 	}
 }
+
+function updateNumEquipe($idEquipe, $numEquipe){
+	global $db;
+
+	$db->exec("UPDATE equipes SET num_equipe = \"$numEquipe\" WHERE id_equipe == '$idEquipe'");
+
+
+}
+
+
 
 function listeMatchsQualif($idTournoi, $numPhase)
 {
@@ -124,10 +141,10 @@ function listeMatchsPhaseFinale($idTournoi, $numPhase)
 	return $listeMatchs;
 }
 
-function statsEquipe($idTournoi, $numEquipe)
+function statsEquipe($numEquipe)
 {
 	global $db;
-	$resultats = $db->query('SELECT * FROM matchs_qualifs WHERE id_tournoi == '.$idTournoi.' AND ( equipe1 == '. $numEquipe.' OR equipe2 == '. $numEquipe.')');
+	$resultats = $db->query('SELECT * FROM matchs_qualifs WHERE ( equipe1 == '. $numEquipe.' OR equipe2 == '. $numEquipe.')');
 	
 	while ($rowResults = $resultats->fetchArray(1)) {
 		$listeMatchsEquipe[] = $rowResults;
@@ -157,7 +174,7 @@ function statsEquipe($idTournoi, $numEquipe)
 	}
 	
 		$ptsDiff = $ptsPour - $ptsContre;
-		$db->exec("UPDATE equipes SET nb_victoires = \"$nbVictoires\", pts_pour = \"$ptsPour\", pts_contre = \"$ptsContre\", pts_diff = \"$ptsDiff\" WHERE id_tournoi == '$idTournoi' AND num_equipe == '$numEquipe'");
+		$db->exec("UPDATE equipes SET nb_victoires = \"$nbVictoires\", pts_pour = \"$ptsPour\", pts_contre = \"$ptsContre\", pts_diff = \"$ptsDiff\" WHERE num_equipe == '$numEquipe'");
 	
 	
 }
@@ -212,7 +229,7 @@ function tiragePhasefinale($idTournoi, $nbEquipes, $numPhase)
 			if($row['dispo_phasesfinales'] == 'oui' && $countEquipe < $nbEquipes){
 				$numEquipe = $row['num_equipe'];
 				$tableauEquipes[] = $numEquipe;
-				$db->exec("UPDATE equipes SET dispo_phasesfinales = \"non\" WHERE id_tournoi == '$idTournoi' AND num_equipe == '$numEquipe'");
+				$db->exec("UPDATE equipes SET dispo_phasesfinales = \"non\" WHERE num_equipe == '$numEquipe'");
 				$countEquipe = $countEquipe + 1;
 			}
 		}

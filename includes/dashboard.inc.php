@@ -3,13 +3,11 @@ defined('_LPDT') or die;
 
 if (isset($_GET['idtournoi'])){
 	$infosTournoi = infosTournoi($idTournoi);
-	$listeEquipes = listeEquipes($idTournoi);
+	$listeEquipes = listeEquipes();
 	if(!empty($listeEquipes)){
 		$nbEquipes = count($listeEquipes);
-	
-		$listeEquipes = listeEquipes($idTournoi);
 		foreach ($listeEquipes as $row){
-			statsEquipe($idTournoi, $row['num_equipe']);
+			statsEquipe($row['id_equipe']);
 		}
 	} else {
 		$nbEquipes = 0;
@@ -73,13 +71,12 @@ if (isset($_GET['idtournoi'])){
 					
 					<li class="uk-nav-header">QUALIFICATIONS</li>
 					<li><a href="index.php?idtournoi=<?php echo $idTournoi; ?>&page=qualifs"><span data-uk-icon="icon: thumbnails" class="uk-margin-small-right"></span>Phases</a></li>					
-					<li><a href="index.php?idtournoi=<?php echo $idTournoi; ?>&page=classementqualifs""><span data-uk-icon="icon: list" class="uk-margin-small-right"></span>Classement</a></li>
+					<li><a href="index.php?idtournoi=<?php echo $idTournoi; ?>&page=classementqualifs"><span data-uk-icon="icon: list" class="uk-margin-small-right"></span>Classement</a></li>
 					<li class="uk-nav-header">PHASES FINALES</li>
 					<li><a href="index.php?idtournoi=<?php echo $idTournoi; ?>&page=phasesfinales"><span data-uk-icon="icon: thumbnails" class="uk-margin-small-right"></span>Phases</a></li>
 					
 					<li class="uk-nav-header">MAINTENANCE</li>
 					<li><a href="index.php?idtournoi=<?php echo $idTournoi; ?>&page=maintenance"><span data-uk-icon="icon: unlock" class="uk-margin-small-right"></span>Dévérouillage</a></li>					
-					<li><a href="index.php?idtournoi=<?php echo $idTournoi; ?>&page=backup"><span data-uk-icon="icon: history" class="uk-margin-small-right"></span>Sauvegarde<br />Restauration</a></li>					
 				</ul>
 				<div class="left-content-box uk-margin-top">
 					

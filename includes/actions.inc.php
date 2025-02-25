@@ -98,6 +98,7 @@ if(isset($_POST['action'])){
 		}
 
 		if ($_POST['action'] == 'restauration'){
+			$nomTournoi = $_POST['nomTournoi'];
 			 /**
 			 * function formatFileName
 			 * @access public
@@ -108,7 +109,8 @@ if(isset($_POST['action'])){
 			 *           y élimine les caractères potentiellement dangereux.
 			 */         
 			function formatFileName($aFileName, $aMaxLength = 50) {
-				$aFileName = "tournois.db";
+				$aFileName = strToLower(subStr($aFileName, 0, $aMaxLength));
+     			$aFileName = ereg_replace('[^a-zA-Z,._\+\()\-]', '', $aFileName);
 				
 				return $aFileName;
 			} // end of function formatFileName() /2
@@ -168,7 +170,14 @@ if(isset($_POST['action'])){
 						// vers les répertoire/fichier destination spécifiés
 						if (move_uploaded_file($_FILES['aFile']['tmp_name'],
 													$destination_dir.DIRECTORY_SEPARATOR.$destination_file)) {
-						echo 'Fichier valide et upload&eacute; correctement.';   
+						echo 'Fichier valide et upload&eacute; correctement.'; 
+						
+						$db = new SQLite3('includes/conf/tournois.db');
+						$fileArray = explode('.',$destination_file,-1);
+						$fileNameTournoi = $fileArray[0];
+						$db->exec("INSERT INTO tournois (id_tournoi, nom_tournoi) VALUES ('". $fileNameTournoi ."', '". $nomTournoi ."')");
+						
+
 						} else { // error sur move_uploaded_file
 						echo 'Le fichier n\'a pas &eacute;t&eacute; upload&eacute; correctement !';
 						}

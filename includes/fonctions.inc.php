@@ -206,6 +206,12 @@ function tiragePhaseQualif($nbEquipes, $numPhase)
 			
 		$equipe1 = $premierTableauEquipes[$indexTable];
 		$equipe2 = $secondTableauEquipes[$indexTable];
+		if($equipe1 == $nbEquipes){
+			$equipe1 = 'EXEMPT';
+		}
+		if($equipe2 == $nbEquipes){
+			$equipe1 = 'EXEMPT';
+		}
 		
 		$matchs[$numMatch] = array('num_phase'=>$numPhase, 'equipe1'=>$equipe1, 'equipe2'=> $equipe2);
 		$numMatch = $numMatch + 1;

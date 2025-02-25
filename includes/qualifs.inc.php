@@ -9,7 +9,19 @@ if (isset($_POST['creerPhase'])){
 	creerPhaseQualif($idTournoi, $numPhase, $nbEquipes);	
 }
 
-$infosPhase = infosPhase($idTournoi);
+// $infosPhase = infosPhase();
+// print_r($infosPhase);
+// $isLock = $infosPhase[0]['phasequalif_locked'];
+// if($isLock == 1){
+// 	$lockedColor = "red";
+// 	$lockedIcon = "lock";
+// 	$lockedAction = "unlock";
+// }else{
+// 	$lockedColor = "green";
+// 	$lockedIcon = "unlock";
+// 	$lockedAction = "lock";
+// }
+
 echo "Equipes inscrites : ". $nbEquipes."<br/><br/>";
 
 if ($infosPhase == ''){
@@ -64,7 +76,7 @@ if ($infosPhase == ''){
 		unset($content);
 		 	
 		$countPhase = 1;
-		while ($countPhase < $numPhase+1){
+		while ($countPhase < $numPhase + 1){
 		
 		if ($countPhase == $numPhase){		
 			$trashButton = "<a href=\"index.php?idtournoi=". $idTournoi ."&action=supprphasequalif&phasequalif=". $numPhase ."\" class=\"uk-icon-link trash-icon\" title=\"Supprimer\" data-uk-tooltip data-uk-icon=\"icon: trash\"></a>";
@@ -97,10 +109,30 @@ if ($infosPhase == ''){
 							</tr>";
 		
 		$numPlaque = 1;
+		$indexPlayed = 0;
+		$nbMatchs = $nbEquipes;
+		if($nbEquipes&1){
+			$nbMatchs = $nbEquipes + 1;
+		}
+		$nbMatchs = $nbMatchs / 2;
 		foreach ($listeMatchs as $row){
 			$idMatch = $row['id_matchqualif'];
 			$score1 = $row['score1'];
 			$score2 = $row['score2'];
+						
+			if($score1 == $infosTournoi['pts_qualifs'] || $score2 == $infosTournoi['pts_qualifs']){
+				$matchPlayed = "green";
+				$indexPlayed = $indexPlayed + 1;
+			}else{
+				$matchPlayed = "red";
+			}
+
+			if($indexPlayed == $nbMatchs){
+				$allPlayed = "green";
+			}else{
+				$allPlayed = "red";
+			}
+
 			$equipe1 = $row['equipe1'];
 			$equipe2 = $row['equipe2'];
 			$indexSelect = 0;
@@ -144,6 +176,7 @@ if ($infosPhase == ''){
 						</div>
 						
 						<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">$equipe2</div>
+						<div style=\"display:inline-block;width: 10px;height:10px;border-radius: 50%;background-color:". $matchPlayed ."\"></div>
 					
 						<input type=\"hidden\" name=\"idTournoi\"  value=\"$idTournoi\"></input>
 						<input type=\"hidden\" name=\"idMatchQualif\"  value=\"$idMatch\"></input>
@@ -174,8 +207,9 @@ if ($infosPhase == ''){
 						<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
 							<div class=\"uk-card-header\">
 								<div class=\"uk-grid uk-grid-small\">
-									<div class=\"uk-width-auto\"><h4>Phase $countPhase</h4></div>
+									<div style=\"display:inline-bock;\" class=\"uk-width-auto\"><h4>Phase $countPhase</h4></div><div style=\"margin-top: 8px;margin-left: 20px;display:inline-block;border-radius: 50%; height: 15px;background-color:$allPlayed ;\"></div>
 									<div class=\"uk-width-expand uk-text-right panel-icons\">
+										<a style=\"color: $lockedColor\" href=\"index.php?page=qualifs&action=". $lockAction ."PhaseQualif\" class=\"uk-margin-medium-right\"  uk-icon=\"$lockedIcon\"></a>
 										<a onclick=\"printDiv('phase$countPhase');\" uk-icon=\"print\"></a>". $trashButton ."
 									</div>
 								</div>

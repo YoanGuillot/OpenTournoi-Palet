@@ -5,6 +5,11 @@ function supprEquipe(idTournoi, idEquipe){
 function supprTournoi(idTournoi){
 	$("#supprTournoiBouton").attr("href", 'index.php?idtournoi='+idTournoi+'&action=supprtournoi');
 }
+
+function supprPhaseQualif(idTournoi, numPhase){
+	$("#supprPhaseQualifBouton").attr("href", 'index.php?idtournoi='+idTournoi+'&action=supprphasequalif&phasequalif='+numPhase);
+}
+
 function activateLink(idLink, side, ptsV, idMatch){
 	$("#"+idLink).removeClass('disabled');
 	$("#"+idLink).css('color', 'green');

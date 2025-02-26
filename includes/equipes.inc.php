@@ -2,7 +2,7 @@
 defined('_LPDT') or die;
 $infosPhase = infosPhase();
 $listeEquipes = listeEquipes();
-if($nbEquipes >= $infosTournoi['max_equipes']){
+if($infosTournoi['max_equipes'] != 0 && $nbEquipes >= $infosTournoi['max_equipes']){
 	$disableCreerButton = "disabled";
 }else{
 	$disableCreerButton = "";

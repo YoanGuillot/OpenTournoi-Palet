@@ -86,7 +86,8 @@ if(isset($_POST['action'])){
 					
 					header("Location: index.php?idtournoi=$idTournoi&page=qualifs");
 		}
-		
+
+			
 		if ($_POST['action'] == 'impression'){
 			require 'includes/lib/fpdf/fpdf.php';
 			
@@ -232,6 +233,20 @@ if(isset($_GET['action'])){
 			unlink('./includes/conf/'. $idTournoi .'.db');
 		
 			header("Location: index.php");			
+		}
+
+		if($_GET['action'] == 'lockphasequalif'){
+			$numPhase = $_GET['numphase'];
+			$db->exec("UPDATE phases_qualif SET phasequalif_locked = '1' WHERE num_phase == '$numPhase'");
+			
+			header("Location: index.php?idtournoi=$idTournoi&page=qualifs");
+		}
+		
+		if($_GET['action'] == 'unlockphasequalif'){
+			$numPhase = $_GET['numphase'];
+			$db->exec("UPDATE phases_qualif SET phasequalif_locked = '0' WHERE num_phase == '$numPhase'");
+			
+			header("Location: index.php?idtournoi=$idTournoi&page=qualifs");
 		}
 		
 		if($_GET['action'] == 'supprphasequalif'){

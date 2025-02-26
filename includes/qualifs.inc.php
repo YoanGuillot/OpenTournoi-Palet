@@ -9,18 +9,10 @@ if (isset($_POST['creerPhase'])){
 	creerPhaseQualif($idTournoi, $numPhase, $nbEquipes);	
 }
 
-// $infosPhase = infosPhase();
+$infosPhase = infosPhase();
+//DEBUG
 // print_r($infosPhase);
-// $isLock = $infosPhase[0]['phasequalif_locked'];
-// if($isLock == 1){
-// 	$lockedColor = "red";
-// 	$lockedIcon = "lock";
-// 	$lockedAction = "unlock";
-// }else{
-// 	$lockedColor = "green";
-// 	$lockedIcon = "unlock";
-// 	$lockedAction = "lock";
-// }
+
 
 echo "Equipes inscrites : ". $nbEquipes."<br/><br/>";
 
@@ -72,18 +64,35 @@ if ($infosPhase == ''){
 		$colonnePhase = array_column($infosPhase, 'num_phase');
 		rsort($colonnePhase, SORT_NUMERIC);
 		$numPhase = $colonnePhase[0];
+		
 	
 		unset($content);
 		 	
 		$countPhase = 1;
 		while ($countPhase < $numPhase + 1){
 		
+		$isLock = isLock($countPhase);
+		$isLock = $isLock[0]['phasequalif_locked'];
+		//print_r($isLock);
+		if($isLock == 1){
+			$lockedColor = "red";
+			$lockedIcon = "lock";
+			$lockAction = "unlock";
+			$disableSelect = "disabled";
+		}else{
+			$lockedColor = "green";
+			$lockedIcon = "unlock";
+			$lockAction = "lock";
+			$disableSelect = "";
+		}
+
+
 		if ($countPhase == $numPhase){		
 			$trashButton = "<a href=\"index.php?idtournoi=". $idTournoi ."&action=supprphasequalif&phasequalif=". $numPhase ."\" class=\"uk-icon-link trash-icon\" title=\"Supprimer\" data-uk-tooltip data-uk-icon=\"icon: trash\"></a>";
 		}else{
 			$trashButton = " ";
 		}
-		$listeMatchs = listeMatchsQualif($idTournoi, $countPhase);
+		$listeMatchs = listeMatchsQualif($countPhase);
 		
 		$tableauMatchs = "<table class=\"uk-table uk-table-striped\" style=\"width: 100%\">
 							<tr>
@@ -163,14 +172,14 @@ if ($infosPhase == ''){
 						<div style=\"display:inline-block;width: 10%\" class=\"uk-text-center\">$numPlaque</div>
 						<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">$equipe1</div>
 						<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center\">
-							<select id=\"match-$idMatch-side1\" onchange=\"activateLink('validMatch-$idMatch', 'side2', ".$infosTournoi['pts_qualifs'] .", $idMatch)\" name=\"score1\" class=\"uk-select\"  >
+							<select id=\"match-$idMatch-side1\" onchange=\"activateLink('validMatch-$idMatch', 'side2', ".$infosTournoi['pts_qualifs'] .", $idMatch)\" name=\"score1\" class=\"uk-select\" $disableSelect >
 								$selectOptions1
 							</select>
 						</div>
 						<div style=\"display:inline-block;width: 10%\" class=\"uk-text-center\"><a id=\"validMatch-$idMatch\" style=\"color: gray\" href=\"javascript:document.getElementById('formMatch-$idMatch').submit();\" uk-icon=\"check\" class=\"disabled\"></a></div>
 						
 						<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center\">
-							<select id=\"match-$idMatch-side2\" onchange=\"activateLink('validMatch-$idMatch', 'side1', ".$infosTournoi['pts_qualifs'] .", $idMatch)\" name=\"score2\" class=\"uk-select\"  >
+							<select id=\"match-$idMatch-side2\" onchange=\"activateLink('validMatch-$idMatch', 'side1', ".$infosTournoi['pts_qualifs'] .", $idMatch)\" name=\"score2\" class=\"uk-select\" $disableSelect >
 								$selectOptions2
 							</select>
 						</div>
@@ -203,13 +212,14 @@ if ($infosPhase == ''){
 		if(empty($content)){
 			$content="";
 		}
+	
 		$content = $content."<div class=\"uk-width-1-1 uk-width-1-2@l uk-width-1-2@xl\">
 						<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
 							<div class=\"uk-card-header\">
 								<div class=\"uk-grid uk-grid-small\">
 									<div style=\"display:inline-bock;\" class=\"uk-width-auto\"><h4>Phase $countPhase</h4></div><div style=\"margin-top: 8px;margin-left: 20px;display:inline-block;border-radius: 50%; height: 15px;background-color:$allPlayed ;\"></div>
 									<div class=\"uk-width-expand uk-text-right panel-icons\">
-										<a style=\"color: $lockedColor\" href=\"index.php?page=qualifs&action=". $lockAction ."PhaseQualif\" class=\"uk-margin-medium-right\"  uk-icon=\"$lockedIcon\"></a>
+										<a style=\"color: $lockedColor\" href=\"index.php?page=qualifs&idtournoi=". $idTournoi ."&action=". $lockAction ."phasequalif&numphase=$countPhase\" class=\"uk-margin-medium-right\"  uk-icon=\"$lockedIcon\"></a>
 										<a onclick=\"printDiv('phase$countPhase');\" uk-icon=\"print\"></a>". $trashButton ."
 									</div>
 								</div>

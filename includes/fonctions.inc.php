@@ -119,15 +119,26 @@ function updateNumEquipe($idEquipe, $numEquipe){
 
 
 
-function listeMatchsQualif($idTournoi, $numPhase)
+function listeMatchsQualif($numPhase)
 {
 	global $db;
-	$resultats = $db->query('SELECT * FROM matchs_qualifs WHERE id_tournoi == '.$idTournoi.' AND num_phase == '. $numPhase .'');
+	$resultats = $db->query('SELECT * FROM matchs_qualifs WHERE num_phase == '. $numPhase .'');
 	while ($row = $resultats->fetchArray(1)) {
 		$listeMatchs[] = $row;
 	}
 	
 	return $listeMatchs;
+}
+
+function isLock($numPhase)
+{
+	global $db;
+	$resultats = $db->query('SELECT * FROM phases_qualif WHERE num_phase == '. $numPhase .'');
+	while ($row = $resultats->fetchArray(1)) {
+		$detailsPhase[] = $row;
+	}
+	
+	return $detailsPhase;
 }
 
 function listeMatchsPhaseFinale($idTournoi, $numPhase)

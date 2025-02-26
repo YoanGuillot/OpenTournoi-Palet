@@ -221,7 +221,7 @@ function tiragePhaseQualif($nbEquipes, $numPhase)
 			$equipe1 = 'EXEMPT';
 		}
 		if($equipe2 == $nbEquipes){
-			$equipe1 = 'EXEMPT';
+			$equipe2 = 'EXEMPT';
 		}
 		
 		$matchs[$numMatch] = array('num_phase'=>$numPhase, 'equipe1'=>$equipe1, 'equipe2'=> $equipe2);

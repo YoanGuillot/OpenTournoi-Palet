@@ -1,7 +1,12 @@
 <?php
 defined('_LPDT') or die;
-
-
+$infosPhase = infosPhase();
+$listeEquipes = listeEquipes();
+if($nbEquipes >= $infosTournoi['max_equipes']){
+	$disableCreerButton = "disabled";
+}else{
+	$disableCreerButton = "";
+}
 ?>
 
 <div class="uk-grid uk-grid-medium" data-uk-grid uk-sortable="handle: .sortable-icon">
@@ -39,12 +44,12 @@ defined('_LPDT') or die;
 								<th style="width: 10%">Actions</th>
 							</tr>
 						</thead>
-							<td><input name="nomEquipe" class="uk-input uk-form-width-medium" type="text" required></td>
-							<td><input name="joueur1" class="uk-input uk-form-width-medium" type="text"></td>
-							<td><input name="joueur2" class="uk-input uk-form-width-medium" type="text"></td>
-							<td><input name="joueur3" class="uk-input uk-form-width-medium" type="text"></td>
+							<td><input name="nomEquipe" class="uk-input uk-form-width-medium" type="text" required <?php echo $disableCreerButton; ?>></td>
+							<td><input name="joueur1" class="uk-input uk-form-width-medium" type="text" <?php echo $disableCreerButton; ?>></td>
+							<td><input name="joueur2" class="uk-input uk-form-width-medium" type="text" <?php echo $disableCreerButton; ?>></td>
+							<td><input name="joueur3" class="uk-input uk-form-width-medium" type="text" <?php echo $disableCreerButton; ?>></td>
 							<input type="hidden" name="action" class="uk-input" value="creationEquipe">
-							<td><button class="uk-button uk-button-primary uk-margin-left">Créer</button></td>
+							<td><button class="uk-button uk-button-primary uk-margin-left" <?php echo $disableCreerButton; ?>>Créer</button></td>
 					<?php } ?>
 					</table>	
 					</form>						
@@ -58,9 +63,8 @@ defined('_LPDT') or die;
 		<div class="uk-card uk-card-default uk-card-hover">
 			<div class="uk-card-header">
 				<div class="uk-grid uk-grid-small">
-					<div class="uk-width-auto"><h4>Equipes inscrites</h4></div>
+					<div class="uk-width-auto"><h4>Equipes inscrites : <?php echo $nbEquipes; ?> </h4></div>
 					<div class="uk-width-expand uk-text-right panel-icons">
-						
 						
 						<button class="uk-button importBouton">Importer<span uk-icon="triangle-down"></span></button>
 						<div uk-dropdown="pos: bottom-center;animation: slide-top; animate-out: true; duration: 700;">
@@ -94,15 +98,14 @@ defined('_LPDT') or die;
 							</tr>
 						</thead>
 <?php
-	$infosPhase = infosPhase();
-	$listeEquipes = listeEquipes();
+	
 	$numEquipe = 1;
 	
 	if(!empty($listeEquipes)){
 		foreach($listeEquipes as $row) {
 			
 			if(empty($infosPhase)){
-				$deleteEquipe = "<a style=\"color: red\" onclick=\"supprEquipe(" .$row['id_equipe'] .")\" uk-icon=\"trash\" uk-toggle=\"target: #supprEquipe\"></a>";
+				$deleteEquipe = "<a style=\"color: red\" onclick=\"supprEquipe(" .$idTournoi ."," .$row['id_equipe'] .")\" uk-icon=\"trash\" uk-toggle=\"target: #supprEquipe\"></a>";
 			}else{
 				$deleteEquipe = "";
 			}

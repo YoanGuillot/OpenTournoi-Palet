@@ -9,6 +9,16 @@ if (isset($_GET['idtournoi'])){
 		foreach ($listeEquipes as $row){
 			statsEquipe($row['id_equipe']);
 		}
+		
+		$phasesMenu = "";
+		$infosPhasesFinales = infosPhasesFinales();
+		foreach ($infosPhasesFinales as $row){
+			$phasesMenu .= "<li><a href=\"index.php?idtournoi=". $idTournoi ."&idphase=". $row['id_phasefinale'] ."&page=phase". $row['nb_equipes'] ."\"><span data-uk-icon=\"icon: thumbnails\" class=\"uk-margin-small-right\"></span>". $row['label_phasefinale'] ."</a></li>";
+		}
+		
+	
+	
+	
 	} else {
 		$nbEquipes = 0;
 	}
@@ -73,8 +83,8 @@ if (isset($_GET['idtournoi'])){
 					<li><a href="index.php?idtournoi=<?php echo $idTournoi; ?>&page=qualifs"><span data-uk-icon="icon: thumbnails" class="uk-margin-small-right"></span>Phases</a></li>					
 					<li><a href="index.php?idtournoi=<?php echo $idTournoi; ?>&page=classementqualifs"><span data-uk-icon="icon: list" class="uk-margin-small-right"></span>Classement</a></li>
 					<li class="uk-nav-header">PHASES FINALES</li>
-					<li><a href="index.php?idtournoi=<?php echo $idTournoi; ?>&page=phasesfinales"><span data-uk-icon="icon: thumbnails" class="uk-margin-small-right"></span>Phases</a></li>
-					
+					<li><a href="index.php?idtournoi=<?php echo $idTournoi; ?>&page=phasesfinales"><span data-uk-icon="icon: cog" class="uk-margin-small-right"></span>Gestion phases</a></li>
+					<?php echo $phasesMenu; ?>
 					<li class="uk-nav-header">MAINTENANCE</li>
 					<li><a href="index.php?idtournoi=<?php echo $idTournoi; ?>&page=maintenance"><span data-uk-icon="icon: unlock" class="uk-margin-small-right"></span>Dévérouillage</a></li>					
 				</ul>

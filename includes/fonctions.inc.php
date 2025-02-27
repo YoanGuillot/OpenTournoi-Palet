@@ -52,7 +52,7 @@ function infosPhase()
 	}
 }
 
-function infosPhaseFinale()
+function infosPhasesFinales()
 {
 	global $db;
 	$resultats = $db->query('SELECT * FROM phases_finales');
@@ -60,9 +60,6 @@ function infosPhaseFinale()
 		$infosPhaseFinale[] = $row;
 	}
 	if(!empty($infosPhaseFinale)){
-		return $infosPhaseFinale;
-	}else{
-		$infosPhasefinale = "";
 		return $infosPhaseFinale;
 	}
 	
@@ -190,6 +187,15 @@ function statsEquipe($numEquipe)
 	
 }
 
+function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
+	global $db;
+	$indexEquipes = 1;
+	while ($indexEquipes < $nombreEquipes){
+
+		$db->exec("INSERT INTO positions_phasesfinales (id_phasefinale, position_label) VALUES ('". $idPhaseFinale ."', 'A$indexEquipe')");
+	}
+}
+
 function tiragePhaseQualif($nbEquipes, $numPhase)
 {
 	if ($nbEquipes&1){
@@ -239,14 +245,15 @@ function tiragePhasefinale($idTournoi, $nbEquipes, $numPhase)
 	$recupEquipes = classementQualifs($idTournoi);
 	$tableauEquipes = array();
 	$countEquipe = 0;
+	$infosTournoi = infosTournoi($idTournoi);
 	if($infosTournoi['type_phasesfinales'] == "tetesdeserie"){
-		
+	
 	}else{
 		foreach($recupEquipes as $row){
-			if($row['dispo_phasesfinales'] == 'oui' && $countEquipe < $nbEquipes){
+			if($row['dispo_phasesfinales'] == '1' && $countEquipe < $nbEquipes){
 				$numEquipe = $row['num_equipe'];
 				$tableauEquipes[] = $numEquipe;
-				$db->exec("UPDATE equipes SET dispo_phasesfinales = \"non\" WHERE num_equipe == '$numEquipe'");
+				$db->exec("UPDATE equipes SET dispo_phasesfinales = '0' WHERE num_equipe == '$numEquipe'");
 				$countEquipe = $countEquipe + 1;
 			}
 		}

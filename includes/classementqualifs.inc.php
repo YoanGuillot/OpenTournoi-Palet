@@ -40,6 +40,7 @@ defined('_LPDT') or die;
 								</th>
 							</tr>
 						</thead>
+						<tbody>
 <?php
 	$classementQualifs = classementQualifs($idTournoi);
 		
@@ -55,7 +56,7 @@ defined('_LPDT') or die;
 						<div style=\"display:inline-block;width: 8%\" >". $row['pts_pour'] ."</div>
 						<div style=\"display:inline-block;width: 8%\" >". $row['pts_contre'] ."</div>
 						<div style=\"display:inline-block;width: 8%\" >". $row['pts_diff'] ."</div>
-					</form>
+					
 					</td>
 				</tr>";
 			$placeEquipe = $placeEquipe + 1;
@@ -63,6 +64,7 @@ defined('_LPDT') or die;
 	}
 
 ?>	
+						</tbody>
 					</table>
 				</div>
 			</div>

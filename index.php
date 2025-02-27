@@ -11,6 +11,7 @@ date_default_timezone_set("Europe/Paris");
     <link rel="stylesheet" href="css/uikit.min.css" />
     <link rel="stylesheet" href="css/dashboard.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/arbres.css" />
     <script src="js/jquery.min.js"></script>
     <script src="js/uikit.min.js"></script>
 	<script src="js/uikit-icons.min.js"></script>

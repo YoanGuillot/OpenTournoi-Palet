@@ -250,7 +250,7 @@ if(isset($_GET['action'])){
 		}
 		
 		if($_GET['action'] == 'supprphasequalif'){
-
+			
 			$db->exec("DELETE FROM phases_qualif WHERE id_tournoi == ". $idTournoi ." AND num_phase == ". $_GET['phasequalif'] ."");
 			
 			header("Location: index.php?idtournoi=$idTournoi&page=qualifs");			
@@ -262,18 +262,18 @@ if(isset($_GET['action'])){
 			//mettre a jour la dispo finale
 			
 				global $db;
-				$resultats = $db->query('SELECT * FROM matchs_phasesfinales WHERE id_tournoi == '. $idTournoi .' AND num_phasefinale == '. $_GET['phasefinale'] .'');
+				$resultats = $db->query('SELECT * FROM matchs_phasesfinales WHERE num_phasefinale == '. $_GET['phasefinale'] .'');
 				while ($row = $resultats->fetchArray(1)) {
 					$equipe1 = $row['equipe1'];
 					$equipe2 = $row['equipe2'];
 										
-					$db->exec("UPDATE equipes SET dispo_phasesfinales = \"oui\" WHERE id_tournoi == '$idTournoi' AND num_equipe == '$equipe1'");
-					$db->exec("UPDATE equipes SET dispo_phasesfinales = \"oui\" WHERE id_tournoi == '$idTournoi' AND num_equipe == '$equipe2'");
+					$db->exec("UPDATE equipes SET dispo_phasesfinales = '1' WHERE num_equipe == '$equipe1'");
+					$db->exec("UPDATE equipes SET dispo_phasesfinales = '1' WHERE num_equipe == '$equipe2'");
 					
 				}	
 			
 
-			$db->exec("DELETE FROM phases_finales WHERE id_tournoi == ". $idTournoi ." AND num_phasefinale == ". $_GET['phasefinale'] ."");
+			$db->exec("DELETE FROM phases_finales WHERE num_phasefinale == ". $_GET['phasefinale'] ."");
 			
 			header("Location: index.php?idtournoi=$idTournoi&page=phasesfinales");			
 		}

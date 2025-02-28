@@ -190,9 +190,86 @@ function statsEquipe($numEquipe)
 function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 	global $db;
 	$indexEquipes = 1;
-	while ($indexEquipes < $nombreEquipes){
+	while ($indexEquipes <= $nombreEquipes){
 
-		$db->exec("INSERT INTO positions_phasesfinales (id_phasefinale, position_label) VALUES ('". $idPhaseFinale ."', 'A$indexEquipe')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'A". $indexEquipe ."')");
+		
+		$indexEquipe = $indexEquipe + 1;
+	}
+
+	$indexEquipe = 1;
+	$nbEquipesB = $nombreEquipes / 2;
+
+	while ($indexEquipes <= $nbEquipesB){
+
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'B". $indexEquipe ."')");
+		
+		$indexEquipe++;
+	}
+
+	if($nombreEquipes > 2){
+		$indexEquipe = 1;
+		$nbEquipesC = $nombreEquipes / 4;
+
+		while ($indexEquipes < $nbEquipesC){
+
+			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'C". $indexEquipe ."')");
+		
+			$indexEquipe++;
+		}
+
+	}
+
+	if($nombreEquipes > 4){
+		$indexEquipe = 1;
+		$nbEquipesD = $nombreEquipes / 8;
+
+		while ($indexEquipes <= $nbEquipesD){
+
+			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'D". $indexEquipe ."')");
+		
+			$indexEquipe++;
+		}
+
+	}
+
+	if($nombreEquipes > 16){
+		$indexEquipe = 1;
+		$nbEquipesE = $nombreEquipes / 16;
+
+		while ($indexEquipes <= $nbEquipesE){
+
+			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'E". $indexEquipe ."')");
+		
+			$indexEquipe++;
+		}
+
+	}
+
+	if($nombreEquipes > 32){
+		$indexEquipe = 1;
+		$nbEquipesF = $nombreEquipes / 32;
+
+		while ($indexEquipes <= $nbEquipesF){
+
+			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'F". $indexEquipe ."')");
+		
+			$indexEquipe++;
+		}
+
+	}
+
+	if($nombreEquipes > 64){
+		$indexEquipe = 1;
+		$nbEquipesG = $nombreEquipes / 64;
+
+		while ($indexEquipes <= $nbEquipesG){
+
+			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'G". $indexEquipe ."')");
+		
+			$indexEquipe++;
+		}
+
 	}
 }
 
@@ -258,6 +335,8 @@ function tiragePhasefinale($idTournoi, $nbEquipes, $numPhase)
 			}
 		}
 	}
+
+	genererArbrePhaseFinale($numPhase,$nbEquipes);
 	
 	//melange du tableau
 	$melTableauEquipes = $tableauEquipes;

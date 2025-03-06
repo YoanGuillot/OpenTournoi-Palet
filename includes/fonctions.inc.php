@@ -189,8 +189,8 @@ function statsEquipe($numEquipe)
 
 function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 	global $db;
-	$indexEquipes = 1;
-	while ($indexEquipes <= $nombreEquipes){
+	$indexEquipe = 1;
+	while ($indexEquipe <= $nombreEquipes){
 
 		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'A". $indexEquipe ."')");
 		
@@ -200,18 +200,19 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 	$indexEquipe = 1;
 	$nbEquipesB = $nombreEquipes / 2;
 
-	while ($indexEquipes <= $nbEquipesB){
+	while ($indexEquipe <= $nbEquipesB){
 
 		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'B". $indexEquipe ."')");
 		
 		$indexEquipe++;
 	}
 
+	//PROBLEME
 	if($nombreEquipes > 2){
 		$indexEquipe = 1;
 		$nbEquipesC = $nombreEquipes / 4;
 
-		while ($indexEquipes < $nbEquipesC){
+		while ($indexEquipe < $nbEquipesC){
 
 			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'C". $indexEquipe ."')");
 		
@@ -224,7 +225,7 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 		$indexEquipe = 1;
 		$nbEquipesD = $nombreEquipes / 8;
 
-		while ($indexEquipes <= $nbEquipesD){
+		while ($indexEquipe <= $nbEquipesD){
 
 			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'D". $indexEquipe ."')");
 		
@@ -237,7 +238,7 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 		$indexEquipe = 1;
 		$nbEquipesE = $nombreEquipes / 16;
 
-		while ($indexEquipes <= $nbEquipesE){
+		while ($indexEquipe <= $nbEquipesE){
 
 			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'E". $indexEquipe ."')");
 		
@@ -250,7 +251,7 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 		$indexEquipe = 1;
 		$nbEquipesF = $nombreEquipes / 32;
 
-		while ($indexEquipes <= $nbEquipesF){
+		while ($indexEquipe <= $nbEquipesF){
 
 			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'F". $indexEquipe ."')");
 		
@@ -263,7 +264,7 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 		$indexEquipe = 1;
 		$nbEquipesG = $nombreEquipes / 64;
 
-		while ($indexEquipes <= $nbEquipesG){
+		while ($indexEquipe <= $nbEquipesG){
 
 			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'G". $indexEquipe ."')");
 		
@@ -373,9 +374,21 @@ function supprPhaseQualif($idPhase)
 	header("Location: index.php?idtournoi=$idTournoi&page=qualifs");
 }
 
+function dispoReset($idPhaseFinale)
+{
+	global $db;
+	$listeMatchsPhaseFinale = $db->exec("SELECT * FROM matchs_phasesfinales WHERE id_phasefinale == $idPhaseFinale");
+	foreach($listeMatchsPhaseFinale as $row){
+		$db->exec("UPDATE equipes SET dispo_phasesfinales = \"1\" WHERE num_equipe == '". $row['equipe1'] ."'");
+		$db->exec("UPDATE equipes SET dispo_phasesfinales = \"1\" WHERE num_equipe == '". $row['equipe2'] ."'");
+	}
+}
+
+
 function supprPhaseFinale($idPhaseFinale)
 {
 	global $db;
+	dispoReset($idPhaseFinale);
 	$db->exec("DELETE FROM phases_finales WHERE id_phasefinale == $idPhaseFinale");
 	header("Location: index.php?idtournoi=$idTournoi&page=phasesfinales");
 }

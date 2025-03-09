@@ -11,7 +11,6 @@ if (isset($_POST['creerPhaseFinale'])){
 	creerPhaseFinale($idTournoi, $numPhaseFinale, $nbEquipes, $labelPhaseFinale, $typePhaseFinale);	
 }
 
-
 $infosPhasesFinales = infosPhasesFinales($idTournoi);
 
 

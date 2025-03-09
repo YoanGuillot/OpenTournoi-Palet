@@ -29,8 +29,44 @@ defined('_LPDT') or die;
 		</div>
 	</div>
 	<!-- /panel -->
-	<!-- panel -->
-	<div class="uk-width-1-2@l">
+	 <!-- panel -->
+	<div class="uk-width-1-2">
+		<div class="uk-card uk-card-default uk-card-hover uk-height-1-1">
+			<div class="uk-card-header">
+				<div class="uk-grid uk-grid-small">
+					<div class="uk-width-auto"><h4>Restaurer une sauvegarde</h4></div>
+					<div class="uk-width-expand uk-text-right panel-icons">
+						
+					</div>
+				</div>
+			</div>
+			<div class="uk-card-body">
+				<div uk-overflow-auto>
+					<div class="uk-panel uk-text-center">
+                    <form name="form" method="post" action="index.php" enctype="multipart/form-data">
+                        <!-- Taille maximale en octets. Non sécurisé car facilement contournable !! -->
+                        <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+                        
+                        <input class="uk-input" type="file" name="aFile" />
+                        <br />
+                        <br />
+						Nom du tournoi : <input class="uk-input uk-form-width-medium" type="text" name="nomTournoi"/><br/>
+						<br/><input type="hidden" name="action" value="restauration" />
+                        <input class="uk-button uk-button-success" type="submit" name="submitFile" value="restaurer la sauvegarde" />
+                        </form>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /panel -->
+	
+</div>
+
+<div class="uk-grid uk-grid-medium" data-uk-grid uk-sortable="handle: .sortable-icon">		
+
+		<!-- panel -->
+	<div class="uk-width-1-1">
 		<div class="uk-card uk-card-default uk-card-hover">
 			<div class="uk-card-header">
 				<div class="uk-grid uk-grid-small">
@@ -68,41 +104,6 @@ defined('_LPDT') or die;
 	}
 ?>	
 					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- /panel -->
-</div>
-
-<div class="uk-grid uk-grid-medium" data-uk-grid uk-sortable="handle: .sortable-icon">		
-
-		<!-- panel -->
-	<div class="uk-width-1-2">
-		<div class="uk-card uk-card-default uk-card-hover">
-			<div class="uk-card-header">
-				<div class="uk-grid uk-grid-small">
-					<div class="uk-width-auto"><h4>Restaurer une sauvegarde</h4></div>
-					<div class="uk-width-expand uk-text-right panel-icons">
-						
-					</div>
-				</div>
-			</div>
-			<div class="uk-card-body">
-				<div uk-overflow-auto>
-					<div class="uk-panel uk-text-center">
-                    <form name="form" method="post" action="index.php" enctype="multipart/form-data">
-                        <!-- Taille maximale en octets. Non sécurisé car facilement contournable !! -->
-                        <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
-                        
-                        <input type="file" name="aFile" />
-                        <br />
-                        <br />
-						Nom du tournoi : <input type="text" name="nomTournoi"/><br/>
-						<br/><input type="hidden" name="action" value="restauration" />
-                        <input type="submit" name="submitFile" value="restaurer la sauvegarde" />
-                        </form>
-                    </div>
 				</div>
 			</div>
 		</div>

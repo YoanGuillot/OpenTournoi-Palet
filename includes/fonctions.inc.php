@@ -188,6 +188,7 @@ function statsEquipe($numEquipe)
 }
 
 function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
+	
 	global $db;
 	$indexEquipe = 1;
 	while ($indexEquipe <= $nombreEquipes){

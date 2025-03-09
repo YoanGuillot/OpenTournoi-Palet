@@ -213,7 +213,7 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 		$indexEquipe = 1;
 		$nbEquipesC = $nombreEquipes / 4;
 
-		while ($indexEquipe < $nbEquipesC){
+		while ($indexEquipe <= $nbEquipesC){
 
 			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'C". $indexEquipe ."')");
 		
@@ -235,7 +235,7 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 
 	}
 
-	if($nombreEquipes > 16){
+	if($nombreEquipes > 8){
 		$indexEquipe = 1;
 		$nbEquipesE = $nombreEquipes / 16;
 
@@ -248,7 +248,7 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 
 	}
 
-	if($nombreEquipes > 32){
+	if($nombreEquipes > 16){
 		$indexEquipe = 1;
 		$nbEquipesF = $nombreEquipes / 32;
 
@@ -261,13 +261,26 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 
 	}
 
-	if($nombreEquipes > 64){
+	if($nombreEquipes > 32){
 		$indexEquipe = 1;
 		$nbEquipesG = $nombreEquipes / 64;
 
 		while ($indexEquipe <= $nbEquipesG){
 
 			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'G". $indexEquipe ."')");
+		
+			$indexEquipe++;
+		}
+
+	}
+	
+	if($nombreEquipes > 64){
+		$indexEquipe = 1;
+		$nbEquipesH = $nombreEquipes / 128;
+
+		while ($indexEquipe <= $nbEquipesH){
+
+			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'H". $indexEquipe ."')");
 		
 			$indexEquipe++;
 		}

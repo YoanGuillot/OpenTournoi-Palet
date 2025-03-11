@@ -479,9 +479,15 @@ function creerPhaseFinale($idTournoi,$numPhaseFinale,$nbEquipes, $labelPhaseFina
 			$matchs[] = array("equipe1" => $equipe1, "equipe2" => $equipe2);
 	}
 	
-
+	$indexPosition = 1;
 	foreach ($matchs as $row){
+
 		$db->exec("INSERT INTO matchs_phasesfinales (id_tournoi, id_phasefinale, num_phasefinale, equipe1, equipe2) VALUES ('". $idTournoi ."','". $idPhaseFinale ."','". $numPhaseFinale ."','". $row['equipe1'] ."','". $row['equipe2'] ."')");
+		$db->exec("UPDATE positions_phasesfinales SET num_equipe = '". $row['equipe1'] ."' WHERE num_phasefinale == '". $numPhaseFinale ."' AND position_label == 'A". $indexPosition ."'");
+		$indexPosition++;
+		$db->exec("UPDATE positions_phasesfinales SET num_equipe = '". $row['equipe2'] ."' WHERE num_phasefinale == '". $numPhaseFinale ."' AND position_label == 'A". $indexPosition ."'");
+
+
 	}	
 	
 	header("Location: index.php?idtournoi=$idTournoi&page=phasesfinales");

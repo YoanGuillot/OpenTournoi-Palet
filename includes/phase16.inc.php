@@ -1,3 +1,18 @@
+<?php
+$idPhaseFinale = $_GET['idphase'];
+$numPhase = getNumPhaseFinale($idPhaseFinale);
+$numPhase = $numPhase[0]['num_phasefinale'];
+$infoPositions = infosPositions($numPhase);
+
+foreach ($infoPositions as $row) {
+	$positions[$row['position_label']] = $row['num_equipe'];
+	$ptsPositions[$row['position_label']] = $row['position_score'];
+}
+
+
+
+?>
+
 <div id="phase-container">
 	<div class="arbre">
 		<div class="uk-width-1-1">
@@ -14,10 +29,10 @@
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										A1
+									<?php echo $positions['A1']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									0
+									<?php echo $ptsPositions['A1']; ?>
 									</div>
 								</div>  
 							</td>
@@ -33,10 +48,12 @@
 							</td>
 							<td>                
 							</td>
+							<td></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>
-								<div class="bracket-position">1-8</div>
+								<div class="bracket-position">1-16</div>
 								<div class="bracket-edit">
 									<img src="img/edit.png" />
 								</div>
@@ -46,10 +63,10 @@
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										B1
+									<?php echo $positions['B1']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-										0
+									<?php echo $ptsPositions['B1']; ?>
 									</div>
 								</div>
 							</td>
@@ -61,15 +78,17 @@
 							</td>
 							<td>                
 							</td>
+							<td></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										A2
+									<?php echo $positions['A2']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									0
+									<?php echo $ptsPositions['A2']; ?>
 									</div>
 								</div>  
 							</td>
@@ -85,6 +104,8 @@
 							</td>
 							<td>                
 							</td>
+							<td></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>
@@ -94,7 +115,7 @@
 
 							</td>
 							<td>
-								<div class="bracket-position">1-4</div>
+								<div class="bracket-position">1-8</div>
 								<div class="bracket-edit">
 									<img src="img/edit.png" />
 								</div>
@@ -104,10 +125,10 @@
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										C1
+									<?php echo $positions['C1']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-										0
+									<?php echo $ptsPositions['C1']; ?>
 									</div>
 								</div> 
 							</td>
@@ -115,15 +136,17 @@
 							</td>
 							<td>                
 							</td>
+							<td></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										A3
+									<?php echo $positions['A3']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									0
+									<?php echo $ptsPositions['A3']; ?>
 									</div>
 								</div>  
 							</td>
@@ -139,10 +162,12 @@
 							</td>
 							<td>                
 							</td>
+							<td></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>
-								<div class="bracket-position">1-8</div>
+								<div class="bracket-position">1-16</div>
 								<div class="bracket-edit">
 									<img src="img/edit.png" />
 								</div>
@@ -152,10 +177,10 @@
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										B2
+									<?php echo $positions['B2']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-										0
+									<?php echo $ptsPositions['B2']; ?>
 									</div>
 								</div>
 							</td>
@@ -167,15 +192,17 @@
 							</td>
 							<td>                
 							</td>
+							<td></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										A4
+									<?php echo $positions['A4']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									0
+									<?php echo $ptsPositions['A4']; ?>
 									</div>
 								</div>  
 							</td>
@@ -191,6 +218,8 @@
 							</td>
 							<td>                
 							</td>
+							<td></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>                
@@ -202,7 +231,7 @@
 							<td>                
 							</td>
 							<td>
-								<div class="bracket-position">1-2</div>
+								<div class="bracket-position">1-4</div>
 								<div class="bracket-edit">
 									<img src="img/edit.png" />
 								</div>
@@ -210,21 +239,26 @@
 							<td class="bracket-t">                
 							</td>
 							<td>
-								<div class="bracket-equipe bracket-vainqueur">
+								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										D1
+									<?php echo $positions['D1']; ?>
+									</div>
+									<div class="bracket-equipe-score">
+									<?php echo $ptsPositions['D1']; ?>
 									</div>
 								</div>                
 							</td>
+							<td class="bracket-haut"></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										A5
+									<?php echo $positions['A5']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									0
+									<?php echo $ptsPositions['A5']; ?>
 									</div>
 								</div>  
 							</td>
@@ -239,12 +273,14 @@
 							<td class="bracket-i">                
 							</td>
 							<td>
-								<div class="bracket-position">1</div>
+								<div class="bracket-position">1-2</div>
 							</td>
+							<td class="bracket-i"></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>
-								<div class="bracket-position">1-8</div>
+								<div class="bracket-position">1-16</div>
 								<div class="bracket-edit">
 									<img src="img/edit.png" />
 								</div>
@@ -254,10 +290,10 @@
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										B3
+									<?php echo $positions['B5']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-										0
+									<?php echo $ptsPositions['B5']; ?>
 									</div>
 								</div>
 							</td>
@@ -269,15 +305,17 @@
 							</td>
 							<td>                
 							</td>
+							<td class="bracket-i"></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										A6
+									<?php echo $positions['A6']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									0
+									<?php echo $ptsPositions['A6']; ?>
 									</div>
 								</div>  
 							</td>
@@ -293,6 +331,8 @@
 							</td>
 							<td>                
 							</td>
+							<td class="bracket-i"></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>
@@ -302,7 +342,7 @@
 
 							</td>
 							<td>
-								<div class="bracket-position">1-4</div>
+								<div class="bracket-position">1-8</div>
 								<div class="bracket-edit">
 									<img src="img/edit.png" />
 								</div>
@@ -312,10 +352,10 @@
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										C2
+									<?php echo $positions['C4']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-										0
+									<?php echo $ptsPositions['C4']; ?>
 									</div>
 								</div> 
 							</td>
@@ -323,15 +363,17 @@
 							</td>
 							<td>                
 							</td>
+							<td class="bracket-i"></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										A7
+									<?php echo $positions['A7']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									0
+									<?php echo $ptsPositions['A7']; ?>
 									</div>
 								</div>  
 							</td>
@@ -347,10 +389,12 @@
 							</td>
 							<td>                
 							</td>
+							<td class="bracket-i"></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>
-								<div class="bracket-position">1-8</div>
+								<div class="bracket-position">1-16</div>
 								<div class="bracket-edit">
 									<img src="img/edit.png" />
 								</div>
@@ -360,10 +404,10 @@
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										B4
+									<?php echo $positions['B4']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-										0
+									<?php echo $ptsPositions['B4']; ?>
 									</div>
 								</div>
 							</td>
@@ -375,15 +419,17 @@
 							</td>
 							<td>                
 							</td>
+							<td class="bracket-i"></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										A8
+									<?php echo $positions['A8']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									0
+									<?php echo $ptsPositions['A8']; ?>
 									</div>
 								</div>  
 							</td>
@@ -399,6 +445,448 @@
 							</td>
 							<td>                
 							</td>
+							<td class="bracket-i"></td>
+							<td ></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td class="bracket-t"></td>
+							<td>
+								<div class="bracket-equipe bracket-vainqueur">
+									<div class="bracket-equipe-num">
+									<?php echo $positions['E1']; ?>
+									</div>
+								</div>
+							</td>				
+						</tr>
+						<tr>
+							<td>
+								<div class="bracket-equipe">
+									<div class="bracket-equipe-num">
+									<?php echo $positions['A9']; ?>
+								</div>
+								<div class="bracket-equipe-score">
+								<?php echo $ptsPositions['A9']; ?>
+									</div>
+								</div>  
+							</td>
+							<td class="bracket-haut">  
+							</td>
+							<td>  
+							</td>
+							<td>  
+							</td>
+							<td>  
+							</td>
+							<td>                
+							</td>
+							<td>                
+							</td>
+							<td class="bracket-i"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="bracket-position">1-16</div>
+								<div class="bracket-edit">
+									<img src="img/edit.png" />
+								</div>
+							</td>
+							<td class="bracket-t">
+							</td>
+							<td>
+								<div class="bracket-equipe">
+									<div class="bracket-equipe-num">
+									<?php echo $positions['B5']; ?>
+									</div>
+									<div class="bracket-equipe-score">
+									<?php echo $ptsPositions['B5']; ?>
+									</div>
+								</div>
+							</td>
+							<td class="bracket-haut">  
+							</td>
+							<td>  
+							</td>
+							<td>                
+							</td>
+							<td>                
+							</td>
+							<td class="bracket-i"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="bracket-equipe">
+									<div class="bracket-equipe-num">
+									<?php echo $positions['A10']; ?>
+									</div>
+									<div class="bracket-equipe-score">
+									<?php echo $ptsPositions['A10']; ?>
+									</div>
+								</div>  
+							</td>
+							<td class="bracket-bas">  
+							</td>
+							<td>  
+							</td>
+							<td class="bracket-i">  
+							</td>
+							<td>  
+							</td>
+							<td>                
+							</td>
+							<td>                
+							</td>
+							<td class="bracket-i"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+
+							</td>
+							<td>
+
+							</td>
+							<td>
+								<div class="bracket-position">1-8</div>
+								<div class="bracket-edit">
+									<img src="img/edit.png" />
+								</div>
+							</td>
+							<td class="bracket-t"> 
+							</td>
+							<td>
+								<div class="bracket-equipe">
+									<div class="bracket-equipe-num">
+									<?php echo $positions['C3']; ?>
+									</div>
+									<div class="bracket-equipe-score">
+									<?php echo $ptsPositions['C3']; ?>
+									</div>
+								</div> 
+							</td>
+							<td class="bracket-haut">                
+							</td>
+							<td>                
+							</td>
+							<td class="bracket-i"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="bracket-equipe">
+									<div class="bracket-equipe-num">
+									<?php echo $positions['A11']; ?>
+									</div>
+									<div class="bracket-equipe-score">
+									<?php echo $ptsPositions['A11']; ?>
+									</div>
+								</div>  
+							</td>
+							<td class="bracket-haut">  
+							</td>
+							<td>  
+							</td>
+							<td class="bracket-i">  
+							</td>
+							<td>  
+							</td>
+							<td class="bracket-i">                
+							</td>
+							<td>                
+							</td>
+							<td class="bracket-i"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="bracket-position">1-16</div>
+								<div class="bracket-edit">
+									<img src="img/edit.png" />
+								</div>
+							</td>
+							<td class="bracket-t">
+							</td>
+							<td>
+								<div class="bracket-equipe">
+									<div class="bracket-equipe-num">
+									<?php echo $positions['B6']; ?>
+									</div>
+									<div class="bracket-equipe-score">
+									<?php echo $ptsPositions['B6']; ?>
+									</div>
+								</div>
+							</td>
+							<td class="bracket-bas">  
+							</td>
+							<td>
+							</td>
+							<td class="bracket-i">                
+							</td>
+							<td>                
+							</td>
+							<td class="bracket-i"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="bracket-equipe">
+									<div class="bracket-equipe-num">
+									<?php echo $positions['A12']; ?>
+									</div>
+									<div class="bracket-equipe-score">
+									<?php echo $ptsPositions['A12']; ?>
+									</div>
+								</div>  
+							</td>
+							<td class="bracket-bas">  
+							</td>
+							<td>  
+							</td>
+							<td>  
+							</td>
+							<td>  
+							</td>
+							<td class="bracket-i">                
+							</td>
+							<td>                
+							</td>
+							<td class="bracket-i"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>                
+							</td>
+							<td>                
+							</td>
+							<td>                
+							</td>
+							<td>                
+							</td>
+							<td>
+								<div class="bracket-position">1-4</div>
+								<div class="bracket-edit">
+									<img src="img/edit.png" />
+								</div>
+							</td>
+							<td class="bracket-t">                
+							</td>
+							<td>
+								<div class="bracket-equipe">
+									<div class="bracket-equipe-num">
+									<?php echo $positions['D2']; ?>
+									</div>
+									<div class="bracket-equipe-score">
+									<?php echo $ptsPositions['D2']; ?>
+									</div>
+								</div>                
+							</td>
+							<td class="bracket-bas"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="bracket-equipe">
+									<div class="bracket-equipe-num">
+									<?php echo $positions['A13']; ?>
+									</div>
+									<div class="bracket-equipe-score">
+									<?php echo $ptsPositions['A13']; ?>
+									</div>
+								</div>  
+							</td>
+							<td class="bracket-haut">  
+							</td>
+							<td>  
+							</td>
+							<td>  
+							</td>
+							<td>  
+							</td>
+							<td class="bracket-i">                
+							</td>
+							<td>
+								<div class="bracket-position">1-2</div>
+							</td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="bracket-position">1-16</div>
+								<div class="bracket-edit">
+									<img src="img/edit.png" />
+								</div>
+							</td>
+							<td class="bracket-t">
+							</td>
+							<td>
+								<div class="bracket-equipe">
+									<div class="bracket-equipe-num">
+									<?php echo $positions['B7']; ?>
+									</div>
+									<div class="bracket-equipe-score">
+									<?php echo $ptsPositions['B7']; ?>
+									</div>
+								</div>
+							</td>
+							<td class="bracket-haut">  
+							</td>
+							<td>  
+							</td>
+							<td class="bracket-i">                
+							</td>
+							<td>                
+							</td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="bracket-equipe">
+									<div class="bracket-equipe-num">
+									<?php echo $positions['A14']; ?>
+									</div>
+									<div class="bracket-equipe-score">
+									<?php echo $ptsPositions['A14']; ?>
+									</div>
+								</div>  
+							</td>
+							<td class="bracket-bas">  
+							</td>
+							<td>  
+							</td>
+							<td class="bracket-i">  
+							</td>
+							<td>  
+							</td>
+							<td class="bracket-i">                
+							</td>
+							<td>                
+							</td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+
+							</td>
+							<td>
+
+							</td>
+							<td>
+								<div class="bracket-position">1-8</div>
+								<div class="bracket-edit">
+									<img src="img/edit.png" />
+								</div>
+							</td>
+							<td class="bracket-t"> 
+							</td>
+							<td>
+								<div class="bracket-equipe">
+									<div class="bracket-equipe-num">
+									<?php echo $positions['C4']; ?>
+									</div>
+									<div class="bracket-equipe-score">
+									<?php echo $ptsPositions['C4']; ?>
+									</div>
+								</div> 
+							</td>
+							<td class="bracket-bas">                
+							</td>
+							<td>                
+							</td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="bracket-equipe">
+									<div class="bracket-equipe-num">
+									<?php echo $positions['A15']; ?>
+									</div>
+									<div class="bracket-equipe-score">
+									<?php echo $ptsPositions['A15']; ?>
+									</div>
+								</div>  
+							</td>
+							<td class="bracket-haut">  
+							</td>
+							<td>  
+							</td>
+							<td class="bracket-i">  
+							</td>
+							<td>  
+							</td>
+							<td>                
+							</td>
+							<td>                
+							</td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="bracket-position">1-16</div>
+								<div class="bracket-edit">
+									<img src="img/edit.png" />
+								</div>
+							</td>
+							<td class="bracket-t">
+							</td>
+							<td>
+								<div class="bracket-equipe">
+									<div class="bracket-equipe-num">
+									<?php echo $positions['B8']; ?>
+									</div>
+									<div class="bracket-equipe-score">
+									<?php echo $ptsPositions['B8']; ?>
+									</div>
+								</div>
+							</td>
+							<td class="bracket-bas">  
+							</td>
+							<td>
+							</td>
+							<td>                
+							</td>
+							<td>                
+							</td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="bracket-equipe">
+									<div class="bracket-equipe-num">
+									<?php echo $positions['A16']; ?>
+									</div>
+									<div class="bracket-equipe-score">
+									<?php echo $ptsPositions['A16']; ?>
+									</div>
+								</div>  
+							</td>
+							<td class="bracket-bas">  
+							</td>
+							<td>  
+							</td>
+							<td>  
+							</td>
+							<td>  
+							</td>
+							<td>                
+							</td>
+							<td>                
+							</td>
+							<td></td>
+							<td></td>
 						</tr>
 					</table>
 				</div>
@@ -415,10 +903,10 @@
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										PF1
+									<?php echo $positions['PF1']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									0
+									<?php echo $ptsPositions['PF1']; ?>
 									</div>
 								</div>  
 							</td>
@@ -439,7 +927,7 @@
 							<td>
 								<div class="bracket-equipe bracket-vainqueur">
 									<div class="bracket-equipe-num">
-										VPF1
+									<?php echo $positions['VPF1']; ?>
 									</div>
 								</div>
 							</td>
@@ -448,10 +936,10 @@
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										PF2
+									<?php echo $positions['PF2']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									0
+									<?php echo $ptsPositions['PF2']; ?>
 									</div>
 								</div>  
 							</td>
@@ -484,10 +972,10 @@
 						<td>
 							<div class="bracket-equipe">
 								<div class="bracket-equipe-num">
-									CLA1
+								<?php echo $positions['CLA1']; ?>
 								</div>
 								<div class="bracket-equipe-score">
-								0
+								<?php echo $ptsPositions['CLA1']; ?>
 								</div>
 							</div>  
 						</td>

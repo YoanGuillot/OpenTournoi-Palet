@@ -13,7 +13,8 @@ if (isset($_GET['idtournoi'])){
 		$phasesMenu = "";
 		$infosPhasesFinales = infosPhasesFinales();
 		foreach ($infosPhasesFinales as $row){
-			$phasesMenu .= "<li><a href=\"index.php?idtournoi=". $idTournoi ."&idphase=". $row['id_phasefinale'] ."&page=phase". $row['nb_equipes'] ."\"><span data-uk-icon=\"icon: thumbnails\" class=\"uk-margin-small-right\"></span>". $row['label_phasefinale'] ."</a></li>";
+			$phasesMenu .= "<li><a href=\"index.php?idtournoi=". $idTournoi ."&idphase=". $row['id_phasefinale'] ."&page=phase". $row['nb_equipes'] ."\"><span data-uk-icon=\"icon: thumbnails\" class=\"uk-margin-small-right\"></span>". $row['label_phasefinale'] ."</a></li>
+							<li ><a class=\"uk-margin-left\" href=\"index.php?idtournoi=". $idTournoi ."&idphase=". $row['id_phasefinale'] ."&page=matchsphasesfinales\" ><span data-uk-icon=\"icon: list\" class=\"uk-margin-small-right\"></span>Matchs</a></li>";
 		}
 		
 	

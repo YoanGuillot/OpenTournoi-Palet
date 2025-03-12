@@ -57,6 +57,20 @@ function infosPhasesFinales()
 	global $db;
 	$resultats = $db->query('SELECT * FROM phases_finales');
 	while ($row = $resultats->fetchArray(1)) {
+		$infosPhasesFinales[] = $row;
+	}
+	if(!empty($infosPhasesFinales)){
+		return $infosPhasesFinales;
+	}
+	
+	
+}
+
+function infosPhaseFinale($idPhaseFinale)
+{
+	global $db;
+	$resultats = $db->query('SELECT * FROM phases_finales WHERE id_phase == "'. $idPhaseFinale .'"');
+	while ($row = $resultats->fetchArray(1)) {
 		$infosPhaseFinale[] = $row;
 	}
 	if(!empty($infosPhaseFinale)){
@@ -64,6 +78,35 @@ function infosPhasesFinales()
 	}
 	
 	
+}
+
+function getNumPhaseFinale($idPhaseFinale)
+{
+	global $db;
+	$resultats = $db->query('SELECT * FROM phases_finales WHERE id_phasefinale == "'. $idPhaseFinale .'"');
+	while ($row = $resultats->fetchArray(1)) {
+		$getPhaseFinale[] = $row;
+	}
+	if(!empty($getPhaseFinale)){
+		return $getPhaseFinale;
+	}
+	
+	
+}
+
+
+
+function infosPositions($numPhaseFinale){
+	global $db;
+	$resultats = $db->query('SELECT position_label, num_equipe, position_score FROM positions_phasesfinales WHERE num_phasefinale == '. $numPhaseFinale .'');
+	while ($row = $resultats->fetchArray(1)) {
+		$infosPositions[] = $row;
+	}
+	if(!empty($infosPositions)){
+		return $infosPositions;
+	}
+
+
 }
 
 function listeTournois()
@@ -208,7 +251,7 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 		$indexEquipe++;
 	}
 
-	//PROBLEME
+	
 	if($nombreEquipes > 2){
 		$indexEquipe = 1;
 		$nbEquipesC = $nombreEquipes / 4;
@@ -486,7 +529,7 @@ function creerPhaseFinale($idTournoi,$numPhaseFinale,$nbEquipes, $labelPhaseFina
 		$db->exec("UPDATE positions_phasesfinales SET num_equipe = '". $row['equipe1'] ."' WHERE num_phasefinale == '". $numPhaseFinale ."' AND position_label == 'A". $indexPosition ."'");
 		$indexPosition++;
 		$db->exec("UPDATE positions_phasesfinales SET num_equipe = '". $row['equipe2'] ."' WHERE num_phasefinale == '". $numPhaseFinale ."' AND position_label == 'A". $indexPosition ."'");
-
+		$indexPosition++;
 
 	}	
 	

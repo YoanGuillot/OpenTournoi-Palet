@@ -7,7 +7,7 @@ $infosPhaseFinale = infosPhaseFinale($idPhaseFinale);
 $nbEquipes = $infosPhasefinale['nb_equipes'];
 $numPhaseFinale = $infosPhaseFinale['num_phasefinale'];
 $nbPlaques = $nbEquipes/2;
-
+echo $nbEquipes;
 $prevNbEquipes = 0;
 foreach($infosPhasesFinales as $row){
 	if ($row['num_phase'] < $numPhaseFinale){

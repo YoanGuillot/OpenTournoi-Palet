@@ -69,9 +69,9 @@ function infosPhasesFinales()
 function infosPhaseFinale($idPhaseFinale)
 {
 	global $db;
-	$resultats = $db->query('SELECT * FROM phases_finales WHERE id_phase == "'. $idPhaseFinale .'"');
+	$resultats = $db->query('SELECT * FROM phases_finales WHERE id_phasefinale == "'. $idPhaseFinale .'"');
 	while ($row = $resultats->fetchArray(1)) {
-		$infosPhaseFinale[] = $row;
+		$infosPhaseFinale = $row;
 	}
 	if(!empty($infosPhaseFinale)){
 		return $infosPhaseFinale;
@@ -80,19 +80,17 @@ function infosPhaseFinale($idPhaseFinale)
 	
 }
 
-function getNumPhaseFinale($idPhaseFinale)
-{
-	global $db;
-	$resultats = $db->query('SELECT * FROM phases_finales WHERE id_phasefinale == "'. $idPhaseFinale .'"');
-	while ($row = $resultats->fetchArray(1)) {
-		$getPhaseFinale[] = $row;
-	}
-	if(!empty($getPhaseFinale)){
-		return $getPhaseFinale;
-	}
-	
-	
-}
+//function getNumPhaseFinale($idPhaseFinale)
+//{
+//	global $db;
+//	$resultats = $db->query('SELECT * FROM phases_finales WHERE id_phasefinale == "'. $idPhaseFinale .'"');
+//	while ($row = $resultats->fetchArray(1)) {
+//		$getPhaseFinale[] = $row;
+//	}
+//	if(!empty($getPhaseFinale)){
+//		return $getPhaseFinale;
+//	}	
+//}
 
 
 

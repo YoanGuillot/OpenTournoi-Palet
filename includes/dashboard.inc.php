@@ -109,7 +109,7 @@ if (isset($_GET['idtournoi'])){
 		</aside>
 		<!-- /LEFT BAR -->
 		<!-- CONTENT -->
-		<div id="content" data-uk-height-viewport="expand: true">
+		<div id="content" data-uk-height-viewport="expand: true" style="height:100%; display:block;">
 			<div class="uk-container uk-container-expand">
 <?php
 	// include de la page concernée

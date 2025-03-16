@@ -245,7 +245,10 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 	while ($indexEquipe <= $nbEquipesB){
 
 		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'B". $indexEquipe ."')");
-		
+		if($nombreEquipes > 8){
+			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHA". $indexEquipe ."')");
+
+		}
 		$indexEquipe++;
 	}
 
@@ -257,7 +260,10 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 		while ($indexEquipe <= $nbEquipesC){
 
 			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'C". $indexEquipe ."')");
-		
+			if($nombreEquipes > 8){
+				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLA". $indexEquipe ."')");
+				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHB". $indexEquipe ."')");		
+			}
 			$indexEquipe++;
 		}
 
@@ -270,7 +276,12 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 		while ($indexEquipe <= $nbEquipesD){
 
 			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'D". $indexEquipe ."')");
-		
+			if($nombreEquipes > 8){
+				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLB". $indexEquipe ."')");
+				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLZ". $indexEquipe ."')");
+				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHC". $indexEquipe ."')");
+	
+			}
 			$indexEquipe++;
 		}
 
@@ -283,7 +294,12 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 		while ($indexEquipe <= $nbEquipesE){
 
 			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'E". $indexEquipe ."')");
-		
+			if($nombreEquipes > 8){
+				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLC". $indexEquipe ."')");
+				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLY". $indexEquipe ."')");
+				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHD". $indexEquipe ."')");
+	
+			}
 			$indexEquipe++;
 		}
 
@@ -296,7 +312,10 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 		while ($indexEquipe <= $nbEquipesF){
 
 			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'F". $indexEquipe ."')");
-		
+			if($nombreEquipes > 8){
+				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHE". $indexEquipe ."')");
+	
+			}
 			$indexEquipe++;
 		}
 
@@ -309,7 +328,10 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 		while ($indexEquipe <= $nbEquipesG){
 
 			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'G". $indexEquipe ."')");
-		
+			if($nombreEquipes > 8){
+				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHF". $indexEquipe ."')");
+	
+			}
 			$indexEquipe++;
 		}
 
@@ -322,7 +344,10 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 		while ($indexEquipe <= $nbEquipesH){
 
 			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'H". $indexEquipe ."')");
-		
+			if($nombreEquipes > 8){
+				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHG". $indexEquipe ."')");
+	
+			}
 			$indexEquipe++;
 		}
 

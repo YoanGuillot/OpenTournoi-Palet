@@ -242,9 +242,15 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 	$indexEquipe = 1;
 	$nbEquipesB = $nombreEquipes / 2;
 
+
+
 	while ($indexEquipe <= $nbEquipesB){
 
 		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'B". $indexEquipe ."')");
+
+		if($nombreEquipes > 8){
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHA". $indexEquipe ."')");
+		}
 		
 		$indexEquipe++;
 	}
@@ -257,12 +263,14 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 		while ($indexEquipe <= $nbEquipesC){
 
 			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'C". $indexEquipe ."')");
-			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'PF1')");
-			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'PF2')");
+			
+			if($nombreEquipes > 8){
+				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHB". $indexEquipe ."')");
+			}
 			
 			$indexEquipe++;
-
 		}
+	
 
 	}
 
@@ -273,17 +281,9 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 		while ($indexEquipe <= $nbEquipesD){
 
 			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'D". $indexEquipe ."')");
-			if($nombreEquipes == 8){
-				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLA1')");
-				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLA2')");
-				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLA3')");
-				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLA4')");
-				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLB1')");
-				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLB2')");
-				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLC1')");
-				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLZ1')");
-				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLZ1')");
-				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLY1')");
+			
+			if($nombreEquipes > 8){
+				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHC". $indexEquipe ."')");
 			}
 
 			$indexEquipe++;
@@ -298,7 +298,11 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 		while ($indexEquipe <= $nbEquipesE){
 
 			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'E". $indexEquipe ."')");
-		
+
+			if($nombreEquipes > 8){
+				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHD". $indexEquipe ."')");
+			}
+
 			$indexEquipe++;
 		}
 
@@ -311,7 +315,11 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 		while ($indexEquipe <= $nbEquipesF){
 
 			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'F". $indexEquipe ."')");
-		
+			
+			if($nombreEquipes > 8){
+				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHE". $indexEquipe ."')");
+			}
+
 			$indexEquipe++;
 		}
 
@@ -324,7 +332,11 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 		while ($indexEquipe <= $nbEquipesG){
 
 			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'G". $indexEquipe ."')");
-		
+			
+			if($nombreEquipes > 8){
+				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHF". $indexEquipe ."')");
+			}
+
 			$indexEquipe++;
 		}
 
@@ -337,12 +349,53 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 		while ($indexEquipe <= $nbEquipesH){
 
 			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'H". $indexEquipe ."')");
-		
+			
+			if($nombreEquipes > 8){
+				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHG". $indexEquipe ."')");
+			}
+
 			$indexEquipe++;
 		}
 
 	}
 
+	// Creation des petites finales
+	if($nombreEquipes > 2){
+		$db->exec("INSERT INTO positions_phasesfinales }(num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'PF1')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'PF2')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'PFV1')");
+	}
+	if($nombreEquipes > 8){
+		$db->exec("INSERT INTO positions_phasesfinales }(num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHPF1')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHPF2')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHPFV1')");
+	}
+
+	//Création des matchs de classements pour 8 et 16 equipes
+	if($nombreEquipes == 8 || $nombreEquipes == 16){
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLA1')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLA2')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLA3')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLA4')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLB1')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLB2')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLC1')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLZ1')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLZ2')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CLY1')");
+	}
+	if($nombreEquipes == 16){
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHCLA1')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHCLA2')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHCLA3')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHCLA4')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHCLB1')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHCLB2')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHCLC1')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHCLZ1')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHCLZ2')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHCLY1')");
+	}
 
 }
 

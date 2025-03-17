@@ -999,10 +999,10 @@ foreach ($infoPositions as $row) {
 						<td>
 							<div class="bracket-equipe">
 								<div class="bracket-equipe-score">
-									0
+								<?php echo $ptsPositions['CLZ1']; ?>
 								</div>
 								<div class="bracket-equipe-num">
-									CLZ1
+								<?php echo $positions['CLZ1']; ?>
 								</div>
 							</div>
 						</td>
@@ -1019,10 +1019,10 @@ foreach ($infoPositions as $row) {
 						<td>
 							<div class="bracket-equipe">
 								<div class="bracket-equipe-num">
-									CLB1
+								<?php echo $positions['CLB1']; ?>
 								</div>
 								<div class="bracket-equipe-score">
-									0
+								<?php echo $ptsPositions['CLB1']; ?>
 								</div>
 							</div>
 						</td>
@@ -1043,10 +1043,10 @@ foreach ($infoPositions as $row) {
 						<td>
 							<div class="bracket-equipe">
 								<div class="bracket-equipe-num">
-									CLA2
+								<?php echo $positions['CLA2']; ?>
 								</div>
 								<div class="bracket-equipe-score">
-								0
+								<?php echo $ptsPositions['CLA2']; ?>
 								</div>
 							</div>  
 						</td>
@@ -1063,7 +1063,7 @@ foreach ($infoPositions as $row) {
 						<td>
 							<div class="bracket-equipe bracket-vainqueur">
 								<div class="bracket-equipe-num">
-									CLY1
+									<?php echo $positions['CLY1']; ?>
 								</div>
 							</div> 
 						</td>
@@ -1095,7 +1095,7 @@ foreach ($infoPositions as $row) {
 						<td>
 							<div class="bracket-equipe bracket-vainqueur">
 								<div class="bracket-equipe-num">
-									CLC1
+								<?php echo $positions['CLC1']; ?>
 								</div>
 							</div> 
 						</td>
@@ -1113,10 +1113,10 @@ foreach ($infoPositions as $row) {
 						<td>
 							<div class="bracket-equipe">
 								<div class="bracket-equipe-num">
-									CLA3
+								<?php echo $positions['CLA3']; ?>
 								</div>
 								<div class="bracket-equipe-score">
-								0
+								<?php echo $ptsPositions['CLA3']; ?>
 								</div>
 							</div>  
 						</td>
@@ -1138,10 +1138,10 @@ foreach ($infoPositions as $row) {
 						<td>
 							<div class="bracket-equipe">
 								<div class="bracket-equipe-score">
-									0
+								<?php echo $ptsPositions['CLZ2']; ?>
 								</div>
 								<div class="bracket-equipe-num">
-									CLZ2
+								<?php echo $positions['CLZ2']; ?>
 								</div>
 							</div>
 						</td>
@@ -1158,10 +1158,10 @@ foreach ($infoPositions as $row) {
 						<td>
 							<div class="bracket-equipe">
 								<div class="bracket-equipe-num">
-									CLB2
+								<?php echo $ptsPositions['CLB2']; ?>
 								</div>
 								<div class="bracket-equipe-score">
-									0
+								<?php echo $ptsPositions['CLB2']; ?>
 								</div>
 							</div>
 						</td>
@@ -1182,10 +1182,10 @@ foreach ($infoPositions as $row) {
 						<td>
 							<div class="bracket-equipe">
 								<div class="bracket-equipe-num">
-									CLA4
+								<?php echo $positions['CLA4']; ?>
 								</div>
 								<div class="bracket-equipe-score">
-								0
+								<?php echo $ptsPositions['CLA4']; ?>
 								</div>
 							</div>  
 						</td>
@@ -1233,10 +1233,10 @@ foreach ($infoPositions as $row) {
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										A1
+									<?php echo $positions['CHA1']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									0
+									<?php echo $ptsPositions['CHA1']; ?>
 									</div>
 								</div>  
 							</td>
@@ -1255,7 +1255,7 @@ foreach ($infoPositions as $row) {
 						</tr>
 						<tr>
 							<td>
-								<div class="bracket-position">1-8</div>
+								<div class="bracket-position">9-16</div>
 								<div class="bracket-edit">
 									<img src="img/edit.png" />
 								</div>
@@ -1265,10 +1265,10 @@ foreach ($infoPositions as $row) {
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										B1
+									<?php echo $positions['CHB1']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-										0
+									<?php echo $ptsPositions['CHB1']; ?>
 									</div>
 								</div>
 							</td>
@@ -1285,10 +1285,10 @@ foreach ($infoPositions as $row) {
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										A2
+									<?php echo $positions['CHA2']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									0
+									<?php echo $ptsPositions['CHA2']; ?>
 									</div>
 								</div>  
 							</td>
@@ -1313,7 +1313,7 @@ foreach ($infoPositions as $row) {
 
 							</td>
 							<td>
-								<div class="bracket-position">1-4</div>
+								<div class="bracket-position">5-8</div>
 								<div class="bracket-edit">
 									<img src="img/edit.png" />
 								</div>
@@ -1323,10 +1323,10 @@ foreach ($infoPositions as $row) {
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										C1
+									<?php echo $positions['CHC1']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-										0
+									<?php echo $ptsPositions['CHC1']; ?>
 									</div>
 								</div> 
 							</td>
@@ -1339,10 +1339,10 @@ foreach ($infoPositions as $row) {
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										A3
+									<?php echo $positions['CHA3']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									0
+									<?php echo $ptsPositions['CHA3']; ?>
 									</div>
 								</div>  
 							</td>
@@ -1361,7 +1361,7 @@ foreach ($infoPositions as $row) {
 						</tr>
 						<tr>
 							<td>
-								<div class="bracket-position">1-8</div>
+								<div class="bracket-position">9-16</div>
 								<div class="bracket-edit">
 									<img src="img/edit.png" />
 								</div>
@@ -1371,10 +1371,10 @@ foreach ($infoPositions as $row) {
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										B2
+									<?php echo $positions['CHB2']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-										0
+									<?php echo $ptsPositions['CHB2']; ?>
 									</div>
 								</div>
 							</td>
@@ -1391,10 +1391,10 @@ foreach ($infoPositions as $row) {
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										A4
+									<?php echo $positions['CHA4']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									0
+									<?php echo $ptsPositions['CHA4']; ?>
 									</div>
 								</div>  
 							</td>
@@ -1421,7 +1421,7 @@ foreach ($infoPositions as $row) {
 							<td>                
 							</td>
 							<td>
-								<div class="bracket-position">1-2</div>
+								<div class="bracket-position">3-4</div>
 								<div class="bracket-edit">
 									<img src="img/edit.png" />
 								</div>
@@ -1431,7 +1431,7 @@ foreach ($infoPositions as $row) {
 							<td>
 								<div class="bracket-equipe bracket-vainqueur">
 									<div class="bracket-equipe-num">
-										D1
+									<?php echo $ptsPositions['CHD1']; ?>
 									</div>
 								</div>                
 							</td>
@@ -1440,10 +1440,10 @@ foreach ($infoPositions as $row) {
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										A5
+									<?php echo $positions['CHA5']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									0
+									<?php echo $ptsPositions['CHA5']; ?>
 									</div>
 								</div>  
 							</td>
@@ -1473,10 +1473,10 @@ foreach ($infoPositions as $row) {
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										B3
+									<?php echo $positions['CHB3']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-										0
+									<?php echo $ptsPositions['CHB3']; ?>
 									</div>
 								</div>
 							</td>
@@ -1493,10 +1493,10 @@ foreach ($infoPositions as $row) {
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										A6
+									<?php echo $positions['CHA6']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									0
+									<?php echo $ptsPositions['CHA6']; ?>
 									</div>
 								</div>  
 							</td>
@@ -1531,10 +1531,10 @@ foreach ($infoPositions as $row) {
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										C2
+									<?php echo $positions['CHC2']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-										0
+									<?php echo $ptsPositions['CHC2']; ?>
 									</div>
 								</div> 
 							</td>
@@ -1547,10 +1547,10 @@ foreach ($infoPositions as $row) {
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										A7
+										<?php echo $positions['CHA7']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									0
+									<?php echo $ptsPositions['CHA7']; ?>
 									</div>
 								</div>  
 							</td>
@@ -1579,10 +1579,10 @@ foreach ($infoPositions as $row) {
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										B4
+									<?php echo $positions['CHB4']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-										0
+									<?php echo $ptsPositions['CHB4']; ?>
 									</div>
 								</div>
 							</td>
@@ -1599,10 +1599,10 @@ foreach ($infoPositions as $row) {
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										A8
+									<?php echo $positions['CHA8']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									0
+									<?php echo $ptsPositions['CHA8']; ?>
 									</div>
 								</div>  
 							</td>
@@ -1634,10 +1634,10 @@ foreach ($infoPositions as $row) {
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										PF1
+									<?php echo $positions['CHPF1']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									0
+									<?php echo $ptsPositions['CHPF1']; ?>
 									</div>
 								</div>  
 							</td>
@@ -1658,7 +1658,7 @@ foreach ($infoPositions as $row) {
 							<td>
 								<div class="bracket-equipe bracket-vainqueur">
 									<div class="bracket-equipe-num">
-										VPF1
+									<?php echo $positions['CHVPF1']; ?>
 									</div>
 								</div>
 							</td>
@@ -1667,10 +1667,10 @@ foreach ($infoPositions as $row) {
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-										PF2
+									<?php echo $positions['CHPF2']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									0
+									<?php echo $ptsPositions['CHPF2']; ?>
 									</div>
 								</div>  
 							</td>
@@ -1703,10 +1703,10 @@ foreach ($infoPositions as $row) {
 						<td>
 							<div class="bracket-equipe">
 								<div class="bracket-equipe-num">
-									CLA1
+								<?php echo $positions['CHCLA1']; ?>
 								</div>
 								<div class="bracket-equipe-score">
-								0
+								<?php echo $ptsPositions['CHCLA1']; ?>
 								</div>
 							</div>  
 						</td>
@@ -1727,10 +1727,10 @@ foreach ($infoPositions as $row) {
 						<td>
 							<div class="bracket-equipe">
 								<div class="bracket-equipe-score">
-									0
+								<?php echo $ptsPositions['CHCLZ1']; ?>
 								</div>
 								<div class="bracket-equipe-num">
-									CLZ1
+								<?php echo $positions['CHCLZ1']; ?>
 								</div>
 							</div>
 						</td>
@@ -1747,10 +1747,10 @@ foreach ($infoPositions as $row) {
 						<td>
 							<div class="bracket-equipe">
 								<div class="bracket-equipe-num">
-									CLB1
+								<?php echo $ptsPositions['CHCLB1']; ?>
 								</div>
 								<div class="bracket-equipe-score">
-									0
+								<?php echo $ptsPositions['CHCLB1']; ?>
 								</div>
 							</div>
 						</td>
@@ -1771,10 +1771,10 @@ foreach ($infoPositions as $row) {
 						<td>
 							<div class="bracket-equipe">
 								<div class="bracket-equipe-num">
-									CLA2
+								<?php echo $positions['CHCLA2']; ?>
 								</div>
 								<div class="bracket-equipe-score">
-								0
+								<?php echo $ptsPositions['CHCLA2']; ?>
 								</div>
 							</div>  
 						</td>
@@ -1791,7 +1791,7 @@ foreach ($infoPositions as $row) {
 						<td>
 							<div class="bracket-equipe bracket-vainqueur">
 								<div class="bracket-equipe-num">
-									CLY1
+								<?php echo $positions['CHCLY1']; ?>
 								</div>
 							</div> 
 						</td>
@@ -1823,7 +1823,7 @@ foreach ($infoPositions as $row) {
 						<td>
 							<div class="bracket-equipe bracket-vainqueur">
 								<div class="bracket-equipe-num">
-									CLC1
+								<?php echo $positions['CHCLC1']; ?>
 								</div>
 							</div> 
 						</td>
@@ -1841,10 +1841,10 @@ foreach ($infoPositions as $row) {
 						<td>
 							<div class="bracket-equipe">
 								<div class="bracket-equipe-num">
-									CLA3
+								<?php echo $positions['CHCLA3']; ?>
 								</div>
 								<div class="bracket-equipe-score">
-								0
+								<?php echo $ptsPositions['CHCLA3']; ?>
 								</div>
 							</div>  
 						</td>
@@ -1866,10 +1866,10 @@ foreach ($infoPositions as $row) {
 						<td>
 							<div class="bracket-equipe">
 								<div class="bracket-equipe-score">
-									0
+								<?php echo $ptsPositions['CHCLZ2']; ?>
 								</div>
 								<div class="bracket-equipe-num">
-									CLZ2
+									<?php echo $positions['CHCLZ2']; ?>
 								</div>
 							</div>
 						</td>
@@ -1886,10 +1886,10 @@ foreach ($infoPositions as $row) {
 						<td>
 							<div class="bracket-equipe">
 								<div class="bracket-equipe-num">
-									CLB2
+								<?php echo $positions['CHCLB2']; ?>
 								</div>
 								<div class="bracket-equipe-score">
-									0
+								<?php echo $ptsPositions['CHCLB2']; ?>
 								</div>
 							</div>
 						</td>
@@ -1910,10 +1910,10 @@ foreach ($infoPositions as $row) {
 						<td>
 							<div class="bracket-equipe">
 								<div class="bracket-equipe-num">
-									CLA4
+								<?php echo $positions['CHCLA4']; ?>
 								</div>
 								<div class="bracket-equipe-score">
-								0
+								<?php echo $ptsPositions['CHCLA4']; ?>
 								</div>
 							</div>  
 						</td>

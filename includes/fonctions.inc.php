@@ -361,12 +361,12 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 
 	// Creation des petites finales
 	if($nombreEquipes > 2){
-		$db->exec("INSERT INTO positions_phasesfinales }(num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'PF1')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'PF1')");
 		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'PF2')");
 		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'PFV1')");
 	}
 	if($nombreEquipes > 8){
-		$db->exec("INSERT INTO positions_phasesfinales }(num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHPF1')");
+		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHPF1')");
 		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHPF2')");
 		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label) VALUES ('". $numPhaseFinale ."', 'CHPFV1')");
 	}

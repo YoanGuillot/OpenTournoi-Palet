@@ -4,6 +4,7 @@ $infosPhasesFinales = infosPhasesFinales($idTournoi);
 
 $idPhaseFinale = $_GET['idphase'];
 $infosPhaseFinale = infosPhaseFinale($idPhaseFinale);
+print_r($infosPhaseFinale);
 $nbEquipes = $infosPhasefinale['nb_equipes'];
 $numPhaseFinale = $infosPhaseFinale['num_phasefinale'];
 $nbPlaques = $nbEquipes/2;
@@ -158,8 +159,6 @@ if($prevNbEquipes == 0){
 
 echo $content;
 ?>
-	
-	<p class="uk-text-center"><?php echo $messagePhasesFinales; ?></p>
 	
 
 </div>

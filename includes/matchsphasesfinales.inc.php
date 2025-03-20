@@ -4,14 +4,13 @@ $infosPhasesFinales = infosPhasesFinales($idTournoi);
 
 $idPhaseFinale = $_GET['idphase'];
 $infosPhaseFinale = infosPhaseFinale($idPhaseFinale);
-print_r($infosPhaseFinale);
-$nbEquipes = $infosPhasefinale['nb_equipes'];
+$nbEquipes = $infosPhaseFinale['nb_equipes'];
+
 $numPhaseFinale = $infosPhaseFinale['num_phasefinale'];
 $nbPlaques = $nbEquipes/2;
-echo $nbEquipes;
 $prevNbEquipes = 0;
 foreach($infosPhasesFinales as $row){
-	if ($row['num_phase'] < $numPhaseFinale){
+	if ($row['num_phasefinale'] < $numPhaseFinale){
 		$prevNbEquipes = $prevNbEquipes + $row['nb_equipes'];
 	}
 }
@@ -52,11 +51,7 @@ if($prevNbEquipes == 0){
 		$countPhase = 1;
 		while ($countPhase < $numPhaseFinale+1){
 		
-			if ($countPhase == $numPhaseFinale){	
-				$trashButton = "<a href=\"index.php?idtournoi=". $idTournoi ."&action=supprphasefinale&phasefinale=". $numPhaseFinale ."\" class=\"uk-icon-link trash-icon\" title=\"Supprimer\" data-uk-tooltip data-uk-icon=\"icon: trash\"></a>";
-			}else{
-				$trashButton = " ";
-			}
+		
 			$listeMatchsPhaseFinale = listeMatchsPhaseFinale($idTournoi, $countPhase);
 			//DEBUG
 			//print_r($listeMatchsPhaseFinale);
@@ -140,9 +135,9 @@ if($prevNbEquipes == 0){
 							<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
 								<div class=\"uk-card-header\">
 									<div class=\"uk-grid uk-grid-small\">
-										<div class=\"uk-width-auto\"><h4>Phase $countPhase</h4></div>
+										<div class=\"uk-width-auto\"><h4>". $infosPhaseFinale['label_phasefinale'] ."</h4></div>
 										<div class=\"uk-width-expand uk-text-right panel-icons\">
-											<a uk-icon=\"print\"></a>". $trashButton ."
+											
 										</div>
 									</div>
 								</div>

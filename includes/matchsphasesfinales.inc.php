@@ -22,7 +22,7 @@ if($prevNbEquipes == 0){
 	$debutPlaques = $plaquesDejaUtilises + 1;
 }
 
-
+$numPlaque = $debutPlaques;
 
 ?>
 
@@ -30,130 +30,164 @@ if($prevNbEquipes == 0){
 <?php
 
 
-	///////////////////////////////////////////////////////////////////////////////////////////////////
-		
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//Pour 4 equipes
+if($nbEquipes == 4){
+	$aLabel = "Demi-finales";
+	$bLabel = "Finale";
+	$pfLabel = "Petite finale";
 
 
+	$listeMatchsDemis = listeEquipesPhaseFinale($numPhaseFinale,"Demi-finales","A");
+	$listeMatchsF = listeEquipesPhaseFinale($numPhaseFinale,"Finales","B");
+	$listeMatchsPF = listeEquipesPhaseFinale($numPhaseFinale,"Finales","PF");
+
+	$tableauDemis = constructTableMatchsPF($idTournoi, $aLabel, $listeMatchsDemis, $numPlaque);
+	$tableauF = constructTableMatchsPF($idTournoi, $bLabel, $listeMatchsF, $numPlaque);
+	$tableauPF = constructTableMatchsPF($idTournoi, $pfLabel, $listeMatchsPF, $numPlaque);
+
+}
+//Pour 8 equipes
+if($nbEquipes == 8){
+	$aLabel = "Quarts finale";
+	$bLabel = "Demi-finales";
+	$cLabel = "Finale";
+	$pfLabel = "Petite finale";
+	$clLabel = "Classements";
+
+	$listeMatchsQuarts = listeEquipesPhaseFinale($numPhaseFinale,"Demi-finales","A");
+	$listeMatchsDemis = listeEquipesPhaseFinale($numPhaseFinale,"Demi-finales","B");
+	$listeMatchsF = listeEquipesPhaseFinale($numPhaseFinale,"Finales","C");
+	$listeMatchsPF = listeEquipesPhaseFinale($numPhaseFinale,"Finales","PF");
+	$listeMatchsCLDemis = listeEquipesPhaseFinale($numPhaseFinale,"Demi-finales","CL");
+	$listeMatchsCLF = listeEquipesPhaseFinale($numPhaseFinale,"Finale","CL");
+
+	$tableauQuarts = constructTableMatchsPF($idTournoi, $aLabel, $listeMatchsQuarts, $numPlaque);
+	$tableauDemis = constructTableMatchsPF($idTournoi, $bLabel, $listeMatchsDemis, $numPlaque);
+	$tableauF = constructTableMatchsPF($idTournoi, $cLabel, $listeMatchsF, $numPlaque);
+	$tableauPF = constructTableMatchsPF($idTournoi, $pfLabel, $listeMatchsPF, $numPlaque);
+	$tableauCLDemis = constructTableMatchsPF($idTournoi, $clLabel, $listeMatchsCLDemis, $numPlaque);
+	$tableauCLF = constructTableMatchsPF($idTournoi, $clLabel, $listeMatchsCLF, $numPlaque);
+}	
+// Pour 16 Equipes
+if($nbEquipes == 16){
+	$aLabel = "8èmes de finale";
+	$bLabel = "Quarts finale";
+	$cLabel = "Demi-finales";
+	$dLabel = "Finale";
+	$pfLabel = "Petite Finale";
+	$CH4Label = "Challenge Quarts de finale";
+	$CH2Label = "Challenge Demi-finales";
+	$CHpfLabel = "Challenge Petite finale";
+	$CHfLabel = "Challenge finale";
+	$clLabel = "Classements";
 
 
+	$listeMatchs8 = listeEquipesPhaseFinale($numPhaseFinale,"8èmes de finale","A");
+	$listeMatchsQuarts = listeEquipesPhaseFinale($numPhaseFinale,"Quarts de finales","B");
+	$listeMatchsDemis = listeEquipesPhaseFinale($numPhaseFinale,"Demi-finales","C");
+	$listeMatchsF = listeEquipesPhaseFinale($numPhaseFinale,"Finales","D");
+	$listeMatchsPF = listeEquipesPhaseFinale($numPhaseFinale,"Finales","PF");
+
+	$listeMatchsCLDemis = listeEquipesPhaseFinale($numPhaseFinale,"Demi-finales","CL");
+	$listeMatchsCLF = listeEquipesPhaseFinale($numPhaseFinale,"Finale","CL");
+
+	$listeMatchsCHQuarts = listeEquipesPhaseFinale($numPhaseFinale,"Quarts de finale","CHA");
+	$listeMatchsCHDemis = listeEquipesPhaseFinale($numPhaseFinale,"Demi-finales","CHB");
+	$listeMatchsCHF = listeEquipesPhaseFinale($numPhaseFinale,"Finales","CHC");
+	$listeMatchsCHPF = listeEquipesPhaseFinale($numPhaseFinale,"Finales","CHPF");
+
+	$listeMatchsCHCLDemis = listeEquipesPhaseFinale($numPhaseFinale,"Demi-finales","CHCL");
+	$listeMatchsCHCLF = listeEquipesPhaseFinale($numPhaseFinale,"Finale","CHCL");
 
 
+	$tableau8 = constructTableMatchsPF($idTournoi, $aLabel, $listeMatchs8, $numPlaque);
+	$tableauQuarts = constructTableMatchsPF($idTournoi, $aLabel, $listeMatchsQuarts, $numPlaque);
+	$tableauDemis = constructTableMatchsPF($idTournoi, $bLabel, $listeMatchsDemis, $numPlaque);
+	$tableauF = constructTableMatchsPF($idTournoi, $cLabel, $listeMatchsF, $numPlaque);
+	$tableauPF = constructTableMatchsPF($idTournoi, $pfLabel, $listeMatchsPF, $numPlaque);
+	
+	$tableauCHQuarts = constructTableMatchsPF($idTournoi, $CH4Label, $listeMatchsCHQuarts, $numPlaque);
+	$tableauCHDemis = constructTableMatchsPF($idTournoi, $CH2Label, $listeMatchsCHDemis, $numPlaque);
+	$tableauCHF = constructTableMatchsPF($idTournoi, $CHfLabel, $listeMatchsCHF, $numPlaque);
+	$tableauCHPF = constructTableMatchsPF($idTournoi, $CHpfLabel, $listeMatchsCHPF, $numPlaque);
+	
+	$tableauCLDemis = constructTableMatchsPF($idTournoi, $clLabel, $listeMatchsCLDemis, $numPlaque);
+	$tableauCLF = constructTableMatchsPF($idTournoi, $clLabel, $listeMatchsCLF, $numPlaque);
+}
 
-
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-
-		$colonnePhaseFinale = array_column($infosPhasesFinales, 'num_phasefinale');
-		rsort($colonnePhaseFinale, SORT_NUMERIC);
-		$numPhaseFinale = $colonnePhaseFinale[0];
-		unset($content);
-		 	
-		$countPhase = 1;
-		while ($countPhase < $numPhaseFinale+1){
-		
-		
-			$listeMatchsPhaseFinale = listeMatchsPhaseFinale($idTournoi, $countPhase);
-			//DEBUG
-			//print_r($listeMatchsPhaseFinale);
-			$tableauMatchs = "<table class=\"uk-table uk-table-striped\" style=\"width: 100%\">
-								<tr>
-									<th style=\"box-sizing:border-box;width: 100%\">
-										<div style=\"box-sizing:border-box;display:inline-block;width: 10%\" class=\"uk-text-center uk-text-bolder\">PLAQUE</div>
-										<div style=\"box-sizing:border-box;display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">EQUIPE 1</div>
-										<div style=\"box-sizing:border-box;display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">SCORE 1</div>
-										<div style=\"box-sizing:border-box;display:inline-block;width: 10%\"  class=\"uk-text-center uk-text-bolder\"></div>
-										<div style=\"box-sizing:border-box;display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">SCORE 2</div>
-										<div style=\"box-sizing:border-box;display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">EQUIPE 2</div>
-									</th>
-								</tr>";
-			
-			$numPlaque = $debutPlaques;
-			foreach ($listeMatchsPhaseFinale as $row){
-				$idMatch = $row['id_matchphasesfinales'];
-				$score1 = $row['score1'];
-				$score2 = $row['score2'];
-				$equipe1 = $row['equipe1'];
-				$equipe2 = $row['equipe2'];
-				$indexSelect = 0;
-				$selectOptions1 = "<option value=\"\"></option>";
-				$selectOptions2 = "<option value=\"\"></option>";
-				
-				while ($indexSelect < $infosTournoi['pts_qualifs']){
-					$realValue = $indexSelect + 1;
-					if($realValue == $score1){
-						$selected1 = "selected";
-					}else{
-						$selected1 = "";
-					}
-						if($realValue == $score2){
-						$selected2 = "selected";
-					}else{
-						$selected2 = "";
-					}
-					$selectOptions1 = $selectOptions1."<option value=\"". $realValue ."\" $selected1>". $realValue ."</option>";
-					$selectOptions2 = $selectOptions2."<option value=\"". $realValue ."\" $selected2>". $realValue ."</option>";
-					$indexSelect = $indexSelect + 1;
-				}
-
-				$tableauMatchs = $tableauMatchs."
-					<tr style=\"scroll-margin-top: 300px;\" id=\"matchid-$idMatch\">
-						<td style=\"with:100%\">
-							<form method=\"POST\" id=\"formMatch-$idMatch\" action=\"index.php?idtournoi=$idTournoi&page=qualifs#matchid-$idMatch\">
-							<div style=\"display:inline-block;width: 10%\" class=\"uk-text-center\">$numPlaque</div>
-							<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">$equipe1</div>
-							<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center\">
-								<select id=\"match-$idMatch-side1\" onchange=\"activateLink('validMatch-$idMatch', 'side2', ".$infosTournoi['pts_qualifs'] .", $idMatch)\" name=\"score1\" class=\"uk-select\"  >
-									$selectOptions1
-								</select>
-							</div>
-							<div style=\"display:inline-block;width: 10%\" class=\"uk-text-center\"><a id=\"validMatch-$idMatch\" style=\"color: gray\" href=\"javascript:document.getElementById('formMatch-$idMatch').submit();\" uk-icon=\"check\" class=\"disabled\"></a></div>
-							
-							<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center\">
-								<select id=\"match-$idMatch-side2\" onchange=\"activateLink('validMatch-$idMatch', 'side1', ".$infosTournoi['pts_qualifs'] .", $idMatch)\" name=\"score2\" class=\"uk-select\"  >
-									$selectOptions2
-								</select>
-							</div>
-							
-							<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">$equipe2</div>
-						
-							<input type=\"hidden\" name=\"idTournoi\"  value=\"$idTournoi\"></input>
-							<input type=\"hidden\" name=\"idMatchQualif\"  value=\"$idMatch\"></input>
-							<input type=\"hidden\" name=\"action\"  value=\"miseajourMatchQualif\"></input>
-							</form>
-						</td>
-					</tr>";
-				$numPlaque = $numPlaque + 1;
-			}
-		
-			$tableauMatchs = $tableauMatchs."</table>";
-			
-			if(empty($content)){
-				$content="";
-			}
-
-			$content = $content."<div class=\"uk-width-1-1 uk-width-1-2@l uk-width-1-2@xl\">
-							<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
-								<div class=\"uk-card-header\">
-									<div class=\"uk-grid uk-grid-small\">
-										<div class=\"uk-width-auto\"><h4>". $infosPhaseFinale['label_phasefinale'] ."</h4></div>
-										<div class=\"uk-width-expand uk-text-right panel-icons\">
-											
-										</div>
-									</div>
-								</div>
-								<div class=\"uk-card-body\">
-									<div>
-										". $tableauMatchs ."
-									</div>
-								</div>
-							</div>
-						</div>"; 
-				$countPhase = $countPhase + 1;
-		}
-
-
-echo $content;
-?>
+//pour 32 / 64 / 128 Equipes
+if($nbEquipes == 32){
+	$aLabel = "16èmes de finale";
+	$bLabel = "8èmes de finale";
+	$cLabel = "Quarts finale";
+	$dLabel = "Demi-finales";
+	$eLabel = "Finale";
+	$pfLabel = "Petite Finale";
+	$CH8Label = "Challenge 8èmes de finale";
+	$CH4Label = "Challenge Quarts de finale";
+	$CH2Label = "Challenge Demi-finales";
+	$CHpfLabel = "Challenge Petite finale";
+	$CHfLabel = "Challenge finale";
 	
 
-</div>
+
+	$listeMatchs16 = listeEquipesPhaseFinale($numPhaseFinale,"16èmes de finale","A");
+	$listeMatchs8 = listeEquipesPhaseFinale($numPhaseFinale,"8èmes de finale","B");
+	$listeMatchsQuarts = listeEquipesPhaseFinale($numPhaseFinale,"Quarts de finales","C");
+	$listeMatchsDemis = listeEquipesPhaseFinale($numPhaseFinale,"Demi-finales","D");
+	$listeMatchsF = listeEquipesPhaseFinale($numPhaseFinale,"Finales","E");
+	$listeMatchsPF = listeEquipesPhaseFinale($numPhaseFinale,"Finales","PF");
+
+
+	$listeMatchsCH8 = listeEquipesPhaseFinale($numPhaseFinale,"8èmes de finale","CHA");
+	$listeMatchsCHQuarts = listeEquipesPhaseFinale($numPhaseFinale,"Quarts de finale","CHA");
+	$listeMatchsCHDemis = listeEquipesPhaseFinale($numPhaseFinale,"Demi-finales","CHB");
+	$listeMatchsCHF = listeEquipesPhaseFinale($numPhaseFinale,"Finales","CHC");
+	$listeMatchsCHPF = listeEquipesPhaseFinale($numPhaseFinale,"Finales","CHPF");
+
+
+
+
+	$tableau16 = constructTableMatchsPF($idTournoi, $aLabel, $listeMatchs16, $numPlaque);
+	$tableau8 = constructTableMatchsPF($idTournoi, $bLabel, $listeMatchs8, $numPlaque);
+	$tableauQuarts = constructTableMatchsPF($idTournoi, $cLabel, $listeMatchsQuarts, $numPlaque);
+	$tableauDemis = constructTableMatchsPF($idTournoi, $dLabel, $listeMatchsDemis, $numPlaque);
+	$tableauF = constructTableMatchsPF($idTournoi, $eLabel, $listeMatchsF, $numPlaque);
+	$tableauPF = constructTableMatchsPF($idTournoi, $pfLabel, $listeMatchsPF, $numPlaque);
+	
+	$tableauCH8 = constructTableMatchsPF($idTournoi, $CH8Label, $listeMatchsCH8, $numPlaque);
+	$tableauCHQuarts = constructTableMatchsPF($idTournoi, $CH4Label, $listeMatchsCHQuarts, $numPlaque);
+	$tableauCHDemis = constructTableMatchsPF($idTournoi, $CH2Label, $listeMatchsCHDemis, $numPlaque);
+	$tableauCHF = constructTableMatchsPF($idTournoi, $CHfLabel, $listeMatchsCHF, $numPlaque);
+	$tableauCHPF = constructTableMatchsPF($idTournoi, $CHpfLabel, $listeMatchsCHPF, $numPlaque);
+	
+}
+
+
+if($nbEquipes == 64){
+	$aLabel = "32èmes de finale";
+	$bLabel = "16èmes de finale";
+	$cLabel = "8èmes de finale";
+	$dLabel = "Quarts finale";
+	$eLabel = "Demi-finales";
+	$fLabel = "Finale";
+}
+
+if($nbEquipes == 128){
+	$aLabel = "64èmes de finale";
+	$bLabel = "32èmes de finale";
+	$cLabel = "16èmes de finale";
+	$dLabel = "8èmes de finale";
+	$eLabel = "Quarts finale";
+	$fLabel = "Demi-finales";
+	$gLabel = "Finale";
+}
+
+
+		
+
+
+
+?>

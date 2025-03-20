@@ -24,7 +24,7 @@ date_default_timezone_set("Europe/Paris");
 
 //print_r($_POST);
 //die();
-
+ini_set("default_charset", 'utf-8');
 
 if (isset($_GET['idtournoi'])){
 	$idTournoi = $_GET['idtournoi'];

@@ -123,7 +123,7 @@ function listeTournois()
 function classementQualifs()
 {
 	global $db;
-	$resultats = $db->query('SELECT * FROM equipes ORDER BY nb_victoires DESC, pts_pour DESC, pts_diff DESC');
+	$resultats = $db->query('SELECT * FROM equipes ORDER BY nb_victoires DESC, pts_pour DESC, pts_diff DESC, bonus_qualifs DESC');
 	while ($row = $resultats->fetchArray(1)) {
 		$classementQualifs[] = $row;
 	}
@@ -179,15 +179,148 @@ function isLock($numPhase)
 	return $detailsPhase;
 }
 
-function listeMatchsPhaseFinale($idTournoi, $numPhase)
+function listeEquipesPhaseFinale($numPhase,$niveau,$position)
 {
 	global $db;
-	$resultats = $db->query('SELECT * FROM matchs_phasesfinales WHERE id_tournoi == '.$idTournoi.' AND num_phasefinale == '. $numPhase .'');
+	$resultats = $db->query('SELECT * FROM positions_phasesfinales WHERE num_phasefinale == '. $numPhase .' AND position_niveau == "'. $niveau .'" and position_label LIKE "'. $position .'%"');
 	while ($row = $resultats->fetchArray(1)) {
-		$listeMatchs[] = $row;
+		$listeEquipes[] = $row;
 	}
+
+
+	if(empty($listeEquipes)){
+		$listeEquipes = [];
+	}
+	return $listeEquipes;
+}
+
+function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque)
+{
 	
-	return $listeMatchs;
+	$label = mb_convert_encoding($label, 'UTF-8', 'ISO-8859-1');
+	$infosTournoi = infosTournoi($idTournoi);
+
+	$nbEquipes = count($listeEquipes);
+	$nbRencontres = $nbEquipes / 2;
+
+	$tablePair = [];
+	$tableImpair = [];
+	$indexRow = 0;
+	$indexEquipe = 1;
+	
+	foreach($listeEquipes as $row){
+		if ($indexEquipe&1){
+			$tableImpair[] = $row;
+		}else{
+			$tablePair[] = $row;
+		}
+		$indexEquipe++;
+	}
+
+
+	while( $indexRow < $nbRencontres){
+		$listeMatchs[] = ["position1" => $tableImpair[$indexRow]['position_label'], "equipe1" => $tableImpair[$indexRow]['num_equipe'], "score1" => $tableImpair[$indexRow]['position_score'] , "position2" => $tablePair[$indexRow]['position_label'], "equipe2" => $tablePair[$indexRow]['num_equipe'], "score2" => $tablePair[$indexRow]['position_score']];
+		$indexRow = $indexRow +2;
+	}	
+
+	$tableauRow = "";
+	foreach ($listeMatchs as $row){
+		$idMatch = $row['position2'];
+		$score1 = $row['score2'];
+		$score2 = $row['score2'];
+		$equipe1 = $row['equipe1'];
+		$equipe2 = $row['equipe2'];
+		$indexSelect = 0;
+		$selectOptions1 = "<option value=\"\"></option>";
+		$selectOptions2 = "<option value=\"\"></option>";
+		
+		while ($indexSelect < $infosTournoi['pts_qualifs']){
+			$realValue = $indexSelect + 1;
+			if($realValue == $score1){
+				$selected1 = "selected";
+			}else{
+				$selected1 = "";
+			}
+				if($realValue == $score2){
+				$selected2 = "selected";
+			}else{
+				$selected2 = "";
+			}
+			$selectOptions1 = $selectOptions1."<option value=\"". $realValue ."\" $selected1>". $realValue ."</option>";
+			$selectOptions2 = $selectOptions2."<option value=\"". $realValue ."\" $selected2>". $realValue ."</option>";
+			$indexSelect = $indexSelect + 1;
+		}
+
+		$tableauRow .= "<tr style=\"scroll-margin-top: 300px;\" id=\"matchid-$idMatch\">
+			<td style=\"with:100%\">
+				<form method=\"POST\" id=\"formMatch-$idMatch\" action=\"index.php?idtournoi=$idTournoi&page=matchsphasesfinales#matchid-$idMatch\">
+				<div style=\"display:inline-block;width: 10%\" class=\"uk-text-center\">$numPlaque</div>
+				<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">$equipe1</div>
+				<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center\">
+					<select id=\"match-$idMatch-side1\" onchange=\"activateLink('validMatch-$idMatch', 'side2', ".$infosTournoi['pts_qualifs'] .", $idMatch)\" name=\"score1\" class=\"uk-select\"  >
+						$selectOptions1
+					</select>
+				</div>
+				<div style=\"display:inline-block;width: 10%\" class=\"uk-text-center\"><a id=\"validMatch-$idMatch\" style=\"color: gray\" href=\"javascript:document.getElementById('formMatch-$idMatch').submit();\" uk-icon=\"check\" class=\"disabled\"></a></div>
+				
+				<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center\">
+					<select id=\"match-$idMatch-side2\" onchange=\"activateLink('validMatch-$idMatch', 'side1', ".$infosTournoi['pts_qualifs'] .", $idMatch)\" name=\"score2\" class=\"uk-select\"  >
+						$selectOptions2
+					</select>
+				</div>
+				
+				<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">$equipe2</div>
+			
+				<input type=\"hidden\" name=\"idTournoi\"  value=\"$idTournoi\"></input>
+				<input type=\"hidden\" name=\"idMatchQualif\"  value=\"$idMatch\"></input>
+				<input type=\"hidden\" name=\"action\"  value=\"miseajourMatchQualif\"></input>
+				</form>
+			</td>
+		</tr>";
+
+
+	}
+
+						
+
+
+	$tableauHead="<div class=\"uk-width-1-1 uk-width-1-2@l uk-width-1-2@xl\">
+		<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
+			<div class=\"uk-card-header\">
+				<div class=\"uk-grid uk-grid-small\">
+					<div class=\"uk-width-auto\"><h4>". $label ."</h4></div>
+					<div class=\"uk-width-expand uk-text-right panel-icons\"></div>
+				</div>
+			</div>
+			<div class=\"uk-card-body\">
+				<div>
+					<table class=\"uk-table uk-table-striped\" style=\"width: 100%\">
+						<tr>
+							<th style=\"box-sizing:border-box;width: 100%\">
+								<div style=\"box-sizing:border-box;display:inline-block;width: 10%\" class=\"uk-text-center uk-text-bolder\">PLAQUE</div>
+								<div style=\"box-sizing:border-box;display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">EQUIPE 1</div>
+								<div style=\"box-sizing:border-box;display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">SCORE 1</div>
+								<div style=\"box-sizing:border-box;display:inline-block;width: 10%\"  class=\"uk-text-center uk-text-bolder\"></div>
+								<div style=\"box-sizing:border-box;display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">SCORE 2</div>
+								<div style=\"box-sizing:border-box;display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">EQUIPE 2</div>
+							</th>
+						</tr>";
+					
+	$tableauFooter="
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>";
+
+	
+
+	$tableau = $tableauHead.$tableauRow.$tableauFooter;
+	
+
+	return $tableau;
+
+
 }
 
 function statsEquipe($numEquipe)

@@ -1,4 +1,5 @@
 <?php
+defined('_LPDT') or die; 
 $idPhaseFinale = $_GET['idphase'];
 $infosPhaseFinale = infosPhaseFinale($idPhaseFinale);
 //print_r($infosPhaseFinale);

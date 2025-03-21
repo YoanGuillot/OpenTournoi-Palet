@@ -1,5 +1,5 @@
 <?php
-//Interdit l'accès directe
+//Interdit l'accès direct
 defined('_LPDT') or die;
 
 //Activation des liaisons clés étrangère
@@ -70,6 +70,20 @@ function infosPhaseFinale($idPhaseFinale)
 {
 	global $db;
 	$resultats = $db->query('SELECT * FROM phases_finales WHERE id_phasefinale == "'. $idPhaseFinale .'"');
+	while ($row = $resultats->fetchArray(1)) {
+		$infosPhaseFinale = $row;
+	}
+	if(!empty($infosPhaseFinale)){
+		return $infosPhaseFinale;
+	}
+	
+	
+}
+
+function infosPhaseFinaleNum($numPhaseFinale)
+{
+	global $db;
+	$resultats = $db->query('SELECT * FROM phases_finales WHERE num_phasefinale == "'. $numPhaseFinale .'"');
 	while ($row = $resultats->fetchArray(1)) {
 		$infosPhaseFinale = $row;
 	}
@@ -234,7 +248,12 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque)
 		$selectOptions1 = "<option value=\"\"></option>";
 		$selectOptions2 = "<option value=\"\"></option>";
 		
-		while ($indexSelect < $infosTournoi['pts_qualifs']){
+		if($label == "Finale"){
+			$ptsMatch = $infosTournoi['pts_phasesfinales'];
+		}else{
+			$ptsMatch = $infosTournoi['pts_qualifs'];
+		}
+		while ($indexSelect < $ptsMatch){
 			$realValue = $indexSelect + 1;
 			if($realValue == $score1){
 				$selected1 = "selected";
@@ -273,7 +292,7 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque)
 			
 				<input type=\"hidden\" name=\"idTournoi\"  value=\"$idTournoi\"></input>
 				<input type=\"hidden\" name=\"idMatchQualif\"  value=\"$idMatch\"></input>
-				<input type=\"hidden\" name=\"action\"  value=\"miseajourMatchQualif\"></input>
+				<input type=\"hidden\" name=\"action\"  value=\"miseajourMatchPhaseFinale\"></input>
 				</form>
 			</td>
 		</tr>";
@@ -820,7 +839,7 @@ function creerPhaseQualif($idTournoi,$numPhase,$nbEquipes)
 		$db->exec("INSERT INTO combi_qualifs (id_tournoi, id_phasequalif, num_phase, combinaison) VALUES ('". $idTournoi ."','". $idPhase ."','". $numPhase ."','". $row['combi2'] ."')");
 	}	
 	
-	header("Location: index.php?idtournoi=$idTournoi&page=qualifs");
+	//header("Location: index.php?idtournoi=$idTournoi&page=qualifs");
 }
 
 function creerPhaseFinale($idTournoi,$numPhaseFinale,$nbEquipes, $labelPhaseFinale, $typePhaseFinale)
@@ -854,7 +873,7 @@ function creerPhaseFinale($idTournoi,$numPhaseFinale,$nbEquipes, $labelPhaseFina
 
 	}	
 	
-	header("Location: index.php?idtournoi=$idTournoi&page=phasesfinales");
+	//header("Location: index.php?idtournoi=$idTournoi&page=phasesfinales");
 }
 
 

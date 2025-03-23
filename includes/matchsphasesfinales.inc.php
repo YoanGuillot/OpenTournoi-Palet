@@ -121,24 +121,25 @@ if($nbEquipes == 16){
 	$tableauQuarts = constructTableMatchsPF($idTournoi, $bLabel, $listeMatchsQuarts, $numPlaque);
 	$tableauDemis = constructTableMatchsPF($idTournoi, $cLabel, $listeMatchsDemis, $numPlaque);
 	$tableauF = constructTableMatchsPF($idTournoi, $dLabel, $listeMatchsF, $numPlaque);
-	$tableauPF = constructTableMatchsPF($idTournoi, $pfLabel, $listeMatchsPF, $numPlaque);
+	$tableauPF = constructTableMatchsPF($idTournoi, $pfLabel, $listeMatchsPF, $numPlaque + 1);
 	
-	$tableauCHQuarts = constructTableMatchsPF($idTournoi, $CH4Label, $listeMatchsCHQuarts, $numPlaque);
-	$tableauCHDemis = constructTableMatchsPF($idTournoi, $CH2Label, $listeMatchsCHDemis, $numPlaque);
-	$tableauCHF = constructTableMatchsPF($idTournoi, $CHfLabel, $listeMatchsCHF, $numPlaque);
-	$tableauCHPF = constructTableMatchsPF($idTournoi, $CHpfLabel, $listeMatchsCHPF, $numPlaque);
+	$tableauCHQuarts = constructTableMatchsPF($idTournoi, $CH4Label, $listeMatchsCHQuarts, $numPlaque + 4);
+	$tableauCHDemis = constructTableMatchsPF($idTournoi, $CH2Label, $listeMatchsCHDemis, $numPlaque + 4);
+	$tableauCHF = constructTableMatchsPF($idTournoi, $CHfLabel, $listeMatchsCHF, $numPlaque + 4);
+	$tableauCHPF = constructTableMatchsPF($idTournoi, $CHpfLabel, $listeMatchsCHPF, $numPlaque + 5);
 	
-	$tableauCLDemis = constructTableMatchsPF($idTournoi, $clLabel, $listeMatchsCLDemis, $numPlaque);
-	$tableauCLF = constructTableMatchsPF($idTournoi, $cl2Label, $listeMatchsCLF, $numPlaque);
+	$tableauCLDemis = constructTableMatchsPF($idTournoi, $clLabel, $listeMatchsCLDemis, $numPlaque + 2);
+	$tableauCLF = constructTableMatchsPF($idTournoi, $cl2Label, $listeMatchsCLF, $numPlaque + 2);
 	
-	$tableauCLCHDemis = constructTableMatchsPF($idTournoi, $CHclLabel, $listeMatchsCLDemis, $numPlaque);
-	$tableauCLCHF = constructTableMatchsPF($idTournoi, $CHcl2Label, $listeMatchsCLF, $numPlaque);
+	$tableauCLCHDemis = constructTableMatchsPF($idTournoi, $CHclLabel, $listeMatchsCLDemis, $numPlaque + 6);
+	$tableauCLCHF = constructTableMatchsPF($idTournoi, $CHcl2Label, $listeMatchsCLF, $numPlaque + 6);
 
 	
 	echo $tableau8;
 	echo $tableauQuarts;
 	echo $tableauDemis;
 	echo $tableauF;
+	
 	echo $tableauPF;
 	echo "<div class=\"uk-width-1-1 uk-width-1-1@l uk-width-1-1@xl\"><hr /></div>";
 	echo $tableauCLDemis;

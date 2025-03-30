@@ -7,16 +7,16 @@ defined('_LPDT') or die;
 <div class="uk-grid uk-grid-medium" data-uk-grid uk-sortable="handle: .sortable-icon">
 					
 	<!-- panel -->
-	<div class="uk-width-1-1">
+	<div class="uk-width-1-1 printable">
 		<div class="uk-card uk-card-default uk-card-hover">
 			<div class="uk-card-header">
 				<div class="uk-grid uk-grid-small">
-					<div class="uk-width-auto"><h4>Classement phases qualificatives</h4></div>
+					<div class="uk-width-auto printable"><h4>Classement phases qualificatives</h4></div>
 					<div class="uk-width-expand uk-text-right panel-icons">
 						<form id="formPrint-classementQualifs" method="POST">
 							<input type="hidden" name="action" value="impression"></input>
 							<input type="hidden" name="element" value="classementQualifs"></input>
-							<a href="javascript:document.getElementById('formPrint-classementQualifs').submit();" type="submit" class="uk-icon-link" title="Imprimer" data-uk-tooltip data-uk-icon="icon: print"></a>
+							<a href="javascript:document.getElementById('formPrint-classementQualifs').submit();" type="submit" class="uk-icon-link donotprint" title="Imprimer" data-uk-tooltip data-uk-icon="icon: print"></a>
 						</form>
 					
 					

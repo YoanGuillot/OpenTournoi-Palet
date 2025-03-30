@@ -119,11 +119,11 @@ if (isset($_GET['idtournoi'])){
 	include "includes/$page.inc.php";
 
 ?>
-				<footer class="uk-section uk-section-small uk-text-center">
+				<footer class="uk-section uk-section-small uk-width-1-1 uk-text-center donotprint">
 					<hr>
 					<p class="uk-text-center">Tournoi de Palet par Yoan Guillot - <a href="https://www.lepaletdutrefle.fr">Le Palet du Trèfle</a>
 					</p>
-									</footer>
+				</footer>
 			</div>
 		</div>
 		<!-- /CONTENT -->

@@ -240,6 +240,13 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 	}	
 	//print_r($listeMatchs);
 	$tableauRow = "";
+
+
+	$indexPlayed = 0;
+	$nbMatchs = count($listeMatchs);
+	
+
+
 	foreach ($listeMatchs as $row){
 		$position1 = $row['position1'];
 		$position2 = $row['position2'];
@@ -257,6 +264,21 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 		}else{
 			$ptsMatch = $infosTournoi['pts_qualifs'];
 		}
+
+		if($score1 == $ptsMatch || $score2 == $ptsMatch){
+			$matchPlayed = "green";
+			$indexPlayed = $indexPlayed + 1;
+		}else{
+			$matchPlayed = "red";
+		}
+
+		if($indexPlayed == $nbMatchs){
+			$allPlayed = "green";
+		}else{
+			$allPlayed = "red";
+		}
+
+
 		while ($indexSelect < $ptsMatch){
 			$realValue = $indexSelect + 1;
 			if($realValue == $score1){
@@ -293,6 +315,8 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 				</div>
 				
 				<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">$equipe2</div>
+				<div style=\"display:inline-block;width: 10px;height:10px;border-radius: 50%;background-color:". $matchPlayed ."\"></div>
+
 			
 				<input type=\"hidden\" name=\"idTournoi\"  value=\"$idTournoi\"></input>
 				<input type=\"hidden\" name=\"numPhaseFinale\"  value=\"$numPhaseFinale\"></input>
@@ -308,7 +332,7 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 	}
 
 	
-	$tableauHead="<div class=\"uk-width-1-1 uk-width-1-2@l uk-width-1-3@xl\">
+	$tableauHead="<div class=\"uk-width-1-1 uk-width-1-2@l uk-width-1-2@xl\">
 		<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
 			<div class=\"uk-card-header\">
 				<div class=\"uk-grid uk-grid-small\">

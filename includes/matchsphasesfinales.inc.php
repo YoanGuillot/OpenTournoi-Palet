@@ -31,7 +31,7 @@ calculPhaseFinale($numPhaseFinale, $nbEquipes);
 
 ?>
 
-<div class="uk-grid uk-grid-medium" data-uk-grid uk-grid="masonry: pack" uk-sortable="handle: .sortable-icon">
+<div class="uk-grid uk-grid-medium" data-uk-grid uk-sortable="handle: .sortable-icon">
 <?php
 
 

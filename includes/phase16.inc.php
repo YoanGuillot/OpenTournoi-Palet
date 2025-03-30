@@ -3,8 +3,8 @@ defined('_LPDT') or die;
 $idPhaseFinale = $_GET['idphase'];
 $infosPhaseFinale = infosPhaseFinale($idPhaseFinale);
 //print_r($infosPhaseFinale);
-$numPhase = $infosPhaseFinale['num_phasefinale'];
-$infoPositions = infosPositions($numPhase);
+$numPhaseFinale = $infosPhaseFinale['num_phasefinale'];
+$infoPositions = infosPositions($numPhaseFinale);
 $labelPhaseFinale = $infosPhaseFinale['label_phasefinale'];
 
 
@@ -13,7 +13,7 @@ foreach ($infoPositions as $row) {
 	$ptsPositions[$row['position_label']] = $row['position_score'];
 }
 
-
+calculPhaseFinale($numPhaseFinale, 16);
 
 ?>
 
@@ -59,7 +59,7 @@ foreach ($infoPositions as $row) {
 							<td>
 								<div class="bracket-position">1-16</div>
 								<div class="bracket-edit">
-									<img src="img/edit.png" />
+									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-A2"><img src="img/edit.png" /></a>
 								</div>
 							</td>
 							<td class="bracket-t">

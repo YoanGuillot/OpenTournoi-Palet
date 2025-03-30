@@ -87,6 +87,7 @@ function infosPhaseFinaleNum($numPhaseFinale)
 	while ($row = $resultats->fetchArray(1)) {
 		$infosPhaseFinale = $row;
 	}
+	
 	if(!empty($infosPhaseFinale)){
 		return $infosPhaseFinale;
 	}
@@ -208,12 +209,13 @@ function listeEquipesPhaseFinale($numPhase,$niveau,$position)
 	return $listeEquipes;
 }
 
-function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque)
+function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, $numPhaseFinale)
 {
 	
 	//$label = mb_convert_encoding($label, 'UTF-8', 'ISO-8859-1');
 	$infosTournoi = infosTournoi($idTournoi);
-
+	$idPhaseFinale = infosPhaseFinaleNum($numPhaseFinale);
+	$idPhaseFinale = $idPhaseFinale['id_phasefinale'];
 	$nbEquipes = count($listeEquipes);
 	$nbRencontres = $nbEquipes / 2;
 
@@ -236,12 +238,13 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque)
 		
 		$indexRow = $indexRow +1;
 	}	
-	
+	//print_r($listeMatchs);
 	$tableauRow = "";
 	foreach ($listeMatchs as $row){
-		
+		$position1 = $row['position1'];
+		$position2 = $row['position2'];
 		$idMatch = $row['position2'];
-		$score1 = $row['score2'];
+		$score1 = $row['score1'];
 		$score2 = $row['score2'];
 		$equipe1 = $row['equipe1'];
 		$equipe2 = $row['equipe2'];
@@ -271,20 +274,20 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque)
 			$indexSelect = $indexSelect + 1;
 		}
 
-		$tableauRow .= "<tr style=\"scroll-margin-top: 300px;\" id=\"matchid-$idMatch\">
+		$tableauRow .= "<tr style=\"scroll-margin-top: 300px;\" id=\"matchid-$idMatch\" class=\"anchor\">
 			<td style=\"with:100%\">
-				<form method=\"POST\" id=\"formMatch-$idMatch\" action=\"index.php?idtournoi=$idTournoi&page=matchsphasesfinales#matchid-$idMatch\">
+				<form method=\"POST\" id=\"formMatch-$idMatch\" action=\"index.php?idtournoi=$idTournoi&idphase=$idPhaseFinale&page=matchsphasesfinales#matchid-$idMatch\">
 				<div style=\"display:inline-block;width: 10%\" class=\"uk-text-center\">$numPlaque</div>
 				<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">$equipe1</div>
 				<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center\">
-					<select id=\"match-$idMatch-side1\" onchange=\"activateLink('validMatch-$idMatch', 'side2', ".$infosTournoi['pts_qualifs'] .", $idMatch)\" name=\"score1\" class=\"uk-select\"  >
+					<select id=\"match-$idMatch-side1\" onchange=\"activateLink('validMatch-$idMatch', 'side2', ".$infosTournoi['pts_qualifs'] .", '$idMatch')\" name=\"score1\" class=\"uk-select\"  >
 						$selectOptions1
 					</select>
 				</div>
 				<div style=\"display:inline-block;width: 10%\" class=\"uk-text-center\"><a id=\"validMatch-$idMatch\" style=\"color: gray\" href=\"javascript:document.getElementById('formMatch-$idMatch').submit();\" uk-icon=\"check\" class=\"disabled\"></a></div>
 				
 				<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center\">
-					<select id=\"match-$idMatch-side2\" onchange=\"activateLink('validMatch-$idMatch', 'side1', ".$infosTournoi['pts_qualifs'] .", $idMatch)\" name=\"score2\" class=\"uk-select\"  >
+					<select id=\"match-$idMatch-side2\" onchange=\"activateLink('validMatch-$idMatch', 'side1', ".$infosTournoi['pts_qualifs'] .", '$idMatch')\" name=\"score2\" class=\"uk-select\"  >
 						$selectOptions2
 					</select>
 				</div>
@@ -292,7 +295,10 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque)
 				<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">$equipe2</div>
 			
 				<input type=\"hidden\" name=\"idTournoi\"  value=\"$idTournoi\"></input>
-				<input type=\"hidden\" name=\"idMatchQualif\"  value=\"$idMatch\"></input>
+				<input type=\"hidden\" name=\"numPhaseFinale\"  value=\"$numPhaseFinale\"></input>
+				<input type=\"hidden\" name=\"position1\"  value=\"$position1\"></input>
+				<input type=\"hidden\" name=\"position2\"  value=\"$position2\"></input>
+				<input type=\"hidden\" name=\"idPhaseFinale\"  value=\"$idPhaseFinale\"></input>
 				<input type=\"hidden\" name=\"action\"  value=\"miseajourMatchPhaseFinale\"></input>
 				</form>
 			</td>
@@ -667,6 +673,10 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label, position_niveau) VALUES ('". $numPhaseFinale ."', 'CHCLZ2', 'Challenge Classement 2ème Tour')");
 		$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label, position_niveau) VALUES ('". $numPhaseFinale ."', 'CHCLY1', '')");
 	}
+
+}
+
+function calculPhaseFinale($numPhase, $nbEquipes){
 
 }
 

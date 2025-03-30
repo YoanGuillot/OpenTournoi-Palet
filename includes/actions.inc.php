@@ -63,7 +63,23 @@ if(isset($_POST['action'])){
 				
 					header("Location: index.php?idtournoi=$idTournoi&page=qualifs");
 		}
+
+
+		if ($_POST['action'] == 'miseajourMatchPhaseFinale'){
+					$numPhaseFinale = $_POST['numPhaseFinale'];
+					$idPhaseFinale = $_POST['idPhaseFinale'];
+					$idTournoi = $_POST['idTournoi'];
+					$position1 = $_POST['position1'];
+					$position2 = $_POST['position2'];
+					$score1 = $_POST['score1'];
+					$score2 = $_POST['score2'];
+
+					$db->exec("UPDATE positions_phasesfinales SET position_score = \"$score1\" WHERE num_phasefinale == '$numPhaseFinale' AND position_label == \"$position1\"");
+					$db->exec("UPDATE positions_phasesfinales SET position_score = \"$score2\" WHERE num_phasefinale == '$numPhaseFinale' AND position_label == \"$position2\"");
 		
+			header("Location: index.php?idtournoi=$idTournoi&idphase=$idPhaseFinale&page=matchsphasesfinales");
+}
+
 		if ($_POST['action'] == 'cloturerInscriptions'){
 					$idTournoi = $_POST['idTournoi'];
 					//Attribution des numéros d'équipe dans la base

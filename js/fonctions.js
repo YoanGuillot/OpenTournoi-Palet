@@ -11,6 +11,7 @@ function supprPhaseQualif(idTournoi, numPhase){
 }
 
 function activateLink(idLink, side, ptsV, idMatch){
+	
 	$("#"+idLink).removeClass('disabled');
 	$("#"+idLink).css('color', 'green');
 	

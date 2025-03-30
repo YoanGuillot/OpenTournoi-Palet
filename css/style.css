@@ -181,6 +181,15 @@ section > div:nth-child(2n) {
     margin-top: 500px; 
 }
 
+/****flash the target object when you navigate to it ****/
+.anchor:target {
+  /** border: 2px solid orange; ***/
+  -webkit-box-shadow:inset 0px 0px 0px 2px orange;
+  -moz-box-shadow:inset 0px 0px 0px 2px orange;
+  box-shadow:inset 0px 0px 0px 2px orange;
+}
+
+
 
 /**** FIN PHASES FINALES ****/
 

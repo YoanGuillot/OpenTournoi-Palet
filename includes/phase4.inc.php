@@ -1,3 +1,23 @@
+<?php
+defined('_LPDT') or die; 
+$idPhaseFinale = $_GET['idphase'];
+$infosPhaseFinale = infosPhaseFinale($idPhaseFinale);
+//print_r($infosPhaseFinale);
+$numPhaseFinale = $infosPhaseFinale['num_phasefinale'];
+$infoPositions = infosPositions($numPhaseFinale);
+$labelPhaseFinale = $infosPhaseFinale['label_phasefinale'];
+
+
+foreach ($infoPositions as $row) {
+	$positions[$row['position_label']] = $row['num_equipe'];
+	$ptsPositions[$row['position_label']] = $row['position_score'];
+}
+
+calculPhaseFinale($numPhaseFinale, 4);
+
+?>
+
+
 <div>
 	<div id="phase-container-4">
 			

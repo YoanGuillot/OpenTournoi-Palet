@@ -26,6 +26,9 @@ if (isset($_GET['idtournoi'])){
 }
 
 
+
+
+
 ?>
 		<!--HEADER-->
 		<header id="top-head" class="uk-position-fixed">

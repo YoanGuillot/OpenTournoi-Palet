@@ -4,19 +4,19 @@ defined('_LPDT') or die;
 
 ?>
 
-<div class="uk-grid uk-grid-medium" data-uk-grid uk-sortable="handle: .sortable-icon">
+<div class="uk-grid uk-grid-medium donotprint data-uk-grid uk-sortable="handle: .sortable-icon">
 					
 	<!-- panel -->
-	<div class="uk-width-1-1 printable">
+	<div class="uk-width-1-1">
 		<div class="uk-card uk-card-default uk-card-hover">
 			<div class="uk-card-header">
 				<div class="uk-grid uk-grid-small">
-					<div class="uk-width-auto printable"><h4>Classement phases qualificatives</h4></div>
+					<div class="uk-width-auto"><h4>Classement phases qualificatives</h4></div>
 					<div class="uk-width-expand uk-text-right panel-icons">
 						<form id="formPrint-classementQualifs" method="POST">
 							<input type="hidden" name="action" value="impression"></input>
 							<input type="hidden" name="element" value="classementQualifs"></input>
-							<a href="javascript:document.getElementById('formPrint-classementQualifs').submit();" type="submit" class="uk-icon-link donotprint" title="Imprimer" data-uk-tooltip data-uk-icon="icon: print"></a>
+							<a onclick="printDiv('printClassement');" type="submit" class="uk-icon-link donotprint" title="Imprimer" data-uk-tooltip data-uk-icon="icon: print"></a>
 						</form>
 					
 					
@@ -71,4 +71,53 @@ defined('_LPDT') or die;
 		</div>
 	</div>
 	<!-- /panel -->
+</div>
+<div class="printable">
+	<style>
+		.printable table, .printable th, .printable td{
+			border: 1px solid black;
+  			border-collapse: collapse;
+			text-align:center;
+		}
+
+		.printable table, .printable tr{
+			width: 100%;
+		}
+	</style>
+	<div class="uk-width-auto"><h4>Classement phases qualificatives</h4></div>
+	<table>
+		<thead>
+			<tr>
+				<th style="width: 10%">Place</th>
+				<th style="width: 10%">N°Equipe</th>
+				<th style="width: 28%">Nom équipe</th>
+				<th style="width: 12%">V</th>
+				<th style="width: 12%">Pts Pour</th>
+				<th style="width: 12%">Pts Contre</th>
+				<th style="width: 12%">Diff</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php
+				$classementQualifs = classementQualifs($idTournoi);
+					
+				$placeEquipe = 1;
+				if(!empty($classementQualifs)){
+					foreach($classementQualifs as $row) {
+						echo "<tr>
+									<td style=\"width: 10%\" >". $placeEquipe ."</td>
+									<td style=\"width: 14%\" >". $row['num_equipe'] ."</td>
+									<td style=\"width: 28%\" >". $row['nom_equipe'] ."</td>
+									<td style=\"width: 12%\" >". $row['nb_victoires'] ."</td>
+									<td style=\"width: 12%\" >". $row['pts_pour'] ."</td>
+									<td style=\"width: 12%\" >". $row['pts_contre'] ."</td>
+									<td style=\"width: 12%\" >". $row['pts_diff'] ."</td>
+							</tr>";
+						$placeEquipe = $placeEquipe + 1;
+					}	
+				}
+
+			?>	
+		</tbody>
+	</table>
 </div>

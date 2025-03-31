@@ -189,7 +189,9 @@ section > div:nth-child(2n) {
   box-shadow:inset 0px 0px 0px 2px orange;
 }
 
-
+.printable{
+    display: none;
+}
 
 /**** FIN PHASES FINALES ****/
 
@@ -199,10 +201,8 @@ section > div:nth-child(2n) {
        display: none; 
     }
 		
-	table, .printable th, .printable td {
-		border: 1px solid black;
-		border-collapse : collapse;
-		text-align: center;
+	.printable {
+		display: block;
 		
 	}
 	

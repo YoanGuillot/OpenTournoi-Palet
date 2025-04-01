@@ -16,7 +16,7 @@ defined('_LPDT') or die;
 						<form id="formPrint-classementQualifs" method="POST">
 							<input type="hidden" name="action" value="impression"></input>
 							<input type="hidden" name="element" value="classementQualifs"></input>
-							<a onclick="printDiv('printClassement');" type="submit" class="uk-icon-link donotprint" title="Imprimer" data-uk-tooltip data-uk-icon="icon: print"></a>
+							<a onclick="window.print();" type="submit" class="uk-icon-link donotprint" title="Imprimer" data-uk-tooltip data-uk-icon="icon: print"></a>
 						</form>
 					
 					
@@ -73,28 +73,18 @@ defined('_LPDT') or die;
 	<!-- /panel -->
 </div>
 <div class="printable">
-	<style>
-		.printable table, .printable th, .printable td{
-			border: 1px solid black;
-  			border-collapse: collapse;
-			text-align:center;
-		}
 
-		.printable table, .printable tr{
-			width: 100%;
-		}
-	</style>
-	<div class="uk-width-auto"><h4>Classement phases qualificatives</h4></div>
+	<div class="uk-width-auto"><h4 style="font-weight: bold;">Classement phases qualificatives</h4></div>
 	<table>
 		<thead>
 			<tr>
 				<th style="width: 10%">Place</th>
 				<th style="width: 10%">N°Equipe</th>
-				<th style="width: 28%">Nom équipe</th>
-				<th style="width: 12%">V</th>
-				<th style="width: 12%">Pts Pour</th>
-				<th style="width: 12%">Pts Contre</th>
-				<th style="width: 12%">Diff</th>
+				<th style="width: 44%">Nom équipe</th>
+				<th style="width: 8%">V</th>
+				<th style="width: 8%">Pts Pour</th>
+				<th style="width: 8%">Pts Contre</th>
+				<th style="width: 8%">Diff</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -105,13 +95,13 @@ defined('_LPDT') or die;
 				if(!empty($classementQualifs)){
 					foreach($classementQualifs as $row) {
 						echo "<tr>
-									<td style=\"width: 10%\" >". $placeEquipe ."</td>
+									<td style=\"width: 10%;font-weight:bold;\" >". $placeEquipe ."</td>
 									<td style=\"width: 14%\" >". $row['num_equipe'] ."</td>
-									<td style=\"width: 28%\" >". $row['nom_equipe'] ."</td>
-									<td style=\"width: 12%\" >". $row['nb_victoires'] ."</td>
-									<td style=\"width: 12%\" >". $row['pts_pour'] ."</td>
-									<td style=\"width: 12%\" >". $row['pts_contre'] ."</td>
-									<td style=\"width: 12%\" >". $row['pts_diff'] ."</td>
+									<td style=\"width: 44%\" >". $row['nom_equipe'] ."</td>
+									<td style=\"width: 8%\" >". $row['nb_victoires'] ."</td>
+									<td style=\"width: 8%\" >". $row['pts_pour'] ."</td>
+									<td style=\"width: 8%\" >". $row['pts_contre'] ."</td>
+									<td style=\"width: 8%\" >". $row['pts_diff'] ."</td>
 							</tr>";
 						$placeEquipe = $placeEquipe + 1;
 					}	

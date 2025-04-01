@@ -197,13 +197,32 @@ section > div:nth-child(2n) {
 
 @media print{
 
+    .tooltipster-base.Balloon {
+        display: none !important;
+    }
+
+    body{
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.5;
+        -webkit-text-size-adjust: 100%;
+    }
+    
     .donotprint, header , aside, footer{
        display: none; 
     }
-		
-	.printable {
-		display: block;
-		
-	}
+	
+    .printable{
+        display: block;
+    }
+	.printable table, .printable th, .printable td{
+        border: 1px solid black;
+          border-collapse: collapse;
+        text-align:center;
+    }
+
+    .printable table, .printable tr{
+        width: 100%;
+    }
 	
 }

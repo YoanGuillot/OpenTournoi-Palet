@@ -336,7 +336,7 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 		<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
 			<div class=\"uk-card-header\">
 				<div class=\"uk-grid uk-grid-small\">
-					<div class=\"uk-width-auto\"><h4>". $label ."</h4></div>
+					<div class=\"uk-width-auto\"><h4>". $label ."</h4></div><div style=\"margin-top: 8px;margin-left: 20px;display:inline-block;border-radius: 50%; height: 15px;background-color:$allPlayed ;\"></div>
 					<div class=\"uk-width-expand uk-text-right panel-icons\"></div>
 				</div>
 			</div>
@@ -700,8 +700,76 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 
 }
 
-function calculPhaseFinale($numPhase, $nbEquipes){
+function setNewPosition($numPhaseFinale,$position1, $position2, $positionVainqueur, $positionPerdant){
+	global $db;
+	$resultats1 = $db->query('SELECT * FROM positions_phasesfinales WHERE num_phasefinale == '. $numPhaseFinale .' AND position_label == "'. $position1 .'"');
+	$resultats2 = $db->query('SELECT * FROM positions_phasesfinales WHERE num_phasefinale == '. $numPhaseFinale .' AND position_label == "'. $position2 .'"');
+	$score1 = "";
+	$score2 = "";
+	while ($row1 = $resultats1->fetchArray(1)) {
+		$score1 = $row1['position_score'];
+		$numEquipe1 = $row1['num_equipe'];
+	}
 
+	while ($row2 = $resultats2->fetchArray(1)) {
+		$score2 = $row2['position_score'];
+		$numEquipe2 = $row2['num_equipe'];
+	}
+	
+	if($score1>$score2){
+		$vainqueur = $numEquipe1;
+		$perdant = $numEquipe2;
+	}else{
+		$vainqueur = $numEquipe2;
+		$perdant = $numEquipe1;
+	}
+//////////////////////////////////////// BUGG ///////////////////////////                     
+echo $score1."-";
+echo $score2." ";
+	if(!empty($score) && !empty($score2)){
+		$db->exec("UPDATE positions_phasesfinales SET num_equipe = $vainqueur WHERE num_phasefinale == ". $numPhaseFinale ." AND position_label == \"". $positionVainqueur ."\"");
+		$db->exec("UPDATE positions_phasesfinales SET num_equipe = $perdant WHERE num_phasefinale == ". $numPhaseFinale ." AND position_label == \"". $positionPerdant ."\"");
+	}
+}
+
+function calculPhaseFinale($numPhaseFinale, $nbEquipes){
+	
+	if($nbEquipes == 16){
+		//Calcul B1 CHA1
+		setNewPosition($numPhaseFinale,"A1","A2","B1","CHA1");
+		//Calcul B2 CHA2
+		setNewPosition($numPhaseFinale,"A3","A4","B2","CHA2");
+		//Calcul B3 CHA3
+		setNewPosition($numPhaseFinale,"A5","A6","B3","CHA3");
+		//Calcul B4 CHA4
+		setNewPosition($numPhaseFinale,"A7","A8","B4","CHA4");
+		//Calcul B5 CHA1
+		setNewPosition($numPhaseFinale,"A8","A9","B5","CHA5");
+		//Calcul B6 CHA2
+		setNewPosition($numPhaseFinale,"A10","A11","B6","CHA6");
+		//Calcul B7 CHA3
+		setNewPosition($numPhaseFinale,"A12","A13","B7","CHA7");
+		//Calcul B8 CHA4
+		setNewPosition($numPhaseFinale,"A15","A16","B8","CHA8");
+		
+		//Calcul C1 CLA1
+		setNewPosition($numPhaseFinale,"B1","B2","C1","CLA1");
+		//Calcul C2 CLA2
+		setNewPosition($numPhaseFinale,"B3","B4","C2","CLA2");
+		//Calcul C3 CLA2
+		setNewPosition($numPhaseFinale,"B5","B6","C3","CLA3");
+		//Calcul C4 CLA2
+		setNewPosition($numPhaseFinale,"B7","B8","C4","CLA4");
+
+		//Calcul CHB1 CHCLA1
+		setNewPosition($numPhaseFinale,"CHA1","CHA2","CHB1","CHCLA1");
+		//Calcul CHB2 CHCLA2
+		setNewPosition($numPhaseFinale,"CHA3","CHA4","CHB2","CHCLA2");
+		//Calcul CHB3 CHCLA3
+		setNewPosition($numPhaseFinale,"CHA5","CHA6","CHB3","CHCLA3");
+		//Calcul CHB4 CHCLA4
+		setNewPosition($numPhaseFinale,"CHA7","CHA8","CHB4","CHCLA4");
+	}
 }
 
 function tiragePhaseQualif($nbEquipes, $numPhase)

@@ -738,6 +738,30 @@ function setNewPosition($numPhaseFinale,$position1, $position2, $positionVainque
 
 function calculPhaseFinale($numPhaseFinale, $nbEquipes){
 	
+
+	if($nbEquipes == 8){
+		
+		setNewPosition($numPhaseFinale,"A1","A2","B1","CLA1");
+		setNewPosition($numPhaseFinale,"A3","A4","B2","CLA2");
+		setNewPosition($numPhaseFinale,"A5","A6","B3","CLA3");
+		setNewPosition($numPhaseFinale,"A7","A8","B4","CLA4");
+		
+		setNewPosition($numPhaseFinale,"B1","B2","C1","PF1");
+		setNewPosition($numPhaseFinale,"B3","B4","C2","PF2");
+		
+		setNewPosition($numPhaseFinale,"C1","C2","D1","");
+
+		setNewPosition($numPhaseFinale,"PF1","PF2","PFV1","");
+				
+		setNewPosition($numPhaseFinale,"CLA1","CLA2","CLB1","CLZ1");
+		setNewPosition($numPhaseFinale,"CLA3","CLA4","CLB2","CLZ2");
+
+		setNewPosition($numPhaseFinale,"CLB1","CLB2","CLC1","");
+		setNewPosition($numPhaseFinale,"CLZ1","CLZ2","CLY1","");
+
+	}
+
+
 	if($nbEquipes == 16){
 		//Calcul B1 CHA1
 		setNewPosition($numPhaseFinale,"A1","A2","B1","CHA1");
@@ -756,9 +780,13 @@ function calculPhaseFinale($numPhaseFinale, $nbEquipes){
 		//Calcul B8 CHA4
 		setNewPosition($numPhaseFinale,"A15","A16","B8","CHA8");
 		
-		//Calcul D1 PF1
+		//Calcul D1 PF1 Finales
 		setNewPosition($numPhaseFinale,"C1","C2","D1","PF1");
 		setNewPosition($numPhaseFinale,"C3","C4","D2","PF2");
+
+		//Calcul E1 - Vainqueurs
+		setNewPosition($numPhaseFinale,"D1","D2","E1","");
+		setNewPosition($numPhaseFinale,"PF1","PF2","PFV1","");
 				
 			
 		//Calcul C1 CLA1
@@ -769,6 +797,12 @@ function calculPhaseFinale($numPhaseFinale, $nbEquipes){
 		setNewPosition($numPhaseFinale,"B5","B6","C3","CLA3");
 		//Calcul C4 CLA2
 		setNewPosition($numPhaseFinale,"B7","B8","C4","CLA4");
+
+		setNewPosition($numPhaseFinale,"CLA1","CLA2","CLB1","CLZ1");
+		setNewPosition($numPhaseFinale,"CLA3","CLA4","CLB2","CLZ2");
+
+		setNewPosition($numPhaseFinale,"CLB1","CLB2","CLC1","");
+		setNewPosition($numPhaseFinale,"CLZ1","CLZ2","CLY1","");
 
 		//Calcul CHB1 CHCLA1
 		setNewPosition($numPhaseFinale,"CHA1","CHA2","CHB1","CHCLA1");
@@ -781,8 +815,18 @@ function calculPhaseFinale($numPhaseFinale, $nbEquipes){
 
 		//Calcul CHC1 CHPF1
 		setNewPosition($numPhaseFinale,"CHB1","CHB2","CHC1","CHPF1");
-		//Calcul CHC2 CHPF2
 		setNewPosition($numPhaseFinale,"CHB3","CHB4","CHC2","CHPF2");
+
+		setNewPosition($numPhaseFinale,"CHC1","CHC2","CHD1","");
+		setNewPosition($numPhaseFinale,"CHPF1","CHPF2","CHPFV1","");
+
+		
+		setNewPosition($numPhaseFinale,"CHCLA1","CHCLA2","CHCLB1","CHCLZ1");
+		setNewPosition($numPhaseFinale,"CHCLA3","CHCLA4","CHCLB2","CHCLZ2");
+
+		setNewPosition($numPhaseFinale,"CHCLB1","CHCLB2","CHCLC1","");
+		setNewPosition($numPhaseFinale,"CHCLZ1","CHCLZ2","CHCLY1","");
+
 	}
 }
 

@@ -24,7 +24,9 @@ if($prevNbEquipes == 0){
 }
 
 $numPlaque = $debutPlaques;
-
+//DEBUG
+//echo $numPhaseFinale."-".$nbEquipes;
+//die();
 
 calculPhaseFinale($numPhaseFinale, $nbEquipes);
 
@@ -59,6 +61,7 @@ if($nbEquipes == 4){
 }
 //Pour 8 equipes
 if($nbEquipes == 8){
+
 	$aLabel = "Quarts finale";
 	$bLabel = "Demi-finales";
 	$cLabel = "Finale";
@@ -66,12 +69,13 @@ if($nbEquipes == 8){
 	$clLabel = "Classements 1er Tour";
 	$cl2Label = "Classements 2ème Tour";
 
-	$listeMatchsQuarts = listeEquipesPhaseFinale($numPhaseFinale,"Demi-finales","A");
+	$listeMatchsQuarts = listeEquipesPhaseFinale($numPhaseFinale,"Quarts de finale","A");
 	$listeMatchsDemis = listeEquipesPhaseFinale($numPhaseFinale,"Demi-finales","B");
-	$listeMatchsF = listeEquipesPhaseFinale($numPhaseFinale,"Finales","C");
-	$listeMatchsPF = listeEquipesPhaseFinale($numPhaseFinale,"Finales","PF");
-	$listeMatchsCLDemis = listeEquipesPhaseFinale($numPhaseFinale,"Demi-finales","CL");
-	$listeMatchsCLF = listeEquipesPhaseFinale($numPhaseFinale,"Finale","CL");
+	$listeMatchsF = listeEquipesPhaseFinale($numPhaseFinale,"Finale","C");
+	$listeMatchsPF = listeEquipesPhaseFinale($numPhaseFinale,"Petite finale","PF");
+	$listeMatchsCLDemis = listeEquipesPhaseFinale($numPhaseFinale,"Classement 1er Tour","CL");
+	$listeMatchsCLF = listeEquipesPhaseFinale($numPhaseFinale,"Classement 2ème Tour","CL");
+	
 
 	$tableauQuarts = constructTableMatchsPF($idTournoi, $aLabel, $listeMatchsQuarts, $numPlaque, $numPhaseFinale);
 	$tableauDemis = constructTableMatchsPF($idTournoi, $bLabel, $listeMatchsDemis, $numPlaque, $numPhaseFinale);
@@ -87,6 +91,8 @@ if($nbEquipes == 8){
 	echo $listeMatchsCLDemis;
 	echo $listeMatchsCLF;
 }	
+
+
 // Pour 16 Equipes
 if($nbEquipes == 16){
 	$aLabel = "8èmes de finale";
@@ -136,8 +142,8 @@ if($nbEquipes == 16){
 	$tableauCLDemis = constructTableMatchsPF($idTournoi, $clLabel, $listeMatchsCLDemis, $numPlaque + 2, $numPhaseFinale);
 	$tableauCLF = constructTableMatchsPF($idTournoi, $cl2Label, $listeMatchsCLF, $numPlaque + 2, $numPhaseFinale);
 	
-	$tableauCLCHDemis = constructTableMatchsPF($idTournoi, $CHclLabel, $listeMatchsCLDemis, $numPlaque + 6, $numPhaseFinale);
-	$tableauCLCHF = constructTableMatchsPF($idTournoi, $CHcl2Label, $listeMatchsCLF, $numPlaque + 6, $numPhaseFinale);
+	$tableauCLCHDemis = constructTableMatchsPF($idTournoi, $CHclLabel, $listeMatchsCHCLDemis, $numPlaque + 6, $numPhaseFinale);
+	$tableauCLCHF = constructTableMatchsPF($idTournoi, $CHcl2Label, $listeMatchsCHCLF, $numPlaque + 6, $numPhaseFinale);
 
 	
 	echo $tableau8;

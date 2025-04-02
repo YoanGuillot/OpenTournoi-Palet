@@ -706,11 +706,12 @@ function setNewPosition($numPhaseFinale,$position1, $position2, $positionVainque
 	$resultats2 = $db->query('SELECT * FROM positions_phasesfinales WHERE num_phasefinale == '. $numPhaseFinale .' AND position_label == "'. $position2 .'"');
 	$score1 = "";
 	$score2 = "";
+	
 	while ($row1 = $resultats1->fetchArray(1)) {
 		$score1 = $row1['position_score'];
 		$numEquipe1 = $row1['num_equipe'];
 	}
-
+	
 	while ($row2 = $resultats2->fetchArray(1)) {
 		$score2 = $row2['position_score'];
 		$numEquipe2 = $row2['num_equipe'];
@@ -723,12 +724,15 @@ function setNewPosition($numPhaseFinale,$position1, $position2, $positionVainque
 		$vainqueur = $numEquipe2;
 		$perdant = $numEquipe1;
 	}
-//////////////////////////////////////// BUGG ///////////////////////////                     
-echo $score1."-";
-echo $score2." ";
-	if(!empty($score) && !empty($score2)){
+// DEBUGG                     
+//echo $score1."-";
+//echo $score2." ";
+	if(!empty($score1) && !empty($score2)){
 		$db->exec("UPDATE positions_phasesfinales SET num_equipe = $vainqueur WHERE num_phasefinale == ". $numPhaseFinale ." AND position_label == \"". $positionVainqueur ."\"");
 		$db->exec("UPDATE positions_phasesfinales SET num_equipe = $perdant WHERE num_phasefinale == ". $numPhaseFinale ." AND position_label == \"". $positionPerdant ."\"");
+	}else{
+		$db->exec("UPDATE positions_phasesfinales SET num_equipe = '' WHERE num_phasefinale == ". $numPhaseFinale ." AND position_label == \"". $positionVainqueur ."\"");
+		$db->exec("UPDATE positions_phasesfinales SET num_equipe = '' WHERE num_phasefinale == ". $numPhaseFinale ." AND position_label == \"". $positionPerdant ."\"");
 	}
 }
 
@@ -744,14 +748,19 @@ function calculPhaseFinale($numPhaseFinale, $nbEquipes){
 		//Calcul B4 CHA4
 		setNewPosition($numPhaseFinale,"A7","A8","B4","CHA4");
 		//Calcul B5 CHA1
-		setNewPosition($numPhaseFinale,"A8","A9","B5","CHA5");
+		setNewPosition($numPhaseFinale,"A9","A10","B5","CHA5");
 		//Calcul B6 CHA2
-		setNewPosition($numPhaseFinale,"A10","A11","B6","CHA6");
+		setNewPosition($numPhaseFinale,"A11","A12","B6","CHA6");
 		//Calcul B7 CHA3
-		setNewPosition($numPhaseFinale,"A12","A13","B7","CHA7");
+		setNewPosition($numPhaseFinale,"A13","A14","B7","CHA7");
 		//Calcul B8 CHA4
 		setNewPosition($numPhaseFinale,"A15","A16","B8","CHA8");
 		
+		//Calcul D1 PF1
+		setNewPosition($numPhaseFinale,"C1","C2","D1","PF1");
+		setNewPosition($numPhaseFinale,"C3","C4","D2","PF2");
+				
+			
 		//Calcul C1 CLA1
 		setNewPosition($numPhaseFinale,"B1","B2","C1","CLA1");
 		//Calcul C2 CLA2
@@ -769,6 +778,11 @@ function calculPhaseFinale($numPhaseFinale, $nbEquipes){
 		setNewPosition($numPhaseFinale,"CHA5","CHA6","CHB3","CHCLA3");
 		//Calcul CHB4 CHCLA4
 		setNewPosition($numPhaseFinale,"CHA7","CHA8","CHB4","CHCLA4");
+
+		//Calcul CHC1 CHPF1
+		setNewPosition($numPhaseFinale,"CHB1","CHB2","CHC1","CHPF1");
+		//Calcul CHC2 CHPF2
+		setNewPosition($numPhaseFinale,"CHB3","CHB4","CHC2","CHPF2");
 	}
 }
 

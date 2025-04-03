@@ -264,7 +264,7 @@ calculPhaseFinale($numPhaseFinale, 8);
 							<td>
 								<div class="bracket-position">1-16</div>
 								<div class="bracket-edit">
-									<img src="img/edit.png" />
+									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-A6"><img src="img/edit.png" /></a>
 								</div>
 							</td>
 							<td class="bracket-t">
@@ -370,7 +370,7 @@ calculPhaseFinale($numPhaseFinale, 8);
 							<td>
 								<div class="bracket-position">1-16</div>
 								<div class="bracket-edit">
-									<img src="img/edit.png" />
+									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-A8"><img src="img/edit.png" /></a>
 								</div>
 							</td>
 							<td class="bracket-t">
@@ -449,7 +449,7 @@ calculPhaseFinale($numPhaseFinale, 8);
 							<td>
 								<div class="bracket-position">3-4</div>
 								<div class="bracket-edit">
-									<img src="img/edit.png" />
+									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-PF2"><img src="img/edit.png" /></a>
 								</div>
 							</td>
 							<td class="bracket-t">
@@ -538,7 +538,7 @@ calculPhaseFinale($numPhaseFinale, 8);
 						<td>
 							<div class="bracket-position">5-8</div>
 							<div class="bracket-edit">
-								<img src="img/edit.png" />
+								<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-CLA2"><img src="img/edit.png" /></a>
 							</div>
 						</td>
 						<td class="bracket-t">
@@ -614,7 +614,7 @@ calculPhaseFinale($numPhaseFinale, 8);
 						<td>
 							<div class="bracket-position">5-6</div>
 							<div class="bracket-edit">
-								<img src="img/edit.png" />
+								<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-CLA4"><img src="img/edit.png" /></a>
 							</div>
 						</td>
 						<td class="bracket-t"> 

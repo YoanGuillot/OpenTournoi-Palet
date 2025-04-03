@@ -214,7 +214,7 @@ calculPhaseFinale($numPhaseFinale, 4);
 							<td>
 								<div class="bracket-position">3-4</div>
 								<div class="bracket-edit">
-									<img src="img/edit.png" />
+								<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-PF2"><img src="img/edit.png" /></a>
 								</div>
 							</td>
 							<td class="bracket-t">

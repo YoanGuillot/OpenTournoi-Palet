@@ -30,8 +30,15 @@ if ($infosTournoi['statut_inscriptions'] == 'ferme' && $infosTournoi['statut_qua
 	$messageQualif = "";
 }else{
 	$dispoBouton = "disabled";
-	$messageQualif = "Vous devez avoir clôturer les inscriptions <a href=\"index.php?idtournoi=$idTournoi&page=equipes\">(ici)</a> avant de pouvoir créer une phase de qualification.";
+	if($infosTournoi['statut_inscriptions'] != 'ferme'){
+		$messageQualif = "Vous devez avoir clôturer les inscriptions <a href=\"index.php?idtournoi=$idTournoi&page=equipes\">(ici)</a> avant de pouvoir créer une phase de qualification.";
+	}else{
+		$messageQualif = "Les phases de qualifications sont closes !";
+	}
+	
 }
+
+echo "<p class='uk-text-center'>$messageQualif</p>";
 
 		echo "<div style=\"display:block;width: 100%\">		
 		
@@ -219,7 +226,7 @@ if ($infosPhase == ''){
 						<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
 							<div class=\"uk-card-header\">
 								<div class=\"uk-grid uk-grid-small\">
-									<div style=\"display:inline-bock;\" class=\"uk-width-auto\"><h4>Phase $countPhase</h4></div><div style=\"margin-top: 8px;margin-left: 20px;display:inline-block;border-radius: 50%; height: 15px;background-color:$allPlayed ;\"></div>
+									<div style=\"display:inline-bock;\" class=\"uk-width-auto\"><h4>Qualifs - Tour " .$countPhase ." en ". $infosTournoi['pts_qualifs'] ." Points</h4></div><div style=\"margin-top: 8px;margin-left: 20px;display:inline-block;border-radius: 50%; height: 15px;background-color:$allPlayed ;\"></div>
 									<div class=\"uk-width-expand uk-text-right panel-icons\">
 										<a style=\"color: $lockedColor\" href=\"index.php?page=qualifs&idtournoi=". $idTournoi ."&action=". $lockAction ."phasequalif&numphase=$countPhase\" class=\"uk-margin-medium-right\"  uk-icon=\"$lockedIcon\"></a>
 										<a onclick=\"printDiv('phase$countPhase');\" uk-icon=\"print\"></a>". $trashButton ."
@@ -258,7 +265,7 @@ if ($infosPhase == ''){
 echo $content;
 ?>
 	
-	<p class="uk-text-center"><?php echo $messageQualif; ?></p>
+
 	
 
 </div>

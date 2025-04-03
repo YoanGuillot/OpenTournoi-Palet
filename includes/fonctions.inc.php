@@ -260,9 +260,9 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 		$selectOptions2 = "<option value=\"\"></option>";
 		
 		if($label == "Finale"){
-			$ptsMatch = $infosTournoi['pts_phasesfinales'];
+			$ptsMatch = $infosTournoi['pts_finales'];
 		}else{
-			$ptsMatch = $infosTournoi['pts_qualifs'];
+			$ptsMatch = $infosTournoi['pts_phasesfinales'];
 		}
 
 		if($score1 == $ptsMatch || $score2 == $ptsMatch){
@@ -302,14 +302,14 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 				<div style=\"display:inline-block;width: 10%\" class=\"uk-text-center\">$numPlaque</div>
 				<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">$equipe1</div>
 				<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center\">
-					<select id=\"match-$idMatch-side1\" onchange=\"activateLink('validMatch-$idMatch', 'side2', ".$infosTournoi['pts_qualifs'] .", '$idMatch')\" name=\"score1\" class=\"uk-select\"  >
+					<select id=\"match-$idMatch-side1\" onchange=\"activateLink('validMatch-$idMatch', 'side2', ".$ptsMatch .", '$idMatch')\" name=\"score1\" class=\"uk-select\"  >
 						$selectOptions1
 					</select>
 				</div>
 				<div style=\"display:inline-block;width: 10%\" class=\"uk-text-center\"><a id=\"validMatch-$idMatch\" style=\"color: gray\" href=\"javascript:document.getElementById('formMatch-$idMatch').submit();\" uk-icon=\"check\" class=\"disabled\"></a></div>
 				
 				<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center\">
-					<select id=\"match-$idMatch-side2\" onchange=\"activateLink('validMatch-$idMatch', 'side1', ".$infosTournoi['pts_qualifs'] .", '$idMatch')\" name=\"score2\" class=\"uk-select\"  >
+					<select id=\"match-$idMatch-side2\" onchange=\"activateLink('validMatch-$idMatch', 'side1', ".$ptsMatch .", '$idMatch')\" name=\"score2\" class=\"uk-select\"  >
 						$selectOptions2
 					</select>
 				</div>
@@ -336,7 +336,7 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 		<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
 			<div class=\"uk-card-header\">
 				<div class=\"uk-grid uk-grid-small\">
-					<div class=\"uk-width-auto\"><h4>". $label ."</h4></div><div style=\"margin-top: 8px;margin-left: 20px;display:inline-block;border-radius: 50%; height: 15px;background-color:$allPlayed ;\"></div>
+					<div class=\"uk-width-auto\"><h4>". $label ." en ". $ptsMatch ." Points</h4></div><div style=\"margin-top: 8px;margin-left: 20px;display:inline-block;border-radius: 50%; height: 15px;background-color:$allPlayed ;\"></div>
 					<div class=\"uk-width-expand uk-text-right panel-icons\"></div>
 				</div>
 			</div>
@@ -724,12 +724,15 @@ function setNewPosition($numPhaseFinale,$position1, $position2, $positionVainque
 		$vainqueur = $numEquipe2;
 		$perdant = $numEquipe1;
 	}
+
+
 // DEBUGG                     
 //echo $score1."-";
 //echo $score2." ";
+
 	if(!empty($score1) && !empty($score2)){
-		$db->exec("UPDATE positions_phasesfinales SET num_equipe = $vainqueur WHERE num_phasefinale == ". $numPhaseFinale ." AND position_label == \"". $positionVainqueur ."\"");
-		$db->exec("UPDATE positions_phasesfinales SET num_equipe = $perdant WHERE num_phasefinale == ". $numPhaseFinale ." AND position_label == \"". $positionPerdant ."\"");
+		$db->exec("UPDATE positions_phasesfinales SET num_equipe = '$vainqueur' WHERE num_phasefinale == ". $numPhaseFinale ." AND position_label == \"". $positionVainqueur ."\"");
+		$db->exec("UPDATE positions_phasesfinales SET num_equipe = '$perdant' WHERE num_phasefinale == ". $numPhaseFinale ." AND position_label == \"". $positionPerdant ."\"");
 	}else{
 		$db->exec("UPDATE positions_phasesfinales SET num_equipe = '' WHERE num_phasefinale == ". $numPhaseFinale ." AND position_label == \"". $positionVainqueur ."\"");
 		$db->exec("UPDATE positions_phasesfinales SET num_equipe = '' WHERE num_phasefinale == ". $numPhaseFinale ." AND position_label == \"". $positionPerdant ."\"");
@@ -738,6 +741,15 @@ function setNewPosition($numPhaseFinale,$position1, $position2, $positionVainque
 
 function calculPhaseFinale($numPhaseFinale, $nbEquipes){
 	
+	if($nbEquipes == 4){
+		
+		setNewPosition($numPhaseFinale,"A1","A2","B1","PF1");
+		setNewPosition($numPhaseFinale,"A3","A4","B2","PF2");
+
+		setNewPosition($numPhaseFinale,"B1","B2","C1","");
+		setNewPosition($numPhaseFinale,"PF1","PF2","PFV1","");
+
+	}
 
 	if($nbEquipes == 8){
 		

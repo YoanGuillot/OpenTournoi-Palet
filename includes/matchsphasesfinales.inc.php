@@ -47,16 +47,16 @@ if($nbEquipes == 4){
 
 
 	$listeMatchsDemis = listeEquipesPhaseFinale($numPhaseFinale,"Demi-finales","A");
-	$listeMatchsF = listeEquipesPhaseFinale($numPhaseFinale,"Finales","B");
-	$listeMatchsPF = listeEquipesPhaseFinale($numPhaseFinale,"Finales","PF");
+	$listeMatchsF = listeEquipesPhaseFinale($numPhaseFinale,"Finale","B");
+	$listeMatchsPF = listeEquipesPhaseFinale($numPhaseFinale,"Petite finale","PF");
 
 	$tableauDemis = constructTableMatchsPF($idTournoi, $aLabel, $listeMatchsDemis, $numPlaque, $numPhaseFinale);
 	$tableauF = constructTableMatchsPF($idTournoi, $bLabel, $listeMatchsF, $numPlaque, $numPhaseFinale);
 	$tableauPF = constructTableMatchsPF($idTournoi, $pfLabel, $listeMatchsPF, $numPlaque, $numPhaseFinale);
 
-	echo $listeMatchsDemis;
-	echo $listeMatchsF;
-	echo $listeMatchsPF;
+	echo $tableauDemis;
+	echo $tableauF;
+	echo $tableauPF;
 
 }
 //Pour 8 equipes
@@ -84,12 +84,14 @@ if($nbEquipes == 8){
 	$tableauCLDemis = constructTableMatchsPF($idTournoi, $clLabel, $listeMatchsCLDemis, $numPlaque, $numPhaseFinale);
 	$tableauCLF = constructTableMatchsPF($idTournoi, $cl2Label, $listeMatchsCLF, $numPlaque, $numPhaseFinale);
 
-	echo $listeMatchsQuarts;
-	echo $listeMatchsDemis;
-	echo $listeMatchsF;
-	echo $listeMatchsPF;
-	echo $listeMatchsCLDemis;
-	echo $listeMatchsCLF;
+	echo $tableauQuarts;
+	echo $tableauDemis;
+	echo $tableauF;
+	
+	echo $tableauPF;
+	echo "<div class=\"uk-width-1-1 uk-width-1-1@l uk-width-1-1@xl\"><hr /></div>";
+	echo $tableauCLDemis;
+	echo $tableauCLF;
 }	
 
 

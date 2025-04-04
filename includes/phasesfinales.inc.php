@@ -35,7 +35,7 @@ if ($infosTournoi['statut_inscriptions'] == 'ferme' && $infosTournoi['statut_qua
 		
 			<div style=\"display:inline-block;width:100%;text-align:left;\">
 				<form method=\"POST\" action=\"index.php?idtournoi=$idTournoi&page=phasesfinales\">
-				Libellé : <input type=\"text\" name=\"labelPhaseFinale\" />
+				Libellé : <input type=\"text\" name=\"labelPhaseFinale\" required />
 				<input type=\"hidden\" name=\"creerPhaseFinale\" value=\"1\" />
 				<input type=\"hidden\" name=\"numPhaseFinale\" value=\"". $numPhaseFinale+1 ."\" />
 				Nombre de joueurs : <select class=\"uk-select uk-form-width-small\" name=\"nbEquipes\"><option value=\"4\">4</option><option value=\"8\">8</option><option value=\"16\">16</option><option value=\"32\" disabled>32(indisponible)</option><option value=\"64\" disabled>64(indisponible)</option><option value=\"128\" disabled>128(indisponible)</option></select>

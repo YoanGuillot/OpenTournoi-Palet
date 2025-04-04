@@ -846,6 +846,9 @@ function tiragePhaseQualif($nbEquipes, $numPhase)
 {
 	if ($nbEquipes&1){
 	$nbEquipes = $nbEquipes + 1;
+		$isPair = false;
+	}else{
+		$isPair = true;
 	}
 
 	$tableauEquipes = range(1,$nbEquipes);
@@ -869,10 +872,10 @@ function tiragePhaseQualif($nbEquipes, $numPhase)
 			
 		$equipe1 = $premierTableauEquipes[$indexTable];
 		$equipe2 = $secondTableauEquipes[$indexTable];
-		if($equipe1 == $nbEquipes){
+		if($equipe1 == $nbEquipes && $isPair == false){
 			$equipe1 = 'EXEMPT';
 		}
-		if($equipe2 == $nbEquipes){
+		if($equipe2 == $nbEquipes && $isPair == false){
 			$equipe2 = 'EXEMPT';
 		}
 		

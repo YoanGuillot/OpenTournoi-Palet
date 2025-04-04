@@ -255,7 +255,7 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 		$score2 = $row['score2'];
 		$equipe1 = $row['equipe1'];
 		$equipe2 = $row['equipe2'];
-		$indexSelect = 0;
+		$indexSelect = -1;
 		$selectOptions1 = "<option value=\"\"></option>";
 		$selectOptions2 = "<option value=\"\"></option>";
 		
@@ -281,12 +281,13 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 
 		while ($indexSelect < $ptsMatch){
 			$realValue = $indexSelect + 1;
-			if($realValue == $score1){
+		
+			if($realValue === $score1){
 				$selected1 = "selected";
 			}else{
 				$selected1 = "";
 			}
-				if($realValue == $score2){
+				if($realValue === $score2){
 				$selected2 = "selected";
 			}else{
 				$selected2 = "";
@@ -388,16 +389,21 @@ function statsEquipe($numEquipe)
 	if(!empty($listeMatchsEquipe)){
 		foreach ($listeMatchsEquipe as $row){
 			if ($numEquipe == $row['equipe1']){
-				$ptsPour = $ptsPour + $row['score1'];
-				$ptsContre = $ptsContre + $row['score2'];
-				if ($row['score1'] > $row['score2']){
-					$nbVictoires = $nbVictoires + 1;
+				if(!empty($score1)){
+					$ptsPour = $ptsPour + $row['score1'];
+					$ptsContre = $ptsContre + $row['score2'];
+				
+					if ($row['score1'] > $row['score2']){
+						$nbVictoires = $nbVictoires + 1;
+					}
 				}
 			}else{
-				$ptsPour = $ptsPour + $row['score2'];
-				$ptsContre = $ptsContre + $row['score1'];
-				if ($row['score1'] < $row['score2']){
-					$nbVictoires = $nbVictoires + 1;
+				if(!empty($score2)){
+					$ptsPour = $ptsPour + $row['score2'];
+					$ptsContre = $ptsContre + $row['score1'];
+					if ($row['score1'] < $row['score2']){
+						$nbVictoires = $nbVictoires + 1;
+					}
 				}
 			}
 		}

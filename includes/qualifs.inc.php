@@ -153,18 +153,18 @@ if ($infosPhase == ''){
 
 			$equipe1 = $row['equipe1'];
 			$equipe2 = $row['equipe2'];
-			$indexSelect = 0;
-			$selectOptions1 = "<option value=\"0\">0</option>";
-			$selectOptions2 = "<option value=\"0\">0</option>";
+			$indexSelect = -1;
+			$selectOptions1 = "<option value=\"\"></option>";
+			$selectOptions2 = "<option value=\"\"></option>";
 			
 			while ($indexSelect < $infosTournoi['pts_qualifs']){
 				$realValue = $indexSelect + 1;
-				if($realValue == $score1){
+				if($realValue === $score1){
 					$selected1 = "selected";
 				}else{
 					$selected1 = "";
 				}
-					if($realValue == $score2){
+					if($realValue === $score2){
 					$selected2 = "selected";
 				}else{
 					$selected2 = "";

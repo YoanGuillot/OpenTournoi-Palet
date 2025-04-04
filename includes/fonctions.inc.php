@@ -385,11 +385,11 @@ function statsEquipe($numEquipe)
 	$ptsContre = 0;
 	$nbVictoires = 0;
 	
-	
+	//echo $row['score1']."-".$row['score2'];
 	if(!empty($listeMatchsEquipe)){
 		foreach ($listeMatchsEquipe as $row){
 			if ($numEquipe == $row['equipe1']){
-				if(!empty($score1)){
+				if(is_numeric($row['score1'])){
 					$ptsPour = $ptsPour + $row['score1'];
 					$ptsContre = $ptsContre + $row['score2'];
 				
@@ -398,7 +398,7 @@ function statsEquipe($numEquipe)
 					}
 				}
 			}else{
-				if(!empty($score2)){
+				if(is_numeric($row['score2'])){
 					$ptsPour = $ptsPour + $row['score2'];
 					$ptsContre = $ptsContre + $row['score1'];
 					if ($row['score1'] < $row['score2']){
@@ -733,10 +733,10 @@ function setNewPosition($numPhaseFinale,$position1, $position2, $positionVainque
 
 
 // DEBUGG                     
-//echo $score1."-";
-//echo $score2." ";
+echo $score1."-";
+echo $score2." ";
 
-	if(!empty($score1) && !empty($score2)){
+	if(is_numeric($score1) && is_numeric($score2)){
 		$db->exec("UPDATE positions_phasesfinales SET num_equipe = '$vainqueur' WHERE num_phasefinale == ". $numPhaseFinale ." AND position_label == \"". $positionVainqueur ."\"");
 		$db->exec("UPDATE positions_phasesfinales SET num_equipe = '$perdant' WHERE num_phasefinale == ". $numPhaseFinale ." AND position_label == \"". $positionPerdant ."\"");
 	}else{

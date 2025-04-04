@@ -733,8 +733,8 @@ function setNewPosition($numPhaseFinale,$position1, $position2, $positionVainque
 
 
 // DEBUGG                     
-echo $score1."-";
-echo $score2." ";
+//echo $score1."-";
+//echo $score2." ";
 
 	if(is_numeric($score1) && is_numeric($score2)){
 		$db->exec("UPDATE positions_phasesfinales SET num_equipe = '$vainqueur' WHERE num_phasefinale == ". $numPhaseFinale ." AND position_label == \"". $positionVainqueur ."\"");

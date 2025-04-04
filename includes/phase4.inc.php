@@ -136,7 +136,8 @@ calculPhaseFinale($numPhaseFinale, 4);
 							</td>
 							<td class="bracket-i">  
 							</td>
-							<td>  
+							<td>
+							<div class="bracket-position">1</div>  
 							</td>
 						</tr>
 						<tr>

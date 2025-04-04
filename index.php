@@ -22,6 +22,8 @@ date_default_timezone_set("Europe/Paris");
 <body>
 <?php
 
+
+
 //print_r($_POST);
 //die();
 ini_set("default_charset", 'utf-8');
@@ -37,6 +39,9 @@ if (isset($_GET['idtournoi'])){
 		$page = "gestion";
 	}
 }else{
+	if(!file_exists('includes/conf/tournois.db')){
+		copy('./includes/conf/models/tournois.db', './includes/conf/tournois.db');
+	}
 	//Connexion à la base de donnée
 	$db = new SQLite3('includes/conf/tournois.db');
 

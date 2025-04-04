@@ -13,6 +13,14 @@ a.disabled {
 	opacity: 0.6;
 }
 
+button, select{
+    border-radius: 5px !important;
+}
+
+.uk-card{
+    border-radius: 5px;
+    border: 1px solid #dddddd;
+}
 /*** PHASES FINALES ***/
 
 #phase-container { 

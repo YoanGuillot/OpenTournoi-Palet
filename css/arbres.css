@@ -47,7 +47,7 @@
         float: left;
     }
 
-    .arbre .bracket-edit img{
+    .arbre .bracket-edit img, .arbre .bracket-edit-r img{
         height: 25px;
         padding-top: 2px;
     }
@@ -70,6 +70,7 @@
         width: 100px;
         line-height:30px;
         vertical-align: bottom;
+        border-radius: 5px;
     }
     
     .arbre .bracket-equipe-score {
@@ -80,6 +81,7 @@
         width: 30px;
         line-height:30px;
         vertical-align: bottom;
+        border-radius: 5px;
     }
 
     .arbre .bracket-vainqueur{

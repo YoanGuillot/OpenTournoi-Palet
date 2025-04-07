@@ -37,7 +37,7 @@ if($infosTournoi['max_equipes'] != 0 && $nbEquipes >= $infosTournoi['max_equipes
 					<table class="uk-table uk-table-striped">
 						<thead>
 							<tr>
-								<th style="width: 20%">Nom équipe</th>
+								<th style="width: 20%">Nom équipe <span style="color:red">*</span></th>
 								<th style="width: 20%">Joueur 1</th>
 								<th style="width: 20%">Joueur 2</th>
 								<th style="width: 20%">Joueur 3</th>
@@ -52,9 +52,11 @@ if($infosTournoi['max_equipes'] != 0 && $nbEquipes >= $infosTournoi['max_equipes
 							<td><button class="uk-button uk-button-primary uk-margin-left" <?php echo $disableCreerButton; ?>>Créer</button></td>
 					<?php } ?>
 					</table>	
-					</form>						
+					</form>	
+					<p><span style="color:red">* </span> champs obligatoires</p>					
 				</div>
 			</div>
+			
 		</div>
 	</div>
 	<!-- /panel -->

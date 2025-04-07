@@ -17,7 +17,7 @@ defined('_LPDT') or die;
 				<div class="uk-grid uk-grid-large">
 					<div class="uk-panel"><a href="index.php?idtournoi=<?php echo $idTournoi; ?>&page=parametres" class="uk-icon-link" title="Paramètres" data-uk-tooltip data-uk-icon="icon: settings;ratio: 3"></a><br />Paramètres</div>
 					<div class="uk-panel"><a href="index.php?idtournoi=<?php echo $idTournoi; ?>&page=equipes" class="uk-icon-link" title="Equipes" data-uk-tooltip data-uk-icon="icon: users;ratio: 3"></a><br />Equipes</div>
-					<div class="uk-panel"><a href="index.php?idtournoi=<?php echo $idTournoi; ?>&page=impressions" class="uk-icon-link" title="Impressions" data-uk-tooltip data-uk-icon="icon: print;ratio: 3"></a><br />Impressions</div>
+					<!--<div class="uk-panel"><a href="index.php?idtournoi=<?php echo $idTournoi; ?>&page=impressions" class="uk-icon-link" title="Impressions" data-uk-tooltip data-uk-icon="icon: print;ratio: 3"></a><br />Impressions</div>-->
 				</div>
 			</div>
 		</div>

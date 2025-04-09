@@ -27,7 +27,7 @@
   overflow-x: hidden;
   overflow-y: auto;
   background-color: #222A30;
-  width: 240px;
+  width: 200px;
   z-index:2;
   transition: height 0.3s ease-out;
 }
@@ -94,7 +94,7 @@
    right: 0;
    z-index: 3;
    bottom: 0;
-   width: 240px;
+   width: 200px;
 }
 .left-logo {
 	/* navbar height */
@@ -128,11 +128,11 @@
 @media screen and (min-width: 960px){
 	#content {
 		/* equal to left-col width */
-		margin-left: 240px;
+		margin-left: 200px;
 	}
 	#top-head {
 		/* equal to left-col width */
-		left:240px;
+		left:200px;
 	}
 }
 

@@ -846,6 +846,56 @@ function calculPhaseFinale($numPhaseFinale, $nbEquipes){
 		setNewPosition($numPhaseFinale,"CHCLZ1","CHCLZ2","CHCLY1","");
 
 	}
+	
+	if($nbEquipes == 32){
+		setNewPosition($numPhaseFinale,"A1","A2","B1","CHA1");
+		setNewPosition($numPhaseFinale,"A3","A4","B2","CHA2");
+		setNewPosition($numPhaseFinale,"A5","A6","B3","CHA3");
+		setNewPosition($numPhaseFinale,"A7","A8","B4","CHA4");
+		setNewPosition($numPhaseFinale,"A9","A10","B5","CHA5");
+		setNewPosition($numPhaseFinale,"A11","A12","B6","CHA6");
+		setNewPosition($numPhaseFinale,"A13","A14","B7","CHA7");
+		setNewPosition($numPhaseFinale,"A15","A16","B8","CHA8");
+		setNewPosition($numPhaseFinale,"A17","A18","B9","CHA9");
+		setNewPosition($numPhaseFinale,"A19","A20","B10","CHA10");
+		setNewPosition($numPhaseFinale,"A21","A22","B11","CHA11");
+		setNewPosition($numPhaseFinale,"A23","A24","B12","CHA12");
+		setNewPosition($numPhaseFinale,"A25","A26","B13","CHA13");
+		setNewPosition($numPhaseFinale,"A27","A28","B14","CHA14");
+		setNewPosition($numPhaseFinale,"A29","A30","B15","CHA15");
+		setNewPosition($numPhaseFinale,"A31","A32","B16","CHA16");
+		
+		
+		setNewPosition($numPhaseFinale,"D1","D2","E1","PF1");
+		setNewPosition($numPhaseFinale,"D3","D4","E2","PF2");
+
+		
+		setNewPosition($numPhaseFinale,"E1","E2","F1","");
+		setNewPosition($numPhaseFinale,"PF1","PF2","PFV1","");
+
+		setNewPosition($numPhaseFinale,"CHA1","CHA2","CHB1","");
+		setNewPosition($numPhaseFinale,"CHA3","CHA4","CHB2","");
+		setNewPosition($numPhaseFinale,"CHA5","CHA6","CHB3","");
+		setNewPosition($numPhaseFinale,"CHA7","CHA8","CHB4","");
+		setNewPosition($numPhaseFinale,"CHA9","CHA10","CHB5","");
+		setNewPosition($numPhaseFinale,"CHA11","CHA12","CHB6","");
+		setNewPosition($numPhaseFinale,"CHA13","CHA14","CHB7","");
+		setNewPosition($numPhaseFinale,"CHA15","CHA16","CHB8","");
+
+		setNewPosition($numPhaseFinale,"CHB1","CHB2","CHC1","");
+		setNewPosition($numPhaseFinale,"CHB3","CHB4","CHC2","");
+		setNewPosition($numPhaseFinale,"CHB5","CHB6","CHC3","");
+		setNewPosition($numPhaseFinale,"CHB7","CHB8","CHC4","");
+
+		setNewPosition($numPhaseFinale,"CHC1","CHC2","CHD1","CHPF1");
+		setNewPosition($numPhaseFinale,"CHC3","CHC4","CHD2","CHPF2");
+		
+		setNewPosition($numPhaseFinale,"CHD1","CHD2","CHE1","");
+
+
+		setNewPosition($numPhaseFinale,"CHPF1","CHPF2","CHPFV1","");
+
+	}
 }
 
 function tiragePhaseQualif($nbEquipes, $numPhase)

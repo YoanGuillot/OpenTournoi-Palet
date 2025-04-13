@@ -105,7 +105,7 @@ if($nbEquipes == 16){
 	$CH4Label = "Challenge Quarts de finale";
 	$CH2Label = "Challenge Demi-finales";
 	$CHpfLabel = "Challenge Petite finale";
-	$CHfLabel = "Challenge finale";
+	$CHfLabel = "Challenge Finale";
 	$clLabel = "Classements 1er Tour";
 	$cl2Label = "Classements 2ème Tour";
 	$CHclLabel = "Challenge Classements 1er Tour";
@@ -184,23 +184,23 @@ if($nbEquipes == 32){
 	$CH4Label = "Challenge Quarts de finale";
 	$CH2Label = "Challenge Demi-finales";
 	$CHpfLabel = "Challenge Petite finale";
-	$CHfLabel = "Challenge finale";
+	$CHfLabel = "Challenge Finale";
 	
 
 
 	$listeMatchs16 = listeEquipesPhaseFinale($numPhaseFinale,"16èmes de finale","A");
 	$listeMatchs8 = listeEquipesPhaseFinale($numPhaseFinale,"8èmes de finale","B");
-	$listeMatchsQuarts = listeEquipesPhaseFinale($numPhaseFinale,"Quarts de finales","C");
+	$listeMatchsQuarts = listeEquipesPhaseFinale($numPhaseFinale,"Quarts de finale","C");
 	$listeMatchsDemis = listeEquipesPhaseFinale($numPhaseFinale,"Demi-finales","D");
 	$listeMatchsF = listeEquipesPhaseFinale($numPhaseFinale,"Finale","E");
-	$listeMatchsPF = listeEquipesPhaseFinale($numPhaseFinale,"Finale","PF");
+	$listeMatchsPF = listeEquipesPhaseFinale($numPhaseFinale,"Petite finale","PF");
 
 
-	$listeMatchsCH8 = listeEquipesPhaseFinale($numPhaseFinale,"8èmes de finale","CHA");
-	$listeMatchsCHQuarts = listeEquipesPhaseFinale($numPhaseFinale,"Quarts de finale","CHA");
-	$listeMatchsCHDemis = listeEquipesPhaseFinale($numPhaseFinale,"Demi-finales","CHB");
-	$listeMatchsCHF = listeEquipesPhaseFinale($numPhaseFinale,"Finales","CHC");
-	$listeMatchsCHPF = listeEquipesPhaseFinale($numPhaseFinale,"Finale","CHPF");
+	$listeMatchsCH8 = listeEquipesPhaseFinale($numPhaseFinale,"Challenge 8èmes de finale","CHA");
+	$listeMatchsCHQuarts = listeEquipesPhaseFinale($numPhaseFinale,"Challenge Quarts de finale","CHB");
+	$listeMatchsCHDemis = listeEquipesPhaseFinale($numPhaseFinale,"Challenge Demi-finales","CHC");
+	$listeMatchsCHF = listeEquipesPhaseFinale($numPhaseFinale,"Challenge Finale","CHD");
+	$listeMatchsCHPF = listeEquipesPhaseFinale($numPhaseFinale,"Challenge Petite finale","CHPF");
 
 
 
@@ -210,8 +210,8 @@ if($nbEquipes == 32){
 	$tableauQuarts = constructTableMatchsPF($idTournoi, $cLabel, $listeMatchsQuarts, $numPlaque, $numPhaseFinale);
 	$tableauDemis = constructTableMatchsPF($idTournoi, $dLabel, $listeMatchsDemis, $numPlaque, $numPhaseFinale);
 	$tableauF = constructTableMatchsPF($idTournoi, $eLabel, $listeMatchsF, $numPlaque, $numPhaseFinale);
-	$tableauPF = constructTableMatchsPF($idTournoi, $pfLabel, $listeMatchsPF, $numPlaque, $numPhaseFinale);
-	
+	$tableauPF = constructTableMatchsPF($idTournoi, $pfLabel, $listeMatchsPF, $numPlaque + 1, $numPhaseFinale);
+
 	$tableauCH8 = constructTableMatchsPF($idTournoi, $CH8Label, $listeMatchsCH8, $numPlaque, $numPhaseFinale);
 	$tableauCHQuarts = constructTableMatchsPF($idTournoi, $CH4Label, $listeMatchsCHQuarts, $numPlaque, $numPhaseFinale);
 	$tableauCHDemis = constructTableMatchsPF($idTournoi, $CH2Label, $listeMatchsCHDemis, $numPlaque, $numPhaseFinale);

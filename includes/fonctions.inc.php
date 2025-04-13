@@ -585,7 +585,7 @@ function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 			$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label, position_niveau) VALUES ('". $numPhaseFinale ."', 'E". $indexEquipe ."', '". $niveau ."')");
 
 			if($nombreEquipes > 8){
-				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label, position_niveau) VALUES ('". $numPhaseFinale ."', 'CHD". $indexEquipe ."', 'Chalenge ". $niveau ."')");
+				$db->exec("INSERT INTO positions_phasesfinales (num_phasefinale, position_label, position_niveau) VALUES ('". $numPhaseFinale ."', 'CHD". $indexEquipe ."', 'Challenge ". $niveau ."')");
 			}
 
 			$indexEquipe++;

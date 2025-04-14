@@ -864,8 +864,21 @@ function calculPhaseFinale($numPhaseFinale, $nbEquipes){
 		setNewPosition($numPhaseFinale,"A27","A28","B14","CHA14");
 		setNewPosition($numPhaseFinale,"A29","A30","B15","CHA15");
 		setNewPosition($numPhaseFinale,"A31","A32","B16","CHA16");
-		
-		
+
+		setNewPosition($numPhaseFinale,"B1","B2","C1","");
+		setNewPosition($numPhaseFinale,"B3","B4","C2","");
+		setNewPosition($numPhaseFinale,"B5","B6","C3","");
+		setNewPosition($numPhaseFinale,"B7","B8","C4","");
+		setNewPosition($numPhaseFinale,"B9","B10","C5","");
+		setNewPosition($numPhaseFinale,"B11","B12","C6","");
+		setNewPosition($numPhaseFinale,"B13","B14","C7","");
+		setNewPosition($numPhaseFinale,"B15","B16","C8","");
+
+		setNewPosition($numPhaseFinale,"C1","C2","D1","");
+		setNewPosition($numPhaseFinale,"C3","C4","D2","");
+		setNewPosition($numPhaseFinale,"C5","C6","D3","");
+		setNewPosition($numPhaseFinale,"C7","C8","D4","");
+				
 		setNewPosition($numPhaseFinale,"D1","D2","E1","PF1");
 		setNewPosition($numPhaseFinale,"D3","D4","E2","PF2");
 

@@ -38,9 +38,9 @@ if ($infosTournoi['statut_inscriptions'] == 'ferme' && $infosTournoi['statut_qua
 	
 }
 
-echo "<p class='uk-text-center'>$messageQualif</p>";
+echo "<p class='uk-text-center donotprint'>$messageQualif</p>";
 
-		echo "<div style=\"display:block;width: 100%\">		
+echo "<div class =\"donotprint\" style=\"width: 100%\">		
 		
 			<div style=\"display:inline-block;width:49%;text-align:left;\">
 				<form method=\"POST\" action=\"index.php?idtournoi=$idTournoi&page=qualifs\">
@@ -56,7 +56,7 @@ echo "<p class='uk-text-center'>$messageQualif</p>";
 				<button type=\"submit\" class=\"uk-button uk-button-primary\">Clôturer les phases qualificatives</button>
 				</form>
 			</div>
-		</div><hr />";
+		</div><hr class=\"donotprint\" />";
 ?>
 
 <div class="uk-grid uk-grid-medium" data-uk-grid uk-sortable="handle: .sortable-icon">
@@ -96,7 +96,7 @@ if ($infosPhase == ''){
 
 		if ($countPhase == $numPhase){		
 			//$trashButton = "<a href=\"index.php?idtournoi=". $idTournoi ."&action=supprphasequalif&phasequalif=". $numPhase ."\" class=\"uk-icon-link trash-icon\" title=\"Supprimer\" data-uk-tooltip data-uk-icon=\"icon: trash\"></a>";
-			$trashButton = "<a style=\"margin-left: 40px;color: red\" href=\"\" onclick=\"supprPhaseQualif(". $idTournoi .",". $numPhase .")\" uk-icon=\"icon: trash; ratio: 1\" uk-toggle=\"target: #supprPhaseQualif\"></a>";
+			$trashButton = "<a class=\"donotprint\" style=\"margin-left: 40px;color: red\" href=\"\" onclick=\"supprPhaseQualif(". $idTournoi .",". $numPhase .")\" uk-icon=\"icon: trash; ratio: 1\" uk-toggle=\"target: #supprPhaseQualif\"></a>";
 
 		}else{
 			$trashButton = " ";
@@ -228,8 +228,8 @@ if ($infosPhase == ''){
 								<div class=\"uk-grid uk-grid-small\">
 									<div style=\"display:inline-bock;\" class=\"uk-width-auto\"><h4>Qualifs - Tour " .$countPhase ." en ". $infosTournoi['pts_qualifs'] ." Points</h4></div><div style=\"margin-top: 8px;margin-left: 20px;display:inline-block;border-radius: 50%; height: 15px;background-color:$allPlayed ;\"></div>
 									<div class=\"uk-width-expand uk-text-right panel-icons\">
-										<a style=\"color: $lockedColor\" href=\"index.php?page=qualifs&idtournoi=". $idTournoi ."&action=". $lockAction ."phasequalif&numphase=$countPhase\" class=\"uk-margin-medium-right\"  uk-icon=\"$lockedIcon\"></a>
-										<a onclick=\"printDiv('phase$countPhase');\" uk-icon=\"print\"></a>". $trashButton ."
+										<a style=\"color: $lockedColor\" href=\"index.php?page=qualifs&idtournoi=". $idTournoi ."&action=". $lockAction ."phasequalif&numphase=$countPhase\" class=\"uk-margin-medium-right donotprint\"  uk-icon=\"$lockedIcon\"></a>
+										<a class=\"donotprint\" onclick=\"window.print();\" uk-icon=\"print\"></a>". $trashButton ."
 									</div>
 								</div>
 							</div>

@@ -149,6 +149,8 @@ function classementQualifs()
 
 function listeEquipes()
 {
+	echo "ouch";
+	die();
 	global $db;
 	$resultats = $db->query('SELECT * FROM equipes');
 	while ($row = $resultats->fetchArray(1)) {

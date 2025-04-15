@@ -17,6 +17,8 @@ date_default_timezone_set("Europe/Paris");
 	<script src="js/uikit-icons.min.js"></script>
 	<script src="js/fonctions.js"></script>
 
+	
+
 </head>
 
 <body>

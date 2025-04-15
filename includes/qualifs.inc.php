@@ -116,7 +116,7 @@ if ($infosPhase == ''){
 							</tr>";
 							
 							
-		$tableauMatchsPrint = "<table border=\"1px\" cellspacing=\"0\" cellpadding=\"3\" style=\"width: 100%\">
+		$tableauMatchsPrint = "<table style=\"text-align:center\" border=\"1px\" cellspacing=\"0\" cellpadding=\"3\" style=\"width: 100%\">
 							<tr>
 								<th style=\"width: 10%\" class=\"uk-text-center uk-text-bolder\">PLAQUE</th>
 								<th style=\"width: 18%\" class=\"uk-text-center uk-text-bolder\">EQUIPE 1</th>
@@ -229,7 +229,7 @@ if ($infosPhase == ''){
 									<div style=\"display:inline-bock;\" class=\"uk-width-auto\"><h4>Qualifs - Tour " .$countPhase ." en ". $infosTournoi['pts_qualifs'] ." Points</h4></div><div style=\"margin-top: 8px;margin-left: 20px;display:inline-block;border-radius: 50%; height: 15px;background-color:$allPlayed ;\"></div>
 									<div class=\"uk-width-expand uk-text-right panel-icons\">
 										<a style=\"color: $lockedColor\" href=\"index.php?page=qualifs&idtournoi=". $idTournoi ."&action=". $lockAction ."phasequalif&numphase=$countPhase\" class=\"uk-margin-medium-right donotprint\"  uk-icon=\"$lockedIcon\"></a>
-										<a class=\"donotprint\" onclick=\"window.print();\" uk-icon=\"print\"></a>". $trashButton ."
+										<a class=\"donotprint\" onclick=\"printDiv('phase$countPhase');\" uk-icon=\"print\"></a>". $trashButton ."
 									</div>
 								</div>
 							</div>

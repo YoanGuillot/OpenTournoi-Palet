@@ -2,18 +2,15 @@
 require __DIR__.'/vendor/autoload.php';
 use Spipu\Html2Pdf\Html2Pdf;
 
-function listeEquipes()
+function classementQualifs()
 {
 	global $db;
-	$resultats = $db->query('SELECT * FROM equipes');
+	$resultats = $db->query('SELECT * FROM equipes ORDER BY nb_victoires DESC, pts_pour DESC, pts_diff DESC, bonus_qualifs DESC');
 	while ($row = $resultats->fetchArray(1)) {
-		$listeEquipes[] = $row;
+		$classementQualifs[] = $row;
 	}
-	if(!empty($listeEquipes)){
-		return $listeEquipes;
-	}else{
-		$listeEquipes = "";
-		return $listeEquipes;
+	if(!empty($classementQualifs)){
+		return $classementQualifs;
 	}
 }
 
@@ -25,18 +22,22 @@ if(isset($_GET['idtournoi'])){
     //Connexion à la base de donnée
 	$db = new SQLite3('includes/conf/' .$idTournoi. '.db');
 
-    $listeEquipes = listeEquipes();
+    $classementQualifs = classementQualifs($idTournoi);
     $contentMain = "";
-    if(!empty($listeEquipes)){
-		foreach($listeEquipes as $row) {
+    $placeEquipe = 1;
+    if(!empty($classementQualifs)){
+		foreach($classementQualifs as $row) {
 			
 			$contentMain .= "<tr>
+					    <td>$placeEquipe</td>
 					    <td>". $row['num_equipe'] ."</td>
 						<td>". $row['nom_equipe'] ."</td>
-						<td>". $row['joueur1'] ."</td>
-						<td>". $row['joueur2'] ."</td>
-						<td>". $row['joueur3'] ."</td>
+						<td>". $row['nb_victoires'] ."</td>
+						<td>". $row['pts_pour'] ."</td>
+						<td>". $row['pts_contre'] ."</td>
+						<td>". $row['pts_diff'] ."</td>
 				    </tr>";
+            $placeEquipe ++;
 		}
 	}
 
@@ -54,20 +55,22 @@ if(isset($_GET['idtournoi'])){
                         border: 1px solid #000000;
                         margin: auto;
                         border-collapse: collapse;
+                        text-align:center;
                     }
                     td, th{
                         padding: 10px;
                         border: 1px solid #000000;
                     }
                     th{
-                        width: 90px;
+                        width: 40px;
+                        background-color: #dddddd;
                     }
                 </style>
-                <h1>LISTE DES EQUIPES</h1>
+                <h1>CLASSEMENT QUALIFICATIONS</h1>
                 <br>
                 <table>
                     <tr>
-                        <th width=60>Numéro</th><th width=120>Nom de l'équipe</th><th>Joueur 1</th><th>Joueur 2</th><th>Joueur 3</th>
+                        <th>Place</th><th>Numéro</th><th width=160>Nom de l'équipe</th><th>Victoires</th><th>Pts P</th><th>Pts C</th><th>Diff</th>
                     </tr>";
 
     $contentFooter = "</table>";
@@ -77,7 +80,7 @@ if(isset($_GET['idtournoi'])){
 
 
     $html2pdf->writeHTML($content);
-    $html2pdf->output('Equipes.pdf', 'D');
+    $html2pdf->output('classement-qualifs.pdf', 'D');
 }else{
     echo "ID tournoi non défini ! ";
 }

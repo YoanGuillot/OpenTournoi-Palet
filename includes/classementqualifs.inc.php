@@ -16,7 +16,7 @@ defined('_LPDT') or die;
 						<form id="formPrint-classementQualifs" method="POST">
 							<input type="hidden" name="action" value="impression"></input>
 							<input type="hidden" name="element" value="classementQualifs"></input>
-							<a onclick="window.print();" type="submit" class="uk-icon-link donotprint" title="Imprimer" data-uk-tooltip data-uk-icon="icon: print"></a>
+							<a class="visible-inline uk-margin-right" href="PDF-classement-qualifs.php?idtournoi=<?php echo $idTournoi; ?>" uk-icon="print"></a>
 						</form>
 					
 					

@@ -229,7 +229,7 @@ if ($infosPhase == ''){
 									<div style=\"display:inline-bock;\" class=\"uk-width-auto\"><h4>Qualifs - Tour " .$countPhase ." en ". $infosTournoi['pts_qualifs'] ." Points</h4></div><div style=\"margin-top: 8px;margin-left: 20px;display:inline-block;border-radius: 50%; height: 15px;background-color:$allPlayed ;\"></div>
 									<div class=\"uk-width-expand uk-text-right panel-icons\">
 										<a style=\"color: $lockedColor\" href=\"index.php?page=qualifs&idtournoi=". $idTournoi ."&action=". $lockAction ."phasequalif&numphase=$countPhase\" class=\"uk-margin-medium-right donotprint\"  uk-icon=\"$lockedIcon\"></a>
-										<a class=\"donotprint\" onclick=\"printDiv('phase$countPhase');\" uk-icon=\"print\"></a>". $trashButton ."
+										<a href=\"PDF-phase-qualif.php?idtournoi=$idTournoi&numphase=$countPhase&ptsqualifs=". $infosTournoi['pts_qualifs'] ."\" uk-icon=\"print\"></a>". $trashButton ."
 									</div>
 								</div>
 							</div>

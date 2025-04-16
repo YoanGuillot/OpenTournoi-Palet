@@ -67,6 +67,7 @@ if($infosTournoi['max_equipes'] != 0 && $nbEquipes >= $infosTournoi['max_equipes
 				<div class="uk-grid uk-grid-small">
 					<div class="uk-width-auto"><h4>Equipes inscrites : <?php echo $nbEquipes; ?> </h4></div>
 					<div class="uk-width-expand uk-text-right panel-icons">
+						<a class="visible-inline uk-margin-right" href="PDF-equipes.php?idtournoi=<?php echo $idTournoi; ?>" uk-icon="print"></a>
 						
 						<button class="uk-button importBouton">Importer<span uk-icon="triangle-down"></span></button>
 						<div uk-dropdown="pos: bottom-center;animation: slide-top; animate-out: true; duration: 700;">
@@ -74,7 +75,7 @@ if($infosTournoi['max_equipes'] != 0 && $nbEquipes >= $infosTournoi['max_equipes
 							<a class="uk-float-right" href="exportEquipes-csv.php?idtournoi=<?php echo $idTournoi; ?>"><img src="images/csv.png" /></a>
 						</div>
 						
-						<button class="uk-button">Exporter<span uk-icon="triangle-down"></span></button>
+						<button class="uk-button exportBouton">Exporter<span uk-icon="triangle-down"></span></button>
 						<div uk-dropdown="pos: bottom-center;animation: slide-top; animate-out: true; duration: 700;">
 							<a class="uk-float-left" href="exportEquipes-xlsx.php?idtournoi=<?php echo $idTournoi; ?>"><img src="images/xlsx.png" /></a>
 							<a class="uk-float-right" href="exportEquipes-csv.php?idtournoi=<?php echo $idTournoi; ?>"><img src="images/csv.png" /></a>
@@ -165,6 +166,7 @@ if ($infosTournoi['statut_inscriptions'] == "ferme"){
 		$('input').attr('disabled', true);
 		$('a.uk-icon').css("display", 'none');
 		$('.importBouton').css("display", 'none');
+		$('.visible-inline').css("display", 'inline-block');
 		
 		
 	});

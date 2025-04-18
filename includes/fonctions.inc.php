@@ -244,7 +244,7 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 
 	$indexPlayed = 0;
 	$nbMatchs = count($listeMatchs);
-	
+	$rawMatchsContent = "";
 
 
 	foreach ($listeMatchs as $row){
@@ -278,6 +278,8 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 			$allPlayed = "red";
 		}
 
+		
+
 
 		while ($indexSelect < $ptsMatch){
 			$realValue = $indexSelect + 1;
@@ -296,7 +298,7 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 			$selectOptions2 = $selectOptions2."<option value=\"". $realValue ."\" $selected2>". $realValue ."</option>";
 			$indexSelect = $indexSelect + 1;
 		}
-
+		
 		$tableauRow .= "<tr style=\"scroll-margin-top: 300px;\" id=\"matchid-$idMatch\" class=\"anchor\">
 			<td style=\"with:100%\">
 				<form method=\"POST\" id=\"formMatch-$idMatch\" action=\"index.php?idtournoi=$idTournoi&idphase=$idPhaseFinale&page=matchsphasesfinales#matchid-$idMatch\">
@@ -328,22 +330,24 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 				</form>
 			</td>
 		</tr>";
+		$rawMatchsContent .= "<tr><td>$numPlaque</td><td>$equipe1</td><td>$score1</td><td>$score2</td><td>$equipe2</td></tr>";
 
 		$numPlaque++;
 	}
 
-	
+	$rawMatchsHeader = "<div style='display:none' name='$label'><h1>$label - en $ptsMatch pts</h1><table><tr><th>Plaque</th><th width=150>Equipe 1</th><th>Score 1</th><th>Score 2</th><th width=150>Equipe 2</th></tr>";	
 	$tableauHead="<div class=\"uk-width-1-1 uk-width-1-2@l uk-width-1-2@xl\">
 		<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
 			<div class=\"uk-card-header\">
 				<div class=\"uk-grid uk-grid-small\">
 					<div class=\"uk-width-auto\"><h4>". $label ." en ". $ptsMatch ." Points</h4></div><div style=\"margin-top: 8px;margin-left: 20px;display:inline-block;border-radius: 50%; height: 15px;background-color:$allPlayed ;\"></div>
 					<div class=\"uk-width-expand uk-text-right panel-icons\"></div>
+					
 				</div>
 			</div>
 			<div class=\"uk-card-body\">
 				<div>
-					<table class=\"uk-table uk-table-striped\" style=\"width: 100%\">
+					<table niveau=\"$label\" class=\"uk-table uk-table-striped\" style=\"width: 100%\">
 						<tr>
 							<th style=\"box-sizing:border-box;width: 100%\">
 								<div style=\"box-sizing:border-box;display:inline-block;width: 10%\" class=\"uk-text-center uk-text-bolder\">PLAQUE</div>
@@ -361,10 +365,10 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 			</div>
 		</div>
 	</div>";
-
+	$rawMatchsFooter = "</table></div>";
 	
 
-	$tableau = $tableauHead.$tableauRow.$tableauFooter;
+	$tableau = $tableauHead.$tableauRow.$tableauFooter.$rawMatchsHeader.$rawMatchsContent.$rawMatchsFooter;
 	
 
 	return $tableau;

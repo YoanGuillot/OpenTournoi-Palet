@@ -306,7 +306,7 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 		}
 		
 		$tableauRow .= "<tr style=\"scroll-margin-top: 300px;\" id=\"matchid-$idMatch\" class=\"anchor\">
-			<td style=\"with:100%\">
+			<td style=\"width:100%\">
 				<form method=\"POST\" id=\"formMatch-$idMatch\" action=\"index.php?idtournoi=$idTournoi&idphase=$idPhaseFinale&page=matchsphasesfinales#matchid-$idMatch\">
 				<div style=\"display:inline-block;width: 10%\" class=\"uk-text-center\">$numPlaque</div>
 				<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">$equipe1</div>
@@ -336,7 +336,7 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 				</form>
 			</td>
 		</tr>";
-		$rawMatchsContent .= "<tr><td class='numplaque\"> $numPlaque</td><td>$equipe1</td><td>$score1</td><td>$score2</td><td>$equipe2</td></tr>";
+		$rawMatchsContent .= "<tr><td class=\"numplaque\"> $numPlaque</td><td>$equipe1</td><td>$score1</td><td>$score2</td><td>$equipe2</td></tr>";
 
 		$numPlaque++;
 	}

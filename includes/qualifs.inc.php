@@ -181,14 +181,14 @@ if ($infosPhase == ''){
 						<div style=\"display:inline-block;width: 10%\" class=\"uk-text-center\">$numPlaque</div>
 						<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">$equipe1</div>
 						<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center\">
-							<select id=\"match-$idMatch-side1\" onchange=\"activateLink('validMatch-$idMatch', 'side2', ".$infosTournoi['pts_qualifs'] .", $idMatch)\" name=\"score1\" class=\"uk-select\" $disableSelect >
+							<select id=\"match-$idMatch-side1\" onchange=\"activateLinkQualifs('validMatch-$idMatch', 'side2', ".$infosTournoi['pts_qualifs'] .", $idMatch)\" name=\"score1\" class=\"uk-select\" $disableSelect >
 								$selectOptions1
 							</select>
 						</div>
-						<div style=\"display:inline-block;width: 10%\" class=\"uk-text-center\"><a id=\"validMatch-$idMatch\" style=\"color: gray\" href=\"javascript:document.getElementById('formMatch-$idMatch').submit();\" uk-icon=\"check\" class=\"disabled\"></a></div>
+						<div style=\"display:inline-block;width: 10%\" class=\"uk-text-center\"><a id=\"validMatch-$idMatch\" style=\"color: gray\" uk-icon=\"check\" class=\"disabled\"></a></div>
 						
 						<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center\">
-							<select id=\"match-$idMatch-side2\" onchange=\"activateLink('validMatch-$idMatch', 'side1', ".$infosTournoi['pts_qualifs'] .", $idMatch)\" name=\"score2\" class=\"uk-select\" $disableSelect >
+							<select id=\"match-$idMatch-side2\" onchange=\"activateLinkQualifs('validMatch-$idMatch', 'side1', ".$infosTournoi['pts_qualifs'] .", $idMatch)\" name=\"score2\" class=\"uk-select\" $disableSelect >
 								$selectOptions2
 							</select>
 						</div>

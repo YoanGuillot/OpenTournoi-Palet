@@ -19,8 +19,61 @@ function activateLink(idLink, side, ptsV, idMatch){
 		$("#match-"+idMatch+"-"+side).val(ptsV);
 		$("#formMatch-"+idMatch).submit();
 	}
+}
 
+function activateLinkQualifs(idLink, side, ptsV, idMatch){
+    $("#"+idLink).css('visibility', 'hidden');
+    
+    var formid = $("#"+idLink).closest("form").attr("id");
+    var url = $("#"+formid).attr("action");
+    var idTournoi = $("#"+formid+" input[name='idTournoi']").val();
+    var idMatchQualif = $("#"+formid+" input[name='idMatchQualif']").val();
+    var action = $("#"+formid+" input[name='action']").val();
 
+    if (event.target.value != ptsV && event.target.value != ''){
+		$("#match-"+idMatch+"-"+side).val(ptsV);
+		//$("#formMatch-"+idMatch).submit();
+	
+        
+        var score1 = $("#match-"+idMatch+"-side1").val();
+        var score2 = $("#match-"+idMatch+"-side2").val();
+         
+    
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {"idTournoi": idTournoi, "idMatchQualif": idMatchQualif, "score1": score1, "score2": score2, "action" : action},
+            cache: false,
+            success: function(){
+                $("#"+idLink).addClass('disabled');
+                $("#"+idLink).css('color', 'gray');                 
+                $("#"+idLink).css('visibility', 'visible');                 
+            }
+        });
+    
+    
+    
+    }
+    var score1 = $("#match-"+idMatch+"-side1").val();
+    var score2 = $("#match-"+idMatch+"-side2").val();
+    //alert(score1+", "+score2);
+    if((score1 == '' ) && (score2 == '')){
+        $("#"+idLink).css('visibility', 'visible'); 
+        $("#"+idLink).removeClass('disabled');
+        $("#"+idLink).css('color', 'green');
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {"idTournoi": idTournoi, "idMatchQualif": idMatchQualif, "score1": score1, "score2": score2, "action" : action},
+            cache: false,
+            success: function(){
+                $("#"+idLink).addClass('disabled');
+                $("#"+idLink).css('color', 'gray');                 
+                $("#"+idLink).css('visibility', 'visible');                 
+            }
+        });
+    }
 }
 
 function print16(labelPhaseFinale) {
@@ -40,8 +93,15 @@ function print16(labelPhaseFinale) {
     if (elemsChallenge.length > 0) {
         challenge16 = elemsChallenge[0].innerHTML; // Prendre le premier élément
     }
+
+    if (challenge16 == ""){
+        var printTab16 = labelPhaseHtml+"<br>"+principale16+"</page>";
+    }else{
+        var printTab16 = labelPhaseHtml+"<br>"+principale16+"</page><page>"+challenge16+"</page>";
+    }
+
     
-    var printTab16 = labelPhaseHtml+"<br>"+principale16+"</page><page>"+challenge16+"</page>";
+    
   
 	document.getElementById('printDiv').innerHTML = "<form id='form-16' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='16'>16</input><input type='textarea' name='rawhtml' value='" + printTab16 + "'></form>";
 	document.forms["form-16"].submit();

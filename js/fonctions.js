@@ -24,6 +24,10 @@ function activateLink(idLink, side, ptsV, idMatch){
 function activateLinkQualifs(idLink, side, ptsV, idMatch){
     $("#"+idLink).css('visibility', 'hidden');
 
+
+    var tableid = $("#"+idLink).closest("table").attr("id");
+    var tableNbTR = $("#"+tableid+" tr").length;
+    var NbMatch = tableNbTR -1;
     var formid = $("#"+idLink).closest("form").attr("id");
     var url = $("#"+formid).attr("action");
     var idTournoi = $("#"+formid+" input[name='idTournoi']").val();

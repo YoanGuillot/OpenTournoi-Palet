@@ -103,7 +103,7 @@ if ($infosPhase == ''){
 		}
 		$listeMatchs = listeMatchsQualif($countPhase);
 		
-		$tableauMatchs = "<table class=\"uk-table uk-table-striped\" style=\"width: 100%\">
+		$tableauMatchs = "<table id=\"table-$numPhase\" class=\"uk-table uk-table-striped tableQualif\" style=\"width: 100%\">
 							<tr>
 								<th style=\"box-sizing:border-box;width: 100%\">
 									<div style=\"box-sizing:border-box;display:inline-block;width: 10%\" class=\"uk-text-center uk-text-bolder\">PLAQUE</div>
@@ -222,7 +222,7 @@ if ($infosPhase == ''){
 			$content="";
 		}
 	
-		$content = $content."<div class=\"uk-width-1-1 uk-width-1-2@l uk-width-1-2@xl\">
+		$content = $content."<div class=\"phaseQualif uk-width-1-1 uk-width-1-2@l uk-width-1-2@xl\">
 						<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
 							<div class=\"uk-card-header\">
 								<div class=\"uk-grid uk-grid-small\">

@@ -27,7 +27,15 @@ function activateLinkQualifs(idLink, side, ptsV, idMatch){
 
     var tableid = $("#"+idLink).closest("table").attr("id");
     var tableNbTR = $("#"+tableid+" tr").length;
-    var NbMatch = tableNbTR -1;
+    var tableNbGreen = $("#"+tableid+" .pointStatut.green").length;
+    var nbMatch = tableNbTR -1;
+    alert(nbMatch+", "+tableNbGreen);
+    if(nbMatch == tableNbGreen){
+        $("#"+tableid).closest(".bigPoint").css('background-color', 'green');
+    }else{
+        $("#"+tableid).closest(".bigPoint").css('background-color', 'red');
+    }
+
     var formid = $("#"+idLink).closest("form").attr("id");
     var url = $("#"+formid).attr("action");
     var idTournoi = $("#"+formid+" input[name='idTournoi']").val();
@@ -52,7 +60,9 @@ function activateLinkQualifs(idLink, side, ptsV, idMatch){
                 $("#"+idLink).addClass('disabled');
                 $("#"+idLink).css('color', 'gray');                 
                 $("#"+idLink).css('visibility', 'visible');                 
-                $("#"+formid+" .pointStatut").css('background-color', 'green');                 
+                $("#"+formid+" .pointStatut").css('background-color', 'green');
+                $("#"+formid+" .pointStatut").removeClass("red");               
+                $("#"+formid+" .pointStatut").addClass("green");               
             }
         });
     
@@ -76,7 +86,9 @@ function activateLinkQualifs(idLink, side, ptsV, idMatch){
                 $("#"+idLink).addClass('disabled');
                 $("#"+idLink).css('color', 'gray');                 
                 $("#"+idLink).css('visibility', 'visible');
-                $("#"+formid+" .pointStatut").css('background-color', 'red');                 
+                $("#"+formid+" .pointStatut").css('background-color', 'red');
+                $("#"+formid+" .pointStatut").removeClass("green");               
+                $("#"+formid+" .pointStatut").addClass("red");                 
             }
         });
     }

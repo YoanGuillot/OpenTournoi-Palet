@@ -194,7 +194,7 @@ if ($infosPhase == ''){
 						</div>
 						
 						<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">$equipe2</div>
-						<div class=\"pointStatut\" style=\"display:inline-block;width: 10px;height:10px;border-radius: 50%;background-color:". $matchPlayed ."\"></div>
+						<div class=\"pointStatut $matchPlayed\" style=\"display:inline-block;width: 10px;height:10px;border-radius: 50%;background-color:". $matchPlayed ."\"></div>
 					
 						<input type=\"hidden\" name=\"idTournoi\"  value=\"$idTournoi\"></input>
 						<input type=\"hidden\" name=\"idMatchQualif\"  value=\"$idMatch\"></input>
@@ -226,7 +226,7 @@ if ($infosPhase == ''){
 						<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
 							<div class=\"uk-card-header\">
 								<div class=\"uk-grid uk-grid-small\">
-									<div style=\"display:inline-bock;\" class=\"uk-width-auto\"><h4>Qualifs - Tour " .$countPhase ." en ". $infosTournoi['pts_qualifs'] ." Points</h4></div><div style=\"margin-top: 8px;margin-left: 20px;display:inline-block;border-radius: 50%; height: 15px;background-color:$allPlayed ;\"></div>
+									<div style=\"display:inline-bock;\" class=\"uk-width-auto\"><h4>Qualifs - Tour " .$countPhase ." en ". $infosTournoi['pts_qualifs'] ." Points</h4></div><div class=\"bigPoint\" style=\"margin-top: 8px;margin-left: 20px;display:inline-block;border-radius: 50%; height: 15px;background-color:$allPlayed ;\"></div>
 									<div class=\"uk-width-expand uk-text-right panel-icons\">
 										<a style=\"color: $lockedColor\" href=\"index.php?page=qualifs&idtournoi=". $idTournoi ."&action=". $lockAction ."phasequalif&numphase=$countPhase\" class=\"uk-margin-medium-right donotprint\"  uk-icon=\"$lockedIcon\"></a>
 										<a href=\"PDF-phase-qualif.php?idtournoi=$idTournoi&numphase=$countPhase&ptsqualifs=". $infosTournoi['pts_qualifs'] ."\" uk-icon=\"print\"></a>". $trashButton ."

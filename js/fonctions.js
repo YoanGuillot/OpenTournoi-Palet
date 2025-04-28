@@ -23,7 +23,7 @@ function activateLink(idLink, side, ptsV, idMatch){
 
 function activateLinkQualifs(idLink, side, ptsV, idMatch){
     $("#"+idLink).css('visibility', 'hidden');
-    
+
     var formid = $("#"+idLink).closest("form").attr("id");
     var url = $("#"+formid).attr("action");
     var idTournoi = $("#"+formid+" input[name='idTournoi']").val();
@@ -48,6 +48,7 @@ function activateLinkQualifs(idLink, side, ptsV, idMatch){
                 $("#"+idLink).addClass('disabled');
                 $("#"+idLink).css('color', 'gray');                 
                 $("#"+idLink).css('visibility', 'visible');                 
+                $("#"+formid+" .pointStatut").css('background-color', 'green');                 
             }
         });
     
@@ -70,7 +71,8 @@ function activateLinkQualifs(idLink, side, ptsV, idMatch){
             success: function(){
                 $("#"+idLink).addClass('disabled');
                 $("#"+idLink).css('color', 'gray');                 
-                $("#"+idLink).css('visibility', 'visible');                 
+                $("#"+idLink).css('visibility', 'visible');
+                $("#"+formid+" .pointStatut").css('background-color', 'red');                 
             }
         });
     }

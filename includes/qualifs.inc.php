@@ -194,7 +194,7 @@ if ($infosPhase == ''){
 						</div>
 						
 						<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">$equipe2</div>
-						<div style=\"display:inline-block;width: 10px;height:10px;border-radius: 50%;background-color:". $matchPlayed ."\"></div>
+						<div class=\"pointStatut\" style=\"display:inline-block;width: 10px;height:10px;border-radius: 50%;background-color:". $matchPlayed ."\"></div>
 					
 						<input type=\"hidden\" name=\"idTournoi\"  value=\"$idTournoi\"></input>
 						<input type=\"hidden\" name=\"idMatchQualif\"  value=\"$idMatch\"></input>

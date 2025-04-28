@@ -49,7 +49,8 @@ if(isset($_POST['action'])){
 					$ptsQualifs = $_POST['ptsQualifs'];
 					$ptsPhasesFinales = $_POST['ptsPhasesFinales'];
 					$ptsFinales = $_POST['ptsFinales'];
-					$db->exec("UPDATE tournois SET max_equipes = \"$maxEquipes\", type_phasesfinales = \"$typePhasesFinales\", pts_qualifs = \"$ptsQualifs\", pts_phasesfinales = \"$ptsPhasesFinales\", pts_finales = \"$ptsFinales\" WHERE id_tournoi == '$idTournoi'");
+					$ptsPetiteFinales = $_POST['ptsPetiteFinales'];
+					$db->exec("UPDATE tournois SET max_equipes = \"$maxEquipes\", type_phasesfinales = \"$typePhasesFinales\", pts_qualifs = \"$ptsQualifs\", pts_phasesfinales = \"$ptsPhasesFinales\", pts_finales = \"$ptsFinales\", pts_petitefinales = \"$ptsPetiteFinales\" WHERE id_tournoi == '$idTournoi'");
 					
 					header("Location: index.php?idtournoi=$idTournoi&page=parametres");
 		}

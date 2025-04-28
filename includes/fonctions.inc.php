@@ -259,8 +259,14 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 		$selectOptions1 = "<option value=\"\"></option>";
 		$selectOptions2 = "<option value=\"\"></option>";
 		
-		if($label == "Finale"){
+		if($label == "Finale" || $label == "Challenge Finale"){
 			$ptsMatch = $infosTournoi['pts_finales'];
+		}else{
+			$ptsMatch = $infosTournoi['pts_phasesfinales'];
+		}
+		
+		if($label == "Petite finale" || $label == "Challenge Petite finale"){
+			$ptsMatch = $infosTournoi['pts_petitefinales'];
 		}else{
 			$ptsMatch = $infosTournoi['pts_phasesfinales'];
 		}
@@ -330,7 +336,7 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 				</form>
 			</td>
 		</tr>";
-		$rawMatchsContent .= "<tr><td>$numPlaque</td><td>$equipe1</td><td>$score1</td><td>$score2</td><td>$equipe2</td></tr>";
+		$rawMatchsContent .= "<tr><td class='numplaque\"> $numPlaque</td><td>$equipe1</td><td>$score1</td><td>$score2</td><td>$equipe2</td></tr>";
 
 		$numPlaque++;
 	}

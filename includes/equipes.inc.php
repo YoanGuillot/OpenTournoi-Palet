@@ -44,7 +44,7 @@ if($infosTournoi['max_equipes'] != 0 && $nbEquipes >= $infosTournoi['max_equipes
 								<th style="width: 10%">Actions</th>
 							</tr>
 						</thead>
-							<td><input name="nomEquipe" class="uk-input uk-form-width-medium" type="text" required <?php echo $disableCreerButton; ?>></td>
+							<td><input name="nomEquipe" class="uk-input uk-form-width-medium" type="text" required autofocus <?php echo $disableCreerButton; ?>></td>
 							<td><input name="joueur1" class="uk-input uk-form-width-medium" type="text" <?php echo $disableCreerButton; ?>></td>
 							<td><input name="joueur2" class="uk-input uk-form-width-medium" type="text" <?php echo $disableCreerButton; ?>></td>
 							<td><input name="joueur3" class="uk-input uk-form-width-medium" type="text" <?php echo $disableCreerButton; ?>></td>

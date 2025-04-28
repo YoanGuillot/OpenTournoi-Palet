@@ -83,6 +83,15 @@ defined('_LPDT') or die;
 									<option value="15"<?php if ($infosTournoi['pts_finales'] == '15'){ echo " selected";} ?>>15</option>
 								</select>
 							</div>
+
+							<div class="uk-margin">
+								<span>Points d'un match de petite finale : </span>
+								<select name="ptsPetiteFinales" class="uk-select uk-form-width-small">
+									<option value="11"<?php if ($infosTournoi['pts_petitefinales'] == '11'){ echo " selected";} ?>>11</option>
+									<option value="13"<?php if ($infosTournoi['pts_petitefinales'] == '13'){ echo " selected";} ?>>13</option>
+									<option value="15"<?php if ($infosTournoi['pts_petitefinales'] == '15'){ echo " selected";} ?>>15</option>
+								</select>
+							</div>
 	
 							<input type="hidden" name="action" class="uk-input" value="miseajourParametres"></input>
 							<input type="hidden" name="idTournoi" class="uk-input" value="<?php echo $idTournoi; ?>"></input>

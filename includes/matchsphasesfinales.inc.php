@@ -32,13 +32,13 @@ $numPlaque = $debutPlaques;
 calculPhaseFinale($numPhaseFinale, $nbEquipes);
 
 
-$print1 = "<button class='uk-button uk-button-primary uk-margin-left uk-margin-right' onclick='print1()'><span uk-icon=\"icon: print\"> </span> Finales</button>";
-$print2 = "<button class='uk-button uk-button-primary uk-margin-left uk-margin-right' onclick='print2()'><span uk-icon=\"icon: print\"> </span> Demis</button>";
-$print4 = "<button class='uk-button uk-button-primary uk-margin-left uk-margin-right' onclick='print4()'><span uk-icon=\"icon: print\"> </span> Quarts</button>";
-$print8 = "<button class='uk-button uk-button-primary uk-margin-left uk-margin-right' onclick='print8()'><span uk-icon=\"icon: print\"> </span> 8èmes</button>";
-$print16 = "<button class='uk-button uk-button-primary uk-margin-left uk-margin-right' onclick='print16()'><span uk-icon=\"icon: print\"> </span> 16èmes</button>";
-$print32 = "<button class='uk-button uk-button-primary uk-margin-left uk-margin-right' onclick='print32()'><span uk-icon=\"icon: print\"> </span> 32èmes</button>";
-$print64 = "<button class='uk-button uk-button-primary uk-margin-left uk-margin-right' onclick='print64()'><span uk-icon=\"icon: print\"> </span> 64èmes</button>";
+$print1 = "<button class='uk-button uk-button-primary uk-margin-left uk-margin-right' onclick='print1(\"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> Finales</button>";
+$print2 = "<button class='uk-button uk-button-primary uk-margin-left uk-margin-right' onclick='print2(\"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> Demis</button>";
+$print4 = "<button class='uk-button uk-button-primary uk-margin-left uk-margin-right' onclick='print4(\"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> Quarts</button>";
+$print8 = "<button class='uk-button uk-button-primary uk-margin-left uk-margin-right' onclick='print8(\"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> 8èmes</button>";
+$print16 = "<button class='uk-button uk-button-primary uk-margin-left uk-margin-right' onclick='print16(\"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> 16èmes</button>";
+$print32 = "<button class='uk-button uk-button-primary uk-margin-left uk-margin-right' onclick='print32(\"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> 32èmes</button>";
+$print64 = "<button class='uk-button uk-button-primary uk-margin-left uk-margin-right' onclick='print64(\"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> 64èmes</button>";
 
 ?>
 <div class="uk-grid uk-grid-medium" data-uk-grid uk-sortable="handle: .sortable-icon">
@@ -64,7 +64,7 @@ if($nbEquipes == 4){
 			<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
 				<div class=\"uk-card-header\">
 					<div class=\"uk-grid uk-grid-small\">
-						<div class=\"uk-width-1-1 uk-width-1-1@l uk-width-1-1@xl\">$print2  $print1</div>
+						<div style='margin-bottom: 0px;' class='uk-align-center uk-flex'>$print2 $print1</div>
 					</div>
 				</div>
 			</div>
@@ -93,15 +93,17 @@ if($nbEquipes == 4){
 //Pour 8 equipes
 if($nbEquipes == 8){
 
-	echo"<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
+	echo"<div class='uk-width-3-4'>
+		<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
 			<div class=\"uk-card-header\">
 				<div class=\"uk-grid uk-grid-small\">
-					<div class=\"uk-width-1-1 uk-width-1-1@l uk-width-1-1@xl\"><span uk-icon=\"icon: print\">Impression :</span> $print4 - $print2 - $print1</div>
+					<div style='margin-bottom: 0px;' class='uk-align-center uk-flex'>$print4  $print2  $print1</div>
 				</div>
 			</div>
-		</div>";
+		</div>
+	</div>";
 
-	$aLabel = "Quarts finale";
+	$aLabel = "Quarts de finale";
 	$bLabel = "Demi-finales";
 	$cLabel = "Finale";
 	$pfLabel = "Petite finale";
@@ -119,9 +121,9 @@ if($nbEquipes == 8){
 	$tableauQuarts = constructTableMatchsPF($idTournoi, $aLabel, $listeMatchsQuarts, $numPlaque, $numPhaseFinale);
 	$tableauDemis = constructTableMatchsPF($idTournoi, $bLabel, $listeMatchsDemis, $numPlaque, $numPhaseFinale);
 	$tableauF = constructTableMatchsPF($idTournoi, $cLabel, $listeMatchsF, $numPlaque, $numPhaseFinale);
-	$tableauPF = constructTableMatchsPF($idTournoi, $pfLabel, $listeMatchsPF, $numPlaque, $numPhaseFinale);
-	$tableauCLDemis = constructTableMatchsPF($idTournoi, $clLabel, $listeMatchsCLDemis, $numPlaque, $numPhaseFinale);
-	$tableauCLF = constructTableMatchsPF($idTournoi, $cl2Label, $listeMatchsCLF, $numPlaque, $numPhaseFinale);
+	$tableauPF = constructTableMatchsPF($idTournoi, $pfLabel, $listeMatchsPF, $numPlaque + 1, $numPhaseFinale);
+	$tableauCLDemis = constructTableMatchsPF($idTournoi, $clLabel, $listeMatchsCLDemis, $numPlaque + 2, $numPhaseFinale);
+	$tableauCLF = constructTableMatchsPF($idTournoi, $cl2Label, $listeMatchsCLF, $numPlaque + 2, $numPhaseFinale);
 
 	echo $tableauQuarts;
 	echo $tableauDemis;
@@ -137,20 +139,22 @@ if($nbEquipes == 8){
 // Pour 16 Equipes
 if($nbEquipes == 16){
 
-	echo"<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
+	echo"<div class='uk-width-3-4'>
+		<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
 			<div class=\"uk-card-header\">
 				<div class=\"uk-grid uk-grid-small\">
-					<div class=\"uk-width-1-1 uk-width-1-1@l uk-width-1-1@xl\"><span uk-icon=\"icon: print\">Impression :</span> $print8 - $print4 - $print2 - $print1</div>
+					<div style='margin-bottom: 0px;' class='uk-align-center uk-flex'>$print8  $print4  $print2  $print1</div>
 				</div>
 			</div>
-		</div>";
+		</div>
+	</div>";
 
 
 	$aLabel = "8èmes de finale";
-	$bLabel = "Quarts finale";
+	$bLabel = "Quarts de finale";
 	$cLabel = "Demi-finales";
 	$dLabel = "Finale";
-	$pfLabel = "Petite Finale";
+	$pfLabel = "Petite finale";
 	$CH4Label = "Challenge Quarts de finale";
 	$CH2Label = "Challenge Demi-finales";
 	$CHpfLabel = "Challenge Petite finale";
@@ -237,10 +241,10 @@ if($nbEquipes == 32){
 
 	$aLabel = "16èmes de finale";
 	$bLabel = "8èmes de finale";
-	$cLabel = "Quarts finale";
+	$cLabel = "Quarts de finale";
 	$dLabel = "Demi-finales";
 	$eLabel = "Finale";
-	$pfLabel = "Petite Finale";
+	$pfLabel = "Petite finale";
 	$CH8Label = "Challenge 8èmes de finale";
 	$CH4Label = "Challenge Quarts de finale";
 	$CH2Label = "Challenge Demi-finales";
@@ -304,7 +308,7 @@ if($nbEquipes == 64){
 	echo"<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
 			<div class=\"uk-card-header\">
 				<div class=\"uk-grid uk-grid-small\">
-					<div class=\"uk-width-1-1 uk-width-1-1@l uk-width-1-1@xl\"><span uk-icon=\"icon: print\">Impression :</span> $print32 - $print16 - $print8 - $print4 - $print2 - $print1</div>
+					<div style='margin-bottom: 0px;' class='uk-align-center uk-flex'>$print32 $print16 $print8 $print4 $print2 $print1</div>
 				</div>
 			</div>
 		</div>";	
@@ -312,7 +316,7 @@ if($nbEquipes == 64){
 	$aLabel = "32èmes de finale";
 	$bLabel = "16èmes de finale";
 	$cLabel = "8èmes de finale";
-	$dLabel = "Quarts finale";
+	$dLabel = "Quarts de finale";
 	$eLabel = "Demi-finales";
 	$fLabel = "Finale";
 }
@@ -322,7 +326,7 @@ if($nbEquipes == 128){
 	echo"<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
 			<div class=\"uk-card-header\">
 				<div class=\"uk-grid uk-grid-small\">
-					<div class=\"uk-width-1-1 uk-width-1-1@l uk-width-1-1@xl\"><span uk-icon=\"icon: print\">Impression :</span> $print64 - $print32 - $print16 - $print8 - $print4 - $print2 - $print1</div>
+					<div style='margin-bottom: 0px;' class='uk-align-center uk-flex'>$print64 $print32 $print16 $print8 $print4 $print2 $print1</div>
 				</div>
 			</div>
 		</div>";	
@@ -331,7 +335,7 @@ if($nbEquipes == 128){
 	$bLabel = "32èmes de finale";
 	$cLabel = "16èmes de finale";
 	$dLabel = "8èmes de finale";
-	$eLabel = "Quarts finale";
+	$eLabel = "Quarts de finale";
 	$fLabel = "Demi-finales";
 	$gLabel = "Finale";
 }

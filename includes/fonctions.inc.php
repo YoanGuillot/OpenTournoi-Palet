@@ -259,16 +259,14 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 		$selectOptions1 = "<option value=\"\"></option>";
 		$selectOptions2 = "<option value=\"\"></option>";
 		
+		$ptsMatch = $infosTournoi['pts_phasesfinales'];
+
 		if($label == "Finale" || $label == "Challenge Finale"){
 			$ptsMatch = $infosTournoi['pts_finales'];
-		}else{
-			$ptsMatch = $infosTournoi['pts_phasesfinales'];
 		}
 		
 		if($label == "Petite finale" || $label == "Challenge Petite finale"){
 			$ptsMatch = $infosTournoi['pts_petitefinales'];
-		}else{
-			$ptsMatch = $infosTournoi['pts_phasesfinales'];
 		}
 
 		if($score1 == $ptsMatch || $score2 == $ptsMatch){
@@ -311,20 +309,20 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 				<div style=\"display:inline-block;width: 10%\" class=\"uk-text-center\">$numPlaque</div>
 				<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">$equipe1</div>
 				<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center\">
-					<select id=\"match-$idMatch-side1\" onchange=\"activateLink('validMatch-$idMatch', 'side2', ".$ptsMatch .", '$idMatch')\" name=\"score1\" class=\"uk-select\"  >
+					<select id=\"match-$idMatch-side1\" onchange=\"activateLinkPF('validMatch-$idMatch', 'side2', ".$ptsMatch .", '$idMatch')\" name=\"score1\" class=\"uk-select\"  >
 						$selectOptions1
 					</select>
 				</div>
-				<div style=\"display:inline-block;width: 10%\" class=\"uk-text-center\"><a id=\"validMatch-$idMatch\" style=\"color: gray\" href=\"javascript:document.getElementById('formMatch-$idMatch').submit();\" uk-icon=\"check\" class=\"disabled\"></a></div>
+				<div style=\"display:inline-block;width: 10%\" class=\"uk-text-center\"><a id=\"validMatch-$idMatch\" style=\"color: gray\" uk-icon=\"check\" class=\"disabled\"></a></div>
 				
 				<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center\">
-					<select id=\"match-$idMatch-side2\" onchange=\"activateLink('validMatch-$idMatch', 'side1', ".$ptsMatch .", '$idMatch')\" name=\"score2\" class=\"uk-select\"  >
+					<select id=\"match-$idMatch-side2\" onchange=\"activateLinkPF('validMatch-$idMatch', 'side1', ".$ptsMatch .", '$idMatch')\" name=\"score2\" class=\"uk-select\"  >
 						$selectOptions2
 					</select>
 				</div>
 				
 				<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">$equipe2</div>
-				<div style=\"display:inline-block;width: 10px;height:10px;border-radius: 50%;background-color:". $matchPlayed ."\"></div>
+				<div class=\"pointStatut $matchPlayed\" style=\"display:inline-block;width: 10px;height:10px;border-radius: 50%;background-color:". $matchPlayed ."\"></div>
 
 			
 				<input type=\"hidden\" name=\"idTournoi\"  value=\"$idTournoi\"></input>
@@ -346,7 +344,7 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 		<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
 			<div class=\"uk-card-header\">
 				<div class=\"uk-grid uk-grid-small\">
-					<div class=\"uk-width-auto\"><h4>". $label ." en ". $ptsMatch ." Points</h4></div><div style=\"margin-top: 8px;margin-left: 20px;display:inline-block;border-radius: 50%; height: 15px;background-color:$allPlayed ;\"></div>
+					<div class=\"uk-width-auto\"><h4>". $label ." en ". $ptsMatch ." Points</h4></div><div otpname=\"bigPoint $label\" style=\"margin-top: 8px;margin-left: 20px;display:inline-block;border-radius: 50%; height: 15px;background-color:$allPlayed ;\"></div>
 					<div class=\"uk-width-expand uk-text-right panel-icons\"></div>
 					
 				</div>

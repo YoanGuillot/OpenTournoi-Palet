@@ -46,14 +46,14 @@ echo "<div class =\"donotprint\" style=\"width: 100%\">
 				<form method=\"POST\" action=\"index.php?idtournoi=$idTournoi&page=qualifs\">
 				<input type=\"hidden\" name=\"creerPhase\" value=\"1\" />
 				<input type=\"hidden\" name=\"numPhase\" value=\"". $numPhase+1 ."\" />
-				<button type=\"submit\" style=\"background-color: mediumseagreen;color: #ffffff;\" class=\"uk-button\" $dispoBouton>Créer une phase de qualification</button>
+				<button type=\"submit\" style=\"background-color: mediumseagreen;color: #ffffff;\" class=\"uk-button\" $dispoBouton><span uk-icon=\"icon: plus-circle\" style=\"margin-right: 5px;\"></span> Créer une phase de qualification</button>
 				</form>
 			</div>	
 			<div style=\"display:inline-block;width:49%;text-align:right;\">
 				<form method=\"POST\" action=\"index.php?idtournoi=$idTournoi&page=qualifs\">
 				<input type=\"hidden\" name=\"idTournoi\" value=\"$idTournoi\" />
 				<input type=\"hidden\" name=\"action\" value=\"cloturerPhasesQualifs\" />
-				<button type=\"submit\" class=\"uk-button uk-button-danger\">Clôturer les phases qualificatives</button>
+				<button type=\"submit\" class=\"uk-button uk-button-danger\"><span uk-icon=\"icon: ban\" style=\"margin-right: 5px;vertical-align: text-bottom\"></span> Clôturer les phases qualificatives</button>
 				</form>
 			</div>
 		</div><hr class=\"donotprint\" />";

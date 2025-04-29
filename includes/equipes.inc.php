@@ -22,7 +22,7 @@ if($infosTournoi['max_equipes'] != 0 && $nbEquipes >= $infosTournoi['max_equipes
 							<input type="hidden" name="idTournoi" value="<?php echo $idTournoi; ?>"></input>
 							<input type="hidden" name="action" value="cloturerInscriptions"></input>
 							<?php if ($infosTournoi['statut_inscriptions'] != "ferme"){ ?>
-							<button type="submit" class="uk-button uk-button-danger uk-margin-right">Clôturer les inscriptions</button></form>
+							<button type="submit" class="uk-button uk-button-danger uk-margin-right"><span style="margin-right: 5px;vertical-align: text-bottom" uk-icon="icon: ban"></span> Clôturer les inscriptions</button></form>
 							<?php }else{
 									echo "<p style=\"color:red; font-weight: bold;\">Les inscriptions sont closes</p>";
 							}
@@ -49,7 +49,7 @@ if($infosTournoi['max_equipes'] != 0 && $nbEquipes >= $infosTournoi['max_equipes
 							<td><input name="joueur2" class="uk-input uk-form-width-medium" type="text" <?php echo $disableCreerButton; ?>></td>
 							<td><input name="joueur3" class="uk-input uk-form-width-medium" type="text" <?php echo $disableCreerButton; ?>></td>
 							<input type="hidden" name="action" class="uk-input" value="creationEquipe">
-							<td><button style="background-color: mediumseagreen;color: #ffffff;" class="uk-button uk-margin-left" <?php echo $disableCreerButton; ?>>Créer</button></td>
+							<td><button style="background-color: mediumseagreen;color: #ffffff;" class="uk-button uk-margin-left" <?php echo $disableCreerButton; ?>><span style="margin-right: 5px;" uk-icon="plus-circle"></span> Créer</button></td>
 					<?php } ?>
 					</table>	
 					</form>	

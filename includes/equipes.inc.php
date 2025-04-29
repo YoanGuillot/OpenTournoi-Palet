@@ -22,7 +22,7 @@ if($infosTournoi['max_equipes'] != 0 && $nbEquipes >= $infosTournoi['max_equipes
 							<input type="hidden" name="idTournoi" value="<?php echo $idTournoi; ?>"></input>
 							<input type="hidden" name="action" value="cloturerInscriptions"></input>
 							<?php if ($infosTournoi['statut_inscriptions'] != "ferme"){ ?>
-							<button type="submit" class="uk-button uk-button-primary uk-margin-right">Clôturer les inscriptions</button></form>
+							<button type="submit" class="uk-button uk-button-danger uk-margin-right">Clôturer les inscriptions</button></form>
 							<?php }else{
 									echo "<p style=\"color:red; font-weight: bold;\">Les inscriptions sont closes</p>";
 							}
@@ -49,7 +49,7 @@ if($infosTournoi['max_equipes'] != 0 && $nbEquipes >= $infosTournoi['max_equipes
 							<td><input name="joueur2" class="uk-input uk-form-width-medium" type="text" <?php echo $disableCreerButton; ?>></td>
 							<td><input name="joueur3" class="uk-input uk-form-width-medium" type="text" <?php echo $disableCreerButton; ?>></td>
 							<input type="hidden" name="action" class="uk-input" value="creationEquipe">
-							<td><button class="uk-button uk-button-primary uk-margin-left" <?php echo $disableCreerButton; ?>>Créer</button></td>
+							<td><button style="background-color: mediumseagreen;color: #ffffff;" class="uk-button uk-margin-left" <?php echo $disableCreerButton; ?>>Créer</button></td>
 					<?php } ?>
 					</table>	
 					</form>	
@@ -67,7 +67,7 @@ if($infosTournoi['max_equipes'] != 0 && $nbEquipes >= $infosTournoi['max_equipes
 				<div class="uk-grid uk-grid-small">
 					<div class="uk-width-auto"><h4>Equipes inscrites : <?php echo $nbEquipes; ?> </h4></div>
 					<div class="uk-width-expand uk-text-right panel-icons">
-						<a class="visible-inline uk-margin-right" href="PDF-equipes.php?idtournoi=<?php echo $idTournoi; ?>" uk-icon="print"></a>
+						<a href="PDF-equipes.php?idtournoi=<?php echo $idTournoi; ?>"><button class="uk-button uk-button-primary uk-margin-right" ><span uk-icon="print"></span> IMPRIMER</button></a>
 						
 						<button class="uk-button importBouton">Importer<span uk-icon="triangle-down"></span></button>
 						<div uk-dropdown="pos: bottom-center;animation: slide-top; animate-out: true; duration: 700;">

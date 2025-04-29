@@ -27,14 +27,8 @@ function activateLinkQualifs(idLink, side, ptsV, idMatch){
 
     var tableid = $("#"+idLink).closest("table").attr("id");
     var tableNbTR = $("#"+tableid+" tr").length;
-    var tableNbGreen = $("#"+tableid+" .pointStatut.green").length;
-    var nbMatch = tableNbTR -1;
-    alert(nbMatch+", "+tableNbGreen);
-    if(nbMatch == tableNbGreen){
-        $("#"+tableid).closest(".bigPoint").css('background-color', 'green');
-    }else{
-        $("#"+tableid).closest(".bigPoint").css('background-color', 'red');
-    }
+    
+  
 
     var formid = $("#"+idLink).closest("form").attr("id");
     var url = $("#"+formid).attr("action");
@@ -72,6 +66,16 @@ function activateLinkQualifs(idLink, side, ptsV, idMatch){
     var score1 = $("#match-"+idMatch+"-side1").val();
     var score2 = $("#match-"+idMatch+"-side2").val();
     //alert(score1+", "+score2);
+
+    if((score1 == '' ) || (score2 == '')){
+        $("#"+idLink).addClass('disabled');
+        $("#"+idLink).css('color', 'gray');                 
+        $("#"+idLink).css('visibility', 'hidden');
+        $("#"+formid+" .pointStatut").css('background-color', 'red');
+        $("#"+formid+" .pointStatut").removeClass("green");               
+        $("#"+formid+" .pointStatut").addClass("red");
+    }
+
     if((score1 == '' ) && (score2 == '')){
         $("#"+idLink).css('visibility', 'visible'); 
         $("#"+idLink).removeClass('disabled');
@@ -92,6 +96,24 @@ function activateLinkQualifs(idLink, side, ptsV, idMatch){
             }
         });
     }
+
+ 
+
+    setTimeout(function (){
+  
+        var tableNbGreen = $("#"+tableid+" .pointStatut.green").length;
+        var nbMatch = tableNbTR -1;
+        var numPhase = $("#"+tableid).attr("otpname");
+        var idBigPoint = "bigPoint-"+numPhase;
+        //alert(nbMatch+", "+tableNbGreen);
+        if(nbMatch == tableNbGreen){
+            $("#"+idBigPoint).css('background-color', 'green');
+        }else{
+            $("#"+idBigPoint).css('background-color', 'red');
+        }
+                    
+    }, 500); 
+        
 }
 
 function print16(labelPhaseFinale) {

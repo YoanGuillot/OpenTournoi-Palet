@@ -14,7 +14,7 @@ $infosPhase = infosPhase();
 // print_r($infosPhase);
 
 
-echo "Equipes inscrites : ". $nbEquipes."<br/><br/>";
+//echo "Equipes inscrites : ". $nbEquipes."<br/><br/>";
 
 if ($infosPhase == ''){
 		$numPhase = 0;
@@ -46,14 +46,14 @@ echo "<div class =\"donotprint\" style=\"width: 100%\">
 				<form method=\"POST\" action=\"index.php?idtournoi=$idTournoi&page=qualifs\">
 				<input type=\"hidden\" name=\"creerPhase\" value=\"1\" />
 				<input type=\"hidden\" name=\"numPhase\" value=\"". $numPhase+1 ."\" />
-				<button type=\"submit\" class=\"uk-button uk-button-primary\" $dispoBouton>Créer une phase de qualification</button>
+				<button type=\"submit\" style=\"background-color: mediumseagreen;color: #ffffff;\" class=\"uk-button\" $dispoBouton>Créer une phase de qualification</button>
 				</form>
 			</div>	
 			<div style=\"display:inline-block;width:49%;text-align:right;\">
 				<form method=\"POST\" action=\"index.php?idtournoi=$idTournoi&page=qualifs\">
 				<input type=\"hidden\" name=\"idTournoi\" value=\"$idTournoi\" />
 				<input type=\"hidden\" name=\"action\" value=\"cloturerPhasesQualifs\" />
-				<button type=\"submit\" class=\"uk-button uk-button-primary\">Clôturer les phases qualificatives</button>
+				<button type=\"submit\" class=\"uk-button uk-button-danger\">Clôturer les phases qualificatives</button>
 				</form>
 			</div>
 		</div><hr class=\"donotprint\" />";
@@ -103,7 +103,7 @@ if ($infosPhase == ''){
 		}
 		$listeMatchs = listeMatchsQualif($countPhase);
 		
-		$tableauMatchs = "<table id=\"table-$numPhase\" class=\"uk-table uk-table-striped tableQualif\" style=\"width: 100%\">
+		$tableauMatchs = "<table id=\"table-$countPhase\" otpname=\"$countPhase\" class=\"uk-table uk-table-striped tableQualif\" style=\"width: 100%\">
 							<tr>
 								<th style=\"box-sizing:border-box;width: 100%\">
 									<div style=\"box-sizing:border-box;display:inline-block;width: 10%\" class=\"uk-text-center uk-text-bolder\">PLAQUE</div>
@@ -226,7 +226,7 @@ if ($infosPhase == ''){
 						<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
 							<div class=\"uk-card-header\">
 								<div class=\"uk-grid uk-grid-small\">
-									<div style=\"display:inline-bock;\" class=\"uk-width-auto\"><h4>Qualifs - Tour " .$countPhase ." en ". $infosTournoi['pts_qualifs'] ." Points</h4></div><div class=\"bigPoint\" style=\"margin-top: 8px;margin-left: 20px;display:inline-block;border-radius: 50%; height: 15px;background-color:$allPlayed ;\"></div>
+									<div style=\"display:inline-bock;\" class=\"uk-width-auto\"><h4>Qualifs - Tour " .$countPhase ." en ". $infosTournoi['pts_qualifs'] ." Points</h4></div><div id=\"bigPoint-$countPhase\" style=\"margin-top: 8px;margin-left: 20px;display:inline-block;border-radius: 50%; height: 15px;background-color:$allPlayed ;\"></div>
 									<div class=\"uk-width-expand uk-text-right panel-icons\">
 										<a style=\"color: $lockedColor\" href=\"index.php?page=qualifs&idtournoi=". $idTournoi ."&action=". $lockAction ."phasequalif&numphase=$countPhase\" class=\"uk-margin-medium-right donotprint\"  uk-icon=\"$lockedIcon\"></a>
 										<a href=\"PDF-phase-qualif.php?idtournoi=$idTournoi&numphase=$countPhase&ptsqualifs=". $infosTournoi['pts_qualifs'] ."\" uk-icon=\"print\"></a>". $trashButton ."

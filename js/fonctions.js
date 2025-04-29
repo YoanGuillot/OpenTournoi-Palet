@@ -259,7 +259,7 @@ function print16(labelPhaseFinale) {
 }
 
 function print8(labelPhaseFinale) {
-    var labelPhaseHtml = "<div class=\"enteteImpression\">"+labelPhaseFinale+"</div>";
+    var labelPhaseHtml = "<page><div class=\"enteteImpression\">"+labelPhaseFinale+"</div>";
     var principale8 = "";
     var challenge8 = "";
     
@@ -276,7 +276,11 @@ function print8(labelPhaseFinale) {
         challenge8 = elemsChallenge[0].innerHTML; // Prendre le premier élément
     }
     
-    var printTab8 = labelPhaseHtml+"<br>"+principale8+"<br>"+challenge8;
+    if (challenge8 == ""){
+        var printTab8 = labelPhaseHtml+"<br>"+principale8+"</page>";
+    }else{
+        var printTab8 = labelPhaseHtml+"<br>"+principale8+"</page><page><div class=\"enteteImpression\">Challenge "+labelPhaseFinale+"</div><br>"+challenge8+"</page>";
+    }
   
 	document.getElementById('printDiv').innerHTML = "<form id='form-8' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='8'>8</input><input type='textarea' name='rawhtml' value='" + printTab8 + "'></form>";
 	document.forms["form-8"].submit();

@@ -36,7 +36,7 @@ if(isset($_GET['idtournoi']) && isset($_GET['numphase']) && isset($_GET['ptsqual
 		foreach($listeMatchs as $row) {
 			
 			$contentMain .= "<tr>
-					    <td>". $numPlaque ."</td>
+					    <td class=\"numplaque\">". $numPlaque ."</td>
 						<td>". $row['equipe1'] ."</td>
 						<td>". $row['score1'] ."</td>
 						<td>". $row['score2'] ."</td>
@@ -52,26 +52,50 @@ if(isset($_GET['idtournoi']) && isset($_GET['numphase']) && isset($_GET['ptsqual
 
     $contentHeader = "
                 <style>
-                    h1{
-                        text-align:center;
-                    }  
-                    table{
-                        width: 90%;
-                        border: 1px solid #000000;
-                        margin: auto;
-                        border-collapse: collapse;
-                        text-align:center;
-                    }
-                    td, th{
-                        padding: 10px;
-                        border: 1px solid #000000;
-                    }
-                    th{
-                        width: 50px;
-                        background-color: #dddddd;
-                    }
-                </style>
-                <h1>Qualifications - TOUR $numPhase  - Partie en $ptsQualifs pts</h1>
+            h1{
+                text-align:center;
+                font-size: 24px;
+            }  
+            table{
+                width: 90%;
+                border: 1px solid #000000;
+                margin: auto;
+                border-collapse: collapse;
+                text-align:center;
+            }
+            td, th{
+                padding-top: 15px;
+                padding-bottom: 15px;
+                padding-left: 10px;
+                padding-right: 10px;
+                border: 1px solid #000000;
+                font-size: 18px;
+            }
+            th{
+                width: 50px;
+                background-color: #dddddd;
+                text-transform : uppercase;
+                font-weight: bold;
+                vertical-align: middle;
+            }
+            
+            .enteteImpression{
+                display:block;
+                border: 1px solid #000000;
+                background-color: #dddddd;
+                font-weight: bold;
+                font-size: 30px;
+                text-align:center;
+                text-transform: uppercase;
+            }
+
+            .numplaque{
+                font-weight: bold;
+                background-color: #eeeeee;
+            }
+
+        </style>
+                <div class=\"enteteImpression\"><h1>Qualifications - TOUR $numPhase  - Partie en $ptsQualifs pts</h1></div>
                 <br>
                 <table>
                     <tr>

@@ -1,8 +1,5 @@
 <?php
 defined('_LPDT') or die; 
-//debug
-//$nbEquipes = 32;
-
 
 if (isset($_POST['creerPhase'])){
 	$numPhase = $_POST['numPhase'];
@@ -10,8 +7,6 @@ if (isset($_POST['creerPhase'])){
 }
 
 $infosPhase = infosPhase();
-//DEBUG
-// print_r($infosPhase);
 
 
 //echo "Equipes inscrites : ". $nbEquipes."<br/><br/>";
@@ -40,7 +35,7 @@ if ($infosTournoi['statut_inscriptions'] == 'ferme' && $infosTournoi['statut_qua
 
 echo "<p class='uk-text-center donotprint'>$messageQualif</p>";
 
-echo "<div class =\"donotprint\" style=\"width: 100%\">		
+echo "<div style=\"width: 100%\">		
 		
 			<div style=\"display:inline-block;width:49%;text-align:left;\">
 				<form method=\"POST\" action=\"index.php?idtournoi=$idTournoi&page=qualifs\">
@@ -56,7 +51,7 @@ echo "<div class =\"donotprint\" style=\"width: 100%\">
 				<button type=\"submit\" class=\"uk-button uk-button-danger\"><span uk-icon=\"icon: ban\" style=\"margin-right: 5px;vertical-align: text-bottom\"></span> Clôturer les phases qualificatives</button>
 				</form>
 			</div>
-		</div><hr class=\"donotprint\" />";
+		</div><hr/>";
 ?>
 
 <div class="uk-grid uk-grid-medium" data-uk-grid uk-sortable="handle: .sortable-icon">
@@ -80,7 +75,6 @@ if ($infosPhase == ''){
 		
 		$isLock = isLock($countPhase);
 		$isLock = $isLock[0]['phasequalif_locked'];
-		//print_r($isLock);
 		if($isLock == 1){
 			$lockedColor = "red";
 			$lockedIcon = "lock";
@@ -96,7 +90,7 @@ if ($infosPhase == ''){
 
 		if ($countPhase == $numPhase){		
 			//$trashButton = "<a href=\"index.php?idtournoi=". $idTournoi ."&action=supprphasequalif&phasequalif=". $numPhase ."\" class=\"uk-icon-link trash-icon\" title=\"Supprimer\" data-uk-tooltip data-uk-icon=\"icon: trash\"></a>";
-			$trashButton = "<a class=\"donotprint\" style=\"margin-left: 40px;color: red\" href=\"\" onclick=\"supprPhaseQualif(". $idTournoi .",". $numPhase .")\" uk-icon=\"icon: trash; ratio: 1\" uk-toggle=\"target: #supprPhaseQualif\"></a>";
+			$trashButton = "<a style=\"margin-left: 40px;color: red\" href=\"\" onclick=\"supprPhaseQualif(". $idTournoi .",". $numPhase .")\" uk-icon=\"icon: trash; ratio: 1\" uk-toggle=\"target: #supprPhaseQualif\"></a>";
 
 		}else{
 			$trashButton = " ";
@@ -115,17 +109,6 @@ if ($infosPhase == ''){
 								</th>
 							</tr>";
 							
-							
-		$tableauMatchsPrint = "<table style=\"text-align:center\" border=\"1px\" cellspacing=\"0\" cellpadding=\"3\" style=\"width: 100%\">
-							<tr>
-								<th style=\"width: 10%\" class=\"uk-text-center uk-text-bolder\">PLAQUE</th>
-								<th style=\"width: 18%\" class=\"uk-text-center uk-text-bolder\">EQUIPE 1</th>
-								<th style=\"width: 18%\" class=\"uk-text-center uk-text-bolder\">SCORE 1</th>
-								<th style=\"width: 18%\" class=\"uk-text-center uk-text-bolder\">SCORE 2</th>
-								<th style=\"width: 18%\" class=\"uk-text-center uk-text-bolder\">EQUIPE 2</th>
-								</th>
-							</tr>";
-		
 		$numPlaque = 1;
 		$indexPlayed = 0;
 		$nbMatchs = $nbEquipes;
@@ -203,21 +186,11 @@ if ($infosPhase == ''){
 					</td>
 				</tr>";
 				
-						$tableauMatchsPrint = $tableauMatchsPrint."
-				<tr>
-						<td>$numPlaque</div>
-						<td>$equipe1</div>
-						<td>$score1</td>						
-						<td>$score2</td>
-						
-						<td>$equipe2</td>
-				</tr>";
 				
 			$numPlaque = $numPlaque + 1;
 		}
 		
 		$tableauMatchs = $tableauMatchs."</table>";
-		$tableauMatchsPrint = $tableauMatchsPrint."</table>";
 		if(empty($content)){
 			$content="";
 		}
@@ -228,7 +201,7 @@ if ($infosPhase == ''){
 								<div class=\"uk-grid uk-grid-small\">
 									<div style=\"display:inline-bock;\" class=\"uk-width-auto\"><h4>Qualifs - Tour " .$countPhase ." en ". $infosTournoi['pts_qualifs'] ." Points</h4></div><div id=\"bigPoint-$countPhase\" style=\"margin-top: 8px;margin-left: 20px;display:inline-block;border-radius: 50%; height: 15px;background-color:$allPlayed ;\"></div>
 									<div class=\"uk-width-expand uk-text-right panel-icons\">
-										<a style=\"color: $lockedColor\" href=\"index.php?page=qualifs&idtournoi=". $idTournoi ."&action=". $lockAction ."phasequalif&numphase=$countPhase\" class=\"uk-margin-medium-right donotprint\"  uk-icon=\"$lockedIcon\"></a>
+										<a style=\"color: $lockedColor\" href=\"index.php?page=qualifs&idtournoi=". $idTournoi ."&action=". $lockAction ."phasequalif&numphase=$countPhase\" class=\"uk-margin-medium-right\"  uk-icon=\"$lockedIcon\"></a>
 										<a href=\"PDF-phase-qualif.php?idtournoi=$idTournoi&numphase=$countPhase&ptsqualifs=". $infosTournoi['pts_qualifs'] ."\" uk-icon=\"print\"></a>". $trashButton ."
 									</div>
 								</div>
@@ -239,24 +212,6 @@ if ($infosPhase == ''){
 								</div>
 							</div>
 						</div>
-						
-						<div style=\"display:none\">
-							<div id=\"phase" .$countPhase . "Print\">$tableauMatchsPrint</div>
-						</div>
-						 
-						<script>
-							function printDiv(countPhase) {
-								
-								var divContents = document.getElementById(countPhase+'Print').innerHTML;
-								var a = window.open('', '', 'height=1080, width=960');
-								a.document.write('<html>');
-								a.document.write('<body > <h1>'+countPhase+'<br><br><br>');
-								a.document.write(divContents);
-								a.document.write('</body></html>');
-								a.document.close();
-								a.print();
-							}
-						</script>
 					</div>"; 
 			$countPhase = $countPhase + 1;
 		}

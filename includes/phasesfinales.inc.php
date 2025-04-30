@@ -39,7 +39,7 @@ if ($infosTournoi['statut_inscriptions'] == 'ferme' && $infosTournoi['statut_qua
 				<input type=\"hidden\" name=\"creerPhaseFinale\" value=\"1\" />
 				<input type=\"hidden\" name=\"numPhaseFinale\" value=\"". $numPhaseFinale+1 ."\" />
 				Nombre de joueurs : <select class=\"uk-select uk-form-width-small uk-margin-right\" name=\"nbEquipes\"><option value=\"4\">4</option><option value=\"8\">8</option><option value=\"16\">16</option><option value=\"32\">32</option><option value=\"64\" disabled>64(indisponible)</option><option value=\"128\" disabled>128(indisponible)</option></select>
-				Type de phase : <select class=\"uk-select uk-form-width-small uk-margin-right\" name=\"typePhaseFinale\"><option value=\"arbre\">Arbre de tournoi</option><option value=\"poule\"disabled>Poule(indisponible)</option></select>
+				<!--- Type de phase : <select class=\"uk-select uk-form-width-small uk-margin-right\" name=\"typePhaseFinale\"><option value=\"arbre\">Arbre de tournoi</option><option value=\"poule\"disabled>Poule(indisponible)</option></select> --->
 				<button type=\"submit\" class=\"uk-button uk-button-primary\" $dispoBouton>Créer une phase finale</button>
 				</form>
 			</div>	
@@ -76,7 +76,7 @@ if ($infosPhasesFinales == ''){
 				$content="";
 			}
 
-			$content = $content."<div class=\"uk-width-1-1 uk-width-1-2@l uk-width-1-4@xl\">
+			$content = $content."<div class=\"uk-width-1-1 uk-width-1-1@l uk-width-1-2@xl\">
 							<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
 								<div class=\"uk-card-header\">
 									<div class=\"uk-grid uk-grid-small\">
@@ -88,7 +88,15 @@ if ($infosPhasesFinales == ''){
 								</div>
 								<div class=\"uk-card-body\">
 									<div>
-										Nombre d'équipes : ". $infosPhaseFinale['nb_equipes'] ." <a href=\"index.php?idtournoi=". $idTournoi ."&idphase=". $infosPhaseFinale['id_phasefinale'] ."&page=phase". $infosPhaseFinale['nb_equipes'] ."\" class=\"uk-icon-link sign-in-icon uk-float-right\" title=\"Accéder à cette phase\" data-uk-tooltip data-uk-icon=\"icon: sign-in; ratio :1.5\"></a>
+										<button class=\"uk-button uk-button-default\" disabled>Nombre d'équipes : <strong>". $infosPhaseFinale['nb_equipes'] ."</strong></button>
+										<div class=\"uk-float-right\">
+											<a href=\"index.php?idtournoi=". $idTournoi ."&idphase=". $infosPhaseFinale['id_phasefinale'] ."&page=phase". $infosPhaseFinale['nb_equipes'] ."\" title=\"Accéder à l'arbre de tournoi\" data-uk-tooltip>
+												<button class=\"uk-button uk-button-primary\"><img src=\"img/bracket.png\" class=\"uk-margin-small-right\" />Tableau</button>
+											</a>
+											<a href=\"http://localhost/tournoipalet/index.php?idtournoi=$idTournoi&idphase=$idPhaseFinale&page=matchsphasesfinales\" title=\"Accéder à la liste des matchs\" data-uk-tooltip>
+												<button class=\"uk-button uk-button-primary\"><span class=\"uk-margin-small-right uk-icon\" data-uk-icon=\"icon: list\"></span>Matchs</button>
+											</a>
+										</div>
 									</div>
 								</div>
 							</div>

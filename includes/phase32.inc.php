@@ -1022,7 +1022,9 @@ calculPhaseFinale($numPhaseFinale, 32);
 							<td></td>
 							<td></td>
 							<td class="bracket-i"></td>
-							<td></td>
+							<td>
+							<div class="bracket-position">1</div>
+							</td>
 						</tr>
 						<tr>
 							<td>

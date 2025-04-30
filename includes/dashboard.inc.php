@@ -17,8 +17,26 @@ if (isset($_GET['idtournoi'])){
 	$infosPhasesFinales = infosPhasesFinales();
 	if(!empty($infosPhasesFinales)){
 		foreach ($infosPhasesFinales as $row){
-			$phasesMenu .= "<li><a href=\"index.php?idtournoi=". $idTournoi ."&idphase=". $row['id_phasefinale'] ."&page=phase". $row['nb_equipes'] ."\"><span data-uk-icon=\"icon: thumbnails\" class=\"uk-margin-small-right\"></span>". $row['label_phasefinale'] ."</a></li>
-						<li ><a class=\"uk-margin-left\" href=\"index.php?idtournoi=". $idTournoi ."&idphase=". $row['id_phasefinale'] ."&page=matchsphasesfinales\" ><span data-uk-icon=\"icon: list\" class=\"uk-margin-small-right\"></span>Matchs</a></li>";
+			$phasesMenu .= "<li style=\"margin-top: 10px; padding-left: 22px; padding-top: 10px; border-top : 1px solid #444444\">
+								
+									<span data-uk-icon=\"icon: thumbnails\" class=\"uk-margin-small-right\">
+									</span>
+									". $row['label_phasefinale'] ."
+								
+							</li>
+							<li>
+								<a class=\"uk-margin-left\" href=\"index.php?idtournoi=". $idTournoi ."&idphase=". $row['id_phasefinale'] ."&page=phase". $row['nb_equipes'] ."\">
+									<span class=\"uk-margin-small-right\"><img src=\"img/bracket.png\" />
+									</span>
+									Tableau
+								</a>
+							</li>
+							<li >
+								<a class=\"uk-margin-left\" href=\"index.php?idtournoi=". $idTournoi ."&idphase=". $row['id_phasefinale'] ."&page=matchsphasesfinales\" >
+									<span data-uk-icon=\"icon: list\" class=\"uk-margin-small-right\"></span>
+									Matchs
+								</a>
+							</li>";
 		}
 	}
 }

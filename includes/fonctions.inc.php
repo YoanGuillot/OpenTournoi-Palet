@@ -1098,6 +1098,27 @@ function creerPhaseFinale($idTournoi,$numPhaseFinale,$nbEquipes, $labelPhaseFina
 	global $db;
 	$db->exec("INSERT INTO phases_finales (id_tournoi, num_phasefinale, nb_equipes, label_phasefinale, type_phasefinale) VALUES ('". $idTournoi ."', '". $numPhaseFinale ."', '". $nbEquipes ."', '". $labelPhaseFinale ."', '". $typePhaseFinale ."')");	
 
+	//////// creation classement
+        // La table n'existe pas, on l'importe
+        // Exécuter le script SQL pour créer la table
+        $sql = "
+        PRAGMA foreign_keys = off;
+        BEGIN TRANSACTION;
+        -- Tableau : classements
+        CREATE TABLE IF NOT EXISTS classements (
+            id_classement INTEGER PRIMARY KEY AUTOINCREMENT, 
+            class_numequipe NUMERIC, 
+            class_numphase NUMERIC REFERENCES phases_finales (num_phasefinale) ON DELETE CASCADE, 
+            class_place NUMERIC
+        );
+        COMMIT TRANSACTION;
+        PRAGMA foreign_keys = on;
+        ";
+        
+        $db->exec($sql);
+
+
+
 	// Ajout des places selon nombre d'équipe
 	$indexPlace = 1;
 	while ($indexPlace < $nbEquipes + 1){

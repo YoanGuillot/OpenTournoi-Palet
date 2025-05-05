@@ -7,7 +7,8 @@ if (isset($_POST['creerPhaseFinale'])){
 	$numPhaseFinale = $_POST['numPhaseFinale'];
 	$nbEquipes = $_POST['nbEquipes'];
 	$labelPhaseFinale = $_POST['labelPhaseFinale'];
-	$typePhaseFinale = $_POST['typePhaseFinale'];
+	//$typePhaseFinale = $_POST['typePhaseFinale'];
+	$typePhaseFinale = "arbre";
 	creerPhaseFinale($idTournoi, $numPhaseFinale, $nbEquipes, $labelPhaseFinale, $typePhaseFinale);	
 }
 

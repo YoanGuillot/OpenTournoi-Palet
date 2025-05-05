@@ -1096,8 +1096,18 @@ function creerPhaseQualif($idTournoi,$numPhase,$nbEquipes)
 function creerPhaseFinale($idTournoi,$numPhaseFinale,$nbEquipes, $labelPhaseFinale, $typePhaseFinale)
 {
 	global $db;
-	$db->exec("INSERT INTO phases_finales (id_tournoi, num_phasefinale, nb_equipes, label_phasefinale, type_phasefinale) VALUES ('". $idTournoi ."', '". $numPhaseFinale ."', '". $nbEquipes ."', '". $labelPhaseFinale ."', '". $typePhaseFinale ."')");
-	
+	$db->exec("INSERT INTO phases_finales (id_tournoi, num_phasefinale, nb_equipes, label_phasefinale, type_phasefinale) VALUES ('". $idTournoi ."', '". $numPhaseFinale ."', '". $nbEquipes ."', '". $labelPhaseFinale ."', '". $typePhaseFinale ."')");	
+
+	// Ajout des places selon nombre d'équipe
+	$indexPlace = 1;
+	while ($indexPlace < $nbEquipes + 1){
+		$db->exec("INSERT INTO classements (class_numphase, class_place) VALUES ('". $numPhaseFinale ."','". $indexPlace ."')");
+		$indexPlace++;
+	}
+
+//////// fin création classement
+
+
 	$recupIdPhase = $db->query('SELECT * FROM phases_finales WHERE id_tournoi == '.$idTournoi.' AND num_phasefinale == '. $numPhaseFinale .'');
 	while ($row = $recupIdPhase->fetchArray(1)) {
 		$idPhaseFinale = $row['id_phasefinale'];
@@ -1122,7 +1132,7 @@ function creerPhaseFinale($idTournoi,$numPhaseFinale,$nbEquipes, $labelPhaseFina
 		$db->exec("UPDATE positions_phasesfinales SET num_equipe = '". $row['equipe2'] ."' WHERE num_phasefinale == '". $numPhaseFinale ."' AND position_label == 'A". $indexPosition ."'");
 		$indexPosition++;
 
-	}	
+	}
 	
 	//header("Location: index.php?idtournoi=$idTournoi&page=phasesfinales");
 }

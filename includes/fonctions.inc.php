@@ -964,11 +964,51 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 	}
 
 	// Vainqueur
-	$resultatsVainqueur = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale == '. $numPhaseFinale .' AND position_label == "'. $lastLevel .'1"');
+	$resultatsVainqueur = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "'. $lastLevel .'1"');
 	while ($rowVainqueur = $resultatsVainqueur->fetchArray(1)) {
-		$vainqueur = $rowVainqueur['num_equipe'];
+		$place1= $rowVainqueur['num_equipe'];
 	}
-	print_r($vainqueur);
+	
+	// 2ème Place (finaliste perdant)
+	// On décrémente $lastLevel pour obtenir le niveau précédent (ex: E -> D)
+	$previousLevel = chr(ord($lastLevel) - 1);
+	$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2")');
+	while ($row = $resultats->fetchArray(1)) {
+		if($row['num_equipe'] != $place1) {
+			$place2 = $row['num_equipe'];
+		}
+	}
+
+	// 3ème Place
+	$resultatsVainqueur = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "PFV1"');
+	while ($rowVainqueur = $resultatsVainqueur->fetchArray(1)) {
+		$place3= $rowVainqueur['num_equipe'];
+	}
+
+	$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "PF1" OR position_label = "PF2")');
+	while ($row = $resultats->fetchArray(1)) {
+		if($row['num_equipe'] != $place3) {
+			$place4 = $row['num_equipe'];
+		}
+	}
+
+	echo "1 - $place1 <br>";
+	echo "2 - $place2 <br>";
+	echo "3 - $place3 <br>";
+	echo "4 - $place4 <br>";
+
+	if($nbEquipes == 8 || $nbEquipes == 16){
+		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "CLC1")');
+		while ($row = $resultats->fetchArray(1)) {
+				$place5 = $row['num_equipe'];
+		}
+	
+	
+		echo "5 - $place5 <br>";
+	
+	
+	}
+
 	die();
 	
 

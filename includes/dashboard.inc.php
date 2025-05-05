@@ -33,8 +33,14 @@ if (isset($_GET['idtournoi'])){
 							</li>
 							<li >
 								<a class=\"uk-margin-left\" href=\"index.php?idtournoi=". $idTournoi ."&idphase=". $row['id_phasefinale'] ."&page=matchsphasesfinales\" >
-									<span data-uk-icon=\"icon: list\" class=\"uk-margin-small-right\"></span>
+									<span data-uk-icon=\"icon: table\" class=\"uk-margin-small-right\"></span>
 									Matchs
+								</a>
+							</li>
+							<li >
+								<a class=\"uk-margin-left\" href=\"index.php?idtournoi=". $idTournoi ."&idphasefinale=". $row['id_phasefinale'] ."&page=classementphasesfinales\" >
+									<span data-uk-icon=\"icon: list\" class=\"uk-margin-small-right\"></span>
+									Classement
 								</a>
 							</li>";
 		}
@@ -143,26 +149,3 @@ if (isset($_GET['idtournoi'])){
 			</div>
 		</div>
 		<!-- /CONTENT -->
-		<!-- OFFCANVAS -->
-		<div id="offcanvas-nav" data-uk-offcanvas="flip: true; overlay: true">
-			<div class="uk-offcanvas-bar uk-offcanvas-bar-animation uk-offcanvas-slide">
-				<button class="uk-offcanvas-close uk-close uk-icon" type="button" data-uk-close></button>
-				<ul class="uk-nav uk-nav-default">
-					<li class="uk-active"><a href="#">Active</a></li>
-					<li class="uk-parent">
-						<a href="#">Parent</a>
-						<ul class="uk-nav-sub"> 
-							<li><a href="#">Sub item</a></li>
-							<li><a href="#">Sub item</a></li>
-						</ul>
-					</li>
-					<li class="uk-nav-header">Header</li>
-					<li><a href="#js-options"><span class="uk-margin-small-right uk-icon" data-uk-icon="icon: table"></span> Item</a></li>
-					<li><a href="#"><span class="uk-margin-small-right uk-icon" data-uk-icon="icon: thumbnails"></span> Item</a></li>
-					<li class="uk-nav-divider"></li>
-					<li><a href="#"><span class="uk-margin-small-right uk-icon" data-uk-icon="icon: trash"></span> Item</a></li>
-				</ul>
-				
-			</div>
-		</div>
-		<!-- /OFFCANVAS -->

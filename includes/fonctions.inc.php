@@ -147,6 +147,18 @@ function classementQualifs()
 	}
 }
 
+function classementPF($numPhaseFinale)
+{
+	global $db;
+	$resultats = $db->query("SELECT * FROM classements WHERE class_numphase == '$numPhaseFinale' ORDER BY class_place ASC");
+	while ($row = $resultats->fetchArray(1)) {
+		$classementPF[] = $row;
+	}
+	if(!empty($classementPF)){
+		return $classementPF;
+	}
+}
+
 function listeEquipes()
 {
 	global $db;
@@ -917,6 +929,50 @@ function calculPhaseFinale($numPhaseFinale, $nbEquipes){
 		setNewPosition($numPhaseFinale,"CHPF1","CHPF2","CHPFV1","");
 
 	}
+}
+
+function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
+	global $db;
+	$infosTournoi = infosTournoi($idTournoi);
+	$ptsFinales = $infosTournoi['pts_finales'];
+	$ptsPetitesFinales = $infosTournoi['pts_petitefinales'];
+	$ptsPhasesFinales = $infosTournoi['pts_phasesfinales'];
+	
+	switch ($nbEquipes) {
+		case 4:
+			$lastLevel = "C";
+			break;
+		case 8:
+			$lastLevel = "D";
+			break;
+		case 16:
+			$lastLevel = "E";
+			$lastLevelCH = "CHD";
+			break;
+		case 32:
+			$lastLevel = "F";
+			$lastLevelCH = "CHE";
+			break;
+		case 64:
+			$lastLevel = "G";
+			$lastLevelCH = "CHF";
+			break;
+		case 128:
+			$lastLevel = "H";
+			$lastLevelCH = "CHG";
+			break;
+	}
+
+	// Vainqueur
+	$resultatsVainqueur = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale == '. $numPhaseFinale .' AND position_label == "'. $lastLevel .'1"');
+	while ($rowVainqueur = $resultatsVainqueur->fetchArray(1)) {
+		$vainqueur = $rowVainqueur['num_equipe'];
+	}
+	print_r($vainqueur);
+	die();
+	
+
+
 }
 
 function tiragePhaseQualif($nbEquipes, $numPhase)

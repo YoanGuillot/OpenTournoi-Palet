@@ -970,7 +970,6 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 	}
 	
 	// 2ème Place (finaliste perdant)
-	// On décrémente $lastLevel pour obtenir le niveau précédent (ex: E -> D)
 	$previousLevel = chr(ord($lastLevel) - 1);
 	$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2")');
 	while ($row = $resultats->fetchArray(1)) {
@@ -984,7 +983,7 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 	while ($rowVainqueur = $resultatsVainqueur->fetchArray(1)) {
 		$place3= $rowVainqueur['num_equipe'];
 	}
-
+	// 4ème Place
 	$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "PF1" OR position_label = "PF2")');
 	while ($row = $resultats->fetchArray(1)) {
 		if($row['num_equipe'] != $place3) {
@@ -997,16 +996,62 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 	echo "3 - $place3 <br>";
 	echo "4 - $place4 <br>";
 
+	// Matchs de classement
+
 	if($nbEquipes == 8 || $nbEquipes == 16){
-		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "CLC1")');
+		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "CLC1"');
 		while ($row = $resultats->fetchArray(1)) {
 				$place5 = $row['num_equipe'];
 		}
 	
+		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "CLB1" OR position_label = "CLB2")');
+		while ($row = $resultats->fetchArray(1)) {
+			if($row['num_equipe'] != $place5) {	
+				$place6 = $row['num_equipe'];
+			}
+		}
+
+		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "CLY1"');
+		while ($row = $resultats->fetchArray(1)) {
+				$place7 = $row['num_equipe'];
+		}
 	
+		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "CLZ1" OR position_label = "CLZ2")');
+		while ($row = $resultats->fetchArray(1)) {
+			if($row['num_equipe'] != $place7) {	
+				$place8 = $row['num_equipe'];
+			}
+		}
+
+		
 		echo "5 - $place5 <br>";
+		echo "6 - $place6 <br>";
+		echo "7 - $place7 <br>";
+		echo "8 - $place8 <br>";
 	
-	
+	}
+
+	if($nbEquipes > 16){
+
+		// Perdants Quarts de finales places 5 à 8
+		$previousLevel = chr(ord($lastLevel) - 3);
+
+		$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8")';
+
+		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC');
+		$i = 5;
+		while ($row = $resultats->fetchArray(1)) {
+			
+			$a = "place".$i;	
+			$$a = $row['num_equipe'];
+			$i++;
+		}
+
+		echo "5 - $place5 <br>";
+		echo "6 - $place6 <br>";
+		echo "7 - $place7 <br>";
+		echo "8 - $place8 <br>";
+
 	}
 
 	die();

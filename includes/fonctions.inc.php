@@ -159,6 +159,18 @@ function classementPF($numPhaseFinale)
 	}
 }
 
+function classementFinal()
+{
+	global $db;
+	$resultats = $db->query("SELECT * FROM classements ORDER BY class_numphase ASC, class_place ASC");
+	while ($row = $resultats->fetchArray(1)) {
+		$classementFinal[] = $row;
+	}
+	if(!empty($classementFinal)){
+		return $classementFinal;
+	}
+}
+
 function listeEquipes()
 {
 	global $db;

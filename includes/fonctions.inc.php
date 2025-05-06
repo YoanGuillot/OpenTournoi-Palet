@@ -1254,7 +1254,49 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 			}
 		}
 
+		// Matchs de classement
 
+		if($nbEquipes == 16){
+			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "CHCLC1"');
+			while ($row = $resultats->fetchArray(1)) {
+					$place13 = $row['num_equipe'];
+			}
+		
+			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "CHCLB1" OR position_label = "CHCLB2")');
+			while ($row = $resultats->fetchArray(1)) {
+				if($row['num_equipe'] != $place13) {	
+					$place14 = $row['num_equipe'];
+				}
+			}
+
+			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "CHCLY1"');
+			while ($row = $resultats->fetchArray(1)) {
+					$place15 = $row['num_equipe'];
+			}
+		
+			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "CHCLZ1" OR position_label = "CHCLZ2")');
+			while ($row = $resultats->fetchArray(1)) {
+				if($row['num_equipe'] != $place15) {	
+					$place16 = $row['num_equipe'];
+				}
+			}
+
+			
+			if($place13 != ''){
+				$db->exec("UPDATE classements SET class_numequipe = '$place13' WHERE class_place == '13' AND class_numphase == '". $numPhaseFinale ."'");
+			}
+			if($place14 != ''){
+				$db->exec("UPDATE classements SET class_numequipe = '$place14' WHERE class_place == '14' AND class_numphase == '". $numPhaseFinale ."'");
+			}
+			if($place15 != ''){
+				$db->exec("UPDATE classements SET class_numequipe = '$place15' WHERE class_place == '15' AND class_numphase == '". $numPhaseFinale ."'");
+			}
+			if($place16 != ''){
+				$db->exec("UPDATE classements SET class_numequipe = '$place16' WHERE class_place == '16' AND class_numphase == '". $numPhaseFinale ."'");
+			}
+
+		
+		}
 
 	}
 }

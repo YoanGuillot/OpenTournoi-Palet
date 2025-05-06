@@ -2787,7 +2787,7 @@ calculPhaseFinale($numPhaseFinale, 32);
 
 							</td>
 							<td>
-								<div class="bracket-position">17-20</div>
+								<div class="bracket-position">17-24</div>
 								<div class="bracket-edit">
 									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-CHB8"><img src="img/edit.png" /></a>
 								</div>

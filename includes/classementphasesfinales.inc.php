@@ -9,7 +9,7 @@ $label = $infosPhaseFinale['label_phasefinale'];
 
 calculClassementPF($idTournoi, $numPhaseFinale, $nbEquipes);
 
-die();
+
 ?>
 
 <div class="uk-grid uk-grid-medium donotprint data-uk-grid uk-sortable="handle: .sortable-icon">
@@ -49,8 +49,12 @@ die();
 	
 	if(!empty($classementPF)){
 		foreach($classementPF as $row) {
-
-			$nomEquipe = "A faire";
+			if($row['class_numequipe'] != ''){
+				$nomEquipe = getEquipeName($row['class_numequipe']);
+			}else{
+				$nomEquipe = "";
+			}
+			
 			echo "<tr id=\"idplace-". $row['class_place'] ."\">
 					<td style=\"with:100%\">
 						<div style=\"display:inline-block;width: 22%\" >". $row['class_place'] ."</div>

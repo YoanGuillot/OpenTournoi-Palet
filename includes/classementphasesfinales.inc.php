@@ -22,7 +22,7 @@ calculClassementPF($idTournoi, $numPhaseFinale, $nbEquipes);
 					<div class="uk-width-auto"><h4>Classement <?php echo $label; ?></h4></div>
 					<div class="uk-width-expand uk-text-right panel-icons">
 						<form id="formPrint-classementPF" method="POST">
-							<a class="visible-inline uk-margin-right" href="PDF-classement-phasesfinales.php?idtournoi=<?php echo $idTournoi; ?>" uk-icon="print"></a>
+							<a class="visible-inline uk-margin-right" href="PDF-classement-phasesfinales.php?idtournoi=<?php echo $idTournoi; ?>&numphasefinale=<?php echo $numPhaseFinale; ?>" uk-icon="print"></a>
 						</form>
 					
 					

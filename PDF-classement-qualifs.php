@@ -29,7 +29,7 @@ if(isset($_GET['idtournoi'])){
 		foreach($classementQualifs as $row) {
 			
 			$contentMain .= "<tr>
-					    <td>$placeEquipe</td>
+					    <td class=\"numplaque\">$placeEquipe</td>
 					    <td>". $row['num_equipe'] ."</td>
 						<td>". $row['nom_equipe'] ."</td>
 						<td>". $row['nb_victoires'] ."</td>
@@ -65,8 +65,24 @@ if(isset($_GET['idtournoi'])){
                         width: 40px;
                         background-color: #dddddd;
                     }
+                    .enteteImpression{
+                        display:block;
+                        border: 1px solid #000000;
+                        background-color: #dddddd;
+                        font-weight: bold;
+                        font-size: 30px;
+                        text-align:center;
+                        text-transform: uppercase;
+                        width: 93%;
+                        margin: auto;
+                    }
+
+                    .numplaque{
+                        font-weight: bold;
+                        background-color: #eeeeee;
+                    }
                 </style>
-                <h1>CLASSEMENT QUALIFICATIONS</h1>
+                <div class=\"enteteImpression\"><h1>CLASSEMENT QUALIFICATIONS</h1></div>
                 <br>
                 <table>
                     <tr>

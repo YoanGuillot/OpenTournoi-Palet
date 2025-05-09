@@ -60,10 +60,25 @@ if(isset($_GET['idtournoi'])){
                         border: 1px solid #000000;
                     }
                     th{
-                        width: 90px;
+                        width: 94px;
+                    }
+                    .enteteImpression{
+                        border: 1px solid #000000;
+                        background-color: #dddddd;
+                        font-weight: bold;
+                        font-size: 30px;
+                        text-align:center;
+                        text-transform: uppercase;
+                        width: 90%;
+                        margin: auto;
+                    }
+
+                    .numplaque{
+                        font-weight: bold;
+                        background-color: #eeeeee;
                     }
                 </style>
-                <h1>LISTE DES EQUIPES</h1>
+                <div class=\"enteteImpression\"><h1>LISTE DES EQUIPES</h1></div>
                 <br>
                 <table>
                     <tr>

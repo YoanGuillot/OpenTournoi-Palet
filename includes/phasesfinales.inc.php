@@ -67,7 +67,8 @@ if ($infosPhasesFinales == ''){
 		$infosPhaseFinale = infosPhaseFinaleNum($countPhase);
 		$idPhaseFinale = $infosPhaseFinale['id_phasefinale'];
 			if ($countPhase == $numPhaseFinale){	
-				$trashButton = "<a href=\"index.php?idtournoi=". $idTournoi ."&action=supprphasefinale&phasefinale=". $numPhaseFinale ."\" class=\"uk-icon-link trash-icon\" title=\"Supprimer\" data-uk-tooltip data-uk-icon=\"icon: trash\"></a>";
+				//$trashButton = "<a href=\"index.php?idtournoi=". $idTournoi ."&action=supprphasefinale&phasefinale=". $numPhaseFinale ."\" class=\"uk-icon-link trash-icon\" title=\"Supprimer\" data-uk-tooltip data-uk-icon=\"icon: trash\"></a>";
+				$trashButton = "<a style=\"margin-left: 40px;color: red\" href=\"\" onclick=\"supprPhaseFinale(". $idTournoi .",". $numPhaseFinale .")\" uk-icon=\"icon: trash; ratio: 1\" uk-toggle=\"target: #supprPhaseFinale\"></a>";
 			}else{
 				$trashButton = " ";
 			}
@@ -118,4 +119,15 @@ echo $content;
 	<p class="uk-text-center"><?php echo $messagePhasesFinales; ?></p>
 	
 
+</div>
+
+<div id="supprPhaseFinale" uk-modal>
+      <div class="uk-modal-dialog uk-modal-body">
+        <h2 class="uk-modal-title uk-text-center"><span uk-icon="icon: warning; ratio: 2"></span> ATTENTION <span uk-icon="icon: warning; ratio: 2"></span></h2>
+        <p>Vous allez supprimer cette phase finale. Cette action n'est pas réversible. Tous les matchs associés seront supprimés !<br /><br />Souhaitez vous continuer ?</p>
+        <p class="uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Annuler</button>
+            <a id="supprPhaseFinaleBouton" href="#" class="uk-button uk-button-primary" style="background-color: red" type="button">Supprimer cette phase</a>
+        </p>
+    </div>
 </div>

@@ -24,7 +24,7 @@ $stylesCSS = "<style>
                 font-size: 18px;
             }
             th{
-                width: 50px;
+                width: 54px;
                 background-color: #dddddd;
                 text-transform : uppercase;
                 font-weight: bold;
@@ -39,6 +39,8 @@ $stylesCSS = "<style>
                 font-size: 30px;
                 text-align:center;
                 text-transform: uppercase;
+                width: 90%;
+                margin: auto;
             }
 
             .numplaque{

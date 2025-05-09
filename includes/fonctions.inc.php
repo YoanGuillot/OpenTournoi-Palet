@@ -756,12 +756,15 @@ function setNewPosition($numPhaseFinale,$position1, $position2, $positionVainque
 	}
 	
 	if($score1>$score2){
+		$perduA = $score2;
 		$vainqueur = $numEquipe1;
 		$perdant = $numEquipe2;
 	}else{
+		$perduA = $score1;
 		$vainqueur = $numEquipe2;
 		$perdant = $numEquipe1;
 	}
+	
 
 
 // DEBUGG                     
@@ -769,7 +772,7 @@ function setNewPosition($numPhaseFinale,$position1, $position2, $positionVainque
 //echo $score2." ";
 
 	if(is_numeric($score1) && is_numeric($score2)){
-		$db->exec("UPDATE positions_phasesfinales SET num_equipe = '$vainqueur' WHERE num_phasefinale == ". $numPhaseFinale ." AND position_label == \"". $positionVainqueur ."\"");
+		$db->exec("UPDATE positions_phasesfinales SET num_equipe = '$vainqueur', score_precedent ='$perduA' WHERE num_phasefinale == ". $numPhaseFinale ." AND position_label == \"". $positionVainqueur ."\"");
 		$db->exec("UPDATE positions_phasesfinales SET num_equipe = '$perdant' WHERE num_phasefinale == ". $numPhaseFinale ." AND position_label == \"". $positionPerdant ."\"");
 	}else{
 		$db->exec("UPDATE positions_phasesfinales SET num_equipe = '' WHERE num_phasefinale == ". $numPhaseFinale ." AND position_label == \"". $positionVainqueur ."\"");
@@ -975,6 +978,10 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 			break;
 	}
 
+	$place1 = '';
+			$place2 = '';
+			$place3 = '';
+			$place4 = '';
 	// Vainqueur
 	$resultatsVainqueur = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "'. $lastLevel .'1"');
 	while ($rowVainqueur = $resultatsVainqueur->fetchArray(1)) {
@@ -1068,7 +1075,7 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 
 		$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8")';
 
-		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC');
+		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC');
 		$i = 5;
 		while ($row = $resultats->fetchArray(1)) {
 			
@@ -1087,7 +1094,7 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 
 		$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8" OR position_label = "'. $previousLevel .'9" OR position_label = "'. $previousLevel .'10" OR position_label = "'. $previousLevel .'11" OR position_label = "'. $previousLevel .'12" OR position_label = "'. $previousLevel .'13" OR position_label = "'. $previousLevel .'14" OR position_label = "'. $previousLevel .'15" OR position_label = "'. $previousLevel .'16")';
 
-		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC');
+		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC');
 		$i = 9;
 		while ($row = $resultats->fetchArray(1)) {
 			
@@ -1108,7 +1115,7 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 
 		$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8" OR position_label = "'. $previousLevel .'9" OR position_label = "'. $previousLevel .'10" OR position_label = "'. $previousLevel .'11" OR position_label = "'. $previousLevel .'12" OR position_label = "'. $previousLevel .'13" OR position_label = "'. $previousLevel .'14" OR position_label = "'. $previousLevel .'15" OR position_label = "'. $previousLevel .'16" OR position_label = "'. $previousLevel .'17" OR position_label = "'. $previousLevel .'18" OR position_label = "'. $previousLevel .'19" OR position_label = "'. $previousLevel .'20" OR position_label = "'. $previousLevel .'21" OR position_label = "'. $previousLevel .'22" OR position_label = "'. $previousLevel .'23" OR position_label = "'. $previousLevel .'24" OR position_label = "'. $previousLevel .'25" OR position_label = "'. $previousLevel .'26" OR position_label = "'. $previousLevel .'27" OR position_label = "'. $previousLevel .'28" OR position_label = "'. $previousLevel .'29" OR position_label = "'. $previousLevel .'30" OR position_label = "'. $previousLevel .'31" OR position_label = "'. $previousLevel .'32")';
 
-		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC');
+		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC');
 		$i = 17;
 		while ($row = $resultats->fetchArray(1)) {
 			
@@ -1129,7 +1136,7 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 
 		$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8" OR position_label = "'. $previousLevel .'9" OR position_label = "'. $previousLevel .'10" OR position_label = "'. $previousLevel .'11" OR position_label = "'. $previousLevel .'12" OR position_label = "'. $previousLevel .'13" OR position_label = "'. $previousLevel .'14" OR position_label = "'. $previousLevel .'15" OR position_label = "'. $previousLevel .'16" OR position_label = "'. $previousLevel .'17" OR position_label = "'. $previousLevel .'18" OR position_label = "'. $previousLevel .'19" OR position_label = "'. $previousLevel .'20" OR position_label = "'. $previousLevel .'21" OR position_label = "'. $previousLevel .'22" OR position_label = "'. $previousLevel .'23" OR position_label = "'. $previousLevel .'24" OR position_label = "'. $previousLevel .'25" OR position_label = "'. $previousLevel .'26" OR position_label = "'. $previousLevel .'27" OR position_label = "'. $previousLevel .'28" OR position_label = "'. $previousLevel .'29" OR position_label = "'. $previousLevel .'30" OR position_label = "'. $previousLevel .'31" OR position_label = "'. $previousLevel .'32" OR position_label = "'. $previousLevel .'33" OR position_label = "'. $previousLevel .'34" OR position_label = "'. $previousLevel .'35" OR position_label = "'. $previousLevel .'36" OR position_label = "'. $previousLevel .'37" OR position_label = "'. $previousLevel .'38" OR position_label = "'. $previousLevel .'39" OR position_label = "'. $previousLevel .'40" OR position_label = "'. $previousLevel .'41" OR position_label = "'. $previousLevel .'42" OR position_label = "'. $previousLevel .'43" OR position_label = "'. $previousLevel .'44" OR position_label = "'. $previousLevel .'45" OR position_label = "'. $previousLevel .'46" OR position_label = "'. $previousLevel .'47" OR position_label = "'. $previousLevel .'48" OR position_label = "'. $previousLevel .'49" OR position_label = "'. $previousLevel .'50" OR position_label = "'. $previousLevel .'51" OR position_label = "'. $previousLevel .'52" OR position_label = "'. $previousLevel .'53" OR position_label = "'. $previousLevel .'54" OR position_label = "'. $previousLevel .'55" OR position_label = "'. $previousLevel .'56" OR position_label = "'. $previousLevel .'57" OR position_label = "'. $previousLevel .'58" OR position_label = "'. $previousLevel .'59" OR position_label = "'. $previousLevel .'60" OR position_label = "'. $previousLevel .'61" OR position_label = "'. $previousLevel .'62" OR position_label = "'. $previousLevel .'63" OR position_label = "'. $previousLevel .'64")';
 
-		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC');
+		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC');
 		$i = 33;
 		while ($row = $resultats->fetchArray(1)) {
 			
@@ -1322,7 +1329,7 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 	
 			$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8")';
 	
-			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC');
+			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC');
 			
 			switch($nbEquipes){
 				case 32:
@@ -1353,7 +1360,7 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 			$previousLevel = "CH".$previousLevel;
 			$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8" OR position_label = "'. $previousLevel .'9" OR position_label = "'. $previousLevel .'10" OR position_label = "'. $previousLevel .'11" OR position_label = "'. $previousLevel .'12" OR position_label = "'. $previousLevel .'13" OR position_label = "'. $previousLevel .'14" OR position_label = "'. $previousLevel .'15" OR position_label = "'. $previousLevel .'16")';
 	
-			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC');
+			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC, score_precedent ASC');
 			
 			switch($nbEquipes){
 				case 32:
@@ -1389,7 +1396,7 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 			$previousLevel = "CH".$previousLevel;
 			$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8" OR position_label = "'. $previousLevel .'9" OR position_label = "'. $previousLevel .'10" OR position_label = "'. $previousLevel .'11" OR position_label = "'. $previousLevel .'12" OR position_label = "'. $previousLevel .'13" OR position_label = "'. $previousLevel .'14" OR position_label = "'. $previousLevel .'15" OR position_label = "'. $previousLevel .'16")';
 	
-			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC');
+			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC');
 			
 			switch($nbEquipes){
 				case 64:
@@ -1523,11 +1530,18 @@ function tiragePhasefinale($idTournoi, $nbEquipes, $numPhase)
 }
 
 
-function supprPhaseQualif($idPhase)
+function supprPhaseQualif($idPhase,$idTournoi)
 {
 	global $db;
 	$db->exec("DELETE FROM phases_qualif WHERE id_phasequalif == $idPhase");
 	header("Location: index.php?idtournoi=$idTournoi&page=qualifs");
+}
+
+function supprPhaseQualifTirage($idPhase,$idTournoi)
+{
+	global $db;
+	$db->exec("DELETE FROM phases_qualif WHERE id_phasequalif == $idPhase");
+	//header("Location: index.php?idtournoi=$idTournoi&page=qualifs");
 }
 
 function dispoReset($idPhaseFinale)
@@ -1568,8 +1582,8 @@ function creerPhaseQualif($idTournoi,$numPhase,$nbEquipes)
 	$generation = 1;
 	TIRAGE:
 	unset($matchs);	
-	if ($generation > 1000){
-		supprPhaseQualif($idPhase);
+	if ($generation > 100000){
+		supprPhaseQualifTirage($idPhase,$idTournoi);
 		echo "Aucune combinaison trouvée.<br /><br /><a href=\"index.php?idtournoi=". $idTournoi ."&page=qualifs\"><button class=\"uk-button uk-button-primary\">Retour</button></a>";
 		die();
 	}

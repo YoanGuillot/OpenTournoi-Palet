@@ -72,7 +72,7 @@ if(isset($_GET['idtournoi']) && isset($_GET['numphase']) && isset($_GET['ptsqual
                 font-size: 18px;
             }
             th{
-                width: 50px;
+                width: 54px;
                 background-color: #dddddd;
                 text-transform : uppercase;
                 font-weight: bold;
@@ -87,6 +87,8 @@ if(isset($_GET['idtournoi']) && isset($_GET['numphase']) && isset($_GET['ptsqual
                 font-size: 30px;
                 text-align:center;
                 text-transform: uppercase;
+                width: 90%;
+                margin: auto;
             }
 
             .numplaque{

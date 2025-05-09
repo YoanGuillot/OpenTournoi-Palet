@@ -3,21 +3,6 @@ require __DIR__.'/vendor/autoload.php';
 use Spipu\Html2Pdf\Html2Pdf;
 
 
-function infosPhaseFinaleNum($numPhaseFinale)
-{
-	global $db;
-	$resultats = $db->query('SELECT * FROM phases_finales WHERE num_phasefinale == "'. $numPhaseFinale .'"');
-	while ($row = $resultats->fetchArray(1)) {
-		$infosPhaseFinale = $row;
-	}
-	
-	if(!empty($infosPhaseFinale)){
-		return $infosPhaseFinale;
-	}
-	
-	
-}
-
 function getEquipeName($numEquipe){
 	global $db;
 	$resultats = $db->query('SELECT nom_equipe FROM equipes WHERE num_equipe = '. $numEquipe .'');
@@ -27,38 +12,36 @@ function getEquipeName($numEquipe){
 	return $nomEquipe;
 }
 
-function classementPF($numPhaseFinale)
+function classementFinal()
 {
 	global $db;
-	$resultats = $db->query("SELECT * FROM classements WHERE class_numphase == '$numPhaseFinale' ORDER BY class_place ASC");
+	$resultats = $db->query("SELECT * FROM classements ORDER BY class_numphase ASC, class_place ASC");
 	while ($row = $resultats->fetchArray(1)) {
-		$classementPF[] = $row;
+		$classementFinal[] = $row;
 	}
-	if(!empty($classementPF)){
-		return $classementPF;
+	if(!empty($classementFinal)){
+	    return $classementFinal;
 	}
+   
 }
 
 
 
 if(isset($_GET['idtournoi'])){
     $idTournoi = $_GET['idtournoi'];
-    $numPhaseFinale = $_GET['numphasefinale'];
+    
     
     //Connexion à la base de donnée
 	$db = new SQLite3('includes/conf/' .$idTournoi. '.db');
 
-   
-    $infosPhaseFinale = infosPhaseFinaleNum($numPhaseFinale);
-    $labelPF = $infosPhaseFinale['label_phasefinale'];
 
     $html2pdf = new Html2Pdf('P','A4','fr');
 
-    $classementPF = classementPF($numPhaseFinale);
+    $classementFinal = classementFinal();
     $contentMain = "";
     
-    if(!empty($classementPF)){
-		foreach($classementPF as $row) {
+    if(!empty($classementFinal)){
+		foreach($classementFinal as $row) {
             if($row['class_numequipe'] != ''){
 				$nomEquipe = getEquipeName($row['class_numequipe']);
 			}else{
@@ -121,7 +104,7 @@ if(isset($_GET['idtournoi'])){
                 background-color: #eeeeee;
             }
                 </style>
-                <div class=\"enteteImpression\"><h1>CLASSEMENT $labelPF</h1></div>
+                <div class=\"enteteImpression\"><h1>CLASSEMENT GENERAL</h1></div>
                 <br>
                 <table>
                     <tr>
@@ -135,7 +118,7 @@ if(isset($_GET['idtournoi'])){
 
 
     $html2pdf->writeHTML($content);
-    $html2pdf->output('classement phasefinale - '. $labelPF .'.pdf', 'D');
+    $html2pdf->output('classement-final.pdf', 'D');
 }else{
     echo "ID tournoi non défini ! ";
 }

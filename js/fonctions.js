@@ -9,6 +9,9 @@ function supprTournoi(idTournoi){
 function supprPhaseQualif(idTournoi, numPhase){
 	$("#supprPhaseQualifBouton").attr("href", 'index.php?idtournoi='+idTournoi+'&action=supprphasequalif&phasequalif='+numPhase);
 }
+function supprPhaseFinale(idTournoi, numPhaseFinale){
+	$("#supprPhaseFinaleBouton").attr("href", 'index.php?idtournoi='+idTournoi+'&action=supprphasefinale&phasefinale='+numPhaseFinale);
+}
 
 function activateLink(idLink, side, ptsV, idMatch){
 	

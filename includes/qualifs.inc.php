@@ -38,11 +38,12 @@ echo "<p class='uk-text-center donotprint'>$messageQualif</p>";
 echo "<div style=\"width: 100%\">		
 		
 			<div style=\"display:inline-block;width:49%;text-align:left;\">
-				<form method=\"POST\" action=\"index.php?idtournoi=$idTournoi&page=qualifs\">
+				<form id=\"form-creerPhaseQualif\" method=\"POST\" action=\"index.php?idtournoi=$idTournoi&page=qualifs\">
 				<input type=\"hidden\" name=\"creerPhase\" value=\"1\" />
 				<input type=\"hidden\" name=\"numPhase\" value=\"". $numPhase+1 ."\" />
-				<button type=\"submit\" style=\"background-color: mediumseagreen;color: #ffffff;\" class=\"uk-button\" $dispoBouton><span uk-icon=\"icon: plus-circle\" style=\"margin-right: 5px;\"></span> Créer une phase de qualification</button>
 				</form>
+				<button id=\"creerPhaseQualifBouton\" href=\"\" onclick=\"creerPhaseQualifBouton()\" style=\"background-color: mediumseagreen;color: #ffffff;\" class=\"uk-button\" $dispoBouton><span uk-icon=\"icon: plus-circle\" style=\"margin-right: 5px;\"></span> Créer une phase de qualification</button>
+				
 			</div>	
 			<div style=\"display:inline-block;width:49%;text-align:right;\">
 				<form method=\"POST\" action=\"index.php?idtournoi=$idTournoi&page=qualifs\">
@@ -236,13 +237,26 @@ echo $content;
     </div>
 </div>
 
-<?php 
-if ($infosTournoi['statut_qualifs'] == "ferme"){
-?>
+<div id="creerPhaseQualif" style="display:none;position: fixed; z-index:999; top: 0px; left:0px;height: 100vh; width: 100vw;background: radial-gradient(#ffffff, rgba(255,255,255,0.8));text-align:center;">
+	<div style="display:table-cell;width:100vw; height: 100vh;text-align:center;vertical-align:middle;">
+		<img style="border-radius: 50%;margin:0 auto;" src="img/loading2.gif" />
+		<h2 style="margin-top: -200px;">GENERATION EN COURS...</h2>
+	</div>
+</div>
+
+
 <script>
+
+	<?php 
+	if ($infosTournoi['statut_qualifs'] == "ferme"){
+	?>
+
 	$(document).ready(function() {
 		$('select').attr('disabled', true);
 		$('.uk-button').attr('disabled', true);
 	});
-</script>
+	
+
 <?php } ?>
+
+</script>

@@ -1584,7 +1584,7 @@ function creerPhaseQualif($idTournoi,$numPhase,$nbEquipes)
 	unset($matchs);	
 	if ($generation > 100000){
 		supprPhaseQualifTirage($idPhase,$idTournoi);
-		echo "Aucune combinaison trouvée.<br /><br /><a href=\"index.php?idtournoi=". $idTournoi ."&page=qualifs\"><button class=\"uk-button uk-button-primary\">Retour</button></a>";
+		echo "<span style=\"color: red; vertical-align: text-bottom\" class=\"uk-icon\" uk-icon=\"icon: close\"></span> Aucune combinaison trouvée ou possibles. Veuillez réessayer (plusieurs tentatives peuvent être effectuées avant de trouver une bonne combinaison).<br /><br /><a href=\"index.php?idtournoi=". $idTournoi ."&page=qualifs\"><button class=\"uk-button uk-button-primary\">Retour</button></a>";
 		die();
 	}
 	$tirage = tiragePhaseQualif($nbEquipes, $numPhase);

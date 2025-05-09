@@ -13,6 +13,11 @@ function supprPhaseFinale(idTournoi, numPhaseFinale){
 	$("#supprPhaseFinaleBouton").attr("href", 'index.php?idtournoi='+idTournoi+'&action=supprphasefinale&phasefinale='+numPhaseFinale);
 }
 
+function creerPhaseQualifBouton(){
+	$('#creerPhaseQualif').css('display', 'block');
+	$('#form-creerPhaseQualif').submit();
+}
+
 function activateLink(idLink, side, ptsV, idMatch){
 	
 	$("#"+idLink).removeClass('disabled');

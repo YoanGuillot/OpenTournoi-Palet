@@ -135,10 +135,95 @@ function listeTournois()
 	}
 }
 
-function classementQualifs()
+function classementQualifs($idTournoi)
 {
 	global $db;
-	$resultats = $db->query('SELECT * FROM equipes ORDER BY nb_victoires DESC, pts_pour DESC, pts_diff DESC, bonus_qualifs DESC');
+	$infosTournoi = infosTournoi($idTournoi);
+	$typeClassement = $infosTournoi['type_classement'];
+	switch($infosTournoi['type_classperso1']){
+		case "nbvictoires";
+			$condition1 = 'nb_victoires DESC';
+			break;
+		case "ptspour";
+			$condition1 = 'pts_pour DESC';
+			break;
+		case "ptscontre";
+			$condition1 = 'pts_contre ASC';
+			break;
+		case "diff";
+			$condition1 = 'pts_diff DESC';
+			break;
+	}
+
+	switch($infosTournoi['type_classperso2']){
+		case "aucun";
+			$condition2 = '';
+			break;
+		case "nbvictoires";
+			$condition2 = ', nb_victoires DESC';
+			break;
+		case "ptspour";
+			$condition2 = ', pts_pour DESC';
+			break;
+		case "ptscontre";
+			$condition2 = ', pts_contre ASC';
+			break;
+		case "diff";
+			$condition2 = ', pts_diff DESC';
+			break;
+	}
+
+	switch($infosTournoi['type_classperso3']){
+		case "aucun";
+			$condition3 = '';
+			break;
+		case "nbvictoires";
+			$condition3 = ', nb_victoires DESC';
+			break;
+		case "ptspour";
+			$condition3 = ', pts_pour DESC';
+			break;
+		case "ptscontre";
+			$condition3 = ', pts_contre ASC';
+			break;
+		case "diff";
+			$condition3 = ', pts_diff DESC';
+			break;
+	}
+
+	switch($infosTournoi['type_classperso4']){
+		case "aucun";
+			$condition4 = '';
+			break;
+		case "nbvictoires";
+			$condition4 = ', nb_victoires DESC';
+			break;
+		case "ptspour";
+			$condition4 = ', pts_pour DESC';
+			break;
+		case "ptscontre";
+			$condition4 = ', pts_contre ASC';
+			break;
+		case "diff";
+			$condition4 = ', pts_diff DESC';
+			break;
+	}
+
+
+	
+	switch ($typeClassement){
+		case "CF":
+			$orderBY = 'nb_victoires DESC, pts_pour DESC, pts_diff DESC, bonus_qualifs DESC';
+			break;
+		case "Challenge17":
+			$orderBY = 'nb_victoires DESC, pts_diff DESC, bonus_qualifs DESC';
+			break;
+		case "Perso":
+			$orderBY = $condition1.$condition2.$condition3.$condition4.', bonus_qualifs DESC';
+			break;
+	}
+
+	$resultats = $db->query('SELECT * FROM equipes ORDER BY '. $orderBY .'');
 	while ($row = $resultats->fetchArray(1)) {
 		$classementQualifs[] = $row;
 	}

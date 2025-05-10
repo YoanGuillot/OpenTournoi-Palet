@@ -46,11 +46,16 @@ if(isset($_POST['action'])){
 					$idTournoi = $_POST['idTournoi'];
 					$maxEquipes = $_POST['maxEquipes'];
 					$typePhasesFinales = $_POST['typePhasesFinales'];
+					$typeClassement = $_POST['classType'];
+					$classPerso1 = $_POST['classPerso1'];
+					$classPerso2 = $_POST['classPerso2'];
+					$classPerso3 = $_POST['classPerso3'];
+					$classPerso4 = $_POST['classPerso4'];
 					$ptsQualifs = $_POST['ptsQualifs'];
 					$ptsPhasesFinales = $_POST['ptsPhasesFinales'];
 					$ptsFinales = $_POST['ptsFinales'];
 					$ptsPetiteFinales = $_POST['ptsPetiteFinales'];
-					$db->exec("UPDATE tournois SET max_equipes = \"$maxEquipes\", type_phasesfinales = \"$typePhasesFinales\", pts_qualifs = \"$ptsQualifs\", pts_phasesfinales = \"$ptsPhasesFinales\", pts_finales = \"$ptsFinales\", pts_petitefinales = \"$ptsPetiteFinales\" WHERE id_tournoi == '$idTournoi'");
+					$db->exec("UPDATE tournois SET max_equipes = \"$maxEquipes\", type_phasesfinales = \"$typePhasesFinales\", pts_qualifs = \"$ptsQualifs\", pts_phasesfinales = \"$ptsPhasesFinales\", pts_finales = \"$ptsFinales\", pts_petitefinales = \"$ptsPetiteFinales\" , type_classement = \"$typeClassement\", type_classperso1 = \"$classPerso1\", type_classperso2 = \"$classPerso2\", type_classperso3 = \"$classPerso3\", type_classperso4 = \"$classPerso4\" WHERE id_tournoi == '$idTournoi'");
 					
 					header("Location: index.php?idtournoi=$idTournoi&page=parametres");
 		}

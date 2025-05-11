@@ -7,7 +7,8 @@ if (isset($_GET['idtournoi'])){
 	if(!empty($listeEquipes)){
 		$nbEquipes = count($listeEquipes);
 		foreach ($listeEquipes as $row){
-			statsEquipe($row['id_equipe']);
+			//echo "equipe :".$row['id_equipe']."<br>";
+			statsEquipe($row['num_equipe']);
 		}	
 	} else {
 		$nbEquipes = 0;

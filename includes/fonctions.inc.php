@@ -1572,29 +1572,39 @@ function tiragePhasefinale($idTournoi, $nbEquipes, $numPhase)
 	$tableauEquipes = array();
 	$countEquipe = 0;
 	$infosTournoi = infosTournoi($idTournoi);
-	if($infosTournoi['type_phasesfinales'] == "tetesdeserie"){
-	
-	}else{
-		foreach($recupEquipes as $row){
-			if($row['dispo_phasesfinales'] == '1' && $countEquipe < $nbEquipes){
-				$numEquipe = $row['num_equipe'];
-				$tableauEquipes[] = $numEquipe;
-				$db->exec("UPDATE equipes SET dispo_phasesfinales = '0' WHERE num_equipe == '$numEquipe'");
-				$countEquipe = $countEquipe + 1;
-			}
+	foreach($recupEquipes as $row){
+		if($row['dispo_phasesfinales'] == '1' && $countEquipe < $nbEquipes){
+			$numEquipe = $row['num_equipe'];
+			$tableauEquipes[] = $numEquipe;
+			$db->exec("UPDATE equipes SET dispo_phasesfinales = '0' WHERE num_equipe == '$numEquipe'");
+			$countEquipe = $countEquipe + 1;
 		}
 	}
 
+
 	genererArbrePhaseFinale($numPhase,$nbEquipes);
 	
-	//melange du tableau
-	$melTableauEquipes = $tableauEquipes;
-	shuffle($melTableauEquipes);
+	
+	if($infosTournoi['type_phasesfinales'] == "tetedeserie"){
+		//non melange du tableau
+		$melTableauEquipes = $tableauEquipes;
+		//Division en deux parties du tableau mélangé
+		$premierTableauEquipes = array_slice($melTableauEquipes, 0, ($nbEquipes / 2)); 
+		$secondTableauEquipes = array_slice($melTableauEquipes,($nbEquipes / 2), $nbEquipes - 1);
+		$secondTableauEquipes = array_reverse($secondTableauEquipes);
+	}else{
+		//melange du tableau
+		$melTableauEquipes = $tableauEquipes;
+		shuffle($melTableauEquipes);
+		//Division en deux parties du tableau mélangé
+		$premierTableauEquipes = array_slice($melTableauEquipes, 0, ($nbEquipes / 2)); 
+		$secondTableauEquipes = array_slice($melTableauEquipes,($nbEquipes / 2), $nbEquipes - 1); 
+		
+	}
+	
 
 
-	//Division en deux parties le tableau mélangé
-	$premierTableauEquipes = array_slice($melTableauEquipes, 0, ($nbEquipes / 2)); 
-	$secondTableauEquipes = array_slice($melTableauEquipes,($nbEquipes / 2), $nbEquipes - 1); 
+	
 
 	//Constituer la proposition de matchs
 
@@ -1603,9 +1613,17 @@ function tiragePhasefinale($idTournoi, $nbEquipes, $numPhase)
 	$indexTable = 0;
 	unset($matchs);
 	while($numMatch < $nbMatch + 1){
-			
-		$equipe1 = $premierTableauEquipes[$indexTable];
-		$equipe2 = $secondTableauEquipes[$indexTable];
+		if(array_key_exists($indexTable, $premierTableauEquipes)){
+			$equipe1 = $premierTableauEquipes[$indexTable];
+		}else{
+			$equipe1 = '';
+		}
+		if(array_key_exists($indexTable, $secondTableauEquipes)){
+			echo array_key_exists($indexTable, $secondTableauEquipes);
+			$equipe2 = $secondTableauEquipes[$indexTable];
+		}else{
+			$equipe2 = '';
+		}
 		
 		$matchs[$numMatch] = array('num_phase'=>$numPhase, 'equipe1'=>$equipe1, 'equipe2'=> $equipe2);
 		$numMatch = $numMatch + 1;
@@ -1735,7 +1753,7 @@ function creerPhaseFinale($idTournoi,$numPhaseFinale,$nbEquipes, $labelPhaseFina
 
 //////// fin création classement
 
-
+	
 	$recupIdPhase = $db->query('SELECT * FROM phases_finales WHERE id_tournoi == '.$idTournoi.' AND num_phasefinale == '. $numPhaseFinale .'');
 	while ($row = $recupIdPhase->fetchArray(1)) {
 		$idPhaseFinale = $row['id_phasefinale'];

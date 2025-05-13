@@ -53,7 +53,7 @@ defined('_LPDT') or die;
 								<span style="font-weight: bold;">Type de phases finales : </span>
 								<select name="typePhasesFinales" class="uk-select uk-form-width-small">
 									<option value="aleatoire"<?php if ($infosTournoi['type_phasesfinales'] == 'aleatoire'){ echo " selected";} ?>>Aléatoire</option>
-									<option value="tetedeserie"<?php if ($infosTournoi['type_phasesfinales'] == 'tetedeserie'){ echo " selected";} ?> disabled>Tête de série (indisponible)</option>
+									<option value="tetedeserie"<?php if ($infosTournoi['type_phasesfinales'] == 'tetedeserie'){ echo " selected";} ?>>Tête de série</option>
 								</select>
 							</div>
 							<hr />

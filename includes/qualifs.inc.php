@@ -42,7 +42,7 @@ echo "<div style=\"width: 100%\">
 				<input type=\"hidden\" name=\"creerPhase\" value=\"1\" />
 				<input type=\"hidden\" name=\"numPhase\" value=\"". $numPhase+1 ."\" />
 				</form>
-				<button id=\"creerPhaseQualifBouton\" href=\"\" onclick=\"creerPhaseQualifBouton()\" style=\"background-color: mediumseagreen;color: #ffffff;\" class=\"uk-button\" $dispoBouton><span uk-icon=\"icon: plus-circle\" style=\"margin-right: 5px;\"></span> Créer une phase de qualification</button>
+				<button id=\"creerPhaseQualifBouton\" href=\"\" onclick=\"creerPhaseQualifBouton();\" style=\"background-color: mediumseagreen;color: #ffffff;\" class=\"uk-button\" $dispoBouton><span uk-icon=\"icon: plus-circle\" style=\"margin-right: 5px;\"></span> Créer une phase de qualification</button>
 				
 			</div>	
 			<div style=\"display:inline-block;width:49%;text-align:right;\">

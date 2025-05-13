@@ -55,14 +55,15 @@ defined('_LPDT') or die;
 									<option value="aleatoire"<?php if ($infosTournoi['type_phasesfinales'] == 'aleatoire'){ echo " selected";} ?>>Aléatoire</option>
 									<option value="tetedeserie"<?php if ($infosTournoi['type_phasesfinales'] == 'tetedeserie'){ echo " selected";} ?>>Tête de série</option>
 								</select>
+								<a href="#helpTypePhasesFinales" uk-toggle><span class="uk-icon uk-margin-left"  uk-icon="icon: question"></span></a>
 							</div>
 							<hr />
 							<div class="uk-margin">
 								<span style="font-weight: bold;">Type de classement pour les phases qualificatives : </span>
 								<div class="uk-margin-left uk-form-controls">
-            						<label><input class="uk-radio btRadioDef" type="radio" value="CF"name="classType" <?php if ($infosTournoi['type_classement'] == 'CF'){ echo " checked";} ?>> <span style="font-style: italic;">Coupe France : </span>  Nb de Victoires - Pts Pour - Différence (Goalaverage)</label><br>
-           							<label><input class="uk-radio btRadioDef" type="radio" value="Challenge17" name="classType" <?php if ($infosTournoi['type_classement'] == 'Challenge17'){ echo " checked";} ?>><span style="font-style: italic;"> Challenge 17 : </span>  Nb Victoires - Différence (Goalaverage)</label><br>
-           							<label><input class="uk-radio btRadioPerso" type="radio" value="Perso" name="classType" <?php if ($infosTournoi['type_classement'] == 'Perso'){ echo " checked";} ?>><span style="font-style: italic;"> Personnalisé</span></label><br>
+            						<label><input class="uk-radio btRadioDef" type="radio" value="CF"name="classType" <?php if ($infosTournoi['type_classement'] == 'CF'){ echo " checked";} ?>> <span style="font-style: italic;" class="uk-margin-right">Coupe France : </span>  Nb de Victoires => Pts Pour => Différence (Goalaverage)</label><br>
+           							<label><input class="uk-radio btRadioDef" type="radio" value="Challenge17" name="classType" <?php if ($infosTournoi['type_classement'] == 'Challenge17'){ echo " checked";} ?>><span style="font-style: italic;" class="uk-margin-right"> Challenge 17 : </span>  Nb Victoires => Différence (Goalaverage)</label><br>
+           							<label><input class="uk-radio btRadioPerso" type="radio" value="Perso" name="classType" <?php if ($infosTournoi['type_classement'] == 'Perso'){ echo " checked";} ?>><span style="font-style: italic; " class="uk-margin-right"> Personnalisé</span></label><br>
 								</div>	
 								<br>
 								<div id="classPersoDiv" style="display:none;"><span>Ordre de Classement personnalisé :</span><br>
@@ -122,6 +123,17 @@ defined('_LPDT') or die;
 		</div>
 	</div>
 	<!-- /panel -->
+</div>
+
+<div id="helpTypePhasesFinales" class="uk-flex-top" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+
+        <p><span style="font-weight: bold">Aléatoire :</span><br/> Tirage aléatoire des rencontres entre les équipes selectionnées pour cette phase.</p><hr />
+        <p><span style="font-weight: bold">Tête de série :</span><br /> Tirage effectué en opposant le premier du classement au dernier, le second à l'avant dernier...etc<br/>(exemple: Pour une phase à 8 équipes, le 1er au classement rencontrera en quart de finale, le 8ème, le 2ème rencontrera le 7ème...etc).<br />Permet aux meilleures équipes de se recontrer seulement aux niveaux proches des finales</p>
+
+    </div>
 </div>
 
 <script>

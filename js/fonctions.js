@@ -400,3 +400,4 @@ function print1(labelPhaseFinale) {
 	document.getElementById('printDiv').innerHTML = "<form id='form-1' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='1'>1</input><input type='textarea' name='rawhtml' value='" + printTab1 + "'></form>";
 	document.forms["form-1"].submit();
 }
+

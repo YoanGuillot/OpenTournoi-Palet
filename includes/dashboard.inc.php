@@ -54,6 +54,7 @@ if (isset($_GET['idtournoi'])){
 
 
 ?>
+<a class="uk-tobottom uk-active" href="#bottom" uk-scroll><span class="uk-icon" uk-icon="icon: chevron-down; ratio: 1.5"></span></a>
 		<!--HEADER-->
 		<header id="top-head" class="uk-position-fixed">
 			<div class="uk-container uk-container-expand uk-background-primary">
@@ -148,6 +149,37 @@ if (isset($_GET['idtournoi'])){
 					<p class="uk-text-center">Tournoi de Palet par Yoan Guillot - <a href="https://www.lepaletdutrefle.fr">Le Palet du Trèfle</a> - version BETA 0.9
 					</p>
 				</footer>
+				<a href="#" data-uk-totop data-uk-scroll></a>
+				<div id="bottom"></div>
 			</div>
 		</div>
+		
 		<!-- /CONTENT -->
+<script>
+	var util = UIkit.util;
+	window.addEventListener("scroll",function(){
+  		var toTop = util.$("a.uk-totop");
+		var toBottom = util.$("a.uk-tobottom");
+  		if(window.pageYOffset > window.innerHeight){
+    		util.addClass(toTop, "uk-active");
+  		}else{
+    		util.removeClass(toTop, "uk-active");
+  		}
+		if(window.pageYOffset < window.innerHeight){
+    		util.addClass(toBottom, "uk-active");
+  		}else{
+    		util.removeClass(toBottom, "uk-active");
+  		}
+
+	},false);
+	
+	$(document).ready(function() {
+		if( $(document).height() < (window.innerHeight * 2)){
+			util.removeClass(toBottom, "uk-active");
+		
+		}
+	});
+	
+	
+
+</script>

@@ -21,6 +21,60 @@ button, select{
     border-radius: 5px;
     border: 1px solid #dddddd;
 }
+
+a.uk-totop {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  box-shadow: 0 5px 25px rgba(0,0,0,.1);
+  color: #000;
+  display: flex;
+	 align-items: center;
+	 justify-content: center;
+  transition: all 250ms ease;
+  z-index: 99;
+  padding-left: 6px !important;
+}
+
+a.uk-tobottom {
+  position: fixed;
+  right: 15px;
+  top: 60px;
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  box-shadow: 0 5px 25px rgba(0,0,0,.1);
+  color: #000;
+  display: flex;
+	 align-items: center;
+	 justify-content: center;
+  transition: all 250ms ease;
+  z-index: 99;
+}
+
+a.uk-totop:not(.uk-active) {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  pointer-events: none;
+}
+a.uk-tobottom:not(.uk-active) {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  pointer-events: none;
+}
+a.uk-totop.uk-active {
+  opacity: 1;
+}
+a.uk-tobottom.uk-active {
+  opacity: 1;
+}
 /*** PHASES FINALES ***/
 
 #phase-container { 

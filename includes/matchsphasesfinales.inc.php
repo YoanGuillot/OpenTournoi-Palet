@@ -305,13 +305,16 @@ if($nbEquipes == 32){
 
 if($nbEquipes == 64){
 
-	echo"<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
+	echo"<div class='uk-width-3-4'>
+		<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
 			<div class=\"uk-card-header\">
 				<div class=\"uk-grid uk-grid-small\">
-					<div style='margin-bottom: 0px;' class='uk-align-center uk-flex'>$print32 $print16 $print8 $print4 $print2 $print1</div>
+					<div style='margin-bottom: 0px;' class='uk-align-center uk-flex'>$print16  $print8  $print4  $print2  $print1</div>
 				</div>
 			</div>
-		</div>";	
+		</div>
+	</div>";	
+
 
 	$aLabel = "32èmes de finale";
 	$bLabel = "16èmes de finale";
@@ -319,6 +322,65 @@ if($nbEquipes == 64){
 	$dLabel = "Quarts de finale";
 	$eLabel = "Demi-finales";
 	$fLabel = "Finale";
+	$pfLabel = "Petite finale";
+	$CH16Label = "Challenge 8èmes de finale";
+	$CH8Label = "Challenge 8èmes de finale";
+	$CH4Label = "Challenge Quarts de finale";
+	$CH2Label = "Challenge Demi-finales";
+	$CHpfLabel = "Challenge Petite finale";
+	$CHfLabel = "Challenge Finale";
+	
+
+
+	$listeMatchs32 = listeEquipesPhaseFinale($numPhaseFinale,"32èmes de finale","A");
+	$listeMatchs16 = listeEquipesPhaseFinale($numPhaseFinale,"16èmes de finale","B");
+	$listeMatchs8 = listeEquipesPhaseFinale($numPhaseFinale,"8èmes de finale","C");
+	$listeMatchsQuarts = listeEquipesPhaseFinale($numPhaseFinale,"Quarts de finale","D");
+	$listeMatchsDemis = listeEquipesPhaseFinale($numPhaseFinale,"Demi-finales","E");
+	$listeMatchsF = listeEquipesPhaseFinale($numPhaseFinale,"Finale","F");
+	$listeMatchsPF = listeEquipesPhaseFinale($numPhaseFinale,"Petite finale","PF");
+
+
+	$listeMatchsCH16 = listeEquipesPhaseFinale($numPhaseFinale,"Challenge 16èmes de finale","CHA");
+	$listeMatchsCH8 = listeEquipesPhaseFinale($numPhaseFinale,"Challenge 8èmes de finale","CHB");
+	$listeMatchsCHQuarts = listeEquipesPhaseFinale($numPhaseFinale,"Challenge Quarts de finale","CHC");
+	$listeMatchsCHDemis = listeEquipesPhaseFinale($numPhaseFinale,"Challenge Demi-finales","CHD");
+	$listeMatchsCHF = listeEquipesPhaseFinale($numPhaseFinale,"Challenge Finale","CHE");
+	$listeMatchsCHPF = listeEquipesPhaseFinale($numPhaseFinale,"Challenge Petite finale","CHPF");
+
+
+////////// A FINIR
+
+	$tableau16 = constructTableMatchsPF($idTournoi, $aLabel, $listeMatchs16, $numPlaque, $numPhaseFinale);
+	$tableau8 = constructTableMatchsPF($idTournoi, $bLabel, $listeMatchs8, $numPlaque, $numPhaseFinale);
+	$tableauQuarts = constructTableMatchsPF($idTournoi, $cLabel, $listeMatchsQuarts, $numPlaque, $numPhaseFinale);
+	$tableauDemis = constructTableMatchsPF($idTournoi, $dLabel, $listeMatchsDemis, $numPlaque, $numPhaseFinale);
+	$tableauF = constructTableMatchsPF($idTournoi, $eLabel, $listeMatchsF, $numPlaque, $numPhaseFinale);
+	$tableauPF = constructTableMatchsPF($idTournoi, $pfLabel, $listeMatchsPF, $numPlaque + 1, $numPhaseFinale);
+
+	$tableauCH8 = constructTableMatchsPF($idTournoi, $CH8Label, $listeMatchsCH8, $numPlaque + 8, $numPhaseFinale);
+	$tableauCHQuarts = constructTableMatchsPF($idTournoi, $CH4Label, $listeMatchsCHQuarts, $numPlaque + 8, $numPhaseFinale);
+	$tableauCHDemis = constructTableMatchsPF($idTournoi, $CH2Label, $listeMatchsCHDemis, $numPlaque + 8, $numPhaseFinale);
+	$tableauCHF = constructTableMatchsPF($idTournoi, $CHfLabel, $listeMatchsCHF, $numPlaque + 8, $numPhaseFinale);
+	$tableauCHPF = constructTableMatchsPF($idTournoi, $CHpfLabel, $listeMatchsCHPF, $numPlaque + 9, $numPhaseFinale);
+
+
+	echo $tableau16;
+	echo $tableau8;
+	echo $tableauQuarts;
+	echo $tableauDemis;
+	echo $tableauF;
+	echo $tableauPF;
+	echo "<div class=\"uk-width-1-1 uk-width-1-1@l uk-width-1-1@xl\"><hr /></div>";
+	echo "<div class=\"uk-width-1-1 uk-width-1-1@l uk-width-1-1@xl\"><hr /><br /><br /></div>";
+	echo "<div class=\"uk-width-1-1 uk-width-1-1@l uk-width-1-1@xl\"><hr /></div>";
+	echo $tableauCH8;
+	echo $tableauCHQuarts;
+	echo $tableauCHDemis;
+	echo $tableauCHF;
+	echo $tableauCHPF;
+	echo "<div class=\"uk-width-1-1 uk-width-1-1@l uk-width-1-1@xl\"><hr /></div>";
+	
 }
 
 if($nbEquipes == 128){

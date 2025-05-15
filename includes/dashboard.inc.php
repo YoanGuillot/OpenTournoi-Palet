@@ -54,7 +54,7 @@ if (isset($_GET['idtournoi'])){
 
 
 ?>
-<a class="uk-tobottom uk-active" href="#bottom" uk-scroll><span class="uk-icon" uk-icon="icon: chevron-down; ratio: 1.5"></span></a>
+<a class="uk-tobottom" href="#bottom" uk-scroll><span class="uk-icon" uk-icon="icon: chevron-down; ratio: 1.5"></span></a>
 		<!--HEADER-->
 		<header id="top-head" class="uk-position-fixed">
 			<div class="uk-container uk-container-expand uk-background-primary">
@@ -165,21 +165,13 @@ if (isset($_GET['idtournoi'])){
   		}else{
     		util.removeClass(toTop, "uk-active");
   		}
-		if(window.pageYOffset < window.innerHeight){
-    		util.addClass(toBottom, "uk-active");
-  		}else{
+		if(window.pageYOffset > window.innerHeight){
     		util.removeClass(toBottom, "uk-active");
+  		}else{
+    		util.addClass(toBottom, "uk-active");
   		}
 
-	},false);
-	
-	$(document).ready(function() {
-		if( $(document).height() < (window.innerHeight * 2)){
-			util.removeClass(toBottom, "uk-active");
-		
-		}
-	});
-	
+	},false);	
 	
 
 </script>

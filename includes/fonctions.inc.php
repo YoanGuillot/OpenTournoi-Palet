@@ -1029,6 +1029,118 @@ function calculPhaseFinale($numPhaseFinale, $nbEquipes){
 		setNewPosition($numPhaseFinale,"CHPF1","CHPF2","CHPFV1","");
 
 	}
+
+	if($nbEquipes == 64){
+		setNewPosition($numPhaseFinale,"A1","A2","B1","CHA1");
+		setNewPosition($numPhaseFinale,"A3","A4","B2","CHA2");
+		setNewPosition($numPhaseFinale,"A5","A6","B3","CHA3");
+		setNewPosition($numPhaseFinale,"A7","A8","B4","CHA4");
+		setNewPosition($numPhaseFinale,"A9","A10","B5","CHA5");
+		setNewPosition($numPhaseFinale,"A11","A12","B6","CHA6");
+		setNewPosition($numPhaseFinale,"A13","A14","B7","CHA7");
+		setNewPosition($numPhaseFinale,"A15","A16","B8","CHA8");
+		setNewPosition($numPhaseFinale,"A17","A18","B9","CHA9");
+		setNewPosition($numPhaseFinale,"A19","A20","B10","CHA10");
+		setNewPosition($numPhaseFinale,"A21","A22","B11","CHA11");
+		setNewPosition($numPhaseFinale,"A23","A24","B12","CHA12");
+		setNewPosition($numPhaseFinale,"A25","A26","B13","CHA13");
+		setNewPosition($numPhaseFinale,"A27","A28","B14","CHA14");
+		setNewPosition($numPhaseFinale,"A29","A30","B15","CHA15");
+		setNewPosition($numPhaseFinale,"A31","A32","B16","CHA16");
+		setNewPosition($numPhaseFinale,"A33","A34","B17","CHA17");
+		setNewPosition($numPhaseFinale,"A35","A36","B18","CHA18");
+		setNewPosition($numPhaseFinale,"A37","A38","B19","CHA19");
+		setNewPosition($numPhaseFinale,"A39","A40","B20","CHA20");
+		setNewPosition($numPhaseFinale,"A41","A42","B21","CHA21");
+		setNewPosition($numPhaseFinale,"A43","A44","B22","CHA22");
+		setNewPosition($numPhaseFinale,"A45","A46","B23","CHA23");
+		setNewPosition($numPhaseFinale,"A47","A48","B24","CHA24");
+		setNewPosition($numPhaseFinale,"A49","A50","B25","CHA25");
+		setNewPosition($numPhaseFinale,"A51","A52","B26","CHA26");
+		setNewPosition($numPhaseFinale,"A53","A54","B27","CHA27");
+		setNewPosition($numPhaseFinale,"A55","A56","B28","CHA28");
+		setNewPosition($numPhaseFinale,"A57","A58","B29","CHA29");
+		setNewPosition($numPhaseFinale,"A59","A60","B30","CHA30");
+		setNewPosition($numPhaseFinale,"A61","A61","B31","CHA31");
+		setNewPosition($numPhaseFinale,"A63","A64","B32","CHA32");
+
+		setNewPosition($numPhaseFinale,"B1","B2","C1","");
+		setNewPosition($numPhaseFinale,"B3","B4","C2","");
+		setNewPosition($numPhaseFinale,"B5","B6","C3","");
+		setNewPosition($numPhaseFinale,"B7","B8","C4","");
+		setNewPosition($numPhaseFinale,"B9","B10","C5","");
+		setNewPosition($numPhaseFinale,"B11","B12","C6","");
+		setNewPosition($numPhaseFinale,"B13","B14","C7","");
+		setNewPosition($numPhaseFinale,"B15","B16","C8","");
+		setNewPosition($numPhaseFinale,"B17","B18","C9","");
+		setNewPosition($numPhaseFinale,"B19","B20","C10","");
+		setNewPosition($numPhaseFinale,"B21","B22","C11","");
+		setNewPosition($numPhaseFinale,"B23","B24","C12","");
+		setNewPosition($numPhaseFinale,"B25","B26","C13","");
+		setNewPosition($numPhaseFinale,"B27","B28","C14","");
+		setNewPosition($numPhaseFinale,"B29","B130","C15","");
+		setNewPosition($numPhaseFinale,"B31","B32","C16","");
+
+		setNewPosition($numPhaseFinale,"C1","C2","D1","");
+		setNewPosition($numPhaseFinale,"C3","C4","D2","");
+		setNewPosition($numPhaseFinale,"C5","C6","D3","");
+		setNewPosition($numPhaseFinale,"C7","C8","D4","");
+		setNewPosition($numPhaseFinale,"C9","C10","D5","");
+		setNewPosition($numPhaseFinale,"C11","C12","D6","");
+		setNewPosition($numPhaseFinale,"C13","C14","D7","");
+		setNewPosition($numPhaseFinale,"C15","C16","D8","");
+				
+		setNewPosition($numPhaseFinale,"D1","D2","E1","");
+		setNewPosition($numPhaseFinale,"D3","D4","E2","");
+		setNewPosition($numPhaseFinale,"D5","D6","E2","");
+		setNewPosition($numPhaseFinale,"D7","D8","E4","");
+		
+		setNewPosition($numPhaseFinale,"E1","E2","F1","PF1");
+		setNewPosition($numPhaseFinale,"E3","E4","F2","PF2");
+
+		
+		setNewPosition($numPhaseFinale,"F1","F2","G1","");
+		setNewPosition($numPhaseFinale,"PF1","PF2","PFV1","");
+
+		setNewPosition($numPhaseFinale,"CHA1","CHA2","CHB1","");
+		setNewPosition($numPhaseFinale,"CHA3","CHA4","CHB2","");
+		setNewPosition($numPhaseFinale,"CHA5","CHA6","CHB3","");
+		setNewPosition($numPhaseFinale,"CHA7","CHA8","CHB4","");
+		setNewPosition($numPhaseFinale,"CHA9","CHA10","CHB5","");
+		setNewPosition($numPhaseFinale,"CHA11","CHA12","CHB6","");
+		setNewPosition($numPhaseFinale,"CHA13","CHA14","CHB7","");
+		setNewPosition($numPhaseFinale,"CHA15","CHA16","CHB8","");
+		setNewPosition($numPhaseFinale,"CHA17","CHA18","CHB9","");
+		setNewPosition($numPhaseFinale,"CHA19","CHA20","CHB10","");
+		setNewPosition($numPhaseFinale,"CHA21","CHA22","CHB11","");
+		setNewPosition($numPhaseFinale,"CHA23","CHA24","CHB12","");
+		setNewPosition($numPhaseFinale,"CHA25","CHA26","CHB13","");
+		setNewPosition($numPhaseFinale,"CHA27","CHA28","CHB14","");
+		setNewPosition($numPhaseFinale,"CHA29","CHA30","CHB15","");
+		setNewPosition($numPhaseFinale,"CHA31","CHA32","CHB16","");
+
+		setNewPosition($numPhaseFinale,"CHB1","CHB2","CHC1","");
+		setNewPosition($numPhaseFinale,"CHB3","CHB4","CHC2","");
+		setNewPosition($numPhaseFinale,"CHB5","CHB6","CHC3","");
+		setNewPosition($numPhaseFinale,"CHB7","CHB8","CHC4","");
+		setNewPosition($numPhaseFinale,"CHB9","CHB10","CHC5","");
+		setNewPosition($numPhaseFinale,"CHB11","CHB12","CHC6","");
+		setNewPosition($numPhaseFinale,"CHB13","CHB14","CHC7","");
+		setNewPosition($numPhaseFinale,"CHB15","CHB16","CHC8","");
+
+		setNewPosition($numPhaseFinale,"CHC1","CHC2","CHD1","");
+		setNewPosition($numPhaseFinale,"CHC3","CHC4","CHD2","");
+		setNewPosition($numPhaseFinale,"CHC5","CHC6","CHD3","");
+		setNewPosition($numPhaseFinale,"CHC7","CHC8","CHD4","");
+
+		setNewPosition($numPhaseFinale,"CHD1","CHD2","CHE1","CHPF1");
+		setNewPosition($numPhaseFinale,"CHD3","CHD4","CHE2","CHPF2");
+		
+		setNewPosition($numPhaseFinale,"CHE1","CHE2","CHF1","");
+
+		setNewPosition($numPhaseFinale,"CHPF1","CHPF2","CHPFV1","");
+
+	}
 }
 
 function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){

@@ -1078,7 +1078,7 @@ function calculPhaseFinale($numPhaseFinale, $nbEquipes){
 		setNewPosition($numPhaseFinale,"B23","B24","C12","");
 		setNewPosition($numPhaseFinale,"B25","B26","C13","");
 		setNewPosition($numPhaseFinale,"B27","B28","C14","");
-		setNewPosition($numPhaseFinale,"B29","B130","C15","");
+		setNewPosition($numPhaseFinale,"B29","B30","C15","");
 		setNewPosition($numPhaseFinale,"B31","B32","C16","");
 
 		setNewPosition($numPhaseFinale,"C1","C2","D1","");
@@ -1092,7 +1092,7 @@ function calculPhaseFinale($numPhaseFinale, $nbEquipes){
 				
 		setNewPosition($numPhaseFinale,"D1","D2","E1","");
 		setNewPosition($numPhaseFinale,"D3","D4","E2","");
-		setNewPosition($numPhaseFinale,"D5","D6","E2","");
+		setNewPosition($numPhaseFinale,"D5","D6","E3","");
 		setNewPosition($numPhaseFinale,"D7","D8","E4","");
 		
 		setNewPosition($numPhaseFinale,"E1","E2","F1","PF1");
@@ -1179,6 +1179,12 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 			$place2 = '';
 			$place3 = '';
 			$place4 = '';
+			$place5 = '';
+			$place6 = '';
+			$place7 = '';
+			$place8 = '';
+			$place14 = '';
+			$place16 = '';
 	// Vainqueur
 	$resultatsVainqueur = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "'. $lastLevel .'1"');
 	while ($rowVainqueur = $resultatsVainqueur->fetchArray(1)) {
@@ -1676,7 +1682,7 @@ function tiragePhaseQualif($nbEquipes, $numPhase)
 	return $matchs;
 }
 
-function tiragePhasefinale($idTournoi, $nbEquipes, $numPhase)
+function tiragePhaseFinale($idTournoi, $nbEquipes, $numPhase)
 {
 	
 	global $db;
@@ -1731,7 +1737,6 @@ function tiragePhasefinale($idTournoi, $nbEquipes, $numPhase)
 			$equipe1 = '';
 		}
 		if(array_key_exists($indexTable, $secondTableauEquipes)){
-			echo array_key_exists($indexTable, $secondTableauEquipes);
 			$equipe2 = $secondTableauEquipes[$indexTable];
 		}else{
 			$equipe2 = '';

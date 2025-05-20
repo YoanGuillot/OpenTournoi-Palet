@@ -32,13 +32,13 @@ $numPlaque = $debutPlaques;
 calculPhaseFinale($numPhaseFinale, $nbEquipes);
 
 
-$print1 = "<button class='uk-button uk-button-primary uk-margin-left uk-margin-right' onclick='print1(\"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> Finales</button>";
-$print2 = "<button class='uk-button uk-button-primary uk-margin-left uk-margin-right' onclick='print2(\"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> Demis</button>";
-$print4 = "<button class='uk-button uk-button-primary uk-margin-left uk-margin-right' onclick='print4(\"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> Quarts</button>";
-$print8 = "<button class='uk-button uk-button-primary uk-margin-left uk-margin-right' onclick='print8(\"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> 8èmes</button>";
-$print16 = "<button class='uk-button uk-button-primary uk-margin-left uk-margin-right' onclick='print16(\"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> 16èmes</button>";
-$print32 = "<button class='uk-button uk-button-primary uk-margin-left uk-margin-right' onclick='print32(\"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> 32èmes</button>";
-$print64 = "<button class='uk-button uk-button-primary uk-margin-left uk-margin-right' onclick='print64(\"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> 64èmes</button>";
+$print1 = "<button class='uk-button uk-button-primary uk-margin-small-left uk-margin-smal-right' onclick='print1(\"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> Finales</button>";
+$print2 = "<button class='uk-button uk-button-primary uk-margin-small-left uk-margin-smal-right' onclick='print2(\"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> Demis</button>";
+$print4 = "<button class='uk-button uk-button-primary uk-margin-small-left uk-margin-smal-right' onclick='print4(\"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> Quarts</button>";
+$print8 = "<button class='uk-button uk-button-primary uk-margin-small-left uk-margin-smal-right' onclick='print8(\"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> 8èmes</button>";
+$print16 = "<button class='uk-button uk-button-primary uk-margin-small-left uk-margin-smal-right' onclick='print16(\"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> 16èmes</button>";
+$print32 = "<button class='uk-button uk-button-primary uk-margin-small-left uk-margin-smal-right' onclick='print32(\"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> 32èmes</button>";
+$print64 = "<button class='uk-button uk-button-primary uk-margin-small-left uk-margin-smal-right' onclick='print64(\"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> 64èmes</button>";
 
 ?>
 <div class="uk-grid uk-grid-medium" data-uk-grid uk-sortable="handle: .sortable-icon">
@@ -387,13 +387,16 @@ if($nbEquipes == 64){
 
 if($nbEquipes == 128){
 
-	echo"<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
+	echo"<div class='uk-width-3-4'>
+		<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
 			<div class=\"uk-card-header\">
 				<div class=\"uk-grid uk-grid-small\">
 					<div style='margin-bottom: 0px;' class='uk-align-center uk-flex'>$print64 $print32 $print16 $print8 $print4 $print2 $print1</div>
 				</div>
 			</div>
-		</div>";	
+		</div>
+	</div>";	
+
 
 	$aLabel = "64èmes de finale";
 	$bLabel = "32èmes de finale";
@@ -402,7 +405,77 @@ if($nbEquipes == 128){
 	$eLabel = "Quarts de finale";
 	$fLabel = "Demi-finales";
 	$gLabel = "Finale";
+	$pfLabel = "Petite finale";
+	$CH32Label = "Challenge 32èmes de finale";
+	$CH16Label = "Challenge 16èmes de finale";
+	$CH8Label = "Challenge 8èmes de finale";
+	$CH4Label = "Challenge Quarts de finale";
+	$CH2Label = "Challenge Demi-finales";
+	$CHpfLabel = "Challenge Petite finale";
+	$CHfLabel = "Challenge Finale";
+	
+
+
+	$listeMatchs64 = listeEquipesPhaseFinale($numPhaseFinale,"64èmes de finale","A");
+	$listeMatchs32 = listeEquipesPhaseFinale($numPhaseFinale,"32èmes de finale","B");
+	$listeMatchs16 = listeEquipesPhaseFinale($numPhaseFinale,"16èmes de finale","C");
+	$listeMatchs8 = listeEquipesPhaseFinale($numPhaseFinale,"8èmes de finale","D");
+	$listeMatchsQuarts = listeEquipesPhaseFinale($numPhaseFinale,"Quarts de finale","E");
+	$listeMatchsDemis = listeEquipesPhaseFinale($numPhaseFinale,"Demi-finales","F");
+	$listeMatchsF = listeEquipesPhaseFinale($numPhaseFinale,"Finale","G");
+	$listeMatchsPF = listeEquipesPhaseFinale($numPhaseFinale,"Petite finale","PF");
+
+
+	$listeMatchsCH32 = listeEquipesPhaseFinale($numPhaseFinale,"Challenge 32èmes de finale","CHA");
+	$listeMatchsCH16 = listeEquipesPhaseFinale($numPhaseFinale,"Challenge 16èmes de finale","CHB");
+	$listeMatchsCH8 = listeEquipesPhaseFinale($numPhaseFinale,"Challenge 8èmes de finale","CHC");
+	$listeMatchsCHQuarts = listeEquipesPhaseFinale($numPhaseFinale,"Challenge Quarts de finale","CHD");
+	$listeMatchsCHDemis = listeEquipesPhaseFinale($numPhaseFinale,"Challenge Demi-finales","CHE");
+	$listeMatchsCHF = listeEquipesPhaseFinale($numPhaseFinale,"Challenge Finale","CHF");
+	$listeMatchsCHPF = listeEquipesPhaseFinale($numPhaseFinale,"Challenge Petite finale","CHPF");
+
+
+	$tableau64 = constructTableMatchsPF($idTournoi, $aLabel, $listeMatchs64, $numPlaque, $numPhaseFinale);
+	$tableau32 = constructTableMatchsPF($idTournoi, $bLabel, $listeMatchs32, $numPlaque, $numPhaseFinale);
+	$tableau16 = constructTableMatchsPF($idTournoi, $cLabel, $listeMatchs16, $numPlaque, $numPhaseFinale);
+	$tableau8 = constructTableMatchsPF($idTournoi, $dLabel, $listeMatchs8, $numPlaque, $numPhaseFinale);
+	$tableauQuarts = constructTableMatchsPF($idTournoi, $eLabel, $listeMatchsQuarts, $numPlaque, $numPhaseFinale);
+	$tableauDemis = constructTableMatchsPF($idTournoi, $fLabel, $listeMatchsDemis, $numPlaque, $numPhaseFinale);
+	$tableauF = constructTableMatchsPF($idTournoi, $gLabel, $listeMatchsF, $numPlaque, $numPhaseFinale);
+	$tableauPF = constructTableMatchsPF($idTournoi, $pfLabel, $listeMatchsPF, $numPlaque + 1, $numPhaseFinale);
+	//OK
+
+	$tableauCH32 = constructTableMatchsPF($idTournoi, $CH32Label, $listeMatchsCH32, $numPlaque + 32, $numPhaseFinale);
+	$tableauCH16 = constructTableMatchsPF($idTournoi, $CH16Label, $listeMatchsCH16, $numPlaque + 32, $numPhaseFinale);
+	$tableauCH8 = constructTableMatchsPF($idTournoi, $CH8Label, $listeMatchsCH8, $numPlaque + 32, $numPhaseFinale);
+	$tableauCHQuarts = constructTableMatchsPF($idTournoi, $CH4Label, $listeMatchsCHQuarts, $numPlaque + 32, $numPhaseFinale);
+	$tableauCHDemis = constructTableMatchsPF($idTournoi, $CH2Label, $listeMatchsCHDemis, $numPlaque + 32, $numPhaseFinale);
+	$tableauCHF = constructTableMatchsPF($idTournoi, $CHfLabel, $listeMatchsCHF, $numPlaque + 32, $numPhaseFinale);
+	$tableauCHPF = constructTableMatchsPF($idTournoi, $CHpfLabel, $listeMatchsCHPF, $numPlaque + 33, $numPhaseFinale);
+
+
+	echo $tableau64;
+	echo $tableau32;
+	echo $tableau16;
+	echo $tableau8;
+	echo $tableauQuarts;
+	echo $tableauDemis;
+	echo $tableauF;
+	echo $tableauPF;
+	echo "<div class=\"uk-width-1-1 uk-width-1-1@l uk-width-1-1@xl\"><hr /></div>";
+	echo "<div class=\"uk-width-1-1 uk-width-1-1@l uk-width-1-1@xl\"><hr /><br /><br /></div>";
+	echo "<div class=\"uk-width-1-1 uk-width-1-1@l uk-width-1-1@xl\"><hr /></div>";
+	echo $tableauCH32;
+	echo $tableauCH16;
+	echo $tableauCH8;
+	echo $tableauCHQuarts;
+	echo $tableauCHDemis;
+	echo $tableauCHF;
+	echo $tableauCHPF;
+	echo "<div class=\"uk-width-1-1 uk-width-1-1@l uk-width-1-1@xl\"><hr /></div>";
+	
 }
+
 
 echo "<div id='printDiv' style='display:none'></div>";
 

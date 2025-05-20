@@ -234,6 +234,67 @@ function activateLinkPF(idLink, side, ptsV, idMatch){
         
 }
 
+function print64(labelPhaseFinale) {
+    var labelPhaseHtml = "<page><div class=\"enteteImpression\">"+labelPhaseFinale+"</div>";
+    var principale64 = "";
+    var challenge64 = "";
+    
+    // Sélectionner les éléments
+    var elemsPrincipale = document.querySelectorAll("div[name='64èmes de finale']");
+    var elemsChallenge = document.querySelectorAll("div[name='Challenge 64èmes de finale']");
+    
+    // Récupérer le contenu HTML de chaque élément trouvé
+    if (elemsPrincipale.length > 0) {
+        principale64 = elemsPrincipale[0].innerHTML; // Prendre le premier élément
+    }
+    
+    if (elemsChallenge.length > 0) {
+        challenge64 = elemsChallenge[0].innerHTML; // Prendre le premier élément
+    }
+
+    if (challenge64 == ""){
+        var printTab64 = labelPhaseHtml+"<br>"+principale64+"</page>";
+    }else{
+        var printTab64 = labelPhaseHtml+"<br>"+principale64+"</page><page>"+challenge64+"</page>";
+    }
+
+    
+    
+  
+	document.getElementById('printDiv').innerHTML = "<form id='form-64' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='64'>64</input><input type='textarea' name='rawhtml' value='" + printTab64 + "'></form>";
+	document.forms["form-64"].submit();
+}
+
+function print32(labelPhaseFinale) {
+    var labelPhaseHtml = "<page><div class=\"enteteImpression\">"+labelPhaseFinale+"</div>";
+    var principale32 = "";
+    var challenge32 = "";
+    
+    // Sélectionner les éléments
+    var elemsPrincipale = document.querySelectorAll("div[name='32èmes de finale']");
+    var elemsChallenge = document.querySelectorAll("div[name='Challenge 32èmes de finale']");
+    
+    // Récupérer le contenu HTML de chaque élément trouvé
+    if (elemsPrincipale.length > 0) {
+        principale32 = elemsPrincipale[0].innerHTML; // Prendre le premier élément
+    }
+    
+    if (elemsChallenge.length > 0) {
+        challenge32 = elemsChallenge[0].innerHTML; // Prendre le premier élément
+    }
+
+    if (challenge32 == ""){
+        var printTab32 = labelPhaseHtml+"<br>"+principale32+"</page>";
+    }else{
+        var printTab32 = labelPhaseHtml+"<br>"+principale32+"</page><page>"+challenge32+"</page>";
+    }
+
+    
+    
+  
+	document.getElementById('printDiv').innerHTML = "<form id='form-32' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='32'>32</input><input type='textarea' name='rawhtml' value='" + printTab32 + "'></form>";
+	document.forms["form-32"].submit();
+}
 
 function print16(labelPhaseFinale) {
     var labelPhaseHtml = "<page><div class=\"enteteImpression\">"+labelPhaseFinale+"</div>";

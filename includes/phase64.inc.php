@@ -263,7 +263,7 @@ calculPhaseFinale($numPhaseFinale, 64);
 							<td>                
 							</td>
 							<td>
-								<div class="bracket-position">17-24</div>
+								<div class="bracket-position">1-16</div>
 								<div class="bracket-edit">
 								<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-C2"><img src="img/edit.png" /></a>
 								</div>
@@ -2319,7 +2319,7 @@ calculPhaseFinale($numPhaseFinale, 64);
 							<td>                
 							</td>
 							<td>
-								<div class="bracket-position">17-24</div>
+								<div class="bracket-position">1-16</div>
 								<div class="bracket-edit">
 								<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-C10"><img src="img/edit.png" /></a>
 								</div>
@@ -2730,7 +2730,7 @@ calculPhaseFinale($numPhaseFinale, 64);
 						<td class="bracket-i"></td><td></td></tr>
 						<tr>
 							<td>
-								<div class="bracket-position">1-32</div>
+								<div class="bracket-position">1-64</div>
 								<div class="bracket-edit">
 									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-A44"><img src="img/edit.png" /></a>
 								</div>
@@ -3464,7 +3464,7 @@ calculPhaseFinale($numPhaseFinale, 64);
 						<td></td><td></td></tr>
 						<tr>
 							<td>
-								<div class="bracket-position">1-32</div>
+								<div class="bracket-position">1-64</div>
 								<div class="bracket-edit">
 									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-A55"><img src="img/edit.png" /></a>
 								</div>
@@ -3579,7 +3579,7 @@ calculPhaseFinale($numPhaseFinale, 64);
 						<td></td><td></td></tr>
 						<tr>
 							<td>
-								<div class="bracket-position">1-32</div>
+								<div class="bracket-position">1-64</div>
 								<div class="bracket-edit">
 									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-A57"><img src="img/edit.png" /></a>
 								</div>

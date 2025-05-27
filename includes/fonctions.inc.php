@@ -1348,7 +1348,7 @@ function calculPhaseFinale($numPhaseFinale, $nbEquipes){
 		setNewPosition($numPhaseFinale,"CHE1","CHE2","CHF1","CHPF1");
 		setNewPosition($numPhaseFinale,"CHE3","CHE4","CHF2","CHPF2");
 		
-		setNewPosition($numPhaseFinale,"CHF1","CHF2","CHF1","");
+		setNewPosition($numPhaseFinale,"CHF1","CHF2","CHG1","");
 
 		setNewPosition($numPhaseFinale,"CHPF1","CHPF2","CHPFV1","");
 

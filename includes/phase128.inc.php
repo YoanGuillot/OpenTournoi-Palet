@@ -6193,7 +6193,7 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td></td>
 							<td class="bracket-i">
 							</td>
-							<td><div class="bracket-position">1</div>
+							<td><div class="bracket-position">65</div>
 							</td>
 						</tr>
 						<tr>

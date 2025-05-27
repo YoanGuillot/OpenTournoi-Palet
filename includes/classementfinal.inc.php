@@ -1,6 +1,13 @@
 <?php
 defined('_LPDT') or die;
 $idTounroi = $_GET['idtournoi'];
+$infosPhasesFinales = infosPhasesFinales($idTournoi);
+
+foreach($infosPhasesFinales as $row) {
+	if($row['num_phasefinale'] != ''){
+		calculClassementPF($idTournoi, $row['num_phasefinale'], $row['nb_equipes']);
+	}
+}	
 
 ?>
 

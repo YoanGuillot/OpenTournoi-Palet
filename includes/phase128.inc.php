@@ -4344,7 +4344,7 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-position">1-64</div>
 								<div class="bracket-edit">
-								<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B2"><img src="img/edit.png" /></a>
+								<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B34"><img src="img/edit.png" /></a>
 								</div>
 							</td>
 							<td class="bracket-t"> 
@@ -4412,10 +4412,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B2']; ?>
+									<?php echo $positions['B34']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B2']; ?>
+									<?php echo $ptsPositions['B34']; ?>
 									</div>
 								</div>
 							</td>
@@ -4540,10 +4540,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B3']; ?>
+									<?php echo $positions['B35']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B3']; ?>
+									<?php echo $ptsPositions['B35']; ?>
 									</div>
 								</div>
 							</td>
@@ -4602,7 +4602,7 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-position">1-64</div>
 								<div class="bracket-edit">
-									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B4"><img src="img/edit.png" /></a>
+									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B36"><img src="img/edit.png" /></a>
 								</div>
 							</td>
 							<td class="bracket-t"> 
@@ -4670,10 +4670,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B4']; ?>
+									<?php echo $positions['B36']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B4']; ?>
+									<?php echo $ptsPositions['B36']; ?>
 									</div>
 								</div>
 							</td>
@@ -4795,10 +4795,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B5']; ?>
+									<?php echo $positions['B37']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B5']; ?>
+									<?php echo $ptsPositions['B37']; ?>
 									</div>
 								</div>
 							</td>
@@ -4857,7 +4857,7 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-position">1-64</div>
 								<div class="bracket-edit">
-									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B6"><img src="img/edit.png" /></a>
+									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B38"><img src="img/edit.png" /></a>
 								</div>
 							</td>
 							<td class="bracket-t"> 
@@ -4925,10 +4925,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B6']; ?>
+									<?php echo $positions['B38']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B6']; ?>
+									<?php echo $ptsPositions['B38']; ?>
 									</div>
 								</div>
 							</td>
@@ -5053,10 +5053,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B7']; ?>
+									<?php echo $positions['B39']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B7']; ?>
+									<?php echo $ptsPositions['B39']; ?>
 									</div>
 								</div>
 							</td>
@@ -5115,7 +5115,7 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-position">1-64</div>
 								<div class="bracket-edit">
-									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B8"><img src="img/edit.png" /></a>
+									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B40"><img src="img/edit.png" /></a>
 								</div>
 							</td>
 							<td class="bracket-t"> 
@@ -5183,10 +5183,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B8']; ?>
+									<?php echo $positions['B40']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B8']; ?>
+									<?php echo $ptsPositions['B40']; ?>
 									</div>
 								</div>
 							</td>
@@ -5319,10 +5319,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B9']; ?>
+									<?php echo $positions['B41']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B9']; ?>
+									<?php echo $ptsPositions['B41']; ?>
 									</div>
 								</div>
 							</td>
@@ -5381,7 +5381,7 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-position">1-64</div>
 								<div class="bracket-edit">
-								<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B10"><img src="img/edit.png" /></a>
+								<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B42"><img src="img/edit.png" /></a>
 								</div>
 							</td>
 							<td class="bracket-t"> 
@@ -5449,10 +5449,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B10']; ?>
+									<?php echo $positions['B42']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B10']; ?>
+									<?php echo $ptsPositions['B42']; ?>
 									</div>
 								</div>
 							</td>
@@ -5578,10 +5578,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B11']; ?>
+									<?php echo $positions['B43']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B11']; ?>
+									<?php echo $ptsPositions['B43']; ?>
 									</div>
 								</div>
 							</td>
@@ -5640,7 +5640,7 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-position">1-64</div>
 								<div class="bracket-edit">
-									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B12"><img src="img/edit.png" /></a>
+									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B44"><img src="img/edit.png" /></a>
 								</div>
 							</td>
 							<td class="bracket-t"> 
@@ -5708,10 +5708,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B12']; ?>
+									<?php echo $positions['B44']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B12']; ?>
+									<?php echo $ptsPositions['B44']; ?>
 									</div>
 								</div>
 							</td>
@@ -5833,10 +5833,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B13']; ?>
+									<?php echo $positions['B45']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B13']; ?>
+									<?php echo $ptsPositions['B45']; ?>
 									</div>
 								</div>
 							</td>
@@ -5895,7 +5895,7 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-position">1-64</div>
 								<div class="bracket-edit">
-									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B14"><img src="img/edit.png" /></a>
+									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B46"><img src="img/edit.png" /></a>
 								</div>
 							</td>
 							<td class="bracket-t"> 
@@ -5963,10 +5963,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B14']; ?>
+									<?php echo $positions['B46']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B14']; ?>
+									<?php echo $ptsPositions['B46']; ?>
 									</div>
 								</div>
 							</td>
@@ -6091,10 +6091,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B15']; ?>
+									<?php echo $positions['B47']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B15']; ?>
+									<?php echo $ptsPositions['B47']; ?>
 									</div>
 								</div>
 							</td>
@@ -6153,7 +6153,7 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-position">1-64</div>
 								<div class="bracket-edit">
-									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B16"><img src="img/edit.png" /></a>
+									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B48"><img src="img/edit.png" /></a>
 								</div>
 							</td>
 							<td class="bracket-t"> 
@@ -6221,10 +6221,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B16']; ?>
+									<?php echo $positions['B48']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B16']; ?>
+									<?php echo $ptsPositions['B48']; ?>
 									</div>
 								</div>
 							</td>
@@ -6356,10 +6356,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B17']; ?>
+									<?php echo $positions['B49']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B17']; ?>
+									<?php echo $ptsPositions['B49']; ?>
 									</div>
 								</div>
 							</td>
@@ -6420,7 +6420,7 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-position">1-64</div>
 								<div class="bracket-edit">
-								<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B18"><img src="img/edit.png" /></a>
+								<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B50"><img src="img/edit.png" /></a>
 								</div>
 							</td>
 							<td class="bracket-t"> 
@@ -6492,10 +6492,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B18']; ?>
+									<?php echo $positions['B50']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B18']; ?>
+									<?php echo $ptsPositions['B50']; ?>
 									</div>
 								</div>
 							</td>
@@ -6616,10 +6616,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B19']; ?>
+									<?php echo $positions['B51']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B19']; ?>
+									<?php echo $ptsPositions['B51']; ?>
 									</div>
 								</div>
 							</td>
@@ -6674,7 +6674,7 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-position">1-64</div>
 								<div class="bracket-edit">
-									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B20"><img src="img/edit.png" /></a>
+									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B52"><img src="img/edit.png" /></a>
 								</div>
 							</td>
 							<td class="bracket-t"> 
@@ -6738,10 +6738,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B20']; ?>
+									<?php echo $positions['B52']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B20']; ?>
+									<?php echo $ptsPositions['B52']; ?>
 									</div>
 								</div>
 							</td>
@@ -6853,10 +6853,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B21']; ?>
+									<?php echo $positions['B53']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B21']; ?>
+									<?php echo $ptsPositions['B53']; ?>
 									</div>
 								</div>
 							</td>
@@ -6911,7 +6911,7 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-position">1-64</div>
 								<div class="bracket-edit">
-									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B22"><img src="img/edit.png" /></a>
+									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B54"><img src="img/edit.png" /></a>
 								</div>
 							</td>
 							<td class="bracket-t"> 
@@ -6975,10 +6975,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B22']; ?>
+									<?php echo $positions['B54']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B22']; ?>
+									<?php echo $ptsPositions['B54']; ?>
 									</div>
 								</div>
 							</td>
@@ -7095,10 +7095,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B23']; ?>
+									<?php echo $positions['B55']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B23']; ?>
+									<?php echo $ptsPositions['B55']; ?>
 									</div>
 								</div>
 							</td>
@@ -7153,7 +7153,7 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-position">1-64</div>
 								<div class="bracket-edit">
-									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B24"><img src="img/edit.png" /></a>
+									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B56"><img src="img/edit.png" /></a>
 								</div>
 							</td>
 							<td class="bracket-t"> 
@@ -7217,10 +7217,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B24']; ?>
+									<?php echo $positions['B56']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B24']; ?>
+									<?php echo $ptsPositions['B56']; ?>
 									</div>
 								</div>
 							</td>
@@ -7345,10 +7345,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B25']; ?>
+									<?php echo $positions['B57']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B25']; ?>
+									<?php echo $ptsPositions['B57']; ?>
 									</div>
 								</div>
 							</td>
@@ -7403,7 +7403,7 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-position">1-64</div>
 								<div class="bracket-edit">
-								<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B26"><img src="img/edit.png" /></a>
+								<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B58"><img src="img/edit.png" /></a>
 								</div>
 							</td>
 							<td class="bracket-t"> 
@@ -7467,10 +7467,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B26']; ?>
+									<?php echo $positions['B58']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B26']; ?>
+									<?php echo $ptsPositions['B58']; ?>
 									</div>
 								</div>
 							</td>
@@ -7587,10 +7587,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B27']; ?>
+									<?php echo $positions['B59']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B27']; ?>
+									<?php echo $ptsPositions['B59']; ?>
 									</div>
 								</div>
 							</td>
@@ -7645,7 +7645,7 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-position">1-64</div>
 								<div class="bracket-edit">
-									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B28"><img src="img/edit.png" /></a>
+									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B60"><img src="img/edit.png" /></a>
 								</div>
 							</td>
 							<td class="bracket-t"> 
@@ -7709,10 +7709,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B28']; ?>
+									<?php echo $positions['B60']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B28']; ?>
+									<?php echo $ptsPositions['B60']; ?>
 									</div>
 								</div>
 							</td>
@@ -7824,10 +7824,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B29']; ?>
+									<?php echo $positions['B61']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B29']; ?>
+									<?php echo $ptsPositions['B61']; ?>
 									</div>
 								</div>
 							</td>
@@ -7882,7 +7882,7 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-position">1-64</div>
 								<div class="bracket-edit">
-									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B30"><img src="img/edit.png" /></a>
+									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B62"><img src="img/edit.png" /></a>
 								</div>
 							</td>
 							<td class="bracket-t"> 
@@ -7946,10 +7946,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B30']; ?>
+									<?php echo $positions['B62']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B30']; ?>
+									<?php echo $ptsPositions['B62']; ?>
 									</div>
 								</div>
 							</td>
@@ -8066,10 +8066,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B31']; ?>
+									<?php echo $positions['B63']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B31']; ?>
+									<?php echo $ptsPositions['B63']; ?>
 									</div>
 								</div>
 							</td>
@@ -8124,7 +8124,7 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-position">1-64</div>
 								<div class="bracket-edit">
-									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B32"><img src="img/edit.png" /></a>
+									<a href="index.php?idtournoi=<?php echo $idTournoi; ?>&idphase=<?php echo $idPhaseFinale; ?>&page=matchsphasesfinales#matchid-B64"><img src="img/edit.png" /></a>
 								</div>
 							</td>
 							<td class="bracket-t"> 
@@ -8188,10 +8188,10 @@ calculPhaseFinale($numPhaseFinale, 128);
 							<td>
 								<div class="bracket-equipe">
 									<div class="bracket-equipe-num">
-									<?php echo $positions['B32']; ?>
+									<?php echo $positions['B64']; ?>
 									</div>
 									<div class="bracket-equipe-score">
-									<?php echo $ptsPositions['B32']; ?>
+									<?php echo $ptsPositions['B64']; ?>
 									</div>
 								</div>
 							</td>

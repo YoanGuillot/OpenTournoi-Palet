@@ -1530,7 +1530,7 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 
 	if($nbEquipes > 32){
 		// Perdants 16ème de finales places 17 à 32
-		$previousLevel = chr(ord($lastLevel) - 4);
+		$previousLevel = chr(ord($lastLevel) - 5);
 
 		$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8" OR position_label = "'. $previousLevel .'9" OR position_label = "'. $previousLevel .'10" OR position_label = "'. $previousLevel .'11" OR position_label = "'. $previousLevel .'12" OR position_label = "'. $previousLevel .'13" OR position_label = "'. $previousLevel .'14" OR position_label = "'. $previousLevel .'15" OR position_label = "'. $previousLevel .'16" OR position_label = "'. $previousLevel .'17" OR position_label = "'. $previousLevel .'18" OR position_label = "'. $previousLevel .'19" OR position_label = "'. $previousLevel .'20" OR position_label = "'. $previousLevel .'21" OR position_label = "'. $previousLevel .'22" OR position_label = "'. $previousLevel .'23" OR position_label = "'. $previousLevel .'24" OR position_label = "'. $previousLevel .'25" OR position_label = "'. $previousLevel .'26" OR position_label = "'. $previousLevel .'27" OR position_label = "'. $previousLevel .'28" OR position_label = "'. $previousLevel .'29" OR position_label = "'. $previousLevel .'30" OR position_label = "'. $previousLevel .'31" OR position_label = "'. $previousLevel .'32")';
 
@@ -1551,7 +1551,7 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 
 	if($nbEquipes > 64){
 		// Perdants 32ème de finales places 33 à 64
-		$previousLevel = chr(ord($lastLevel) - 4);
+		$previousLevel = chr(ord($lastLevel) - 6);
 
 		$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8" OR position_label = "'. $previousLevel .'9" OR position_label = "'. $previousLevel .'10" OR position_label = "'. $previousLevel .'11" OR position_label = "'. $previousLevel .'12" OR position_label = "'. $previousLevel .'13" OR position_label = "'. $previousLevel .'14" OR position_label = "'. $previousLevel .'15" OR position_label = "'. $previousLevel .'16" OR position_label = "'. $previousLevel .'17" OR position_label = "'. $previousLevel .'18" OR position_label = "'. $previousLevel .'19" OR position_label = "'. $previousLevel .'20" OR position_label = "'. $previousLevel .'21" OR position_label = "'. $previousLevel .'22" OR position_label = "'. $previousLevel .'23" OR position_label = "'. $previousLevel .'24" OR position_label = "'. $previousLevel .'25" OR position_label = "'. $previousLevel .'26" OR position_label = "'. $previousLevel .'27" OR position_label = "'. $previousLevel .'28" OR position_label = "'. $previousLevel .'29" OR position_label = "'. $previousLevel .'30" OR position_label = "'. $previousLevel .'31" OR position_label = "'. $previousLevel .'32" OR position_label = "'. $previousLevel .'33" OR position_label = "'. $previousLevel .'34" OR position_label = "'. $previousLevel .'35" OR position_label = "'. $previousLevel .'36" OR position_label = "'. $previousLevel .'37" OR position_label = "'. $previousLevel .'38" OR position_label = "'. $previousLevel .'39" OR position_label = "'. $previousLevel .'40" OR position_label = "'. $previousLevel .'41" OR position_label = "'. $previousLevel .'42" OR position_label = "'. $previousLevel .'43" OR position_label = "'. $previousLevel .'44" OR position_label = "'. $previousLevel .'45" OR position_label = "'. $previousLevel .'46" OR position_label = "'. $previousLevel .'47" OR position_label = "'. $previousLevel .'48" OR position_label = "'. $previousLevel .'49" OR position_label = "'. $previousLevel .'50" OR position_label = "'. $previousLevel .'51" OR position_label = "'. $previousLevel .'52" OR position_label = "'. $previousLevel .'53" OR position_label = "'. $previousLevel .'54" OR position_label = "'. $previousLevel .'55" OR position_label = "'. $previousLevel .'56" OR position_label = "'. $previousLevel .'57" OR position_label = "'. $previousLevel .'58" OR position_label = "'. $previousLevel .'59" OR position_label = "'. $previousLevel .'60" OR position_label = "'. $previousLevel .'61" OR position_label = "'. $previousLevel .'62" OR position_label = "'. $previousLevel .'63" OR position_label = "'. $previousLevel .'64")';
 
@@ -1652,7 +1652,7 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 					break;
 				case 64:
 					$place35= $row['num_equipe'];
-					$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '19' AND class_numphase == '". $numPhaseFinale ."'");
+					$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '35' AND class_numphase == '". $numPhaseFinale ."'");
 					break;
 				case 128:
 					$place67= $row['num_equipe'];
@@ -1814,6 +1814,41 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 			$previousLevel = chr(ord($lastLevel) - 5);
 			$previousLevel = "CH".$previousLevel;
 			$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8" OR position_label = "'. $previousLevel .'9" OR position_label = "'. $previousLevel .'10" OR position_label = "'. $previousLevel .'11" OR position_label = "'. $previousLevel .'12" OR position_label = "'. $previousLevel .'13" OR position_label = "'. $previousLevel .'14" OR position_label = "'. $previousLevel .'15" OR position_label = "'. $previousLevel .'16")';
+	
+			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC');
+			
+			switch($nbEquipes){
+				case 64:
+					// FAUX
+					$i = 49;
+					break;
+				case 128:
+					//FAUX
+					$i = 97;
+					break;
+			}
+
+			while ($row = $resultats->fetchArray(1)) {
+				
+				$a = "place".$i;	
+				$$a = $row['num_equipe'];
+				if($$a != ''){
+					$db->exec("UPDATE classements SET class_numequipe = '". $$a ."' WHERE class_place == '". $i ."' AND class_numphase == '". $numPhaseFinale ."'");
+					//$classement .= "<tr><td>". $i ."</td><td>" .$$a ."</td></tr>";
+				}
+				$i++;
+			}
+	
+		}
+
+
+		if($nbEquipes > 64){
+
+			// Perdants 16ème de finales 
+			$previousLevel = chr(ord($lastLevel) - 6);
+			$previousLevel = "CH".$previousLevel;
+
+			$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8" OR position_label = "'. $previousLevel .'9" OR position_label = "'. $previousLevel .'10" OR position_label = "'. $previousLevel .'11" OR position_label = "'. $previousLevel .'12" OR position_label = "'. $previousLevel .'13" OR position_label = "'. $previousLevel .'14" OR position_label = "'. $previousLevel .'15" OR position_label = "'. $previousLevel .'16" OR position_label = "'. $previousLevel .'17" OR position_label = "'. $previousLevel .'18" OR position_label = "'. $previousLevel .'19" OR position_label = "'. $previousLevel .'20" OR position_label = "'. $previousLevel .'21" OR position_label = "'. $previousLevel .'22" OR position_label = "'. $previousLevel .'23" OR position_label = "'. $previousLevel .'24" OR position_label = "'. $previousLevel .'25" OR position_label = "'. $previousLevel .'26" OR position_label = "'. $previousLevel .'27" OR position_label = "'. $previousLevel .'28" OR position_label = "'. $previousLevel .'29" OR position_label = "'. $previousLevel .'30" OR position_label = "'. $previousLevel .'31" OR position_label = "'. $previousLevel .'32")';
 	
 			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC');
 			

@@ -1940,24 +1940,48 @@ function tiragePhaseFinale($idTournoi, $nbEquipes, $numPhase)
 		}
 	}
 
+	 // Compléter le tableau avec des équipes "vides" si nécessaire
+    while(count($tableauEquipes) < $nbEquipes){
+        $tableauEquipes[] = ''; // Exempt
+    }
 
 	genererArbrePhaseFinale($numPhase,$nbEquipes);
 	
 	
 	if($infosTournoi['type_phasesfinales'] == "tetedeserie"){
-		//non melange du tableau
-		$melTableauEquipes = $tableauEquipes;
-		//Division en deux parties du tableau mélangé
-		$premierTableauEquipes = array_slice($melTableauEquipes, 0, ($nbEquipes / 2)); 
-		$secondTableauEquipes = array_slice($melTableauEquipes,($nbEquipes / 2), $nbEquipes - 1);
-		$secondTableauEquipes = array_reverse($secondTableauEquipes);
+		// Organisation pour têtes de série - système de bracket classique
+        // Méthode standard : séparer le 1er et 2ème dans des moitiés opposées
+        
+        $premierTableauEquipes = array();
+        $secondTableauEquipes = array();
+        $moitie = $nbEquipes / 2;
+        
+        // Créer le bracket complet d'abord
+        $bracket = array();
+        
+        // Première moitié : 1er, puis les équipes qui ne gêneront pas le 2ème
+        // Le 1er va en position 0, le 2ème en position $moitie
+        for($i = 0; $i < $moitie; $i++){
+            $bracket[$i] = $tableauEquipes[$i * 2]; // 1er, 3ème, 5ème, 7ème...
+        }
+        
+        // Seconde moitié : 2ème, puis les équipes restantes  
+        for($i = 0; $i < $moitie; $i++){
+            $bracket[$i + $moitie] = $tableauEquipes[$i * 2 + 1]; // 2ème, 4ème, 6ème, 8ème...
+        }
+        
+        // Maintenant organiser les matchs : 1ère moitié vs dernière moitié inversée
+        for($i = 0; $i < $moitie; $i++){
+            $premierTableauEquipes[] = $bracket[$i];
+            $secondTableauEquipes[] = $bracket[$nbEquipes - 1 - $i];
+        }
 	}else{
-		//melange du tableau
+		//melange du tableau pour un tirage aléatoire et non tête de série
 		$melTableauEquipes = $tableauEquipes;
 		shuffle($melTableauEquipes);
 		//Division en deux parties du tableau mélangé
 		$premierTableauEquipes = array_slice($melTableauEquipes, 0, ($nbEquipes / 2)); 
-		$secondTableauEquipes = array_slice($melTableauEquipes,($nbEquipes / 2), $nbEquipes - 1); 
+		$secondTableauEquipes = array_slice($melTableauEquipes,($nbEquipes / 2)); 
 		
 	}
 	

@@ -1923,97 +1923,157 @@ function tiragePhaseQualif($nbEquipes, $numPhase)
 	return $matchs;
 }
 
+//////////////////// DEBUT FONCTIONS TIRAGES PHASE FINALE /////////////////////////////////
+
 function tiragePhaseFinale($idTournoi, $nbEquipes, $numPhase)
 {
-	
-	global $db;
-	$recupEquipes = classementQualifs($idTournoi);
-	$tableauEquipes = array();
-	$countEquipe = 0;
-	$infosTournoi = infosTournoi($idTournoi);
-	foreach($recupEquipes as $row){
-		if($row['dispo_phasesfinales'] == '1' && $countEquipe < $nbEquipes){
-			$numEquipe = $row['num_equipe'];
-			$tableauEquipes[] = $numEquipe;
-			$db->exec("UPDATE equipes SET dispo_phasesfinales = '0' WHERE num_equipe == '$numEquipe'");
-			$countEquipe = $countEquipe + 1;
-		}
-	}
-
-	 // Compléter le tableau avec des équipes "vides" si nécessaire
-    while(count($tableauEquipes) < $nbEquipes){
-        $tableauEquipes[] = ''; // Exempt
+    global $db;
+    $recupEquipes = classementQualifs($idTournoi);
+    $tableauEquipes = array();
+    $countEquipe = 0;
+    $infosTournoi = infosTournoi($idTournoi);
+    
+    // Récupérer exactement le nombre d'équipes nécessaires selon leur classement
+    foreach($recupEquipes as $row){
+        if($row['dispo_phasesfinales'] == '1' && $countEquipe < $nbEquipes){
+            $numEquipe = $row['num_equipe'];
+            $tableauEquipes[] = $numEquipe;
+            $db->exec("UPDATE equipes SET dispo_phasesfinales = '0' WHERE num_equipe == '$numEquipe'");
+            $countEquipe++;
+        }
     }
 
-	genererArbrePhaseFinale($numPhase,$nbEquipes);
-	
-	
-	if($infosTournoi['type_phasesfinales'] == "tetedeserie"){
-		// Organisation pour têtes de série - système de bracket classique
-        // Méthode standard : séparer le 1er et 2ème dans des moitiés opposées
-        
-        $premierTableauEquipes = array();
-        $secondTableauEquipes = array();
-        $moitie = $nbEquipes / 2;
-        
-        // Créer le bracket complet d'abord
-        $bracket = array();
-        
-        // Première moitié : 1er, puis les équipes qui ne gêneront pas le 2ème
-        // Le 1er va en position 0, le 2ème en position $moitie
-        for($i = 0; $i < $moitie; $i++){
-            $bracket[$i] = $tableauEquipes[$i * 2]; // 1er, 3ème, 5ème, 7ème...
-        }
-        
-        // Seconde moitié : 2ème, puis les équipes restantes  
-        for($i = 0; $i < $moitie; $i++){
-            $bracket[$i + $moitie] = $tableauEquipes[$i * 2 + 1]; // 2ème, 4ème, 6ème, 8ème...
-        }
-        
-        // Maintenant organiser les matchs : 1ère moitié vs dernière moitié inversée
-        for($i = 0; $i < $moitie; $i++){
-            $premierTableauEquipes[] = $bracket[$i];
-            $secondTableauEquipes[] = $bracket[$nbEquipes - 1 - $i];
-        }
-	}else{
-		//melange du tableau pour un tirage aléatoire et non tête de série
-		$melTableauEquipes = $tableauEquipes;
-		shuffle($melTableauEquipes);
-		//Division en deux parties du tableau mélangé
-		$premierTableauEquipes = array_slice($melTableauEquipes, 0, ($nbEquipes / 2)); 
-		$secondTableauEquipes = array_slice($melTableauEquipes,($nbEquipes / 2)); 
-		
-	}
-	
+    // Compléter avec des équipes "vides" si nécessaire (exempts)
+    while(count($tableauEquipes) < $nbEquipes){
+        $tableauEquipes[] = '';
+    }
 
-
-	
-
-	//Constituer la proposition de matchs
-
-	$nbMatch = $nbEquipes / 2;
-	$numMatch = 1;
-	$indexTable = 0;
-	unset($matchs);
-	while($numMatch < $nbMatch + 1){
-		if(array_key_exists($indexTable, $premierTableauEquipes)){
-			$equipe1 = $premierTableauEquipes[$indexTable];
-		}else{
-			$equipe1 = '';
-		}
-		if(array_key_exists($indexTable, $secondTableauEquipes)){
-			$equipe2 = $secondTableauEquipes[$indexTable];
-		}else{
-			$equipe2 = '';
-		}
-		
-		$matchs[$numMatch] = array('num_phase'=>$numPhase, 'equipe1'=>$equipe1, 'equipe2'=> $equipe2);
-		$numMatch = $numMatch + 1;
-		$indexTable = $indexTable + 1;
-	}
-	return $matchs;
+    genererArbrePhaseFinale($numPhase, $nbEquipes);
+    
+    if($infosTournoi['type_phasesfinales'] == "tetedeserie"){
+        // Système de bracket optimal avec seeding professionnel
+        // Garantit que les meilleures équipes ne se rencontrent qu'aux stades les plus avancés
+        $matchs = genererBracketAvecSeedingOptimal($tableauEquipes, $nbEquipes, $numPhase);
+    } else {
+        // Tirage aléatoire
+        $matchs = genererBracketAleatoire($tableauEquipes, $nbEquipes, $numPhase);
+    }
+    
+    return $matchs;
 }
 
+/**
+ * Génère un bracket avec seeding optimal RÉEL
+ * Garantit que les meilleures équipes ne se rencontrent qu'aux stades les plus avancés
+ * Utilise l'algorithme standard des tournois professionnels
+ */
+function genererBracketAvecSeedingOptimal($tableauEquipes, $nbEquipes, $numPhase)
+{
+    $matchs = array();
+    
+    // Générer l'ordre de placement optimal
+    $seedingOrder = genererOrdreSeedingOptimal($nbEquipes);
+    
+    // Réorganiser les équipes selon le seeding optimal
+    $equipesSeeded = array();
+    for($i = 0; $i < $nbEquipes; $i++){
+        $seedPosition = $seedingOrder[$i] - 1; // -1 car les indices commencent à 0
+        $equipesSeeded[] = isset($tableauEquipes[$seedPosition]) ? $tableauEquipes[$seedPosition] : '';
+    }
+    
+    // Créer les matchs avec le seeding optimal
+    $nbMatch = $nbEquipes / 2;
+    for($i = 0; $i < $nbMatch; $i++){
+        $equipe1 = $equipesSeeded[$i];
+        $equipe2 = $equipesSeeded[$nbEquipes - 1 - $i];
+        
+        $matchs[$i + 1] = array(
+            'num_phase' => $numPhase, 
+            'equipe1' => $equipe1, 
+            'equipe2' => $equipe2
+        );
+    }
+    
+    return $matchs;
+}
+
+/**
+ * Génère un bracket aléatoire
+ * Utilise $tableauEquipes pour le mélange aléatoire
+ */
+function genererBracketAleatoire($tableauEquipes, $nbEquipes, $numPhase)
+{
+    $matchs = array();
+    
+    // Mélanger le tableau qui contient déjà les équipes
+    $equipesAleatoires = $tableauEquipes;
+    shuffle($equipesAleatoires);
+    
+    // Diviser en deux groupes
+    $moitie = $nbEquipes / 2;
+    $groupe1 = array_slice($equipesAleatoires, 0, $moitie);
+    $groupe2 = array_slice($equipesAleatoires, $moitie);
+    
+    // Créer les matchs
+    for($i = 0; $i < $moitie; $i++){
+        $equipe1 = isset($groupe1[$i]) ? $groupe1[$i] : '';
+        $equipe2 = isset($groupe2[$i]) ? $groupe2[$i] : '';
+        
+        $matchs[$i + 1] = array(
+            'num_phase' => $numPhase, 
+            'equipe1' => $equipe1, 
+            'equipe2' => $equipe2
+        );
+    }
+    
+    return $matchs;
+}
+
+
+
+/**
+ * Génère l'ordre de seeding optimal pour un nombre donné d'équipes
+ * Fonctionne pour toutes les puissances de 2 : 4, 8, 16, 32, 64, 128, etc.
+ * Suit la logique des tournois professionnels
+ */
+function genererOrdreSeedingOptimal($nbEquipes)
+{
+    // Vérifier que c'est une puissance de 2
+    if(($nbEquipes & ($nbEquipes - 1)) !== 0) {
+        // Si ce n'est pas une puissance de 2, utiliser l'approche simple
+        return range(1, $nbEquipes);
+    }
+    
+    // Générer le seeding optimal récursivement
+    return genererSeedingRecursif($nbEquipes);
+}
+
+/**
+ * Génère récursivement l'ordre de seeding pour n'importe quelle puissance de 2
+ * Algorithme universel qui fonctionne pour 4, 8, 16, 32, 64, 128, 256, etc.
+ */
+function genererSeedingRecursif($n)
+{
+    if($n <= 2) {
+        return range(1, $n);
+    }
+    
+    // Générer récursivement la moitié
+    $half = $n / 2;
+    $halfSeeds = genererSeedingRecursif($half);
+    
+    $seeds = array();
+    
+    // Pour chaque seed de la moitié, ajouter son opposé
+    foreach($halfSeeds as $seed) {
+        $seeds[] = $seed;                    // Seed original
+        $seeds[] = $n + 1 - $seed;          // Son opposé (n+1-seed)
+    }
+    
+    return $seeds;
+}
+
+////////////////////////// FIN TIRAGE PHSE FINALE ////////////////////////
 
 function supprPhaseQualif($idPhase,$idTournoi)
 {

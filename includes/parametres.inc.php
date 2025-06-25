@@ -131,7 +131,7 @@ defined('_LPDT') or die;
         <button class="uk-modal-close-default" type="button" uk-close></button>
 
         <p><span style="font-weight: bold">Aléatoire :</span><br/> Tirage aléatoire des rencontres entre les équipes selectionnées pour cette phase.</p><hr />
-        <p><span style="font-weight: bold">Tête de série :</span><br /> Tirage effectué en opposant le premier du classement au dernier, le second à l'avant dernier...etc<br/>(exemple: Pour une phase à 8 équipes, le 1er au classement rencontrera en quart de finale, le 8ème, le 2ème rencontrera le 7ème...etc).<br />Permet aux meilleures équipes de se recontrer seulement aux niveaux proches des finales</p>
+        <p><span style="font-weight: bold">Tête de série :</span><br /> Tirage effectué en utilisant un système de seeding professionnel permettant aux meilleurs équipes de se rencontrer le plus tard possible.<br/>(exemple: Pour une phase à 8 équipes, le 1er au classement rencontrera en quart de finale, le 8ème, le 2ème rencontrera le 7ème...etc).<br />Permet aux meilleures équipes de se recontrer seulement aux niveaux proches des finales</p>
 
     </div>
 </div>

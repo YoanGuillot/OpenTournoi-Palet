@@ -2073,7 +2073,7 @@ function genererSeedingRecursif($n)
     return $seeds;
 }
 
-////////////////////////// FIN TIRAGE PHSE FINALE ////////////////////////
+////////////////////////// FIN TIRAGE PHSE FINALE /////////////////////////
 
 function supprPhaseQualif($idPhase,$idTournoi)
 {

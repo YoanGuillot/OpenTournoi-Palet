@@ -18,12 +18,12 @@ $db = new SQLite3('includes/conf/'.$idTournoi. '.db');
 $query = $db->query('SELECT * FROM equipes'); 
 $numRows = $db->querySingle('SELECT COUNT(*) as count FROM equipes');
 
-if($numRows > 0){ 
+//if($numRows > 0){ 
     while($row = $query->fetchArray(1)){ 
         $lineData = array($row['num_equipe'], $row['nom_equipe'], $row['joueur1'], $row['joueur2'], $row['joueur3']);  
         $excelData[] = $lineData; 
     } 
-} 
+//} 
  
 // Export data to excel and download as xlsx file 
 $xlsx = CodexWorld\PhpXlsxGenerator::fromArray( $excelData ); 

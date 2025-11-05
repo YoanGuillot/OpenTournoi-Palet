@@ -98,10 +98,10 @@ if ($infosPhasesFinales == ''){
 											<a href=\"index.php?idtournoi=". $idTournoi ."&idphase=". $infosPhaseFinale['id_phasefinale'] ."&page=phase". $infosPhaseFinale['nb_equipes'] ."\" title=\"Accéder à l'arbre de tournoi\" data-uk-tooltip>
 												<button class=\"uk-button uk-button-primary\"><img src=\"img/bracket.png\" class=\"uk-margin-small-right\" />Tableau</button>
 											</a>
-											<a href=\"http://localhost/tournoipalet/index.php?idtournoi=$idTournoi&idphase=$idPhaseFinale&page=matchsphasesfinales\" title=\"Accéder à la liste des matchs\" data-uk-tooltip>
+											<a href=\"index.php?idtournoi=$idTournoi&idphase=$idPhaseFinale&page=matchsphasesfinales\" title=\"Accéder à la liste des matchs\" data-uk-tooltip>
 												<button class=\"uk-button uk-button-primary\"><span class=\"uk-margin-small-right uk-icon\" data-uk-icon=\"icon: table\"></span>Matchs</button>
 											</a>
-											<a href=\"http://localhost/tournoipalet/index.php?idtournoi=$idTournoi&idphasefinale=$idPhaseFinale&page=classementphasesfinales\" title=\"Classement\" data-uk-tooltip>
+											<a href=\"index.php?idtournoi=$idTournoi&idphasefinale=$idPhaseFinale&page=classementphasesfinales\" title=\"Classement\" data-uk-tooltip>
 												<button class=\"uk-button uk-button-primary\"><span class=\"uk-margin-small-right uk-icon\" data-uk-icon=\"icon: list\"></span>Classement</button>
 											</a>
 										</div>

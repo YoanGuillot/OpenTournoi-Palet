@@ -62,7 +62,7 @@ defined('_LPDT') or die;
 								<span style="font-weight: bold;">Type de classement pour les phases qualificatives : </span>
 								<div class="uk-margin-left uk-form-controls">
             						<label><input class="uk-radio btRadioDef" type="radio" value="CF"name="classType" <?php if ($infosTournoi['type_classement'] == 'CF'){ echo " checked";} ?>> <span style="font-style: italic;" class="uk-margin-right">Coupe France : </span>  Nb de Victoires => Pts Pour => Différence (Goalaverage)</label><br>
-           							<label><input class="uk-radio btRadioDef" type="radio" value="Challenge17" name="classType" <?php if ($infosTournoi['type_classement'] == 'Challenge17'){ echo " checked";} ?>><span style="font-style: italic;" class="uk-margin-right"> Challenge 17 : </span>  Nb Victoires => Différence (Goalaverage)</label><br>
+           							<label><input class="uk-radio btRadioDef" type="radio" value="Challenge17" name="classType" <?php if ($infosTournoi['type_classement'] == 'Challenge17'){ echo " checked";} ?>><span style="font-style: italic;" class="uk-margin-right"> Challenge 17 : </span>  Nb Victoires => Différence (Goalaverage) => Pts Pour</label><br>
            							<label><input class="uk-radio btRadioPerso" type="radio" value="Perso" name="classType" <?php if ($infosTournoi['type_classement'] == 'Perso'){ echo " checked";} ?>><span style="font-style: italic; " class="uk-margin-right"> Personnalisé</span></label><br>
 								</div>	
 								<br>

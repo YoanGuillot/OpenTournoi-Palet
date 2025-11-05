@@ -216,7 +216,7 @@ function classementQualifs($idTournoi)
 			$orderBY = 'nb_victoires DESC, pts_pour DESC, pts_diff DESC, bonus_qualifs DESC';
 			break;
 		case "Challenge17":
-			$orderBY = 'nb_victoires DESC, pts_diff DESC, bonus_qualifs DESC';
+			$orderBY = 'nb_victoires DESC, pts_diff DESC, pts_pour DESC, bonus_qualifs DESC';
 			break;
 		case "Perso":
 			$orderBY = $condition1.$condition2.$condition3.$condition4.', bonus_qualifs DESC';
@@ -2073,7 +2073,7 @@ function genererSeedingRecursif($n)
     return $seeds;
 }
 
-////////////////////////// FIN TIRAGE PHSE FINALE /////////////////////////
+////////////////////////// FIN TIRAGE PHSE FINALE ////////////////////////
 
 function supprPhaseQualif($idPhase,$idTournoi)
 {

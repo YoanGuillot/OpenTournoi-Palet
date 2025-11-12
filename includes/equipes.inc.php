@@ -71,8 +71,23 @@ if($infosTournoi['max_equipes'] != 0 && $nbEquipes >= $infosTournoi['max_equipes
 						
 						<button class="uk-button importBouton">Importer<span uk-icon="triangle-down"></span></button>
 						<div uk-dropdown="pos: bottom-center;animation: slide-top; animate-out: true; duration: 700;">
-							<a class="uk-float-left" href="exportEquipes-xlsx.php?idtournoi=<?php echo $idTournoi; ?>"><img src="images/xlsx.png" /></a>
-							<a class="uk-float-right" href="exportEquipes-csv.php?idtournoi=<?php echo $idTournoi; ?>"><img src="images/csv.png" /></a>
+						<!---	<a class="uk-float-left" href="exportEquipes-xlsx.php?idtournoi=<?php echo $idTournoi; ?>"><img src="images/xlsx.png" /></a>
+							<a class="uk-float-right" href="exportEquipes-csv.php?idtournoi=<?php echo $idTournoi; ?>"><img src="images/csv.png" /></a> --->
+
+							<form action="importEquipes-csv.php?idtournoi=<?= $idTournoi ?>" method="post" enctype="multipart/form-data">
+								<h3>Importer des équipes (CSV)</h3>
+								<input class="parcourirBouton" type="file" name="fichier_csv" accept=".csv" required>
+								<button type="submit">Importer CSV</button>
+							</form>
+
+							<form action="importEquipes-xlsx.php?idtournoi=<?= $idTournoi ?>" method="post" enctype="multipart/form-data">
+								<h3>Importer des équipes (XLSX)</h3>
+								<input class="parcourirBouton" type="file" name="fichier_xlsx" accept=".xlsx" required>
+								<button type="submit">Importer XLSX</button>
+							</form>
+
+
+
 						</div>
 						
 						<button class="uk-button exportBouton">Exporter<span uk-icon="triangle-down"></span></button>
@@ -165,7 +180,8 @@ if ($infosTournoi['statut_inscriptions'] == "ferme"){
 	$(document).ready(function() {
 		$('input').attr('disabled', true);
 		$('a.uk-icon').css("display", 'none');
-		$('.importBouton').css("display", 'none');
+		// $('.importBouton').css("display", 'none');
+		$('.parcourirBouton').attr("disabled", false);
 		$('.visible-inline').css("display", 'inline-block');
 		
 		

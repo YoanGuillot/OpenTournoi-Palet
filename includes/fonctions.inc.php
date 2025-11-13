@@ -489,6 +489,58 @@ function constructTableMatchsPF($idTournoi, $label, $listeEquipes , $numPlaque, 
 
 }
 
+function constructTableMatchsPFWeb($idTournoi, $label, $listeEquipes , $numPlaque, $numPhaseFinale)
+{
+	
+	//$label = mb_convert_encoding($label, 'UTF-8', 'ISO-8859-1');
+	$infosTournoi = infosTournoi($idTournoi);
+	$idPhaseFinale = infosPhaseFinaleNum($numPhaseFinale);
+	$idPhaseFinale = $idPhaseFinale['id_phasefinale'];
+	$nbEquipes = count($listeEquipes);
+	$nbRencontres = $nbEquipes / 2;
+
+	$tablePair = [];
+	$tableImpair = [];
+	$indexRow = 0;
+	$indexEquipe = 1;
+	
+	foreach($listeEquipes as $row){
+		if ($indexEquipe&1){
+			$tableImpair[] = $row;
+		}else{
+			$tablePair[] = $row;
+		}
+		$indexEquipe++;
+	}
+	$listeMatchs = [];
+	while( $indexRow < $nbRencontres){
+		$listeMatchs[] = ["position1" => $tableImpair[$indexRow]['position_label'], "equipe1" => $tableImpair[$indexRow]['num_equipe'], "score1" => $tableImpair[$indexRow]['position_score'] , "position2" => $tablePair[$indexRow]['position_label'], "equipe2" => $tablePair[$indexRow]['num_equipe'], "score2" => $tablePair[$indexRow]['position_score']];
+		
+		$indexRow = $indexRow +1;
+	}	
+	
+	foreach ($listeMatchs as $row){
+		$position1 = $row['position1'];
+		$position2 = $row['position2'];
+		$idMatch = $row['position2'];
+		$score1 = $row['score1'];
+		$score2 = $row['score2'];
+		$equipe1 = $row['equipe1'];
+		$equipe2 = $row['equipe2'];
+		
+		$rawMatchsContent .= "<tr><td>$equipe1</td><td>$score1</td><td>$score2</td><td>$equipe2</td></tr>";
+
+		$numPlaque++;
+	}
+
+	$rawMatchsHeader = "<br /><br /><br /><h3>$label</h3><table><tr><th>Equipe 1</th><th>Score 1</th><th>Score 2</th><th>Equipe 2</th></tr>";
+	$rawMatchsFooter = "</table>";
+
+	$tableau = $rawMatchsHeader.$rawMatchsContent.$rawMatchsFooter;
+	
+	return $tableau;
+}
+
 function statsEquipe($numEquipe)
 {
 	global $db;

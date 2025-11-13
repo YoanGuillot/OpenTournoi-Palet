@@ -94,7 +94,23 @@ for ($i = 1; $i <= $nbPhase; $i++) {
 
 
 //Récupération du classement des phases qualificatives
-
+$classementQualifs = classementQualifs($idTournoi);
+//Générer en HTML le tableau du classement des phases qualificatives
+$tableauClassementQualifs = '';
+$placeEquipe = 1;
+if(!empty($classementQualifs)){
+    foreach($classementQualifs as $row) {
+        $tableauClassementQualifs .= '<tr>
+                <td>' . $placeEquipe . '</td>
+                <td>' . htmlspecialchars($row['nom_equipe']) . '</td>
+                <td>' . $row['nb_victoires'] . '</td>
+                <td>' . $row['pts_pour'] . '</td>
+                <td>' . $row['pts_contre'] . '</td>
+                <td>' . $row['pts_diff'] . '</td>
+            </tr>';
+        $placeEquipe = $placeEquipe + 1;
+    }	
+}
 
 
 
@@ -229,25 +245,20 @@ $codeWeb = '<!DOCTYPE html>
         
         <!-- Classement Phase de Qualification -->
         <div id="classement-quali" class="tab-content">
-            <h2>Classement - Phase de Qualifications</h2>
+            <h2>Classement - Phases de Qualifications</h2>
             <table>
                 <thead>
                     <tr>
                         <th>Rang</th>
                         <th>Équipe</th>
-                        <th>Matchs</th>
                         <th>Victoires</th>
-                        <th>Points</th>
+                        <th>Pts Pour</th>
+                        <th>Pts Contre</th>
+                        <th>Diff</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Team A</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>10</td>
-                    </tr>
+                    '. $tableauClassementQualifs .'
                 </tbody>
             </table>
         </div>

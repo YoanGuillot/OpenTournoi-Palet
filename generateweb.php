@@ -512,8 +512,27 @@ if ($infosPhasesFinales == ''){
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
+//Récupération du classement final
+$classementFinal = classementFinal();
+		
+$place = 1;
+$tableClassementFinal = "";
+if(!empty($classementFinal)){
+    foreach($classementFinal as $row) {
+        if($row['class_numequipe'] != ''){
+            $nomEquipe = getEquipeName($row['class_numequipe']);
+        }else{
+            $nomEquipe = "";
+        }
+        
+        $tableClassementFinal .= "<tr>
+                    <td>$place</td>
+                    <td>". $row['class_numequipe'] ."</td>
+                    <td>". $nomEquipe ."</td>
+            </tr>";
+        $place++;
+    }	
+}
 
 
 
@@ -680,18 +699,12 @@ $codeWeb = '<!DOCTYPE html>
                 <thead>
                     <tr>
                         <th>Rang</th>
-                        <th>Équipe</th>
-                        <th>Points Totaux</th>
-                        <th>Victoires</th>
+                        <th>N° Équipe</th>
+                        <th>Nom Équipe</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Team A</td>
-                        <td>20</td>
-                        <td>2</td>
-                    </tr>
+                    '. $tableClassementFinal .'
                 </tbody>
             </table>
         </div>

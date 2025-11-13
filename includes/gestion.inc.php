@@ -76,7 +76,7 @@ defined('_LPDT') or die;
 			<div class="uk-card-body uk-text-center">
 				<div class="uk-grid uk-grid-large">
 					<div class="uk-panel"><a href="index.php?idtournoi=<?php echo $idTournoi; ?>&page=classementfinal" class="uk-icon-link" title="Classement final" data-uk-tooltip data-uk-icon="icon: list;ratio: 3"></a><br />Classement final</div>
-					<div class="uk-panel"><a href="generateweb.php?idtournoi=<?= $idTournoi ?>" class="uk-icon-link" title="Générer site Web" data-uk-tooltip data-uk-icon="icon: sign-out;ratio: 3"></a><br />Générer site Web</div>
+					<div class="uk-panel"><a href="generateweb.php?idtournoi=<?= $idTournoi ?>" class="uk-icon-link" title="Générer site Web" data-uk-tooltip data-uk-icon="icon: cloud-upload;ratio: 3"></a><br />Générer site Web</div>
 					<div class="uk-panel"><a href="index.php" class="uk-icon-link" title="Quitter le tournoi" data-uk-tooltip data-uk-icon="icon: sign-out;ratio: 3"></a><br />Quitter le tournoi</div>
 				</div>
 			</div>

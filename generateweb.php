@@ -3,6 +3,7 @@
 define( '_LPDT', 1 );
 date_default_timezone_set("Europe/Paris");
 
+//récupération de l'id du tournoi
 $idTournoi = $_GET['idtournoi'];
 
 // Connexion à la base de données
@@ -35,6 +36,66 @@ foreach ($listeEquipes as $equipe) {
         <td>' . $joueurs . '</td>
     </tr>';
 }
+
+//Récupération des infos des phases qualificatives
+$infosPhase = infosPhase();
+
+//Récupération du nombre de phases qualificatives
+if ($infosPhase == ''){
+		$nbPhase = 0;
+		$content = "Aucune phase de qualification";
+}else{
+		$colonnePhase = array_column($infosPhase, 'num_phase');
+		rsort($colonnePhase, SORT_NUMERIC);
+		$nbPhase = $colonnePhase[0];
+}
+
+//nbPhase = nombre de phases qualificatives
+
+//Récupération des matchs de chaque phase qualificative
+$matchsPhasesQualifs = array();
+for ($i = 1; $i <= $nbPhase; $i++) {
+    $matchsPhasesQualifs[$i] = listeMatchsQualif($i);
+}
+
+//Générer en HTML des tableaux séparés de résultats pour chaque phase qualificative
+$tablesPhasesQualifs = array();
+for ($i = 1; $i <= $nbPhase; $i++) {
+    $tableHTML = '<table>
+        <thead>
+            <tr>
+                <th>Équipe 1</th>
+                <th>Score 1</th>
+                <th>Score 2</th>
+                <th>Équipe 2</th>
+            </tr>
+        </thead>
+        <tbody>';
+    
+    foreach ($matchsPhasesQualifs[$i] as $match) {
+        $tableHTML .= '<tr>
+            <td>' . $match['equipe1'] . '</td>
+            <td>' . $match['score1'] . '</td>
+            <td>' . $match['score2'] . '</td>
+            <td>' . $match['equipe2'] . '</td>
+        </tr>';
+    }
+    
+    $tableHTML .= '</tbody></table>';
+    $tablesPhasesQualifs[$i] = $tableHTML;
+}
+
+//insérer dans une variable chaque tableau de résultats des phases qualificatives
+$tablesPhasesQualifsHTML = '';
+for ($i = 1; $i <= $nbPhase; $i++) {
+    $tablesPhasesQualifsHTML .= '<br /><br /><br /><h3>Phase de Qualification ' . $i . '</h3>';
+    $tablesPhasesQualifsHTML .= $tablesPhasesQualifs[$i];
+}
+
+
+//Récupération du classement des phases qualificatives
+
+
 
 
 $codeWeb = '<!DOCTYPE html>
@@ -137,9 +198,9 @@ $codeWeb = '<!DOCTYPE html>
         
         <div class="tabs">
             <button class="tab-button active" onclick="showTab(\'equipes\')">Équipes Inscrites</button>
-            <button class="tab-button" onclick="showTab(\'qualifications\')">Phase de Qualifications</button>
+            <button class="tab-button" onclick="showTab(\'qualifications\')">Phases de Qualifications</button>
             <button class="tab-button" onclick="showTab(\'classement-quali\')">Classement Qualifications</button>
-            <button class="tab-button" onclick="showTab(\'finales\')">Phase Finale</button>
+            <button class="tab-button" onclick="showTab(\'finales\')">Phases Finales</button>
             <button class="tab-button" onclick="showTab(\'classement-general\')">Classement Général</button>
         </div>
         
@@ -163,26 +224,7 @@ $codeWeb = '<!DOCTYPE html>
         <!-- Phase de Qualifications -->
         <div id="qualifications" class="tab-content">
             <h2>Phase de Qualifications</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Match</th>
-                        <th>Équipe 1</th>
-                        <th>Score</th>
-                        <th>Équipe 2</th>
-                        <th>Statut</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Team A</td>
-                        <td>10 - 8</td>
-                        <td>Team B</td>
-                        <td>Terminé</td>
-                    </tr>
-                </tbody>
-            </table>
+            '. $tablesPhasesQualifsHTML .'
         </div>
         
         <!-- Classement Phase de Qualification -->

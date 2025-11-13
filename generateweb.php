@@ -112,6 +112,57 @@ if(!empty($classementQualifs)){
     }	
 }
 
+//Récupération des infos des phases finales
+$infosPhasesFinales = infosPhasesFinales($idTournoi);
+
+//Récupérer les infos des matchs de chaque phase finale
+$matchsPhasesFinales = array();
+if(!empty($infosPhasesFinales)){
+    foreach ($infosPhasesFinales as $phaseFinale){
+        $matchsPhasesFinales[$phaseFinale['id_phasefinale']] = listeMatchsPhasesFinales($phaseFinale['id_phasefinale']);
+    }
+}
+//Générer en HTML des tableaux séparés de résultats pour chaque phase finale
+$tablesPhasesFinales = array();
+if(!empty($infosPhasesFinales)){
+    foreach ($infosPhasesFinales as $phaseFinale){
+        $tableHTML = '<table>
+            <thead>
+                <tr>
+                    <th style="text-align:center;">Match</th>
+                    <th style="text-align:center;">Équipe 1</th>
+                    <th style="text-align:center;">Score</th>
+                    <th style="text-align:center;">Équipe 2</th>
+                    <th style="text-align:center;">Statut</th>
+                </tr>
+            </thead>
+            <tbody>';
+        
+        foreach ($matchsPhasesFinales[$phaseFinale['id_phasefinale']] as $match) {
+            $tableHTML .= '<tr>
+                <td style="text-align:center;">' . $match['label_match'] . '</td>
+                <td style="text-align:center;">' . $match['equipe1'] . '</td>
+                <td style="text-align:center;">' . $match['score1'] . ' - ' . $match['score2'] . '</td>
+                <td style="text-align:center;">' . $match['equipe2'] . '</td>
+                <td style="text-align:center;">' . $match['statut_match'] . '</td>
+            </tr>';
+        }
+        
+        $tableHTML .= '</tbody></table>';
+        $tablesPhasesFinales[$phaseFinale['id_phasefinale']] = $tableHTML;
+    }
+}
+
+//Insérer dans une variable chaque tableau de résultats des phases finales
+$tablesPhasesFinalesHTML = ''; 
+if(!empty($infosPhasesFinales)){
+    foreach ($infosPhasesFinales as $phaseFinale){
+        $tablesPhasesFinalesHTML .= '<br /><br /><br /><h3>' . htmlspecialchars($phaseFinale['label_phasefinale']) . '</h3>';
+        $tablesPhasesFinalesHTML .= $tablesPhasesFinales[$phaseFinale['id_phasefinale']];
+    }
+}
+
+
 
 
 $codeWeb = '<!DOCTYPE html>
@@ -265,27 +316,8 @@ $codeWeb = '<!DOCTYPE html>
         
         <!-- Phase Finale -->
         <div id="finales" class="tab-content">
-            <h2>Phase Finale</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Match</th>
-                        <th>Équipe 1</th>
-                        <th>Score</th>
-                        <th>Équipe 2</th>
-                        <th>Statut</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Finale</td>
-                        <td>Team A</td>
-                        <td>-</td>
-                        <td>Team B</td>
-                        <td>À venir</td>
-                    </tr>
-                </tbody>
-            </table>
+            <h2>Phases Finales</h2>
+            '. $tablesPhasesFinalesHTML .'
         </div>
         
         <!-- Classement Général -->

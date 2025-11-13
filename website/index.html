@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenTournoi-Palet - Chazmpionnat de france individuel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+        }
+        
+        .tab-button {
+            padding: 12px 20px;
+            background: white;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab-button.active {
+            color: #0066cc;
+            border-bottom-color: #0066cc;
+            font-weight: bold;
+        }
+        
+        .tab-button:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #0066cc;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏆 OpenTournoi-Palet - Chazmpionnat de france individuel</h1>
+        
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('equipes')">Équipes Inscrites</button>
+            <button class="tab-button" onclick="showTab('qualifications')">Phase de Qualifications</button>
+            <button class="tab-button" onclick="showTab('classement-quali')">Classement Qualifications</button>
+            <button class="tab-button" onclick="showTab('finales')">Phase Finale</button>
+            <button class="tab-button" onclick="showTab('classement-general')">Classement Général</button>
+        </div>
+        
+        <!-- Équipes Inscrites -->
+        <div id="equipes" class="tab-content active">
+            <h2>Équipes Inscrites</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nom de l'Équipe</th>
+                        <th>Joueurs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+        <td>1</td>
+        <td>GuiGui</td>
+        <td></td>
+    </tr><tr>
+        <td>2</td>
+        <td>Ben</td>
+        <td></td>
+    </tr><tr>
+        <td>3</td>
+        <td>Tim</td>
+        <td></td>
+    </tr><tr>
+        <td>4</td>
+        <td>Micka</td>
+        <td></td>
+    </tr><tr>
+        <td>5</td>
+        <td>Sebastien</td>
+        <td></td>
+    </tr><tr>
+        <td>6</td>
+        <td>Damien</td>
+        <td></td>
+    </tr><tr>
+        <td>7</td>
+        <td>Freddy</td>
+        <td></td>
+    </tr><tr>
+        <td>8</td>
+        <td>Tanguy</td>
+        <td></td>
+    </tr><tr>
+        <td>9</td>
+        <td>Fred</td>
+        <td></td>
+    </tr><tr>
+        <td>10</td>
+        <td>Valentin</td>
+        <td></td>
+    </tr><tr>
+        <td>11</td>
+        <td>Bastien</td>
+        <td></td>
+    </tr><tr>
+        <td>12</td>
+        <td>Max</td>
+        <td></td>
+    </tr><tr>
+        <td>13</td>
+        <td>Tommy</td>
+        <td></td>
+    </tr><tr>
+        <td>14</td>
+        <td>Alban</td>
+        <td></td>
+    </tr><tr>
+        <td>15</td>
+        <td>Etienne</td>
+        <td></td>
+    </tr><tr>
+        <td>16</td>
+        <td>Johan</td>
+        <td></td>
+    </tr><tr>
+        <td>17</td>
+        <td>Yoann</td>
+        <td></td>
+    </tr><tr>
+        <td>18</td>
+        <td>Chris</td>
+        <td></td>
+    </tr><tr>
+        <td>19</td>
+        <td>Manu</td>
+        <td></td>
+    </tr><tr>
+        <td>20</td>
+        <td>Daniel</td>
+        <td></td>
+    </tr><tr>
+        <td>21</td>
+        <td>Danny</td>
+        <td></td>
+    </tr><tr>
+        <td>22</td>
+        <td>Mathis</td>
+        <td></td>
+    </tr><tr>
+        <td>23</td>
+        <td>Andy</td>
+        <td></td>
+    </tr><tr>
+        <td>24</td>
+        <td>Théo</td>
+        <td></td>
+    </tr><tr>
+        <td>25</td>
+        <td>Yannick</td>
+        <td></td>
+    </tr><tr>
+        <td>26</td>
+        <td>Jérome</td>
+        <td></td>
+    </tr><tr>
+        <td>27</td>
+        <td>John</td>
+        <td></td>
+    </tr><tr>
+        <td>28</td>
+        <td>Stéphanie</td>
+        <td></td>
+    </tr><tr>
+        <td>29</td>
+        <td>Jean-michel</td>
+        <td></td>
+    </tr><tr>
+        <td>30</td>
+        <td>David</td>
+        <td></td>
+    </tr><tr>
+        <td>31</td>
+        <td>Alex</td>
+        <td></td>
+    </tr><tr>
+        <td>32</td>
+        <td>Rémi</td>
+        <td></td>
+    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Phase de Qualifications -->
+        <div id="qualifications" class="tab-content">
+            <h2>Phase de Qualifications</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Match</th>
+                        <th>Équipe 1</th>
+                        <th>Score</th>
+                        <th>Équipe 2</th>
+                        <th>Statut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Team A</td>
+                        <td>10 - 8</td>
+                        <td>Team B</td>
+                        <td>Terminé</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Classement Phase de Qualification -->
+        <div id="classement-quali" class="tab-content">
+            <h2>Classement - Phase de Qualifications</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rang</th>
+                        <th>Équipe</th>
+                        <th>Matchs</th>
+                        <th>Victoires</th>
+                        <th>Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Team A</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>10</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Phase Finale -->
+        <div id="finales" class="tab-content">
+            <h2>Phase Finale</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Match</th>
+                        <th>Équipe 1</th>
+                        <th>Score</th>
+                        <th>Équipe 2</th>
+                        <th>Statut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Finale</td>
+                        <td>Team A</td>
+                        <td>-</td>
+                        <td>Team B</td>
+                        <td>À venir</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Classement Général -->
+        <div id="classement-general" class="tab-content">
+            <h2>Classement Général</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rang</th>
+                        <th>Équipe</th>
+                        <th>Points Totaux</th>
+                        <th>Victoires</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Team A</td>
+                        <td>20</td>
+                        <td>2</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script>
+        function showTab(tabName) {
+            const contents = document.querySelectorAll('.tab-content');
+            const buttons = document.querySelectorAll('.tab-button');
+            
+            contents.forEach(content => content.classList.remove('active'));
+            buttons.forEach(button => button.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

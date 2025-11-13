@@ -2277,7 +2277,68 @@ function creerPhaseFinale($idTournoi,$numPhaseFinale,$nbEquipes, $labelPhaseFina
 	//header("Location: index.php?idtournoi=$idTournoi&page=phasesfinales");
 }
 
-
+function envoyerFichierVersFTP($local_file, $remote_file, $ftp_config) {
+    // Vérifier que le fichier local existe
+    if (!file_exists($local_file)) {
+        return [
+            'success' => false, 
+            'message' => "Le fichier local n'existe pas"
+        ];
+    }
+    
+    // Connexion FTP
+    $ftp_conn = @ftp_connect($ftp_config['server'], $ftp_config['port']);
+    
+    if (!$ftp_conn) {
+        return [
+            'success' => false, 
+            'message' => "Impossible de se connecter au serveur FTP"
+        ];
+    }
+    
+    // Authentification
+    $login = @ftp_login($ftp_conn, $ftp_config['username'], $ftp_config['password']);
+    
+    if (!$login) {
+        ftp_close($ftp_conn);
+        return [
+            'success' => false, 
+            'message' => "Identifiants FTP incorrects"
+        ];
+    }
+    
+    // Mode passif (important pour les pare-feu)
+    ftp_pasv($ftp_conn, true);
+    
+    // Upload du fichier
+    $upload = @ftp_put($ftp_conn, $remote_file, $local_file, FTP_BINARY);
+    
+    if (!$upload) {
+        ftp_close($ftp_conn);
+        return [
+            'success' => false, 
+            'message' => "Erreur lors de l'envoi du fichier"
+        ];
+    }
+    
+    // Vérifier que le fichier existe bien sur le serveur
+    $taille_distante = ftp_size($ftp_conn, $remote_file);
+    $taille_locale = filesize($local_file);
+    
+    ftp_close($ftp_conn);
+    
+    if ($taille_distante == $taille_locale) {
+        return [
+            'success' => true, 
+            'message' => "Fichier envoyé avec succès (" . $taille_locale . " octets)"
+        ];
+    } else {
+        return [
+            'success' => false, 
+            'message' => "Le fichier a été envoyé mais la taille ne correspond pas"
+        ];
+    }
+}
 
 
 

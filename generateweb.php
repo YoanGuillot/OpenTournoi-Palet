@@ -732,3 +732,44 @@ echo "Le site web a été généré avec succès : " . $filePath;
 $db->close();
 ?>
 <a href="index.php?idtournoi=<?php echo urlencode($idTournoi); ?>" style="display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #0066cc; color: white; text-decoration: none; border-radius: 5px; cursor: pointer;">← Retour au tournoi</a>
+
+
+<?php
+// Envoie vers FTP
+if(!empty($test){// ============= UTILISATION =============
+
+    // 1. Récupérer les infos FTP depuis la BDD
+    $query = $pdo->prepare("SELECT ftp_server, ftp_port, ftp_username, ftp_password FROM config_ftp WHERE id = ?");
+    $query->execute([1]); // ou l'ID approprié
+    $ftp_data = $query->fetch(PDO::FETCH_ASSOC);
+
+    if (!$ftp_data) {
+        die("Configuration FTP non trouvée en base de données");
+    }
+
+    // 2. Préparer la configuration
+    $ftp_config = [
+        'server' => $ftp_data['ftp_server'],
+        'port' => $ftp_data['ftp_port'] ?? 21,
+        'username' => $ftp_data['ftp_username'],
+        'password' => $ftp_data['ftp_password']
+    ];
+
+    // 3. Définir les chemins
+    $local_file = __DIR__ . '/sous-dossier/mon-fichier.html';
+    $remote_file = '/public_html/mon-fichier.html';
+
+    // 4. Envoyer le fichier
+    $resultat = envoyerFichierVersFTP($local_file, $remote_file, $ftp_config);
+
+    // 5. Afficher le résultat
+    if ($resultat['success']) {
+        echo "✓ " . $resultat['message'];
+        // Vous pouvez logger en BDD ici si besoin
+    } else {
+        echo "✗ Erreur : " . $resultat['message'];
+        // Logger l'erreur en BDD si besoin
+    }
+
+}
+?>

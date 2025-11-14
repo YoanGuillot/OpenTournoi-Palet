@@ -2309,6 +2309,19 @@ function envoyerFichierVersFTP($local_file, $remote_file, $ftp_config) {
     
     // Mode passif (important pour les pare-feu)
     ftp_pasv($ftp_conn, true);
+
+
+	// Créer le répertoire distant s'il n'existe pas
+	if (!empty($ftp_config['remotepath'])) {
+		@ftp_mkdir($ftp_conn, $ftp_config['remote_path']);
+		ftp_chdir($ftp_conn, $ftp_config['remote_path']);
+	}
+
+	// Construire le chemin distant complet
+	if (!empty($ftp_config['remote_path'])) {
+		$remote_file = $ftp_config['remote_path'] . '/' . $remote_file;
+	}
+
     
     // Upload du fichier
     $upload = @ftp_put($ftp_conn, $remote_file, $local_file, FTP_BINARY);

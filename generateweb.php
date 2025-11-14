@@ -2,6 +2,7 @@
 //Interdit l'accès directe
 define( '_LPDT', 1 );
 date_default_timezone_set("Europe/Paris");
+error_reporting(0);
 
 //récupération de l'id du tournoi
 $idTournoi = $_GET['idtournoi'];

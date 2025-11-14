@@ -85,6 +85,7 @@ defined('_LPDT') or die;
 	<!-- /panel -->
 </div>
 
+
 <!-- Modal pour affichage du résultat de generateweb.php -->
 <div id="generateWebModal" class="uk-flex-top" uk-modal>
     <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">

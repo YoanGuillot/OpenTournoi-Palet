@@ -50,13 +50,15 @@ defined('_LPDT') or die;
 								</select>
 							</div>
 							<hr />
-							<div class="uk-margin">
-								<span style="font-weight: bold;">Type de phases finales : </span>
-								<select name="typePhasesFinales" class="uk-select uk-form-width-small">
-									<option value="aleatoire"<?php if ($infosTournoi['type_phasesfinales'] == 'aleatoire'){ echo " selected";} ?>>Aléatoire</option>
-									<option value="tetedeserie"<?php if ($infosTournoi['type_phasesfinales'] == 'tetedeserie'){ echo " selected";} ?>>Tête de série</option>
-								</select>
-								<a href="#helpTypePhasesFinales" uk-toggle><span class="uk-icon uk-margin-left"  uk-icon="icon: question"></span></a>
+							<div class="uk-grid uk-grid-small uk-flex-middle">
+								<div class="uk-width-expand">
+									<span style="font-weight: bold;">Type de phases finales : </span>
+									<select name="typePhasesFinales" class="uk-select uk-form-width-small">
+										<option value="aleatoire"<?php if ($infosTournoi['type_phasesfinales'] == 'aleatoire'){ echo " selected";} ?>>Aléatoire</option>
+										<option value="tetedeserie"<?php if ($infosTournoi['type_phasesfinales'] == 'tetedeserie'){ echo " selected";} ?>>Tête de série</option>
+									</select>
+								</div>
+								<div class="uk-width-auto uk-text-right"><a href="#helpTypePhasesFinales" uk-toggle><span class="uk-icon uk-margin-left"  uk-icon="icon: question"></span></a></div>
 							</div>
 							<hr />
 							<div class="uk-margin">
@@ -116,7 +118,16 @@ defined('_LPDT') or die;
 							</div>
 							<hr />
 								<div class="uk-margin">
-								<span style="font-weight: bold;">Génération du site web / envoi vers FTP : </span></br><br />
+								<div class="uk-grid uk-grid-small uk-flex-middle">
+									<div class="uk-width-expand">
+										<span style="font-weight: bold;">Génération du site web / envoi vers FTP :</span>
+									</div>
+									<div class="uk-width-auto uk-text-right">
+										<!-- icône d'aide FTP, ouvre la modale d'information -->
+										<a href="#ftpInfoModal" title="Aide FTP" uk-toggle><span class="uk-icon uk-margin-left"  uk-icon="icon: question"></span></a>
+									</div>
+								</div>
+								</br><br />
 								<label>Emplacement du fichier index.html généré (à copier coller dans l'explorateur windows): <code>%appdata%\OpenTournoi-Palet\www\website\</code> <br /><br />
 								<label>Activer FTP <input class="checkboxFTP" name="checkboxFTP" type="checkbox"<?php if ($infosTournoi['ftp_active'] == '1'){ echo " checked";} ?>></label><br /></br>
 								<div id="classPersoDivFTP"><span>Informations de connexion :</span><br>
@@ -158,6 +169,29 @@ defined('_LPDT') or die;
 	<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 		<button class="uk-modal-close-default" type="button" uk-close></button>
 		<p id="testFTPResult"></p>
+	</div>
+</div>
+
+<!-- Modal d'aide FTP spécifique à la section Paramètres -->
+<div id="ftpInfoModal" class="uk-flex-top" uk-modal>
+	<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+		<h3 class="uk-modal-title">Aide — Paramètres FTP / Hébergeur</h3>
+		<p><strong>Que renseigner :</strong></p>
+		<ul>
+			<li><strong>Serveur (Hôte)</strong> : adresse fournie par l'hébergeur (ex. : ftp.example.com).</li>
+			<li><strong>Utilisateur</strong> : identifiant FTP.</li>
+			<li><strong>Mot de passe</strong> : mot de passe FTP. Si vous voulez le conserver, sauvegardez les paramètres.</li>
+			<li><strong>Port</strong> : généralement 21 (FTP). Si votre hébergeur demande SFTP, l'outil FTP PHP peut ne pas fonctionner.</li>
+			<li><strong>Répertoire distant</strong> : chemin relatif sur le serveur où déposer les fichiers (ex. : public_html/monsite). Ne commencez pas par <code>/</code>.</li>
+		</ul>
+		<hr>
+		<p><strong>Conseils :</strong></p>
+		<ul>
+			<li>Testez la connexion avec le bouton <em>Tester la connexion FTP</em> avant de générer le site.</li>
+			<li>Si l'envoi échoue, essayez d'abord sans répertoire (laisser vide) puis testez avec le sous-dossier correct.</li>
+		</ul>
+		<p class="uk-text-right"><button class="uk-button uk-button-default uk-modal-close" type="button">Fermer</button></p>
 	</div>
 </div>
 

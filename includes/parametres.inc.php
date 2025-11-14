@@ -1,6 +1,7 @@
 <?php
 defined('_LPDT') or die;
 
+
 ?>
 
 
@@ -114,6 +115,24 @@ defined('_LPDT') or die;
 								</select>
 							</div>
 							<hr />
+								<div class="uk-margin">
+								<span style="font-weight: bold;">Génération du site web / envoi vers FTP : </span></br><br />
+								<label>Emplacement du fichier index.html généré (à copier coller dans l'explorateur windows): <code>%appdata%\OpenTournoi-Palet\www\website\</code> <br /><br />
+								<label>Activer FTP <input class="checkboxFTP" name="checkboxFTP" type="checkbox"<?php if ($infosTournoi['ftp_active'] == '1'){ echo " checked";} ?>></label><br /></br>
+								<div id="classPersoDivFTP"><span>Informations de connexion :</span><br>
+									<div class="uk-margin-left">
+										Serveur FTP : <input type="text" name="ftpServer" class="uk-input uk-form-width-large" value="<?php echo isset($infosTournoi['ftp_host']) ? $infosTournoi['ftp_host'] : ''; ?>"><br><br>
+										Nom d'utilisateur : <input type="text" name="ftpUsername" class="uk-input uk-form-width-large" value="<?php echo isset($infosTournoi['ftp_user']) ? $infosTournoi['ftp_user'] : ''; ?>"><br><br>
+										Mot de passe : <input type="password" name="ftpPassword" class="uk-input uk-form-width-medium" value="<?php echo isset($infosTournoi['ftp_pass']) ? $infosTournoi['ftp_pass'] : ''; ?>"><br><br>
+										Port FTP : <input type="text" name="ftpPort" class="uk-input uk-form-width-small" value="<?php echo isset($infosTournoi['ftp_port']) ? $infosTournoi['ftp_port'] : '21'; ?>"><br><br>
+										Répertoire distant : <input type="text" name="ftpDirectory" class="uk-input uk-form-width-large" value="<?php echo isset($infosTournoi['ftp_path']) ? $infosTournoi['ftp_path'] : ''; ?>">
+										<br/><br/>
+										<button type="button" id="testFTPBtn" class="uk-button uk-button-secondary uk-margin-right">Tester la connexion FTP</button> 
+									
+									</div>
+								</div>
+							</div>
+							<hr />
 							<input type="hidden" name="action" class="uk-input" value="miseajourParametres"></input>
 							<input type="hidden" name="idTournoi" class="uk-input" value="<?php echo $idTournoi; ?>"></input>
 							<button type="submit" class="uk-button uk-button-primary uk-margin-right">Sauvegarder</button>
@@ -135,6 +154,12 @@ defined('_LPDT') or die;
 
     </div>
 </div>
+<div id="testFTPResultModal" class="uk-flex-top" uk-modal>
+	<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+		<button class="uk-modal-close-default" type="button" uk-close></button>
+		<p id="testFTPResult"></p>
+	</div>
+</div>
 
 <script>
 
@@ -150,7 +175,48 @@ defined('_LPDT') or die;
 			$('#classPersoDiv').css('display', 'block');
 		});
 
+		// Vérifie l'état initial
+		if ($('.checkboxFTP').is(':checked')) {
+			$('#classPersoDivFTP').show();
+		} else {
+			$('#classPersoDivFTP').hide();
+		}
 
+		// Basculer au changement
+		$('.checkboxFTP').on('change', function() {
+			if ($(this).is(':checked')) {
+				$('#classPersoDivFTP').slideDown();
+			} else {
+				$('#classPersoDivFTP').slideUp();
+			}
+		});
+
+		$('#testFTPBtn').on('click', function() {
+			var ftpServer = $('input[name="ftpServer"]').val();
+			var ftpUsername = $('input[name="ftpUsername"]').val();
+			var ftpPassword = $('input[name="ftpPassword"]').val();
+			var ftpPort = $('input[name="ftpPort"]').val();
+
+			$.ajax({
+				type: 'POST',
+				url: 'index.php?idtournoi=<?php echo $idTournoi; ?>&page=parametres',
+				data: {
+					action: 'testFTP',
+					ftpServer: ftpServer,
+					ftpUsername: ftpUsername,
+					ftpPassword: ftpPassword,
+					ftpPort: ftpPort
+				},
+				success: function(response) {
+					$('#testFTPResult').html(response);
+					UIkit.modal('#testFTPResultModal').show();
+				},
+				error: function() {
+					$('#testFTPResult').html('Erreur lors de la connexion au serveur.');
+					UIkit.modal('#testFTPResultModal').show();
+				}
+			});
+		});
 	});
 
 </script>

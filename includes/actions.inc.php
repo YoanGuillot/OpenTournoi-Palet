@@ -55,7 +55,13 @@ if(isset($_POST['action'])){
 					$ptsPhasesFinales = $_POST['ptsPhasesFinales'];
 					$ptsFinales = $_POST['ptsFinales'];
 					$ptsPetiteFinales = $_POST['ptsPetiteFinales'];
-					$db->exec("UPDATE tournois SET max_equipes = \"$maxEquipes\", type_phasesfinales = \"$typePhasesFinales\", pts_qualifs = \"$ptsQualifs\", pts_phasesfinales = \"$ptsPhasesFinales\", pts_finales = \"$ptsFinales\", pts_petitefinales = \"$ptsPetiteFinales\" , type_classement = \"$typeClassement\", type_classperso1 = \"$classPerso1\", type_classperso2 = \"$classPerso2\", type_classperso3 = \"$classPerso3\", type_classperso4 = \"$classPerso4\" WHERE id_tournoi == '$idTournoi'");
+					$ftp_host = $_POST['ftpServer'];
+					$ftp_user = $_POST['ftpUsername'];
+					$ftp_pass = $_POST['ftpPassword'];
+					$ftp_port = $_POST['ftpPort'];
+					$ftp_path = $_POST['ftpDirectory'];
+					$ftp_active = isset($_POST['checkboxFTP']) ? '1' : '0';
+					$db->exec("UPDATE tournois SET max_equipes = \"$maxEquipes\", type_phasesfinales = \"$typePhasesFinales\", pts_qualifs = \"$ptsQualifs\", pts_phasesfinales = \"$ptsPhasesFinales\", pts_finales = \"$ptsFinales\", pts_petitefinales = \"$ptsPetiteFinales\" , type_classement = \"$typeClassement\", type_classperso1 = \"$classPerso1\", type_classperso2 = \"$classPerso2\", type_classperso3 = \"$classPerso3\", type_classperso4 = \"$classPerso4\", ftp_active = $ftp_active, ftp_host = \"$ftp_host\", ftp_user = \"$ftp_user\", ftp_pass =\"$ftp_pass\", ftp_port = \"$ftp_port\", ftp_path = \"$ftp_path\" WHERE id_tournoi == '$idTournoi'");
 					
 					header("Location: index.php?idtournoi=$idTournoi&page=parametres");
 		}

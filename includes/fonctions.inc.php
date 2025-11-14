@@ -2340,6 +2340,39 @@ function envoyerFichierVersFTP($local_file, $remote_file, $ftp_config) {
     }
 }
 
+function testFTPConnection($ftpServer, $ftpUsername, $ftpPassword, $ftpPort) {
+    // Vérifier que les paramètres ne sont pas vides
+    if (empty($ftpServer) || empty($ftpUsername) || empty($ftpPassword)) {
+        return '<span style="color: red;">Erreur : Veuillez remplir tous les champs.</span>';
+    }
+    
+    // Convertir le port en entier
+    $ftpPort = (int)$ftpPort;
+    if ($ftpPort <= 0 || $ftpPort > 65535) {
+        return '<span style="color: red;">Erreur : Port FTP invalide.</span>';
+    }
+    
+    // Tenter la connexion FTP
+    $ftpConn = @ftp_connect($ftpServer, $ftpPort);
+    
+    if (!$ftpConn) {
+        return '<span style="color: red;">Erreur : Impossible de se connecter au serveur FTP.</span>';
+    }
+    
+    // Tenter l'authentification
+    $ftpLogin = @ftp_login($ftpConn, $ftpUsername, $ftpPassword);
+    
+    if (!$ftpLogin) {
+        ftp_close($ftpConn);
+        return '<span style="color: red;">Erreur : Nom d\'utilisateur ou mot de passe incorrect.</span>';
+    }
+    
+    // Connexion réussie
+    ftp_close($ftpConn);
+    return '<span style="color: green;">✓ Connexion FTP réussie !</span>';
+}
+
+
 
 
 ?>

@@ -74,7 +74,7 @@ if($infosTournoi['max_equipes'] != 0 && $nbEquipes >= $infosTournoi['max_equipes
 						<!---	<a class="uk-float-left" href="exportEquipes-xlsx.php?idtournoi=<?php echo $idTournoi; ?>"><img src="images/xlsx.png" /></a>
 							<a class="uk-float-right" href="exportEquipes-csv.php?idtournoi=<?php echo $idTournoi; ?>"><img src="images/csv.png" /></a> --->
 
-							<form action="/importEquipes-csv.php?idtournoi=<?= $idTournoi ?>" method="post" enctype="multipart/form-data">
+							<form action="importEquipes-csv.php?idtournoi=<?= $idTournoi ?>" method="post" enctype="multipart/form-data">
 								<div style="text-align: left;">
 									<img src="images/xlsx.png" /> Importer des équipes (CSV)<br /><br />
 									<input class="parcourirBouton" type="file" name="fichier_csv" accept=".csv" required>
@@ -82,7 +82,7 @@ if($infosTournoi['max_equipes'] != 0 && $nbEquipes >= $infosTournoi['max_equipes
 								</div>
 							</form>
 							<hr />
-							<form action="/importEquipes-xlsx.php?idtournoi=<?= $idTournoi ?>" method="post" enctype="multipart/form-data">
+							<form action="importEquipes-xlsx.php?idtournoi=<?= $idTournoi ?>" method="post" enctype="multipart/form-data">
 								<div style="text-align: left;"><img src="images/csv.png" /> Importer des équipes (XLSX)<br /><br />
 									<input class="parcourirBouton" type="file" name="fichier_xlsx" accept=".xlsx" required>
 									<button type="submit">Importer XLSX</button>

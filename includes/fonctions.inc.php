@@ -518,7 +518,7 @@ function constructTableMatchsPFWeb($idTournoi, $label, $listeEquipes , $numPlaqu
 		
 		$indexRow = $indexRow +1;
 	}	
-	
+	$rawMatchsContent = "";
 	foreach ($listeMatchs as $row){
 		$position1 = $row['position1'];
 		$position2 = $row['position2'];

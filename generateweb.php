@@ -729,14 +729,16 @@ $codeWeb = '<!DOCTYPE html>
 //Sauvegarde du fichier
 $filePath = 'website/index.html';
 file_put_contents($filePath, $codeWeb);
-echo "Le site web a été généré avec succès : " . $filePath;
+echo "Le site web a été généré avec succès : " . $filePath ."<br /><br />Pour accèder au dossier copiez-collez ce chemin dans votre explorateur de fichiers : <strong>" . realpath('website') . "</strong><br />";
 
-// Envoie vers FTP
-echo "<br /><strong>Envoi vers le serveur FTP :</strong><br />";
 
 
 
 if($infosTournoi['ftp_active'] == 1){
+
+    // Envoie vers FTP
+    echo "<br /><strong>Envoi vers le serveur FTP :</strong><br />";
+
 
     // 1. Récupérer les infos FTP depuis la BDD (correction pour SQLite3)
     $stmt = $db->prepare("SELECT ftp_host, ftp_port, ftp_user, ftp_pass, ftp_path FROM tournois WHERE id_tournoi = :id");
@@ -773,8 +775,10 @@ if($infosTournoi['ftp_active'] == 1){
         // Logger l'erreur en BDD si besoin
     }
 
+}else{
+    echo "<br />Le FTP n'est pas activé pour ce tournoi.";
 }
 $db->close();
 
-echo '<br /><br /><a href="index.php?idtournoi=' . htmlspecialchars($idTournoi) . '" style="display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #0066cc; color: white; text-decoration: none; border-radius: 5px;">← Retour au tournoi</a>';
+//echo '<br /><br /><a href="index.php?idtournoi=' . htmlspecialchars($idTournoi) . '" style="display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #0066cc; color: white; text-decoration: none; border-radius: 5px;">← Retour au tournoi</a>';
 ?>

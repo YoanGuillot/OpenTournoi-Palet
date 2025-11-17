@@ -252,10 +252,11 @@ echo $content;
 	?>
 
 	$(document).ready(function() {
+		$('.uk-button').addClass('uk-button-danger');
 		$('select').attr('disabled', true);
 		$('.uk-button').attr('disabled', true);
+		$('.uk-button').removeAttr('style');
 	});
-	
 
 <?php } ?>
 

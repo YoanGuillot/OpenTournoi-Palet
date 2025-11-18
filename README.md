@@ -11,7 +11,7 @@ Gestion d'un tournoi de palet vendéen.
 - Gestion des impressions, phase qualificatives, phases finales et classements.
 - Générération d'un fichier index.html static pour la diffusion de votre tournoi en ligne, export vers un serveur FTP paramétrable (à partir de la BETA-0.16).
 
-Support sur messenger => Yoan GuiGui ou dans l'onglet "issues" en haut de la page github.
+Support sur messenger => Yoan GuiGui ou dans l'onglet "issues" en haut de la page github(<a href="https://github.com/YoanGuillot/OpenTournoi-Palet/issues">lien</a>).
 
 N'hésitez pas à me faire un retour de votre expérience avec le logiciel, en bien ou en mal, afin de me permettre de l'améliorer.
 

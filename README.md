@@ -17,3 +17,6 @@ N'hésitez pas à me faire un retour de votre expérience avec le logiciel, en b
 
 Auteur : Yoan Guillot
 https://www.lepaletdutrefle.fr
+
+Vous aimez ce logiciel, aidez nous en soutenant notre association sportive de palet en nous adressant un don à cette adresse :
+https://www.helloasso.com/associations/le-palet-du-trefle/formulaires/1

@@ -16,4 +16,4 @@ Support sur messenger => Yoan GuiGui
 N'hésitez pas à me faire un retour de votre expérience avec le logiciel, en bien ou en mal, afin de me permettre de l'améliorer.
 
 Auteur : Yoan Guillot
-https://lepaletdutrefle.fr
+https://www.lepaletdutrefle.fr

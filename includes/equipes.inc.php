@@ -68,7 +68,11 @@ if($infosTournoi['max_equipes'] != 0 && $nbEquipes >= $infosTournoi['max_equipes
 					<div class="uk-width-auto"><h4>Equipes inscrites : <?php echo $nbEquipes; ?> </h4></div>
 					<div class="uk-width-expand uk-text-right panel-icons">
 						<a href="PDF-equipes.php?idtournoi=<?php echo $idTournoi; ?>"><button class="uk-button uk-button-primary uk-margin-right" ><span uk-icon="print"></span> IMPRIMER</button></a>
-						
+						<button class="uk-button exportBouton">Modèle<span uk-icon="triangle-down"></span></button>
+						<div uk-dropdown="pos: bottom-center;animation: slide-top; animate-out: true; duration: 700;">
+							<a class="uk-float-left" href="model-equipes.xlsx"><img src="images/xlsx.png" /></a>
+							<a class="uk-float-right" href="model-equipes.csv"><img src="images/csv.png" /></a>
+						</div>
 						<button class="uk-button importBouton">Importer<span uk-icon="triangle-down"></span></button>
 						<div uk-dropdown="pos: bottom-center;animation: slide-top; animate-out: true; duration: 700;">
 						<!---	<a class="uk-float-left" href="exportEquipes-xlsx.php?idtournoi=<?php echo $idTournoi; ?>"><img src="images/xlsx.png" /></a>

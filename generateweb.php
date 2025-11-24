@@ -124,7 +124,7 @@ $tablesPhasesFinalesHTML = '';
 //Récupération du nombre de phases finales
 if ($infosPhasesFinales == ''){
 		$numPhaseFinale = 0;
-		$tablesPhasesQualifsHTML = "Aucune phase finale";
+		$tablesPhasesFinalesHTML = "Aucune phase finale";
 }else{
 		$colonnePhaseFinale = array_column($infosPhasesFinales, 'num_phasefinale');
 		rsort($colonnePhaseFinale, SORT_NUMERIC);

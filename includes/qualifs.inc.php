@@ -256,6 +256,13 @@ echo $content;
 		$('select').attr('disabled', true);
 		$('.uk-button').attr('disabled', true);
 		$('.uk-button').removeAttr('style');
+		$('a[uk-icon="unlock"]').removeAttr('href');
+		$('a[uk-icon="unlock"]').css('color', 'gray');
+		$('a[uk-icon="unlock"]').css('pointer-events', 'none');
+		$('a[uk-icon="icon: trash; ratio: 1"]').removeAttr('uk-toggle');  
+		$('a[uk-icon="icon: trash; ratio: 1"]').removeAttr('onclick');  
+		$('a[uk-icon="icon: trash; ratio: 1"]').css('color', 'gray');  
+		$('a[uk-icon="icon: trash; ratio: 1"]').css('pointer-events', 'none');  
 	});
 
 <?php } ?>

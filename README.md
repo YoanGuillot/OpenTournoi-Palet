@@ -1,3 +1,5 @@
+<img src="trophy.png"/>
+
 Gestion d'un tournoi de palet vendéen.
 
 - Gestion des équipes

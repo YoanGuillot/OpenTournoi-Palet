@@ -1,6 +1,8 @@
 <img src="trophy.png"/>
 <strong>OpenTournoi-Palet</strong>
-
+<br>
+<br>
+<br>
 Gestion d'un tournoi de palet vendéen.
 
 - Gestion des équipes

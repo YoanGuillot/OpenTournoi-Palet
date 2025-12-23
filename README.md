@@ -1,4 +1,4 @@
-<img src="trophy.png"/>
+<img style="align:center" src="trophy.png"/>
 
 Gestion d'un tournoi de palet vendéen.
 

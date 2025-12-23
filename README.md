@@ -1,4 +1,5 @@
-<img style="align:center" src="trophy.png"/>
+<img src="trophy.png"/>
+<strong>OpenTournoi-Palet</strong>
 
 Gestion d'un tournoi de palet vendéen.
 

@@ -13,7 +13,7 @@ Gestion d'un tournoi de palet vendéen.
 
 Support sur messenger => Yoan GuiGui ou dans l'onglet "issues" en haut de la page github => <a href="https://github.com/YoanGuillot/OpenTournoi-Palet/issues">Lien</a> .
 
-N'hésitez pas à me faire un retour de votre expérience avec le logiciel, en bien ou en mal, afin de me permettre de l'améliorer.
+N'hésitez pas à me faire un retour de votre expérience avec le logiciel, en bien ou en mal, afin de me permettre de l'améliorer.</br>
 Discussions et suggestions ici => <a href="https://github.com/YoanGuillot/OpenTournoi-Palet/discussions">Discussions</a>
 
 Auteur : Yoan Guillot

@@ -3,7 +3,15 @@
 <br>
 <br>
 <br>
+Ce projet est une application web que vous pouvez héberger via votre propre serveur web (wamp, xamp, LAMP) pour une utilisation locale (déconseillée en ligne pour des raison de sécurité).
+Les installeurs utilisent <a href="github.com/cztomczak/phpdesktop" target="_blank">php-desktop</a> pour embarquer l'application web dans un programme remplaçant le serveur web et lui donne une impression de logiciel portable.
+<br>
+<br>
+<br>
 Gestion d'un tournoi de palet vendéen.
+
+
+
 
 - Gestion des équipes
 - Gestion des phases de qualifications (nombre de phases à votre convenance) en mode aléatoire.

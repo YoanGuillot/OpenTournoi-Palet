@@ -5,15 +5,22 @@ defined('_LPDT') or die;
 
 if (isset($_POST['creerPhaseFinale'])){
 	$numPhaseFinale = $_POST['numPhaseFinale'];
-	$nbEquipes = $_POST['nbEquipes'];
 	$labelPhaseFinale = $_POST['labelPhaseFinale'];
-	//$typePhaseFinale = $_POST['typePhaseFinale'];
-	$typePhaseFinale = "arbre";
+	$typePhaseFinale = $_POST['typePhaseFinale'];
+	//$typePhaseFinale = "arbre";
+	$nbEquipesRestantesPF = $_POST['nbEquipesRestantes'];
+
+	if($typePhaseFinale == "poule"){
+		$nbEquipes = $nbEquipesRestantesPF;
+	}else{
+		$nbEquipes = $_POST['nbEquipes'];
+	}
+
 	creerPhaseFinale($idTournoi, $numPhaseFinale, $nbEquipes, $labelPhaseFinale, $typePhaseFinale);	
 }
 
 $infosPhasesFinales = infosPhasesFinales($idTournoi);
-
+$nbEquipesRestantesPF = nbEquipesrestantesPF();
 
 if ($infosPhasesFinales == ''){
 		$numPhaseFinale = 0;
@@ -32,6 +39,34 @@ if ($infosTournoi['statut_inscriptions'] == 'ferme' && $infosTournoi['statut_qua
 	$messagePhasesFinales = "Vous devez avoir clôturer les phases qualificatives <a href=\"index.php?idtournoi=$idTournoi&page=qualifs\">(ici)</a> avant de pouvoir créer une phase finale.";
 }
 
+
+
+$option4Statut = "";
+$option8Statut = "";
+$option16Statut = "";
+$option32Statut = "";
+$option64Statut = "";
+$option128Statut = "";
+if( $nbEquipesRestantesPF < 4 ){
+	$option4Statut = "style='display:none' disabled";
+}
+if( $nbEquipesRestantesPF < 8 ){
+	$option8Statut = "style='display:none' disabled";
+}
+if( $nbEquipesRestantesPF < 16 ){
+	$option16Statut = "style='display:none' disabled";
+}
+if( $nbEquipesRestantesPF < 32 ){
+	$option32Statut = "style='display:none' disabled";
+}
+if( $nbEquipesRestantesPF < 64 ){
+	$option64Statut = "style='display:none' disabled";
+}
+if( $nbEquipesRestantesPF < 128 ){
+	$option128Statut = "style='display:none' disabled";
+}
+
+
 		echo "<div style=\"display:block;width: 100%\">		
 		
 			<div style=\"display:inline-block;width:100%;text-align:left;\">
@@ -39,9 +74,12 @@ if ($infosTournoi['statut_inscriptions'] == 'ferme' && $infosTournoi['statut_qua
 				Libellé : <input class=\"uk-input uk-form-width-medium uk-margin-right\" type=\"text\" name=\"labelPhaseFinale\" required />
 				<input type=\"hidden\" name=\"creerPhaseFinale\" value=\"1\" />
 				<input type=\"hidden\" name=\"numPhaseFinale\" value=\"". $numPhaseFinale+1 ."\" />
-				Nombre de joueurs : <select class=\"uk-select uk-form-width-small uk-margin-right\" name=\"nbEquipes\"><option value=\"4\">4</option><option value=\"8\">8</option><option value=\"16\">16</option><option value=\"32\">32</option><option value=\"64\">64</option><option value=\"128\">128</option></select>
+				<input type=\"hidden\" name=\"nbEquipesRestantes\" value=\"". $nbEquipesRestantesPF ."\" />
+				Nombre de joueurs : <select class=\"uk-select uk-form-width-small uk-margin-right\" name=\"nbEquipes\"><option value=\"4\" $option4Statut>4</option><option value=\"8\" $option8Statut>8</option><option value=\"16\" $option16Statut>16</option><option value=\"32\" $option32Statut>32</option><option value=\"64\" $option64Statut>64</option><option value=\"128\" $option128Statut>128</option></select>
 				<!--- Type de phase : <select class=\"uk-select uk-form-width-small uk-margin-right\" name=\"typePhaseFinale\"><option value=\"arbre\">Arbre de tournoi</option><option value=\"poule\"disabled>Poule(indisponible)</option></select> --->
-				<button type=\"submit\" class=\"uk-button uk-button-primary\" $dispoBouton>Créer une phase finale</button>
+				<button class=\"uk-button uk-button-default\" disabled>Equipes restantes : $nbEquipesRestantesPF</button>
+				<button name=\"typePhaseFinale\" type=\"submit\" class=\"uk-button uk-button-primary uk-margin-left\" value=\"arbre\" $dispoBouton>Créer une phase finale</button>
+				<button name=\"typePhaseFinale\" type=\"submit\" class=\"uk-button uk-button-primary uk-margin-left\" value=\"poule\" $dispoBouton>Créer une poule (équipes restantes)</button>
 				</form>
 			</div>	
 		</div><hr />";
@@ -65,6 +103,7 @@ if ($infosPhasesFinales == ''){
 		$countPhase = 1;
 		while ($countPhase < $numPhaseFinale+1){
 		$infosPhaseFinale = infosPhaseFinaleNum($countPhase);
+		$typePhaseFinale = $infosPhaseFinale['type_phasefinale'];
 		$idPhaseFinale = $infosPhaseFinale['id_phasefinale'];
 			if ($countPhase == $numPhaseFinale){	
 				//$trashButton = "<a href=\"index.php?idtournoi=". $idTournoi ."&action=supprphasefinale&phasefinale=". $numPhaseFinale ."\" class=\"uk-icon-link trash-icon\" title=\"Supprimer\" data-uk-tooltip data-uk-icon=\"icon: trash\"></a>";
@@ -76,6 +115,13 @@ if ($infosPhasesFinales == ''){
 			
 			if(empty($content)){
 				$content="";
+			}
+			
+			$afficherArbre = "";
+			if($typePhaseFinale == "arbre"){
+				$afficherArbre = "<a href=\"index.php?idtournoi=". $idTournoi ."&idphase=". $infosPhaseFinale['id_phasefinale'] ."&page=phase". $infosPhaseFinale['nb_equipes'] ."\" title=\"Accéder à l'arbre de tournoi\" data-uk-tooltip>
+									<button class=\"uk-button uk-button-primary\"><img src=\"img/bracket.png\" class=\"uk-margin-small-right\" />Tableau</button>
+								</a>";
 			}
 
 			$content = $content."<div class=\"uk-width-1-1 uk-width-1-1@l uk-width-1-2@xl\">
@@ -95,9 +141,7 @@ if ($infosPhasesFinales == ''){
 										</div>
 										<hr>
 										<div class=\"uk-text-center\">
-											<a href=\"index.php?idtournoi=". $idTournoi ."&idphase=". $infosPhaseFinale['id_phasefinale'] ."&page=phase". $infosPhaseFinale['nb_equipes'] ."\" title=\"Accéder à l'arbre de tournoi\" data-uk-tooltip>
-												<button class=\"uk-button uk-button-primary\"><img src=\"img/bracket.png\" class=\"uk-margin-small-right\" />Tableau</button>
-											</a>
+											$afficherArbre
 											<a href=\"index.php?idtournoi=$idTournoi&idphase=$idPhaseFinale&page=matchsphasesfinales\" title=\"Accéder à la liste des matchs\" data-uk-tooltip>
 												<button class=\"uk-button uk-button-primary\"><span class=\"uk-margin-small-right uk-icon\" data-uk-icon=\"icon: table\"></span>Matchs</button>
 											</a>

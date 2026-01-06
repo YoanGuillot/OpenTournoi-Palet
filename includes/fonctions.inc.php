@@ -27,6 +27,15 @@ function infosEquipe($idEquipe)
 	return $infosEquipe;
 }
 
+function nbEquipesrestantesPF(){
+	global $db;
+	$resultats = $db->query('SELECT COUNT(DISTINCT num_equipe) as nbEquipes FROM equipes WHERE dispo_phasesfinales == 1');
+	while ($row = $resultats->fetchArray(1)) {
+		$nbEquipesRestantesPF = $row['nbEquipes'];
+	}
+	return $nbEquipesRestantesPF;
+}
+
 function dernierTournoi()
 {	
 	global $db;
@@ -1984,6 +1993,7 @@ function tiragePhaseFinale($idTournoi, $nbEquipes, $numPhase)
     $tableauEquipes = array();
     $countEquipe = 0;
     $infosTournoi = infosTournoi($idTournoi);
+	$infosPhaseFinale = infosPhaseFinale($numPhase);
     
     // Récupérer exactement le nombre d'équipes nécessaires selon leur classement
     foreach($recupEquipes as $row){
@@ -2254,23 +2264,27 @@ function creerPhaseFinale($idTournoi,$numPhaseFinale,$nbEquipes, $labelPhaseFina
 	}
 	
 	unset($matchs);	
+	if($typePhaseFinale == "arbre"){
 
-	$tirage = tiragePhaseFinale($idTournoi, $nbEquipes, $numPhaseFinale);
-	foreach ($tirage as $row){
-			$equipe1 = $row['equipe1'];
-			$equipe2 = $row['equipe2'];
-			
-			$matchs[] = array("equipe1" => $equipe1, "equipe2" => $equipe2);
-	}
+		$tirage = tiragePhaseFinale($idTournoi, $nbEquipes, $numPhaseFinale);
+		foreach ($tirage as $row){
+				$equipe1 = $row['equipe1'];
+				$equipe2 = $row['equipe2'];
+				
+				$matchs[] = array("equipe1" => $equipe1, "equipe2" => $equipe2);
+		}
+		
+		$indexPosition = 1;
 	
-	$indexPosition = 1;
-	foreach ($matchs as $row){
+	
+		foreach ($matchs as $row){
 
-		$db->exec("INSERT INTO matchs_phasesfinales (id_tournoi, id_phasefinale, num_phasefinale, equipe1, equipe2) VALUES ('". $idTournoi ."','". $idPhaseFinale ."','". $numPhaseFinale ."','". $row['equipe1'] ."','". $row['equipe2'] ."')");
-		$db->exec("UPDATE positions_phasesfinales SET num_equipe = '". $row['equipe1'] ."' WHERE num_phasefinale == '". $numPhaseFinale ."' AND position_label == 'A". $indexPosition ."'");
-		$indexPosition++;
-		$db->exec("UPDATE positions_phasesfinales SET num_equipe = '". $row['equipe2'] ."' WHERE num_phasefinale == '". $numPhaseFinale ."' AND position_label == 'A". $indexPosition ."'");
-		$indexPosition++;
+			$db->exec("INSERT INTO matchs_phasesfinales (id_tournoi, id_phasefinale, num_phasefinale, equipe1, equipe2) VALUES ('". $idTournoi ."','". $idPhaseFinale ."','". $numPhaseFinale ."','". $row['equipe1'] ."','". $row['equipe2'] ."')");
+			$db->exec("UPDATE positions_phasesfinales SET num_equipe = '". $row['equipe1'] ."' WHERE num_phasefinale == '". $numPhaseFinale ."' AND position_label == 'A". $indexPosition ."'");
+			$indexPosition++;
+			$db->exec("UPDATE positions_phasesfinales SET num_equipe = '". $row['equipe2'] ."' WHERE num_phasefinale == '". $numPhaseFinale ."' AND position_label == 'A". $indexPosition ."'");
+			$indexPosition++;
+		}
 
 	}
 	

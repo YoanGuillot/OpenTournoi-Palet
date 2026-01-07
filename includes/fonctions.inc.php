@@ -550,6 +550,147 @@ function constructTableMatchsPFWeb($idTournoi, $label, $listeEquipes , $numPlaqu
 	return $tableau;
 }
 
+function listeMatchsPoulePF($numPhaseFinale)
+{
+	global $db;
+
+	
+	return $listeMatchs;
+}
+
+function constructTableMatchsPoule($idTournoi, $label, $listeEquipes, $numPlaque, $numPhaseFinale, $tour){
+	
+	global $db;
+	$infosTournoi = infosTournoi($idTournoi);
+	$infosPhaseFinale = infosPhaseFinaleNum($numPhaseFinale);
+	$idPhaseFinale = $infosPhaseFinale['id_phasefinale'];
+	$ptsMatch = $infosTournoi['pts_phasesfinales'];
+	$resultats = $db->query('SELECT * FROM matchs_phasesfinales WHERE num_phasefinale == '. $numPhaseFinale .' AND tour_poule == '. $tour .'');
+	while ($row = $resultats->fetchArray(1)) {
+		$listeMatchs[] = $row;
+	}
+
+	$indexSelect = -1;
+	$selectOptions1 = "<option value=\"\"></option>";
+	$selectOptions2 = "<option value=\"\"></option>";
+
+	$indexPlayed = 0;
+	$nbMatchs = count($listeMatchs);
+	$tableauRow = "";
+	foreach ($listeMatchs as $row){
+		$idMatch = $row['id_matchphasesfinales'];
+		$score1 = $row['score1'];
+		$score2 = $row['score2'];
+		$equipe1 = $row['equipe1'];
+		$equipe2 = $row['equipe2'];
+
+
+		if($score1 == $ptsMatch || $score2 == $ptsMatch){
+			$matchPlayed = "green";
+			$indexPlayed = $indexPlayed + 1;
+		}else{
+			$matchPlayed = "red";
+		}
+
+		if($indexPlayed == $nbMatchs){
+			$allPlayed = "green";
+		}else{
+			$allPlayed = "red";
+		}
+	
+
+
+		while ($indexSelect < $ptsMatch){
+			$realValue = $indexSelect + 1;
+		
+			if($realValue === $score1){
+				$selected1 = "selected";
+			}else{
+				$selected1 = "";
+			}
+				if($realValue === $score2){
+				$selected2 = "selected";
+			}else{
+				$selected2 = "";
+			}
+			$selectOptions1 = $selectOptions1."<option value=\"". $realValue ."\" $selected1>". $realValue ."</option>";
+			$selectOptions2 = $selectOptions2."<option value=\"". $realValue ."\" $selected2>". $realValue ."</option>";
+			$indexSelect = $indexSelect + 1;
+		}
+		
+		$tableauRow .= "<tr style=\"scroll-margin-top: 300px;\" id=\"matchid-$idMatch\" class=\"anchor\">
+			<td style=\"width:100%\">
+				<form method=\"POST\" id=\"formMatch-$idMatch\" action=\"index.php?idtournoi=$idTournoi&idphase=$idPhaseFinale&page=matchsphasesfinales#matchid-$idMatch\">
+				<div style=\"display:inline-block;width: 10%\" class=\"uk-text-center\">$numPlaque</div>
+				<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">$equipe1</div>
+				<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center\">
+					<select id=\"match-$idMatch-side1\" onchange=\"activateLinkPoulePF('validMatch-$idMatch', 'side2', ".$ptsMatch .", '$idMatch')\" name=\"score1\" class=\"uk-select\"  >
+						$selectOptions1
+					</select>
+				</div>
+				<div style=\"display:inline-block;width: 10%\" class=\"uk-text-center\"><a id=\"validMatch-$idMatch\" style=\"color: gray\" uk-icon=\"check\" class=\"disabled\"></a></div>
+				
+				<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center\">
+					<select id=\"match-$idMatch-side2\" onchange=\"activateLinkPoulePF('validMatch-$idMatch', 'side1', ".$ptsMatch .", '$idMatch')\" name=\"score2\" class=\"uk-select\"  >
+						$selectOptions2
+					</select>
+				</div>
+				
+				<div style=\"display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">$equipe2</div>
+				<div class=\"pointStatut $matchPlayed\" style=\"display:inline-block;width: 10px;height:10px;border-radius: 50%;background-color:". $matchPlayed ."\"></div>
+
+			
+				<input type=\"hidden\" name=\"idTournoi\"  value=\"$idTournoi\"></input>
+				<input type=\"hidden\" name=\"numPhaseFinale\"  value=\"$numPhaseFinale\"></input>
+				<input type=\"hidden\" name=\"idPhaseFinale\"  value=\"$idPhaseFinale\"></input>
+				<input type=\"hidden\" name=\"idMatch\"  value=\"$idMatch\"></input>
+				<input type=\"hidden\" name=\"action\"  value=\"miseajourMatchPoulePF\"></input>
+				</form>
+			</td>
+		</tr>";
+		$numPlaque++;
+
+	}
+	
+	$tableauHead="<div class=\"uk-width-1-1 uk-width-1-2@l uk-width-1-2@xl\">
+		<div class=\"uk-card uk-card-default uk-card-small uk-card-hover\">
+			<div class=\"uk-card-header\">
+				<div class=\"uk-grid uk-grid-small\">
+					<div class=\"uk-width-auto\"><h4>". $label ." en ". $ptsMatch ." Points</h4></div><div otpname=\"bigPoint $label\" style=\"margin-top: 8px;margin-left: 20px;display:inline-block;border-radius: 50%; height: 15px;background-color:$allPlayed ;\"></div>
+					<div class=\"uk-width-expand uk-text-right panel-icons\"></div>
+					
+				</div>
+			</div>
+			<div class=\"uk-card-body\">
+				<div>
+					<table niveau=\"$label\" class=\"uk-table uk-table-striped\" style=\"width: 100%\">
+						<tr>
+							<th style=\"box-sizing:border-box;width: 100%\">
+								<div style=\"box-sizing:border-box;display:inline-block;width: 10%\" class=\"uk-text-center uk-text-bolder\">PLAQUE</div>
+								<div style=\"box-sizing:border-box;display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">EQUIPE 1</div>
+								<div style=\"box-sizing:border-box;display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">SCORE 1</div>
+								<div style=\"box-sizing:border-box;display:inline-block;width: 10%\"  class=\"uk-text-center uk-text-bolder\"></div>
+								<div style=\"box-sizing:border-box;display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">SCORE 2</div>
+								<div style=\"box-sizing:border-box;display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">EQUIPE 2</div>
+							</th>
+						</tr>";
+					
+	$tableauFooter="
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>";
+	
+
+	$tableau = $tableauHead.$tableauRow.$tableauFooter;
+	
+	
+	return $tableau;
+
+}
+
+
 function statsEquipe($numEquipe)
 {
 	global $db;
@@ -1426,374 +1567,130 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 	$ptsFinales = $infosTournoi['pts_finales'];
 	$ptsPetitesFinales = $infosTournoi['pts_petitefinales'];
 	$ptsPhasesFinales = $infosTournoi['pts_phasesfinales'];
+	$typePhaseFinale = infosPhaseFinaleNum($numPhaseFinale);
+	$typePhaseFinale = $typePhaseFinale['type_phasefinale'];
+
+
+
+// CLASSEMENT ARBRE //////////////////////////////////////////////
+	if($typePhaseFinale == 'arbre'){		
 	
-	switch ($nbEquipes) {
-		case 4:
-			$lastLevel = "C";
-			break;
-		case 8:
-			$lastLevel = "D";
-			break;
-		case 16:
-			$lastLevel = "E";
-			$lastLevelCH = "CHD";
-			break;
-		case 32:
-			$lastLevel = "F";
-			$lastLevelCH = "CHE";
-			break;
-		case 64:
-			$lastLevel = "G";
-			$lastLevelCH = "CHF";
-			break;
-		case 128:
-			$lastLevel = "H";
-			$lastLevelCH = "CHG";
-			break;
-	}
-
-	$place1 = '';
-			$place2 = '';
-			$place3 = '';
-			$place4 = '';
-			$place5 = '';
-			$place6 = '';
-			$place7 = '';
-			$place8 = '';
-			$place14 = '';
-			$place16 = '';
-	// Vainqueur
-	$resultatsVainqueur = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "'. $lastLevel .'1"');
-	while ($rowVainqueur = $resultatsVainqueur->fetchArray(1)) {
-		$place1= $rowVainqueur['num_equipe'];
-	}
-	
-	// 2ème Place (finaliste perdant)
-	$previousLevel = chr(ord($lastLevel) - 1);
-	$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2")');
-	while ($row = $resultats->fetchArray(1)) {
-		if($row['num_equipe'] != $place1) {
-			$place2 = $row['num_equipe'];
-		}
-	}
-
-	// 3ème Place
-	$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "PFV1"');
-	while ($row = $resultats->fetchArray(1)) {
-		$place3= $row['num_equipe'];
-	}
-	// 4ème Place
-	$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "PF1" OR position_label = "PF2")');
-	while ($row = $resultats->fetchArray(1)) {
-		if($row['num_equipe'] != $place3) {
-			$place4 = $row['num_equipe'];
-		}
-	}
-
-	
-	if($place1 != ''){
-		$db->exec("UPDATE classements SET class_numequipe = '$place1' WHERE class_place == '1' AND class_numphase == '". $numPhaseFinale ."'");
-	}
-	if($place2 != ''){
-		$db->exec("UPDATE classements SET class_numequipe = '$place2' WHERE class_place == '2' AND class_numphase == '". $numPhaseFinale ."'");
-	}
-	if($place3 != ''){
-		$db->exec("UPDATE classements SET class_numequipe = '$place3' WHERE class_place == '3' AND class_numphase == '". $numPhaseFinale ."'");
-	}
-	if($place4 != ''){
-		$db->exec("UPDATE classements SET class_numequipe = '$place4' WHERE class_place == '4' AND class_numphase == '". $numPhaseFinale ."'");
-	}
-	
-	// Matchs de classement
-
-	if($nbEquipes == 8 || $nbEquipes == 16){
-		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "CLC1"');
-		while ($row = $resultats->fetchArray(1)) {
-				$place5 = $row['num_equipe'];
-		}
-	
-		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "CLB1" OR position_label = "CLB2")');
-		while ($row = $resultats->fetchArray(1)) {
-			if($row['num_equipe'] != $place5) {	
-				$place6 = $row['num_equipe'];
-			}
+		switch ($nbEquipes) {
+			case 4:
+				$lastLevel = "C";
+				break;
+			case 8:
+				$lastLevel = "D";
+				break;
+			case 16:
+				$lastLevel = "E";
+				$lastLevelCH = "CHD";
+				break;
+			case 32:
+				$lastLevel = "F";
+				$lastLevelCH = "CHE";
+				break;
+			case 64:
+				$lastLevel = "G";
+				$lastLevelCH = "CHF";
+				break;
+			case 128:
+				$lastLevel = "H";
+				$lastLevelCH = "CHG";
+				break;
 		}
 
-		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "CLY1"');
-		while ($row = $resultats->fetchArray(1)) {
-				$place7 = $row['num_equipe'];
-		}
-	
-		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "CLZ1" OR position_label = "CLZ2")');
-		while ($row = $resultats->fetchArray(1)) {
-			if($row['num_equipe'] != $place7) {	
-				$place8 = $row['num_equipe'];
-			}
-		}
-
-		
-		if($place5 != ''){
-			$db->exec("UPDATE classements SET class_numequipe = '$place5' WHERE class_place == '5' AND class_numphase == '". $numPhaseFinale ."'");
-		}
-		if($place6 != ''){
-			$db->exec("UPDATE classements SET class_numequipe = '$place6' WHERE class_place == '6' AND class_numphase == '". $numPhaseFinale ."'");
-		}
-		if($place7 != ''){
-			$db->exec("UPDATE classements SET class_numequipe = '$place7' WHERE class_place == '7' AND class_numphase == '". $numPhaseFinale ."'");
-		}
-		if($place8 != ''){
-			$db->exec("UPDATE classements SET class_numequipe = '$place8' WHERE class_place == '8' AND class_numphase == '". $numPhaseFinale ."'");
-		}
-
-	
-	}
-
-	if($nbEquipes > 16){
-
-		// Perdants Quarts de finales places 5 à 8
-		$previousLevel = chr(ord($lastLevel) - 3);
-
-		$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8")';
-
-		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC');
-		$i = 5;
-		while ($row = $resultats->fetchArray(1)) {
-			
-			$a = "place".$i;	
-			$$a = $row['num_equipe'];
-			if($$a != ''){
-				$db->exec("UPDATE classements SET class_numequipe = '". $$a ."' WHERE class_place == '". $i ."' AND class_numphase == '". $numPhaseFinale ."'");
-				//$classement .= "<tr><td>". $i ."</td><td>" .$$a ."</td></tr>";
-			}
-			$i++;
-		}
-
-
-		// Perdants 8ème de finales places 9 à 16
-		$previousLevel = chr(ord($lastLevel) - 4);
-
-		$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8" OR position_label = "'. $previousLevel .'9" OR position_label = "'. $previousLevel .'10" OR position_label = "'. $previousLevel .'11" OR position_label = "'. $previousLevel .'12" OR position_label = "'. $previousLevel .'13" OR position_label = "'. $previousLevel .'14" OR position_label = "'. $previousLevel .'15" OR position_label = "'. $previousLevel .'16")';
-
-		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC');
-		$i = 9;
-		while ($row = $resultats->fetchArray(1)) {
-			
-			$a = "place".$i;	
-			$$a = $row['num_equipe'];
-			if($$a != ''){
-				$db->exec("UPDATE classements SET class_numequipe = '". $$a ."' WHERE class_place == '". $i ."' AND class_numphase == '". $numPhaseFinale ."'");
-				//$classement .= "<tr><td>". $i ."</td><td>" .$$a ."</td></tr>";
-			}
-			$i++;
-		}
-
-	}
-
-	if($nbEquipes > 32){
-		// Perdants 16ème de finales places 17 à 32
-		$previousLevel = chr(ord($lastLevel) - 5);
-
-		$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8" OR position_label = "'. $previousLevel .'9" OR position_label = "'. $previousLevel .'10" OR position_label = "'. $previousLevel .'11" OR position_label = "'. $previousLevel .'12" OR position_label = "'. $previousLevel .'13" OR position_label = "'. $previousLevel .'14" OR position_label = "'. $previousLevel .'15" OR position_label = "'. $previousLevel .'16" OR position_label = "'. $previousLevel .'17" OR position_label = "'. $previousLevel .'18" OR position_label = "'. $previousLevel .'19" OR position_label = "'. $previousLevel .'20" OR position_label = "'. $previousLevel .'21" OR position_label = "'. $previousLevel .'22" OR position_label = "'. $previousLevel .'23" OR position_label = "'. $previousLevel .'24" OR position_label = "'. $previousLevel .'25" OR position_label = "'. $previousLevel .'26" OR position_label = "'. $previousLevel .'27" OR position_label = "'. $previousLevel .'28" OR position_label = "'. $previousLevel .'29" OR position_label = "'. $previousLevel .'30" OR position_label = "'. $previousLevel .'31" OR position_label = "'. $previousLevel .'32")';
-
-		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC');
-		$i = 17;
-		while ($row = $resultats->fetchArray(1)) {
-			
-			$a = "place".$i;	
-			$$a = $row['num_equipe'];
-			if($$a != ''){
-				$db->exec("UPDATE classements SET class_numequipe = '". $$a ."' WHERE class_place == '". $i ."' AND class_numphase == '". $numPhaseFinale ."'");
-				//$classement .= "<tr><td>". $i ."</td><td>" .$$a ."</td></tr>";
-			}
-			$i++;
-		}
-
-	}
-
-	if($nbEquipes > 64){
-		// Perdants 32ème de finales places 33 à 64
-		$previousLevel = chr(ord($lastLevel) - 6);
-
-		$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8" OR position_label = "'. $previousLevel .'9" OR position_label = "'. $previousLevel .'10" OR position_label = "'. $previousLevel .'11" OR position_label = "'. $previousLevel .'12" OR position_label = "'. $previousLevel .'13" OR position_label = "'. $previousLevel .'14" OR position_label = "'. $previousLevel .'15" OR position_label = "'. $previousLevel .'16" OR position_label = "'. $previousLevel .'17" OR position_label = "'. $previousLevel .'18" OR position_label = "'. $previousLevel .'19" OR position_label = "'. $previousLevel .'20" OR position_label = "'. $previousLevel .'21" OR position_label = "'. $previousLevel .'22" OR position_label = "'. $previousLevel .'23" OR position_label = "'. $previousLevel .'24" OR position_label = "'. $previousLevel .'25" OR position_label = "'. $previousLevel .'26" OR position_label = "'. $previousLevel .'27" OR position_label = "'. $previousLevel .'28" OR position_label = "'. $previousLevel .'29" OR position_label = "'. $previousLevel .'30" OR position_label = "'. $previousLevel .'31" OR position_label = "'. $previousLevel .'32" OR position_label = "'. $previousLevel .'33" OR position_label = "'. $previousLevel .'34" OR position_label = "'. $previousLevel .'35" OR position_label = "'. $previousLevel .'36" OR position_label = "'. $previousLevel .'37" OR position_label = "'. $previousLevel .'38" OR position_label = "'. $previousLevel .'39" OR position_label = "'. $previousLevel .'40" OR position_label = "'. $previousLevel .'41" OR position_label = "'. $previousLevel .'42" OR position_label = "'. $previousLevel .'43" OR position_label = "'. $previousLevel .'44" OR position_label = "'. $previousLevel .'45" OR position_label = "'. $previousLevel .'46" OR position_label = "'. $previousLevel .'47" OR position_label = "'. $previousLevel .'48" OR position_label = "'. $previousLevel .'49" OR position_label = "'. $previousLevel .'50" OR position_label = "'. $previousLevel .'51" OR position_label = "'. $previousLevel .'52" OR position_label = "'. $previousLevel .'53" OR position_label = "'. $previousLevel .'54" OR position_label = "'. $previousLevel .'55" OR position_label = "'. $previousLevel .'56" OR position_label = "'. $previousLevel .'57" OR position_label = "'. $previousLevel .'58" OR position_label = "'. $previousLevel .'59" OR position_label = "'. $previousLevel .'60" OR position_label = "'. $previousLevel .'61" OR position_label = "'. $previousLevel .'62" OR position_label = "'. $previousLevel .'63" OR position_label = "'. $previousLevel .'64")';
-
-		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC');
-		$i = 33;
-		while ($row = $resultats->fetchArray(1)) {
-			
-			$a = "place".$i;	
-			$$a = $row['num_equipe'];
-			if($$a != ''){
-				$db->exec("UPDATE classements SET class_numequipe = '". $$a ."' WHERE class_place == '". $i ."' AND class_numphase == '". $numPhaseFinale ."'");
-				//$classement .= "<tr><td>". $i ."</td><td>" .$$a ."</td></tr>";
-			}
-			$i++;
-		}
-
-	}
-
-
-
-	// Challenge
-
-	if($nbEquipes > 8){
-		$lastLevel = chr(ord($lastLevel) - 1);
-		$previousLevel = "CH".$lastLevel;
-
+		$place1 = '';
+				$place2 = '';
+				$place3 = '';
+				$place4 = '';
+				$place5 = '';
+				$place6 = '';
+				$place7 = '';
+				$place8 = '';
+				$place14 = '';
+				$place16 = '';
 		// Vainqueur
-		$resultatsVainqueur = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "'. $previousLevel .'1"');
+		$resultatsVainqueur = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "'. $lastLevel .'1"');
 		while ($rowVainqueur = $resultatsVainqueur->fetchArray(1)) {
-			switch ($nbEquipes){
-				case 16:
-					$place9 = $rowVainqueur['num_equipe'];
-					$db->exec("UPDATE classements SET class_numequipe = '". $rowVainqueur['num_equipe'] ."' WHERE class_place == '9' AND class_numphase == '". $numPhaseFinale ."'");
-					break;	
-				case 32:
-					$place17 = $rowVainqueur['num_equipe'];
-					$db->exec("UPDATE classements SET class_numequipe = '". $rowVainqueur['num_equipe'] ."' WHERE class_place == '17' AND class_numphase == '". $numPhaseFinale ."'");
-					break;	
-				case 64:
-					$place33 = $rowVainqueur['num_equipe'];
-					$db->exec("UPDATE classements SET class_numequipe = '". $rowVainqueur['num_equipe'] ."' WHERE class_place == '33' AND class_numphase == '". $numPhaseFinale ."'");
-					break;	
-				case 128:
-					$place65 = $rowVainqueur['num_equipe'];
-					$db->exec("UPDATE classements SET class_numequipe = '". $rowVainqueur['num_equipe'] ."' WHERE class_place == '65' AND class_numphase == '". $numPhaseFinale ."'");
-					break;	
-			
-			}
+			$place1= $rowVainqueur['num_equipe'];
 		}
-	
+		
 		// 2ème Place (finaliste perdant)
 		$previousLevel = chr(ord($lastLevel) - 1);
-		$previousLevel = "CH".$previousLevel;
-		
 		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2")');
 		while ($row = $resultats->fetchArray(1)) {
-			
-			switch ($nbEquipes){
-				case 16:
-					if($row['num_equipe'] != $place9) {	
-						$place10 = $row['num_equipe'];
-						$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '10' AND class_numphase == '". $numPhaseFinale ."'");
-					}
-					break;	
-				case 32:
-					if($row['num_equipe'] != $place17) {	
-						$place18 = $row['num_equipe'];
-						$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '18' AND class_numphase == '". $numPhaseFinale ."'");
-					}
-					break;
-				case 64:
-					if($row['num_equipe'] != $place33) {	
-						$place34 = $row['num_equipe'];
-						$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '34' AND class_numphase == '". $numPhaseFinale ."'");
-					}
-					break;
-				case 128:
-					if($row['num_equipe'] != $place65) {	
-						$place66 = $row['num_equipe'];
-						$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '66' AND class_numphase == '". $numPhaseFinale ."'");
-					}
-					break;		
+			if($row['num_equipe'] != $place1) {
+				$place2 = $row['num_equipe'];
 			}
 		}
-	
 
 		// 3ème Place
-		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "CHPFV1"');
+		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "PFV1"');
 		while ($row = $resultats->fetchArray(1)) {
-			switch ($nbEquipes){
-				case 16:
-					$place11= $row['num_equipe'];
-					$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '11' AND class_numphase == '". $numPhaseFinale ."'");
-					break;
-				case 32:
-					$place19= $row['num_equipe'];
-					$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '19' AND class_numphase == '". $numPhaseFinale ."'");
-					break;
-				case 64:
-					$place35= $row['num_equipe'];
-					$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '35' AND class_numphase == '". $numPhaseFinale ."'");
-					break;
-				case 128:
-					$place67= $row['num_equipe'];
-					$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '67' AND class_numphase == '". $numPhaseFinale ."'");
-					break;
-			}
+			$place3= $row['num_equipe'];
 		}
-
-
 		// 4ème Place
-		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "CHPF1" OR position_label = "CHPF2")');
+		$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "PF1" OR position_label = "PF2")');
 		while ($row = $resultats->fetchArray(1)) {
-			
-			switch ($nbEquipes){
-				case 16:
-					if($row['num_equipe'] != $place11) {
-						$place12 = $row['num_equipe'];
-						$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '12' AND class_numphase == '". $numPhaseFinale ."'");
-					}
-					break;
-				case 32:
-					if($row['num_equipe'] != $place19) {
-						$place20 = $row['num_equipe'];
-						$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '20' AND class_numphase == '". $numPhaseFinale ."'");
-					}
-					break;
-				case 64:
-					if($row['num_equipe'] != $place35) {
-						$place36 = $row['num_equipe'];
-						$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '36' AND class_numphase == '". $numPhaseFinale ."'");
-					}
-					break;
-				case 128:
-					if($row['num_equipe'] != $place67) {
-						$place68 = $row['num_equipe'];
-						$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '68' AND class_numphase == '". $numPhaseFinale ."'");
-					}
-					break;		
+			if($row['num_equipe'] != $place3) {
+				$place4 = $row['num_equipe'];
 			}
 		}
 
+		
+		if($place1 != ''){
+			$db->exec("UPDATE classements SET class_numequipe = '$place1' WHERE class_place == '1' AND class_numphase == '". $numPhaseFinale ."'");
+		}
+		if($place2 != ''){
+			$db->exec("UPDATE classements SET class_numequipe = '$place2' WHERE class_place == '2' AND class_numphase == '". $numPhaseFinale ."'");
+		}
+		if($place3 != ''){
+			$db->exec("UPDATE classements SET class_numequipe = '$place3' WHERE class_place == '3' AND class_numphase == '". $numPhaseFinale ."'");
+		}
+		if($place4 != ''){
+			$db->exec("UPDATE classements SET class_numequipe = '$place4' WHERE class_place == '4' AND class_numphase == '". $numPhaseFinale ."'");
+		}
+		
 		// Matchs de classement
 
-		if($nbEquipes == 16){
-			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "CHCLC1"');
+		if($nbEquipes == 8 || $nbEquipes == 16){
+			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "CLC1"');
 			while ($row = $resultats->fetchArray(1)) {
-					$place13 = $row['num_equipe'];
+					$place5 = $row['num_equipe'];
 			}
 		
-			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "CHCLB1" OR position_label = "CHCLB2")');
+			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "CLB1" OR position_label = "CLB2")');
 			while ($row = $resultats->fetchArray(1)) {
-				if($row['num_equipe'] != $place13) {	
-					$place14 = $row['num_equipe'];
+				if($row['num_equipe'] != $place5) {	
+					$place6 = $row['num_equipe'];
 				}
 			}
 
-			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "CHCLY1"');
+			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "CLY1"');
 			while ($row = $resultats->fetchArray(1)) {
-					$place15 = $row['num_equipe'];
+					$place7 = $row['num_equipe'];
 			}
 		
-			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "CHCLZ1" OR position_label = "CHCLZ2")');
+			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "CLZ1" OR position_label = "CLZ2")');
 			while ($row = $resultats->fetchArray(1)) {
-				if($row['num_equipe'] != $place15) {	
-					$place16 = $row['num_equipe'];
+				if($row['num_equipe'] != $place7) {	
+					$place8 = $row['num_equipe'];
 				}
 			}
 
 			
-			if($place13 != ''){
-				$db->exec("UPDATE classements SET class_numequipe = '$place13' WHERE class_place == '13' AND class_numphase == '". $numPhaseFinale ."'");
+			if($place5 != ''){
+				$db->exec("UPDATE classements SET class_numequipe = '$place5' WHERE class_place == '5' AND class_numphase == '". $numPhaseFinale ."'");
 			}
-			if($place14 != ''){
-				$db->exec("UPDATE classements SET class_numequipe = '$place14' WHERE class_place == '14' AND class_numphase == '". $numPhaseFinale ."'");
+			if($place6 != ''){
+				$db->exec("UPDATE classements SET class_numequipe = '$place6' WHERE class_place == '6' AND class_numphase == '". $numPhaseFinale ."'");
 			}
-			if($place15 != ''){
-				$db->exec("UPDATE classements SET class_numequipe = '$place15' WHERE class_place == '15' AND class_numphase == '". $numPhaseFinale ."'");
+			if($place7 != ''){
+				$db->exec("UPDATE classements SET class_numequipe = '$place7' WHERE class_place == '7' AND class_numphase == '". $numPhaseFinale ."'");
 			}
-			if($place16 != ''){
-				$db->exec("UPDATE classements SET class_numequipe = '$place16' WHERE class_place == '16' AND class_numphase == '". $numPhaseFinale ."'");
+			if($place8 != ''){
+				$db->exec("UPDATE classements SET class_numequipe = '$place8' WHERE class_place == '8' AND class_numphase == '". $numPhaseFinale ."'");
 			}
 
 		
@@ -1801,28 +1698,13 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 
 		if($nbEquipes > 16){
 
-			// Perdants Quarts de finales 
+			// Perdants Quarts de finales places 5 à 8
 			$previousLevel = chr(ord($lastLevel) - 3);
 
-			$previousLevel = "CH".$previousLevel;
-			
-	
 			$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8")';
-	
+
 			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC');
-			
-			switch($nbEquipes){
-				case 32:
-					$i = 21;
-					break;
-				case 64:
-					$i = 37;
-					break;
-				case 128:
-					$i = 69;
-					break;
-			}
-			
+			$i = 5;
 			while ($row = $resultats->fetchArray(1)) {
 				
 				$a = "place".$i;	
@@ -1832,28 +1714,16 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 					//$classement .= "<tr><td>". $i ."</td><td>" .$$a ."</td></tr>";
 				}
 				$i++;
-			}
-	
-	
-			// Perdants 8ème de finales 
-			$previousLevel = chr(ord($lastLevel) - 4);
-			$previousLevel = "CH".$previousLevel;
-			$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8" OR position_label = "'. $previousLevel .'9" OR position_label = "'. $previousLevel .'10" OR position_label = "'. $previousLevel .'11" OR position_label = "'. $previousLevel .'12" OR position_label = "'. $previousLevel .'13" OR position_label = "'. $previousLevel .'14" OR position_label = "'. $previousLevel .'15" OR position_label = "'. $previousLevel .'16")';
-	
-			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC, score_precedent ASC');
-			
-			switch($nbEquipes){
-				case 32:
-					$i = 25;
-					break;
-				case 64:
-					$i = 41;
-					break;
-				case 128:
-					$i = 73;
-					break;
 			}
 
+
+			// Perdants 8ème de finales places 9 à 16
+			$previousLevel = chr(ord($lastLevel) - 4);
+
+			$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8" OR position_label = "'. $previousLevel .'9" OR position_label = "'. $previousLevel .'10" OR position_label = "'. $previousLevel .'11" OR position_label = "'. $previousLevel .'12" OR position_label = "'. $previousLevel .'13" OR position_label = "'. $previousLevel .'14" OR position_label = "'. $previousLevel .'15" OR position_label = "'. $previousLevel .'16")';
+
+			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC');
+			$i = 9;
 			while ($row = $resultats->fetchArray(1)) {
 				
 				$a = "place".$i;	
@@ -1864,27 +1734,17 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 				}
 				$i++;
 			}
-	
+
 		}
 
 		if($nbEquipes > 32){
-
-			// Perdants 16ème de finales 
+			// Perdants 16ème de finales places 17 à 32
 			$previousLevel = chr(ord($lastLevel) - 5);
-			$previousLevel = "CH".$previousLevel;
-			$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8" OR position_label = "'. $previousLevel .'9" OR position_label = "'. $previousLevel .'10" OR position_label = "'. $previousLevel .'11" OR position_label = "'. $previousLevel .'12" OR position_label = "'. $previousLevel .'13" OR position_label = "'. $previousLevel .'14" OR position_label = "'. $previousLevel .'15" OR position_label = "'. $previousLevel .'16")';
-	
-			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC');
-			
-			switch($nbEquipes){
-				case 64:
-					$i = 49;
-					break;
-				case 128:
-					$i = 81;
-					break;
-			}
 
+			$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8" OR position_label = "'. $previousLevel .'9" OR position_label = "'. $previousLevel .'10" OR position_label = "'. $previousLevel .'11" OR position_label = "'. $previousLevel .'12" OR position_label = "'. $previousLevel .'13" OR position_label = "'. $previousLevel .'14" OR position_label = "'. $previousLevel .'15" OR position_label = "'. $previousLevel .'16" OR position_label = "'. $previousLevel .'17" OR position_label = "'. $previousLevel .'18" OR position_label = "'. $previousLevel .'19" OR position_label = "'. $previousLevel .'20" OR position_label = "'. $previousLevel .'21" OR position_label = "'. $previousLevel .'22" OR position_label = "'. $previousLevel .'23" OR position_label = "'. $previousLevel .'24" OR position_label = "'. $previousLevel .'25" OR position_label = "'. $previousLevel .'26" OR position_label = "'. $previousLevel .'27" OR position_label = "'. $previousLevel .'28" OR position_label = "'. $previousLevel .'29" OR position_label = "'. $previousLevel .'30" OR position_label = "'. $previousLevel .'31" OR position_label = "'. $previousLevel .'32")';
+
+			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC');
+			$i = 17;
 			while ($row = $resultats->fetchArray(1)) {
 				
 				$a = "place".$i;	
@@ -1895,25 +1755,17 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 				}
 				$i++;
 			}
-	
-		}
 
+		}
 
 		if($nbEquipes > 64){
-
-			// Perdants 32ème de finales 
+			// Perdants 32ème de finales places 33 à 64
 			$previousLevel = chr(ord($lastLevel) - 6);
-			$previousLevel = "CH".$previousLevel;
 
 			$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8" OR position_label = "'. $previousLevel .'9" OR position_label = "'. $previousLevel .'10" OR position_label = "'. $previousLevel .'11" OR position_label = "'. $previousLevel .'12" OR position_label = "'. $previousLevel .'13" OR position_label = "'. $previousLevel .'14" OR position_label = "'. $previousLevel .'15" OR position_label = "'. $previousLevel .'16" OR position_label = "'. $previousLevel .'17" OR position_label = "'. $previousLevel .'18" OR position_label = "'. $previousLevel .'19" OR position_label = "'. $previousLevel .'20" OR position_label = "'. $previousLevel .'21" OR position_label = "'. $previousLevel .'22" OR position_label = "'. $previousLevel .'23" OR position_label = "'. $previousLevel .'24" OR position_label = "'. $previousLevel .'25" OR position_label = "'. $previousLevel .'26" OR position_label = "'. $previousLevel .'27" OR position_label = "'. $previousLevel .'28" OR position_label = "'. $previousLevel .'29" OR position_label = "'. $previousLevel .'30" OR position_label = "'. $previousLevel .'31" OR position_label = "'. $previousLevel .'32" OR position_label = "'. $previousLevel .'33" OR position_label = "'. $previousLevel .'34" OR position_label = "'. $previousLevel .'35" OR position_label = "'. $previousLevel .'36" OR position_label = "'. $previousLevel .'37" OR position_label = "'. $previousLevel .'38" OR position_label = "'. $previousLevel .'39" OR position_label = "'. $previousLevel .'40" OR position_label = "'. $previousLevel .'41" OR position_label = "'. $previousLevel .'42" OR position_label = "'. $previousLevel .'43" OR position_label = "'. $previousLevel .'44" OR position_label = "'. $previousLevel .'45" OR position_label = "'. $previousLevel .'46" OR position_label = "'. $previousLevel .'47" OR position_label = "'. $previousLevel .'48" OR position_label = "'. $previousLevel .'49" OR position_label = "'. $previousLevel .'50" OR position_label = "'. $previousLevel .'51" OR position_label = "'. $previousLevel .'52" OR position_label = "'. $previousLevel .'53" OR position_label = "'. $previousLevel .'54" OR position_label = "'. $previousLevel .'55" OR position_label = "'. $previousLevel .'56" OR position_label = "'. $previousLevel .'57" OR position_label = "'. $previousLevel .'58" OR position_label = "'. $previousLevel .'59" OR position_label = "'. $previousLevel .'60" OR position_label = "'. $previousLevel .'61" OR position_label = "'. $previousLevel .'62" OR position_label = "'. $previousLevel .'63" OR position_label = "'. $previousLevel .'64")';
-			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC');
-			
-			switch($nbEquipes){
-				case 128:
-					$i = 97;
-					break;
-			}
 
+			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC');
+			$i = 33;
 			while ($row = $resultats->fetchArray(1)) {
 				
 				$a = "place".$i;	
@@ -1924,10 +1776,314 @@ function calculClassementPF($idTournoi,$numPhaseFinale, $nbEquipes){
 				}
 				$i++;
 			}
-	
+
 		}
 
+
+
+		// Challenge
+
+		if($nbEquipes > 8){
+			$lastLevel = chr(ord($lastLevel) - 1);
+			$previousLevel = "CH".$lastLevel;
+
+			// Vainqueur
+			$resultatsVainqueur = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "'. $previousLevel .'1"');
+			while ($rowVainqueur = $resultatsVainqueur->fetchArray(1)) {
+				switch ($nbEquipes){
+					case 16:
+						$place9 = $rowVainqueur['num_equipe'];
+						$db->exec("UPDATE classements SET class_numequipe = '". $rowVainqueur['num_equipe'] ."' WHERE class_place == '9' AND class_numphase == '". $numPhaseFinale ."'");
+						break;	
+					case 32:
+						$place17 = $rowVainqueur['num_equipe'];
+						$db->exec("UPDATE classements SET class_numequipe = '". $rowVainqueur['num_equipe'] ."' WHERE class_place == '17' AND class_numphase == '". $numPhaseFinale ."'");
+						break;	
+					case 64:
+						$place33 = $rowVainqueur['num_equipe'];
+						$db->exec("UPDATE classements SET class_numequipe = '". $rowVainqueur['num_equipe'] ."' WHERE class_place == '33' AND class_numphase == '". $numPhaseFinale ."'");
+						break;	
+					case 128:
+						$place65 = $rowVainqueur['num_equipe'];
+						$db->exec("UPDATE classements SET class_numequipe = '". $rowVainqueur['num_equipe'] ."' WHERE class_place == '65' AND class_numphase == '". $numPhaseFinale ."'");
+						break;	
+				
+				}
+			}
+		
+			// 2ème Place (finaliste perdant)
+			$previousLevel = chr(ord($lastLevel) - 1);
+			$previousLevel = "CH".$previousLevel;
+			
+			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2")');
+			while ($row = $resultats->fetchArray(1)) {
+				
+				switch ($nbEquipes){
+					case 16:
+						if($row['num_equipe'] != $place9) {	
+							$place10 = $row['num_equipe'];
+							$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '10' AND class_numphase == '". $numPhaseFinale ."'");
+						}
+						break;	
+					case 32:
+						if($row['num_equipe'] != $place17) {	
+							$place18 = $row['num_equipe'];
+							$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '18' AND class_numphase == '". $numPhaseFinale ."'");
+						}
+						break;
+					case 64:
+						if($row['num_equipe'] != $place33) {	
+							$place34 = $row['num_equipe'];
+							$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '34' AND class_numphase == '". $numPhaseFinale ."'");
+						}
+						break;
+					case 128:
+						if($row['num_equipe'] != $place65) {	
+							$place66 = $row['num_equipe'];
+							$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '66' AND class_numphase == '". $numPhaseFinale ."'");
+						}
+						break;		
+				}
+			}
+		
+
+			// 3ème Place
+			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "CHPFV1"');
+			while ($row = $resultats->fetchArray(1)) {
+				switch ($nbEquipes){
+					case 16:
+						$place11= $row['num_equipe'];
+						$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '11' AND class_numphase == '". $numPhaseFinale ."'");
+						break;
+					case 32:
+						$place19= $row['num_equipe'];
+						$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '19' AND class_numphase == '". $numPhaseFinale ."'");
+						break;
+					case 64:
+						$place35= $row['num_equipe'];
+						$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '35' AND class_numphase == '". $numPhaseFinale ."'");
+						break;
+					case 128:
+						$place67= $row['num_equipe'];
+						$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '67' AND class_numphase == '". $numPhaseFinale ."'");
+						break;
+				}
+			}
+
+
+			// 4ème Place
+			$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "CHPF1" OR position_label = "CHPF2")');
+			while ($row = $resultats->fetchArray(1)) {
+				
+				switch ($nbEquipes){
+					case 16:
+						if($row['num_equipe'] != $place11) {
+							$place12 = $row['num_equipe'];
+							$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '12' AND class_numphase == '". $numPhaseFinale ."'");
+						}
+						break;
+					case 32:
+						if($row['num_equipe'] != $place19) {
+							$place20 = $row['num_equipe'];
+							$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '20' AND class_numphase == '". $numPhaseFinale ."'");
+						}
+						break;
+					case 64:
+						if($row['num_equipe'] != $place35) {
+							$place36 = $row['num_equipe'];
+							$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '36' AND class_numphase == '". $numPhaseFinale ."'");
+						}
+						break;
+					case 128:
+						if($row['num_equipe'] != $place67) {
+							$place68 = $row['num_equipe'];
+							$db->exec("UPDATE classements SET class_numequipe = '". $row['num_equipe'] ."' WHERE class_place == '68' AND class_numphase == '". $numPhaseFinale ."'");
+						}
+						break;		
+				}
+			}
+
+			// Matchs de classement
+
+			if($nbEquipes == 16){
+				$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "CHCLC1"');
+				while ($row = $resultats->fetchArray(1)) {
+						$place13 = $row['num_equipe'];
+				}
+			
+				$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "CHCLB1" OR position_label = "CHCLB2")');
+				while ($row = $resultats->fetchArray(1)) {
+					if($row['num_equipe'] != $place13) {	
+						$place14 = $row['num_equipe'];
+					}
+				}
+
+				$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND position_label = "CHCLY1"');
+				while ($row = $resultats->fetchArray(1)) {
+						$place15 = $row['num_equipe'];
+				}
+			
+				$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND (position_label = "CHCLZ1" OR position_label = "CHCLZ2")');
+				while ($row = $resultats->fetchArray(1)) {
+					if($row['num_equipe'] != $place15) {	
+						$place16 = $row['num_equipe'];
+					}
+				}
+
+				
+				if($place13 != ''){
+					$db->exec("UPDATE classements SET class_numequipe = '$place13' WHERE class_place == '13' AND class_numphase == '". $numPhaseFinale ."'");
+				}
+				if($place14 != ''){
+					$db->exec("UPDATE classements SET class_numequipe = '$place14' WHERE class_place == '14' AND class_numphase == '". $numPhaseFinale ."'");
+				}
+				if($place15 != ''){
+					$db->exec("UPDATE classements SET class_numequipe = '$place15' WHERE class_place == '15' AND class_numphase == '". $numPhaseFinale ."'");
+				}
+				if($place16 != ''){
+					$db->exec("UPDATE classements SET class_numequipe = '$place16' WHERE class_place == '16' AND class_numphase == '". $numPhaseFinale ."'");
+				}
+
+			
+			}
+
+			if($nbEquipes > 16){
+
+				// Perdants Quarts de finales 
+				$previousLevel = chr(ord($lastLevel) - 3);
+
+				$previousLevel = "CH".$previousLevel;
+				
+		
+				$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8")';
+		
+				$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC');
+				
+				switch($nbEquipes){
+					case 32:
+						$i = 21;
+						break;
+					case 64:
+						$i = 37;
+						break;
+					case 128:
+						$i = 69;
+						break;
+				}
+				
+				while ($row = $resultats->fetchArray(1)) {
+					
+					$a = "place".$i;	
+					$$a = $row['num_equipe'];
+					if($$a != ''){
+						$db->exec("UPDATE classements SET class_numequipe = '". $$a ."' WHERE class_place == '". $i ."' AND class_numphase == '". $numPhaseFinale ."'");
+						//$classement .= "<tr><td>". $i ."</td><td>" .$$a ."</td></tr>";
+					}
+					$i++;
+				}
+		
+		
+				// Perdants 8ème de finales 
+				$previousLevel = chr(ord($lastLevel) - 4);
+				$previousLevel = "CH".$previousLevel;
+				$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8" OR position_label = "'. $previousLevel .'9" OR position_label = "'. $previousLevel .'10" OR position_label = "'. $previousLevel .'11" OR position_label = "'. $previousLevel .'12" OR position_label = "'. $previousLevel .'13" OR position_label = "'. $previousLevel .'14" OR position_label = "'. $previousLevel .'15" OR position_label = "'. $previousLevel .'16")';
+		
+				$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC, score_precedent ASC');
+				
+				switch($nbEquipes){
+					case 32:
+						$i = 25;
+						break;
+					case 64:
+						$i = 41;
+						break;
+					case 128:
+						$i = 73;
+						break;
+				}
+
+				while ($row = $resultats->fetchArray(1)) {
+					
+					$a = "place".$i;	
+					$$a = $row['num_equipe'];
+					if($$a != ''){
+						$db->exec("UPDATE classements SET class_numequipe = '". $$a ."' WHERE class_place == '". $i ."' AND class_numphase == '". $numPhaseFinale ."'");
+						//$classement .= "<tr><td>". $i ."</td><td>" .$$a ."</td></tr>";
+					}
+					$i++;
+				}
+		
+			}
+
+			if($nbEquipes > 32){
+
+				// Perdants 16ème de finales 
+				$previousLevel = chr(ord($lastLevel) - 5);
+				$previousLevel = "CH".$previousLevel;
+				$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8" OR position_label = "'. $previousLevel .'9" OR position_label = "'. $previousLevel .'10" OR position_label = "'. $previousLevel .'11" OR position_label = "'. $previousLevel .'12" OR position_label = "'. $previousLevel .'13" OR position_label = "'. $previousLevel .'14" OR position_label = "'. $previousLevel .'15" OR position_label = "'. $previousLevel .'16")';
+		
+				$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC');
+				
+				switch($nbEquipes){
+					case 64:
+						$i = 49;
+						break;
+					case 128:
+						$i = 81;
+						break;
+				}
+
+				while ($row = $resultats->fetchArray(1)) {
+					
+					$a = "place".$i;	
+					$$a = $row['num_equipe'];
+					if($$a != ''){
+						$db->exec("UPDATE classements SET class_numequipe = '". $$a ."' WHERE class_place == '". $i ."' AND class_numphase == '". $numPhaseFinale ."'");
+						//$classement .= "<tr><td>". $i ."</td><td>" .$$a ."</td></tr>";
+					}
+					$i++;
+				}
+		
+			}
+
+
+			if($nbEquipes > 64){
+
+				// Perdants 32ème de finales 
+				$previousLevel = chr(ord($lastLevel) - 6);
+				$previousLevel = "CH".$previousLevel;
+
+				$condition = '(position_label = "'. $previousLevel .'1" OR position_label = "'. $previousLevel .'2" OR position_label = "'. $previousLevel .'3" OR position_label = "'. $previousLevel .'4" OR position_label = "'. $previousLevel .'5" OR position_label = "'. $previousLevel .'6" OR position_label = "'. $previousLevel .'7" OR position_label = "'. $previousLevel .'8" OR position_label = "'. $previousLevel .'9" OR position_label = "'. $previousLevel .'10" OR position_label = "'. $previousLevel .'11" OR position_label = "'. $previousLevel .'12" OR position_label = "'. $previousLevel .'13" OR position_label = "'. $previousLevel .'14" OR position_label = "'. $previousLevel .'15" OR position_label = "'. $previousLevel .'16" OR position_label = "'. $previousLevel .'17" OR position_label = "'. $previousLevel .'18" OR position_label = "'. $previousLevel .'19" OR position_label = "'. $previousLevel .'20" OR position_label = "'. $previousLevel .'21" OR position_label = "'. $previousLevel .'22" OR position_label = "'. $previousLevel .'23" OR position_label = "'. $previousLevel .'24" OR position_label = "'. $previousLevel .'25" OR position_label = "'. $previousLevel .'26" OR position_label = "'. $previousLevel .'27" OR position_label = "'. $previousLevel .'28" OR position_label = "'. $previousLevel .'29" OR position_label = "'. $previousLevel .'30" OR position_label = "'. $previousLevel .'31" OR position_label = "'. $previousLevel .'32" OR position_label = "'. $previousLevel .'33" OR position_label = "'. $previousLevel .'34" OR position_label = "'. $previousLevel .'35" OR position_label = "'. $previousLevel .'36" OR position_label = "'. $previousLevel .'37" OR position_label = "'. $previousLevel .'38" OR position_label = "'. $previousLevel .'39" OR position_label = "'. $previousLevel .'40" OR position_label = "'. $previousLevel .'41" OR position_label = "'. $previousLevel .'42" OR position_label = "'. $previousLevel .'43" OR position_label = "'. $previousLevel .'44" OR position_label = "'. $previousLevel .'45" OR position_label = "'. $previousLevel .'46" OR position_label = "'. $previousLevel .'47" OR position_label = "'. $previousLevel .'48" OR position_label = "'. $previousLevel .'49" OR position_label = "'. $previousLevel .'50" OR position_label = "'. $previousLevel .'51" OR position_label = "'. $previousLevel .'52" OR position_label = "'. $previousLevel .'53" OR position_label = "'. $previousLevel .'54" OR position_label = "'. $previousLevel .'55" OR position_label = "'. $previousLevel .'56" OR position_label = "'. $previousLevel .'57" OR position_label = "'. $previousLevel .'58" OR position_label = "'. $previousLevel .'59" OR position_label = "'. $previousLevel .'60" OR position_label = "'. $previousLevel .'61" OR position_label = "'. $previousLevel .'62" OR position_label = "'. $previousLevel .'63" OR position_label = "'. $previousLevel .'64")';
+				$resultats = $db->query('SELECT num_equipe FROM positions_phasesfinales WHERE num_phasefinale = '. $numPhaseFinale .' AND '. $condition .' AND position_score != '. $ptsPhasesFinales. ' ORDER BY position_score DESC, score_precedent ASC');
+				
+				switch($nbEquipes){
+					case 128:
+						$i = 97;
+						break;
+				}
+
+				while ($row = $resultats->fetchArray(1)) {
+					
+					$a = "place".$i;	
+					$$a = $row['num_equipe'];
+					if($$a != ''){
+						$db->exec("UPDATE classements SET class_numequipe = '". $$a ."' WHERE class_place == '". $i ."' AND class_numphase == '". $numPhaseFinale ."'");
+						//$classement .= "<tr><td>". $i ."</td><td>" .$$a ."</td></tr>";
+					}
+					$i++;
+				}
+		
+			}
+
+		}
 	}
+///FIN CLASSEMENT ARBRE ////////////////////////////////////////////////////////
+
+// CLASSEMENT POULE ///////////////////////////////////////////////////////////
+	if($typePhaseFinale == 'poule'){
+	
+	}
+
 }
 
 function getEquipeName($numEquipe){
@@ -1984,6 +2140,56 @@ function tiragePhaseQualif($nbEquipes, $numPhase)
 	return $matchs;
 }
 
+function tiragePoulePF($nbEquipes, $numPhaseFinale, $numPhase)
+{
+	global $db;
+	//récupération des équipes qualifiées
+	$resultats = $db->query('SELECT num_equipe FROM equipes_poule_pf WHERE num_phasefinale = '. $numPhaseFinale .'');
+	$tableauEquipes = array();
+	while ($row = $resultats->fetchArray(1)) {
+		$tableauEquipes[] = $row['num_equipe'];
+	}
+
+	$nbEquipes = count($tableauEquipes);
+	if ($nbEquipes&1){
+	$nbEquipes = $nbEquipes + 1;
+		$isPair = false;
+	}else{
+		$isPair = true;
+	}
+
+	//melange du tableau
+	$melTableauEquipes = $tableauEquipes;
+	shuffle($melTableauEquipes);
+
+	if($isPair == false){
+		$melTableauEquipes[] = 'EXEMPT';
+	}
+
+
+	//Division en deux parties le tableau mélangé
+	$premierTableauEquipes = array_slice($melTableauEquipes, 0, ($nbEquipes / 2)); 
+	$secondTableauEquipes = array_slice($melTableauEquipes,($nbEquipes / 2), $nbEquipes - 1); 
+
+	//Constituer la proposition de matchs
+
+	$nbMatch = $nbEquipes / 2;
+	$numMatch = 1;
+	$indexTable = 0;
+	unset($matchs);
+	while($numMatch < $nbMatch + 1){
+			
+		$equipe1 = $premierTableauEquipes[$indexTable];
+		$equipe2 = $secondTableauEquipes[$indexTable];
+		
+		$matchs[$numMatch] = array('num_phase'=>$numPhase, 'equipe1'=>$equipe1, 'equipe2'=> $equipe2);
+		$numMatch = $numMatch + 1;
+		$indexTable = $indexTable + 1;
+	}
+	
+	return $matchs;
+}
+
 //////////////////// DEBUT FONCTIONS TIRAGES PHASE FINALE /////////////////////////////////
 
 function tiragePhaseFinale($idTournoi, $nbEquipes, $numPhase)
@@ -2023,6 +2229,190 @@ function tiragePhaseFinale($idTournoi, $nbEquipes, $numPhase)
     
     return $matchs;
 }
+
+function tiragePhaseFinalePoule($idTournoi, $nbEquipes, $numPhaseFinale)
+{
+    global $db;
+	$idPhaseFinale = infosPhaseFinaleNum($numPhaseFinale);
+	$idPhaseFinale = $idPhaseFinale['id_phasefinale'];
+    $recupEquipes = classementQualifs($idTournoi);
+    $tableauEquipes = array();
+    $countEquipe = 0;
+    $infosTournoi = infosTournoi($idTournoi);
+	$infosPhaseFinale = infosPhaseFinale($numPhaseFinale);
+    
+    // Récupérer exactement le nombre d'équipes nécessaires selon leur classement
+    foreach($recupEquipes as $row){
+        if($row['dispo_phasesfinales'] == '1' && $countEquipe < $nbEquipes){
+            $numEquipe = $row['num_equipe'];
+            $tableauEquipes[] = $numEquipe;
+            $db->exec("UPDATE equipes SET dispo_phasesfinales = '0' WHERE num_equipe == '$numEquipe'");
+            $countEquipe++;
+        }
+    }
+
+    // Compléter avec des équipes "vides" si nécessaire (exempts)
+    while(count($tableauEquipes) < $nbEquipes){
+        $tableauEquipes[] = '';
+    }
+
+	$previousInfosPhaseFinale = infosPhaseFinaleNum($numPhaseFinale -1);
+	$previousNbEquipes = $previousInfosPhaseFinale['nb_equipes'];
+
+	switch ($previousNbEquipes){
+		case 4:
+			$nbTourMax = 2;
+			break;
+		case 8:
+			$nbTourMax = 3;
+			break;
+		case 16:
+			$nbTourMax = 4;
+			break;
+		case 32:
+			$nbTourMax = 5;
+			break;
+		case 64:
+			$nbTourMax = 6;
+			break;
+		case 128:	
+			$nbTourMax = 7;
+			break;
+	}
+
+	switch ($nbEquipes){
+		case 1:
+			$nbTour = 1;
+			break;
+		case 2:
+			$nbTour = 1;
+			break;
+		case 3:
+			$nbTour = 3;
+			break;
+		case 4:
+			$nbTour = 3;
+			break;
+		case 5:
+			$nbTour = 5;
+			break;
+		case 6:
+			$nbTour = 5;
+			break;
+		case 7:
+			$nbTour = 7;
+			break;
+		case 8:	
+			$nbTour = 7;
+			break;
+		case 9:
+			$nbTour = 9;
+			break;
+		case 10:
+			$nbTour = 9;
+			break;
+		case 11:
+			$nbTour = 11;
+			break;
+		case 12:
+			$nbTour = 11;
+			break;
+		case 13:
+			$nbTour = 13;
+			break;
+		case 14:
+			$nbTour = 13;
+			break;
+		case 15:
+			$nbTour = 15;
+			break;
+		case 16:	
+			$nbTour = 15;
+			break;
+	}
+
+	if($nbTour > $nbTourMax){
+		$nbTour = $nbTourMax;
+	}
+
+	//////// creation equipes_poule_pf ///////////
+	// Vérifier si la table existe déjà
+	// La table n'existe pas, on l'importe
+	// Exécuter le script SQL pour créer la table
+	$sql = "
+	PRAGMA foreign_keys = off;
+	BEGIN TRANSACTION;
+	-- Tableau : equipes_poule_pf
+	CREATE TABLE IF NOT EXISTS equipes_poule_pf (
+		id_equipe_poule_pf INTEGER PRIMARY KEY AUTOINCREMENT, 
+		num_equipe NUMERIC, 
+		num_phasefinale NUMERIC REFERENCES phases_finales (num_phasefinale) ON DELETE CASCADE, 
+		nb_victoire NUMERIC,
+		pts_pour NUMERIC,
+		pts_contre NUMERIC,
+		pts_diff NUMERIC
+	);
+	COMMIT TRANSACTION;
+	PRAGMA foreign_keys = on;
+	";
+	
+	$db->exec($sql);
+
+	//genererPoulePhaseFinale($numPhase, $nbEquipes, $nbTour, $nbTour);
+	foreach($tableauEquipes as $equipe){
+		$db->exec("INSERT INTO equipes_poule_pf (num_equipe, num_phasefinale, nb_victoire, pts_pour, pts_contre, pts_diff) VALUES ('$equipe', '$numPhaseFinale', '0', '0', '0', '0')");
+	}
+	
+	// Générer le premier tour de la poule
+	$numPhase = 1;
+	TOUR:
+	
+	$resultats = $db->query('SELECT combinaison FROM combi_phasesfinales WHERE id_tournoi == '.$idTournoi.'');
+	while ($row = $resultats->fetchArray(1)) {
+		$listeCombinaisons[] = $row['combinaison'];
+	}
+	
+	$generation = 1;
+	TIRAGE:
+	unset($matchs);	
+	if ($generation > 100000){
+		echo "<span style=\"color: red; vertical-align: text-bottom\" class=\"uk-icon\" uk-icon=\"icon: close\"></span> Aucune combinaison trouvée ou possibles. Veuillez réessayer (plusieurs tentatives peuvent être effectuées avant de trouver une bonne combinaison).<br /><br /><a href=\"index.php?idtournoi=". $idTournoi ."&page=qualifs\"><button class=\"uk-button uk-button-primary\">Retour</button></a>";
+		die();
+	}
+	$tirage = tiragePoulePF($nbEquipes, $numPhaseFinale, $numPhase);
+	foreach ($tirage as $row){
+			$equipe1 = $row['equipe1'];
+			$equipe2 = $row['equipe2'];
+			$combi1 = "". $equipe1 ."-". $equipe2 ."";
+			$combi2 = "". $equipe2 ."-". $equipe1 ."";
+			
+			
+			if ($numPhase != 1){
+				if(in_array($combi1, $listeCombinaisons) || in_array($combi2, $listeCombinaisons)){
+					$generation = $generation + 1;
+					goto TIRAGE;
+				}
+			}
+			
+			$matchs[] = array("equipe1" => $equipe1, "equipe2" => $equipe2, "combi1" => $combi1, "combi2" => $combi2);
+	}
+	
+
+	foreach ($matchs as $row){
+		$db->exec("INSERT INTO matchs_phasesfinales (id_tournoi, id_phasefinale, num_phasefinale, equipe1, equipe2, tour_poule) VALUES ('". $idTournoi ."','". $idPhaseFinale ."','". $numPhaseFinale ."','". $row['equipe1'] ."','". $row['equipe2'] ."', '". $numPhase ."')");
+		$db->exec("INSERT INTO combi_phasesfinales (id_tournoi, id_phasefinale, num_phase, combinaison) VALUES ('". $idTournoi ."','". $idPhaseFinale ."','". $numPhase ."','". $row['combi1'] ."')");
+		$db->exec("INSERT INTO combi_phasesfinales (id_tournoi, id_phasefinale, num_phase, combinaison) VALUES ('". $idTournoi ."','". $idPhaseFinale ."','". $numPhase ."','". $row['combi2'] ."')");
+	}
+
+	$numPhase = $numPhase + 1;
+	if ($numPhase <= $nbTour){
+		goto TOUR;
+	}
+    
+}
+
+
+
 
 /**
  * Génère un bracket avec seeding optimal RÉEL
@@ -2246,6 +2636,27 @@ function creerPhaseFinale($idTournoi,$numPhaseFinale,$nbEquipes, $labelPhaseFina
         
         $db->exec($sql);
 
+	//////// ajout colonne tour_poule si absente
+	// On vérifie si la colonne existe déjà
+	$colExists = false;
+	$res = $db->query("PRAGMA table_info(matchs_phasesfinales)");
+	while ($row = $res->fetchArray(SQLITE3_ASSOC)) {
+		if ($row['name'] == 'tour_poule') {
+			$colExists = true;
+			break;
+		}
+	}
+	if (!$colExists) {
+		$sql = "
+		PRAGMA foreign_keys = off;
+		BEGIN TRANSACTION;
+		ALTER TABLE matchs_phasesfinales ADD COLUMN tour_poule INTEGER;
+		COMMIT TRANSACTION;
+		PRAGMA foreign_keys = on;
+		";
+		$db->exec($sql);
+	}
+
 
 
 	// Ajout des places selon nombre d'équipe
@@ -2286,6 +2697,9 @@ function creerPhaseFinale($idTournoi,$numPhaseFinale,$nbEquipes, $labelPhaseFina
 			$indexPosition++;
 		}
 
+	}
+	if($typePhaseFinale == "poule"){
+		$tirage = tiragePhaseFinalePoule($idTournoi, $nbEquipes, $numPhaseFinale);	
 	}
 	
 	//header("Location: index.php?idtournoi=$idTournoi&page=phasesfinales");

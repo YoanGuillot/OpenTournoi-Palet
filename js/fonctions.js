@@ -204,7 +204,118 @@ function activateLinkPF(idLink, side, ptsV, idMatch){
         });
     }
 
+
+    
+
+    
+
  
+
+    setTimeout(function (){
+  
+        var tableNbGreen = $("table[niveau='"+tableid+"'] .pointStatut.green").length;
+        var nbMatch = tableNbTR -1;
+        var numPhase = $("#"+tableid).attr("otpname");
+
+        //alert(nbMatch+", "+tableNbGreen);
+        if(nbMatch == tableNbGreen){
+            $("div[otpname='bigPoint "+tableid+"']").css('background-color', 'green');
+
+        }else{
+            $("div[otpname='bigPoint "+tableid+"']").css('background-color', 'red');
+        }
+
+        if((score1 == '' ) || (score2 == '')){
+            if((score1 == '' ) && (score2 == '')){
+                window.location.reload();
+            }
+        }else{
+                window.location.reload();
+        }
+                    
+    }, 500);
+
+
+        
+}
+
+
+function activateLinkPoulePF(idLink, side, ptsV, idMatch){
+    $("#"+idLink).css('visibility', 'hidden');
+
+
+    var tableid = $("#"+idLink).closest("table").attr("niveau");
+    var tableNbTR = $("table[niveau='"+tableid+"'] tr").length;
+    
+  
+
+    var formid = $("#"+idLink).closest("form").attr("id");
+    var url = $("#"+formid).attr("action");
+    var idTournoi = $("#"+formid+" input[name='idTournoi']").val();
+    var idPhaseFinale = $("#"+formid+" input[name='idPhaseFinale']").val();
+    var numPhaseFinale = $("#"+formid+" input[name='numPhaseFinale']").val();
+    var action = $("#"+formid+" input[name='action']").val();
+
+   
+
+     if (event.target.value != ptsV && event.target.value != ''){
+	 	$("#match-"+idMatch+"-"+side).val(ptsV);
+	 	//$("#formMatch-"+idMatch).submit();
+	
+        
+         var score1 = $("#match-"+idMatch+"-side1").val();
+         var score2 = $("#match-"+idMatch+"-side2").val();
+        
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {"idTournoi": idTournoi, "idMatch": idMatch, "numPhaseFinale": numPhaseFinale, "idPhaseFinale": idPhaseFinale, "score1": score1, "score2": score2, "action" : action},
+            cache: false,
+            success: function(){
+                $("#"+idLink).addClass('disabled');
+                $("#"+idLink).css('color', 'gray');                 
+                $("#"+idLink).css('visibility', 'visible');                 
+                $("#"+formid+" .pointStatut").css('background-color', 'green');
+                $("#"+formid+" .pointStatut").removeClass("red");               
+                $("#"+formid+" .pointStatut").addClass("green");               
+            }
+        });
+        
+     }
+    var score1 = $("#match-"+idMatch+"-side1").val();
+    var score2 = $("#match-"+idMatch+"-side2").val();
+    //alert(score1+", "+score2);
+
+    if((score1 == '' ) || (score2 == '')){
+        $("#"+idLink).addClass('disabled');
+        $("#"+idLink).css('color', 'gray');                 
+        $("#"+idLink).css('visibility', 'hidden');
+        $("#"+formid+" .pointStatut").css('background-color', 'red');
+        $("#"+formid+" .pointStatut").removeClass("green");               
+        $("#"+formid+" .pointStatut").addClass("red");
+    }
+
+    if((score1 == '' ) && (score2 == '')){
+        $("#"+idLink).css('visibility', 'visible'); 
+        $("#"+idLink).removeClass('disabled');
+        $("#"+idLink).css('color', 'green');
+
+        $.ajax({
+            type: "post",
+            url: url,
+            data: {"idTournoi": idTournoi, "idMatch": idMatch, "numPhaseFinale": numPhaseFinale, "idPhaseFinale": idPhaseFinale, "score1": score1, "score2": score2, "action" : action},
+            cache: false,
+            success: function(){
+                $("#"+idLink).addClass('disabled');
+                $("#"+idLink).css('color', 'gray');                 
+                $("#"+idLink).css('visibility', 'visible');
+                $("#"+formid+" .pointStatut").css('background-color', 'red');
+                $("#"+formid+" .pointStatut").removeClass("green");               
+                $("#"+formid+" .pointStatut").addClass("red");                 
+            }
+        });
+    }
 
     setTimeout(function (){
   

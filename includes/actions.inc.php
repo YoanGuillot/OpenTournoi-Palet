@@ -90,7 +90,17 @@ if(isset($_POST['action'])){
 					$db->exec("UPDATE positions_phasesfinales SET position_score = \"$score2\" WHERE num_phasefinale == '$numPhaseFinale' AND position_label == \"$position2\"");
 		
 			header("Location: index.php?idtournoi=$idTournoi&idphase=$idPhaseFinale&page=matchsphasesfinales");
-}
+		}
+
+		if ($_POST['action'] == 'miseajourMatchPoulePF'){
+					echo "Mise à jour match poule PF";
+					$idTournoi = $_POST['idTournoi'];
+					$idMatch = $_POST['idMatch'];
+					$score1 = $_POST['score1'];
+					$score2 = $_POST['score2'];
+					$db->exec("UPDATE matchs_phasesfinales SET score1 = \"$score1\", score2 = \"$score2\" WHERE id_matchphasesfinales == '$idMatch'");
+					//header("Location: index.php?idtournoi=$idTournoi&idphase=$idPhaseFinale&page=matchsphasesfinales");
+		}
 
 		if ($_POST['action'] == 'cloturerInscriptions'){
 					$idTournoi = $_POST['idTournoi'];

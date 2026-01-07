@@ -570,10 +570,6 @@ function constructTableMatchsPoule($idTournoi, $label, $listeEquipes, $numPlaque
 		$listeMatchs[] = $row;
 	}
 
-	$indexSelect = -1;
-	$selectOptions1 = "<option value=\"\"></option>";
-	$selectOptions2 = "<option value=\"\"></option>";
-
 	$indexPlayed = 0;
 	$nbMatchs = count($listeMatchs);
 	$tableauRow = "";
@@ -598,8 +594,10 @@ function constructTableMatchsPoule($idTournoi, $label, $listeEquipes, $numPlaque
 			$allPlayed = "red";
 		}
 	
-
-
+		$indexSelect = -1;
+		$selectOptions1 = "<option value=\"\"></option>";
+		$selectOptions2 = "<option value=\"\"></option>";
+		
 		while ($indexSelect < $ptsMatch){
 			$realValue = $indexSelect + 1;
 		

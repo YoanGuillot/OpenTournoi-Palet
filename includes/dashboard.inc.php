@@ -9,6 +9,7 @@ if (isset($_GET['idtournoi'])){
 		foreach ($listeEquipes as $row){
 			if($row['num_equipe'] != ''){
 				statsEquipe($row['num_equipe']);
+				statsEquipePoulePF($row['num_equipe']);
 			}
 		}	
 	} else {

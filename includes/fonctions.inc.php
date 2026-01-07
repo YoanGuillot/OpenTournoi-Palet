@@ -734,6 +734,49 @@ function statsEquipe($numEquipe)
 	
 }
 
+function statsEquipePoulePF($numEquipe)
+{
+	global $db;
+	$resultats = $db->query('SELECT * FROM matchs_phasesfinales WHERE ( equipe1 == '. $numEquipe.' OR equipe2 == '. $numEquipe.')');
+	
+	while ($rowResults = $resultats->fetchArray(1)) {
+		$listeMatchsEquipe[] = $rowResults;
+	}
+	
+	$ptsPour = 0;
+	$ptsContre = 0;
+	$nbVictoires = 0;
+	
+	//echo $row['score1']."-".$row['score2'];
+	if(!empty($listeMatchsEquipe)){
+		foreach ($listeMatchsEquipe as $row){
+			if ($numEquipe == $row['equipe1']){
+				if(is_numeric($row['score1'])){
+					$ptsPour = $ptsPour + $row['score1'];
+					$ptsContre = $ptsContre + $row['score2'];
+				
+					if ($row['score1'] > $row['score2']){
+						$nbVictoires = $nbVictoires + 1;
+					}
+				}
+			}else{
+				if(is_numeric($row['score2'])){
+					$ptsPour = $ptsPour + $row['score2'];
+					$ptsContre = $ptsContre + $row['score1'];
+					if ($row['score1'] < $row['score2']){
+						$nbVictoires = $nbVictoires + 1;
+					}
+				}
+			}
+		}
+	}
+	
+		$ptsDiff = $ptsPour - $ptsContre;
+		$db->exec("UPDATE equipes_poule_pf SET nb_victoires = \"$nbVictoires\", pts_pour = \"$ptsPour\", pts_contre = \"$ptsContre\", pts_diff = \"$ptsDiff\" WHERE num_equipe == '$numEquipe'");
+	
+	
+}
+
 function genererArbrePhaseFinale($numPhaseFinale,$nombreEquipes){
 	
 	global $db;
@@ -2347,7 +2390,7 @@ function tiragePhaseFinalePoule($idTournoi, $nbEquipes, $numPhaseFinale)
 		id_equipe_poule_pf INTEGER PRIMARY KEY AUTOINCREMENT, 
 		num_equipe NUMERIC, 
 		num_phasefinale NUMERIC REFERENCES phases_finales (num_phasefinale) ON DELETE CASCADE, 
-		nb_victoire NUMERIC,
+		nb_victoires NUMERIC,
 		pts_pour NUMERIC,
 		pts_contre NUMERIC,
 		pts_diff NUMERIC

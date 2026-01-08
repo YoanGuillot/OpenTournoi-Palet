@@ -2,7 +2,14 @@
 require __DIR__.'/vendor/autoload.php';
 use Spipu\Html2Pdf\Html2Pdf;
 
-
+function getEquipeName($numEquipe){
+    global $db;
+    $resultats = $db->query('SELECT nom_equipe FROM equipes WHERE num_equipe = '. $numEquipe .'');
+    while ($row = $resultats->fetchArray(1)) {
+        $nomEquipe = $row['nom_equipe'];
+    }
+    return $nomEquipe;
+}
 function infosTournoi($idTournoi)
 {	
 	global $db;
@@ -15,7 +22,19 @@ function infosTournoi($idTournoi)
 	}
 }
 
-
+function infosPhaseFinale($numPhaseFinale)
+{
+	global $db;
+	$resultats = $db->query('SELECT * FROM phases_finales WHERE num_phasefinale == "'. $numPhaseFinale .'"');
+	while ($row = $resultats->fetchArray(1)) {
+		$infosPhaseFinale = $row;
+	}
+	if(!empty($infosPhaseFinale)){
+		return $infosPhaseFinale;
+	}
+	
+	
+}
 
 function classementQualifs($idTournoi)
 {
@@ -95,17 +114,17 @@ function classementQualifs($idTournoi)
 	
 	switch ($typeClassement){
 		case "CF":
-			$orderBY = 'nb_victoires DESC, pts_pour DESC, pts_diff DESC, bonus_qualifs DESC';
+			$orderBY = 'nb_victoires DESC, pts_pour DESC, pts_diff DESC';
 			break;
 		case "Challenge17":
-			$orderBY = 'nb_victoires DESC, pts_diff DESC, pts_pour DESC, bonus_qualifs DESC';
+			$orderBY = 'nb_victoires DESC, pts_diff DESC, pts_pour DESC';
 			break;
 		case "Perso":
-			$orderBY = $condition1.$condition2.$condition3.$condition4.', bonus_qualifs DESC';
+			$orderBY = $condition1.$condition2.$condition3.$condition4;
 			break;
 	}
 
-	$resultats = $db->query('SELECT * FROM equipes ORDER BY '. $orderBY .'');
+	$resultats = $db->query('SELECT * FROM equipes_poule_pf ORDER BY '. $orderBY .'');
 	while ($row = $resultats->fetchArray(1)) {
 		$classementQualifs[] = $row;
 	}
@@ -127,11 +146,11 @@ if(isset($_GET['idtournoi'])){
     $placeEquipe = 1;
     if(!empty($classementQualifs)){
 		foreach($classementQualifs as $row) {
-			
+            $nomEquipe = getEquipeName($row['num_equipe']);			
 			$contentMain .= "<tr>
 					    <td class=\"numplaque\">$placeEquipe</td>
 					    <td>". $row['num_equipe'] ."</td>
-						<td>". $row['nom_equipe'] ."</td>
+						<td>". $nomEquipe ."</td>
 						<td>". $row['nb_victoires'] ."</td>
 						<td>". $row['pts_pour'] ."</td>
 						<td>". $row['pts_contre'] ."</td>
@@ -142,8 +161,8 @@ if(isset($_GET['idtournoi'])){
 	}
 
 
-
-
+    $numPhaseFinale = $_GET['numphasefinale'];
+    $infosPhaseFinale = infosPhaseFinale($numPhaseFinale);
 
     $contentHeader = "
                 <style>
@@ -182,7 +201,7 @@ if(isset($_GET['idtournoi'])){
                         background-color: #eeeeee;
                     }
                 </style>
-                <div class=\"enteteImpression\"><h1>CLASSEMENT QUALIFICATIONS</h1></div>
+                <div class=\"enteteImpression\"><h1>CLASSEMENT ". $infosPhaseFinale['label_phasefinale'] ."</h1></div>
                 <br>
                 <table>
                     <tr>
@@ -196,7 +215,7 @@ if(isset($_GET['idtournoi'])){
 
 
     $html2pdf->writeHTML($content);
-    $html2pdf->output('classement-qualifs.pdf', 'D');
+    $html2pdf->output('classement-poule-pf.pdf', 'D');
 }else{
     echo "ID tournoi non défini ! ";
 }

@@ -27,6 +27,18 @@ function infosEquipe($idEquipe)
 	return $infosEquipe;
 }
 
+function infosEquipePoulePF($numEquipe)
+{	
+	global $db;
+	$resultats = $db->query('SELECT * FROM equipes_poule_pf WHERE num_equipe == "'. $numEquipe .'"');
+	while ($row = $resultats->fetchArray(1)) {
+		$infosEquipePoulePF = $row;
+	}
+	if(!empty($infosEquipePoulePF)){
+		return $infosEquipePoulePF;
+	}
+}
+
 function nbEquipesrestantesPF(){
 	global $db;
 	$resultats = $db->query('SELECT COUNT(DISTINCT num_equipe) as nbEquipes FROM equipes WHERE dispo_phasesfinales == 1');

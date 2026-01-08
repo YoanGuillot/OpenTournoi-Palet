@@ -25,14 +25,14 @@ $tableauEquipes = '';
 foreach ($listeEquipes as $equipe) {
     $joueurs = htmlspecialchars($equipe['joueur1']);
     if (!empty($equipe['joueur2'])) {
-        $joueurs .= ', ' . htmlspecialchars($equipe['joueur2']);
+        $joueurs .= '&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;' . htmlspecialchars($equipe['joueur2']);
     }
     if (!empty($equipe['joueur3'])) {
-        $joueurs .= ', ' . htmlspecialchars($equipe['joueur3']);
+        $joueurs .= '&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;' . htmlspecialchars($equipe['joueur3']);
     }
 
     $tableauEquipes .= '<tr>
-        <td>' . htmlspecialchars($equipe['num_equipe']) . '</td>
+        <td bgcolor="#eeeeee"><strong>' . htmlspecialchars($equipe['num_equipe']) . '</strong></td>
         <td>' . htmlspecialchars($equipe['nom_equipe']) . '</td>
         <td>' . $joueurs . '</td>
     </tr>';
@@ -102,7 +102,8 @@ $placeEquipe = 1;
 if(!empty($classementQualifs)){
     foreach($classementQualifs as $row) {
         $tableauClassementQualifs .= '<tr>
-                <td>' . $placeEquipe . '</td>
+                <td bgcolor="#eeeeee"><strong>' . $placeEquipe . '</strong></td>
+                <td>' . $row['num_equipe'] . '</td>
                 <td>' . htmlspecialchars($row['nom_equipe']) . '</td>
                 <td>' . $row['nb_victoires'] . '</td>
                 <td>' . $row['pts_pour'] . '</td>
@@ -170,7 +171,7 @@ if ($infosPhasesFinales == ''){
 
         $numPlaque = $debutPlaques;
 
-        if($typePhaseFinale == "Arbre"){
+        if($typePhaseFinale == "arbre"){
     
 
             ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -517,7 +518,7 @@ if ($infosPhasesFinales == ''){
 
         }
 
-        if($typePhaseFinale == "Poule"){
+        if($typePhaseFinale == "poule"){
             //récupérer le nombre de tours de poules
             $resultats = $db->query("SELECT DISTINCT tour_poule FROM matchs_phasesfinales WHERE id_tournoi = '". $idTournoi ."' AND id_phasefinale = '". $idPhaseFinale ."'");
             while ($row = $resultats->fetchArray(1)) {
@@ -527,9 +528,6 @@ if ($infosPhasesFinales == ''){
 
             $listeTableauxTours = '';
             for ($i = 1; $i <= $nbTours; $i++) {
-                //Afficher les boutons d'impression pour chaque tour
-                $printButtons .= "<button class='uk-button uk-button-primary uk-margin-small-left uk-margin-small-right' onclick='printTour($i, \"$labelPhaseFinale\")'><span uk-icon=\"icon: print\"> </span> Tour $i</button>";
-                
                 //Récuperer les matchs de chaque tour
                 $resultats = $db->query("SELECT * FROM matchs_phasesfinales WHERE id_tournoi = '". $idTournoi ."' AND id_phasefinale = '". $idPhaseFinale ."' AND tour_poule = '". $i ."'");
                 while ($row = $resultats->fetchArray(1)) {
@@ -538,16 +536,11 @@ if ($infosPhasesFinales == ''){
 
                 //Générer le tableau des matchs pour chaque tour
                 $tableauTour = constructTableMatchsPouleWeb($idTournoi, "Tour $i", $matchsTour[$i], $numPlaque, $numPhaseFinale, $i);
-                $listeTableauxTours .= $tableauTour;
+                $tablesPhasesFinalesHTML .= $tableauTour;
                     
             
             }
-
-
-
-
-
-
+                    
 
         }
     }
@@ -569,15 +562,13 @@ if(!empty($classementFinal)){
         }
         
         $tableClassementFinal .= "<tr>
-                    <td>$place</td>
+                    <td bgcolor=\"#eeeeee\"><strong>$place</strong></td>
                     <td>". $row['class_numequipe'] ."</td>
                     <td>". $nomEquipe ."</td>
             </tr>";
         $place++;
     }	
 }
-
-
 
 
 $codeWeb = '<!DOCTYPE html>
@@ -716,7 +707,8 @@ $codeWeb = '<!DOCTYPE html>
                 <thead>
                     <tr>
                         <th>Rang</th>
-                        <th>Équipe</th>
+                        <th>N° Équipe</th>
+                        <th>Nom Équipe</th>
                         <th>Victoires</th>
                         <th>Pts Pour</th>
                         <th>Pts Contre</th>
@@ -741,8 +733,8 @@ $codeWeb = '<!DOCTYPE html>
             <table>
                 <thead>
                     <tr>
-                        <th>Rang</th>
-                        <th>N° Équipe</th>
+                        <th width="150">Rang</th>
+                        <th width="150">N° Équipe</th>
                         <th>Nom Équipe</th>
                     </tr>
                 </thead>

@@ -256,6 +256,8 @@ echo $content;
 		$('select').attr('disabled', true);
 		$('.uk-button').attr('disabled', true);
 		$('.uk-button').removeAttr('style');
+		$('.uk-modal-close').attr('disabled', false);
+		$('.uk-modal-close').removeClass('uk-button-danger');
 		$('a[uk-icon="unlock"]').removeAttr('href');
 		$('a[uk-icon="unlock"]').css('color', 'gray');
 		$('a[uk-icon="unlock"]').css('pointer-events', 'none');

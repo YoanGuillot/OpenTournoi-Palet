@@ -799,6 +799,41 @@ function constructTableMatchsPoule($idTournoi, $label, $listeEquipes, $numPlaque
 
 }
 
+function constructTableMatchsPouleWeb($idTournoi, $label, $listeEquipes, $numPlaque, $numPhaseFinale, $tour){
+	
+	global $db;
+	$infosTournoi = infosTournoi($idTournoi);
+	$infosPhaseFinale = infosPhaseFinaleNum($numPhaseFinale);
+	$idPhaseFinale = $infosPhaseFinale['id_phasefinale'];
+	$ptsMatch = $infosTournoi['pts_phasesfinales'];
+	$resultats = $db->query('SELECT * FROM matchs_phasesfinales WHERE num_phasefinale == '. $numPhaseFinale .' AND tour_poule == '. $tour .'');
+	while ($row = $resultats->fetchArray(1)) {
+		$listeMatchs[] = $row;
+	}
+
+	
+	$tableauRow = "";
+	$rawMatchsContent = "";
+	foreach ($listeMatchs as $row){
+		$score1 = $row['score1'];
+		$score2 = $row['score2'];
+		$equipe1 = $row['equipe1'];
+		$equipe2 = $row['equipe2'];
+	
+		$rawMatchsContent .= "<tr><td>$equipe1</td><td>$score1</td><td>$score2</td><td>$equipe2</td></tr>";
+	}
+
+	$rawMatchsHeader = "<br /><br /><br /><h3>$label</h3><table><tr><th>Equipe 1</th><th>Score 1</th><th>Score 2</th><th>Equipe 2</th></tr>";
+	$rawMatchsFooter = "</table>";
+	
+
+	$tableau = $rawMatchsHeader.$rawMatchsContent.$rawMatchsFooter;
+	
+	
+	return $tableau;
+
+}
+
 
 
 

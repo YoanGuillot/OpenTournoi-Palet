@@ -144,7 +144,7 @@ if (isset($_GET['idtournoi'])){
 		<!-- /LEFT BAR -->
 		<!-- CONTENT -->
 		<div id="content" data-uk-height-viewport="expand: true" style="height:100%; display:block;">
-			<div class="uk-container uk-container-expand">
+			<div style="margin-top:20px;" class="uk-container uk-container-expand">
 <?php
 	// include de la page concernée
 	include "includes/$page.inc.php";

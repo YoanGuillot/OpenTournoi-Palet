@@ -187,6 +187,7 @@ if ($infosTournoi['statut_inscriptions'] == "ferme"){
 	$(document).ready(function() {
 		$('input').attr('disabled', true);
 		$('a.uk-icon').css("display", 'none');
+		$('a.generate-web-btn').css("display", 'block');
 		// $('.importBouton').css("display", 'none');
 		$('.parcourirBouton').attr("disabled", false);
 		$('.visible-inline').css("display", 'inline-block');

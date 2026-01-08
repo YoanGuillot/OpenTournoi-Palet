@@ -24,10 +24,10 @@ calculClassementPF($idTournoi, $numPhaseFinale, $nbEquipes);
 					<div class="uk-width-expand uk-text-right panel-icons">
 						<form id="formPrint-classementPF" method="POST">
 							<?php if($typePhaseFinale == 'arbre'){ ?>
-								<a class="visible-inline uk-margin-right" href="PDF-classement-phasesfinales.php?idtournoi=<?php echo $idTournoi; ?>&numphasefinale=<?php echo $numPhaseFinale; ?>" uk-icon="print"></a>
+								<a class="visible-inline uk-margin-right uk-button uk-button-primary uk-border-rounded" href="PDF-classement-phasesfinales.php?idtournoi=<?php echo $idTournoi; ?>&numphasefinale=<?php echo $numPhaseFinale; ?>" uk-icon="print"></a>
 							<?php }
 							if($typePhaseFinale == 'poule'){ ?>
-								<a class="visible-inline uk-margin-right" href="PDF-classement-poulepf.php?idtournoi=<?php echo $idTournoi; ?>&numphasefinale=<?php echo $numPhaseFinale; ?>" uk-icon="print"></a>
+								<a class="visible-inline uk-margin-right uk-button uk-button-primary uk-border-rounded" href="PDF-classement-poulepf.php?idtournoi=<?php echo $idTournoi; ?>&numphasefinale=<?php echo $numPhaseFinale; ?>" uk-icon="print"></a>
 							<?php } ?>
 
 						</form>

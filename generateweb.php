@@ -131,13 +131,13 @@ if ($infosPhasesFinales == ''){
 		$numPhaseFinale = $colonnePhaseFinale[0];
 
     //nbPhaseFinale = nombre de phases finales
-
+   
     //Pour chaque phase finale, faire ceci en partant de 1 jusqu'au nombre de phases finales
     $tablesPhasesFinales = array();
     for ($i = 1; $i <= $numPhaseFinale + 1 ; $i++) {
     
-        $idPhaseFinale = $i;
-        $infosPhaseFinale = infosPhaseFinale($idPhaseFinale);
+        $numPhaseFinale = $i;
+        $infosPhaseFinale = infosPhaseFinaleNum($numPhaseFinale);
         $nbEquipes = $infosPhaseFinale['nb_equipes'];
         $idPhaseFinale = $infosPhaseFinale['id_phasefinale'];
         $labelPhaseFinale = $infosPhaseFinale['label_phasefinale'];

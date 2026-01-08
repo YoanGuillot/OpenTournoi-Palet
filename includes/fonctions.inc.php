@@ -2506,33 +2506,12 @@ function tiragePhaseFinalePoule($idTournoi, $nbEquipes, $numPhaseFinale)
 	if($nbTour > $nbTourMax){
 		$nbTour = $nbTourMax;
 	}
-
-	//////// creation equipes_poule_pf ///////////
-	// Vérifier si la table existe déjà
-	// La table n'existe pas, on l'importe
-	// Exécuter le script SQL pour créer la table
-	$sql = "
-	PRAGMA foreign_keys = off;
-	BEGIN TRANSACTION;
-	-- Tableau : equipes_poule_pf
-	CREATE TABLE IF NOT EXISTS equipes_poule_pf (
-		id_equipe_poule_pf INTEGER PRIMARY KEY AUTOINCREMENT, 
-		num_equipe NUMERIC, 
-		num_phasefinale NUMERIC REFERENCES phases_finales (num_phasefinale) ON DELETE CASCADE, 
-		nb_victoires NUMERIC,
-		pts_pour NUMERIC,
-		pts_contre NUMERIC,
-		pts_diff NUMERIC
-	);
-	COMMIT TRANSACTION;
-	PRAGMA foreign_keys = on;
-	";
 	
-	$db->exec($sql);
+	
 
 	//genererPoulePhaseFinale($numPhase, $nbEquipes, $nbTour, $nbTour);
 	foreach($tableauEquipes as $equipe){
-		$db->exec("INSERT INTO equipes_poule_pf (num_equipe, num_phasefinale, nb_victoire, pts_pour, pts_contre, pts_diff) VALUES ('$equipe', '$numPhaseFinale', '0', '0', '0', '0')");
+		$db->exec("INSERT INTO equipes_poule_pf (num_equipe, num_phasefinale, nb_victoires, pts_pour, pts_contre, pts_diff) VALUES ('$equipe', '$numPhaseFinale', '0', '0', '0', '0')");
 	}
 	
 	// Générer le premier tour de la poule

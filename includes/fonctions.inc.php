@@ -889,7 +889,13 @@ function statsEquipePoulePF($numEquipe)
 	}
 	
 		$ptsDiff = $ptsPour - $ptsContre;
-		$db->exec("UPDATE equipes_poule_pf SET nb_victoires = \"$nbVictoires\", pts_pour = \"$ptsPour\", pts_contre = \"$ptsContre\", pts_diff = \"$ptsDiff\" WHERE num_equipe == '$numEquipe'");
+		
+		   // Vérifier si l'équipe existe avant de faire l'UPDATE
+		   $checkEquipe = $db->query("SELECT COUNT(*) as count FROM equipes_poule_pf WHERE num_equipe == '$numEquipe'");
+		   $rowCheck = $checkEquipe->fetchArray();
+		   if ($rowCheck['count'] > 0) {
+			   $db->exec("UPDATE equipes_poule_pf SET nb_victoires = \"$nbVictoires\", pts_pour = \"$ptsPour\", pts_contre = \"$ptsContre\", pts_diff = \"$ptsDiff\" WHERE num_equipe == '$numEquipe'");
+		   }
 	
 	
 }

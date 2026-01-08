@@ -25,6 +25,31 @@ if (isset($_GET['idtournoi'])){
 	$page="accueil";
 }
 
+//Vérification des mise à jour de base de données
+//////// creation equipes_poule_pf ///////////
+	// Vérifier si la table existe déjà
+	// La table n'existe pas, on l'importe
+	// Exécuter le script SQL pour créer la table
+	$sql = "
+	PRAGMA foreign_keys = off;
+	BEGIN TRANSACTION;
+	-- Tableau : equipes_poule_pf
+	CREATE TABLE IF NOT EXISTS equipes_poule_pf (
+		id_equipe_poule_pf INTEGER PRIMARY KEY AUTOINCREMENT, 
+		num_equipe NUMERIC, 
+		num_phasefinale NUMERIC REFERENCES phases_finales (num_phasefinale) ON DELETE CASCADE, 
+		nb_victoires NUMERIC,
+		pts_pour NUMERIC,
+		pts_contre NUMERIC,
+		pts_diff NUMERIC
+	);
+	COMMIT TRANSACTION;
+	PRAGMA foreign_keys = on;
+	";
+    $db->exec($sql);
+
+
+
 //Chargement des fonctions
 include 'includes/fonctions.inc.php';
 

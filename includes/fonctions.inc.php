@@ -684,6 +684,7 @@ function constructTableMatchsPoule($idTournoi, $label, $listeEquipes, $numPlaque
 	$indexPlayed = 0;
 	$nbMatchs = count($listeMatchs);
 	$tableauRow = "";
+	$rawMatchsContent = "";
 	foreach ($listeMatchs as $row){
 		$idMatch = $row['id_matchphasesfinales'];
 		$score1 = $row['score1'];
@@ -757,6 +758,9 @@ function constructTableMatchsPoule($idTournoi, $label, $listeEquipes, $numPlaque
 				</form>
 			</td>
 		</tr>";
+
+		$rawMatchsContent .= "<tr><td class=\"numplaque\"> $numPlaque</td><td>$equipe1</td><td>$score1</td><td>$score2</td><td>$equipe2</td></tr>";
+
 		$numPlaque++;
 
 	}
@@ -783,6 +787,9 @@ function constructTableMatchsPoule($idTournoi, $label, $listeEquipes, $numPlaque
 								<div style=\"box-sizing:border-box;display:inline-block;width: 18%\" class=\"uk-text-center uk-text-bolder\">EQUIPE 2</div>
 							</th>
 						</tr>";
+	
+	$rawMatchsHeader = "<div style='display:none' name='$label'><h1>$label - en $ptsMatch pts</h1><table><tr><th>Plaque</th><th width=150>Equipe 1</th><th>Score 1</th><th>Score 2</th><th width=150>Equipe 2</th></tr>";
+	$rawMatchsFooter = "</table></div>";
 					
 	$tableauFooter="
 					</table>
@@ -793,6 +800,7 @@ function constructTableMatchsPoule($idTournoi, $label, $listeEquipes, $numPlaque
 	
 
 	$tableau = $tableauHead.$tableauRow.$tableauFooter;
+	$tableau = $tableauHead.$tableauRow.$tableauFooter.$rawMatchsHeader.$rawMatchsContent.$rawMatchsFooter;
 	
 	
 	return $tableau;

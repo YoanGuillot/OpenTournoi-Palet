@@ -573,3 +573,24 @@ function print1(labelPhaseFinale) {
 	document.forms["form-1"].submit();
 }
 
+function printTour(numTour, labelPhaseFinale) {
+    var labelPhaseHtml = "<page><div class=\"enteteImpression\">"+labelPhaseFinale+"</div>";
+    var principale2 = "";
+
+    
+    // Sélectionner les éléments
+    var elemsPrincipale = document.querySelectorAll("div[name='Tour "+numTour+"']");
+  
+    
+    // Récupérer le contenu HTML de chaque élément trouvé
+    if (elemsPrincipale.length > 0) {
+        principale2 = elemsPrincipale[0].innerHTML; // Prendre le premier élément
+    }
+    
+    
+    
+    var printTab2 = labelPhaseHtml+"<br>"+principale2+"</page>";
+  
+	document.getElementById('printDiv').innerHTML = "<form id='form-2' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='2'>2</input><input type='textarea' name='rawhtml' value='" + printTab2 + "'></form>";
+	document.forms["form-2"].submit();
+}

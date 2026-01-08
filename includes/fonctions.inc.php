@@ -661,14 +661,6 @@ function constructTableMatchsPFWeb($idTournoi, $label, $listeEquipes , $numPlaqu
 	return $tableau;
 }
 
-function listeMatchsPoulePF($numPhaseFinale)
-{
-	global $db;
-
-	
-	return $listeMatchs;
-}
-
 function constructTableMatchsPoule($idTournoi, $label, $listeEquipes, $numPlaque, $numPhaseFinale, $tour){
 	
 	global $db;
@@ -806,6 +798,8 @@ function constructTableMatchsPoule($idTournoi, $label, $listeEquipes, $numPlaque
 	return $tableau;
 
 }
+
+
 
 
 function statsEquipe($numEquipe)

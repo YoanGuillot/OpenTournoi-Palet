@@ -54,9 +54,14 @@ if(isset($_POST['rawhtml']) && isset($_POST['niveau'])){
     $niveau = $_POST['niveau'];
     $rawHtml = $_POST['rawhtml'];
     $rawHtml = $stylesCSS.$rawHtml;
+    $label = $_POST['label'];
 
     $html2pdf->writeHTML($rawHtml);
-    $html2pdf->output("phasefinale-$niveau.pdf", 'D');
+    if(isset($_POST['tour'])){
+        $html2pdf->output("phasefinale-$label-Tour-".$_POST['tour'].".pdf", 'D');
+    }else{
+        $html2pdf->output("phasefinale-$label-$niveau.pdf", 'D');
+    }
 }else{
     echo "Html ou niveau non définis !";
 }

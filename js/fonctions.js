@@ -569,7 +569,7 @@ function print1(labelPhaseFinale) {
     
     var printTab1 = labelPhaseHtml+"<br>"+principale1+"<br><br>"+pf1+"<br><br>"+challenge1+"<br><br>"+ChPf1+"<br><br>"+classement1+"<br><br>"+ChClassement1;
   
-	document.getElementById('printDiv').innerHTML = "<form id='form-1' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='1'>1</input><input type='textarea' name='rawhtml' value='" + printTab1 + "'></form>";
+	document.getElementById('printDiv').innerHTML = "<form id='form-1' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='1'>1</input><input name='label' value='"+labelPhaseFinale+"'>"+labelPhaseFinale+"</input><input type='textarea' name='rawhtml' value='" + printTab1 + "'></form>";
 	document.forms["form-1"].submit();
 }
 
@@ -591,6 +591,6 @@ function printTour(numTour, labelPhaseFinale) {
     
     var printTab2 = labelPhaseHtml+"<br>"+principale2+"</page>";
   
-	document.getElementById('printDiv').innerHTML = "<form id='form-2' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='2'>2</input><input type='textarea' name='rawhtml' value='" + printTab2 + "'></form>";
+	document.getElementById('printDiv').innerHTML = "<form id='form-2' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='2'>2</input><input name='label' value='"+labelPhaseFinale+"'>"+labelPhaseFinale+"</input><input name='tour' value='"+numTour+"'>"+numTour+"</input><input type='textarea' name='rawhtml' value='" + printTab2 + "'></form>";
 	document.forms["form-2"].submit();
 }

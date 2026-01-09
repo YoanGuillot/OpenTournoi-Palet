@@ -152,7 +152,7 @@ if (isset($_GET['idtournoi'])){
 ?>
 				<footer class="uk-section uk-section-small uk-width-1-1 uk-text-center donotprint">
 					<hr>
-					<p class="uk-text-center">Tournoi de Palet par Yoan Guillot - <a href="https://www.lepaletdutrefle.fr">Le Palet du Trèfle</a> - version BETA 0.18
+					<p class="uk-text-center">Tournoi de Palet par Yoan Guillot - <a href="https://www.lepaletdutrefle.fr">Le Palet du Trèfle</a> - version BETA 0.19
 					</p>
 				</footer>
 				<a href="#" data-uk-totop data-uk-scroll></a>

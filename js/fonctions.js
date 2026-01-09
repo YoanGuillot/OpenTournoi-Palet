@@ -372,7 +372,7 @@ function print64(labelPhaseFinale) {
     
     
   
-	document.getElementById('printDiv').innerHTML = "<form id='form-64' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='64'>64</input><input type='textarea' name='rawhtml' value='" + printTab64 + "'></form>";
+	document.getElementById('printDiv').innerHTML = "<form id='form-64' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='64'>64</input><input name='label' value='"+labelPhaseFinale+"'>"+labelPhaseFinale+"</input><input type='textarea' name='rawhtml' value='" + printTab64 + "'></form>";
 	document.forms["form-64"].submit();
 }
 
@@ -403,7 +403,7 @@ function print32(labelPhaseFinale) {
     
     
   
-	document.getElementById('printDiv').innerHTML = "<form id='form-32' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='32'>32</input><input type='textarea' name='rawhtml' value='" + printTab32 + "'></form>";
+	document.getElementById('printDiv').innerHTML = "<form id='form-32' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='32'>32</input><input name='label' value='"+labelPhaseFinale+"'>"+labelPhaseFinale+"</input><input type='textarea' name='rawhtml' value='" + printTab32 + "'></form>";
 	document.forms["form-32"].submit();
 }
 
@@ -434,7 +434,7 @@ function print16(labelPhaseFinale) {
     
     
   
-	document.getElementById('printDiv').innerHTML = "<form id='form-16' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='16'>16</input><input type='textarea' name='rawhtml' value='" + printTab16 + "'></form>";
+	document.getElementById('printDiv').innerHTML = "<form id='form-16' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='16'>16</input><input name='label' value='"+labelPhaseFinale+"'>"+labelPhaseFinale+"</input><input type='textarea' name='rawhtml' value='" + printTab16 + "'></form>";
 	document.forms["form-16"].submit();
 }
 
@@ -462,7 +462,7 @@ function print8(labelPhaseFinale) {
         var printTab8 = labelPhaseHtml+"<br>"+principale8+"</page><page><div class=\"enteteImpression\">Challenge "+labelPhaseFinale+"</div><br>"+challenge8+"</page>";
     }
   
-	document.getElementById('printDiv').innerHTML = "<form id='form-8' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='8'>8</input><input type='textarea' name='rawhtml' value='" + printTab8 + "'></form>";
+	document.getElementById('printDiv').innerHTML = "<form id='form-8' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='8'>8</input><input name='label' value='"+labelPhaseFinale+"'>"+labelPhaseFinale+"</input><input type='textarea' name='rawhtml' value='" + printTab8 + "'></form>";
 	document.forms["form-8"].submit();
 }
 
@@ -486,7 +486,7 @@ function print4(labelPhaseFinale) {
     
     var printTab4 = labelPhaseHtml+"<br>"+principale4+"<br><br>"+challenge4;
   
-	document.getElementById('printDiv').innerHTML = "<form id='form-4' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='4'>4</input><input type='textarea' name='rawhtml' value='" + printTab4 + "'></form>";
+	document.getElementById('printDiv').innerHTML = "<form id='form-4' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='4'>4</input><input name='label' value='"+labelPhaseFinale+"'>"+labelPhaseFinale+"</input><input type='textarea' name='rawhtml' value='" + printTab4 + "'></form>";
 	document.forms["form-4"].submit();
 }
 
@@ -522,7 +522,7 @@ function print2(labelPhaseFinale) {
     
     var printTab2 = labelPhaseHtml+"<br>"+principale2+"<br><br>"+classement2+"</page><page><div class=\"enteteImpression\">Challenge "+labelPhaseFinale+"</div><br>"+challenge2+"<br><br>"+ChClassement2+"</page>";
   
-	document.getElementById('printDiv').innerHTML = "<form id='form-2' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='2'>2</input><input type='textarea' name='rawhtml' value='" + printTab2 + "'></form>";
+	document.getElementById('printDiv').innerHTML = "<form id='form-2' action='PDF-phase-finale.php' method='post' target='_blank'><input name='niveau' value='2'>2</input><input name='label' value='"+labelPhaseFinale+"'>"+labelPhaseFinale+"</input><input type='textarea' name='rawhtml' value='" + printTab2 + "'></form>";
 	document.forms["form-2"].submit();
 }
 

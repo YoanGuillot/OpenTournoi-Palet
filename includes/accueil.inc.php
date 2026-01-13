@@ -45,7 +45,7 @@ defined('_LPDT') or die;
 					<div class="uk-panel uk-text-center">
                     <form name="form" method="post" action="index.php" enctype="multipart/form-data">
                         <!-- Taille maximale en octets. Non sécurisé car facilement contournable !! -->
-                        <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+                        <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
                         
                         <input class="uk-input" type="file" name="aFile" />
                         <br />

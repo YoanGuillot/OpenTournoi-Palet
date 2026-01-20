@@ -667,6 +667,7 @@ $codeWeb = '<!DOCTYPE html>
 </head>
 <body>
     <div class="container">
+		<center><img id="logo" style="margin: auto; width: 250px; display:none" src="logo.png" /></center>
         <h1>🏆 OpenTournoi-Palet - '. $nomTournoi .'</h1>
         
         <div class="tabs">
@@ -756,6 +757,23 @@ $codeWeb = '<!DOCTYPE html>
             document.getElementById(tabName).classList.add(\'active\');
             event.target.classList.add(\'active\');
         }
+		
+        fetch(\'logo.png\', {method: \'HEAD\'})
+            .then(response => {
+                if (response.ok) {
+                    // Le fichier existe, on affiche le logo
+                    document.getElementById(\'logo\').style.display = \'block\'; // ou \'inline\' selon votre besoin
+                } else {
+                    // Le fichier n\'existe pas, on masque le logo
+                    document.getElementById(\'logo\').style.display = \'none\';
+                }
+            })
+            .catch(() => {
+                // Erreur réseau ou autre, on masque le logo
+                document.getElementById(\'logo\').style.display = \'none\';
+            });
+
+
     </script>
 </body>
 </html>';
@@ -763,7 +781,8 @@ $codeWeb = '<!DOCTYPE html>
 //Sauvegarde du fichier
 $filePath = 'website/index.html';
 file_put_contents($filePath, $codeWeb);
-echo "Le site web a été généré avec succès : " . $filePath ."<br /><br />Pour accèder au dossier copiez-collez ce chemin dans votre explorateur de fichiers : <strong>" . realpath('website') . "</strong><br />";
+echo "Le site web a été généré avec succès : " . $filePath ."<br /><br />Pour accèder au dossier copiez-collez ce chemin dans votre explorateur de fichiers : <strong>" . realpath('website') . "</strong>
+<br />Pour ajouter votre logo au site web, copiez-collez votre fichier image nommé <strong>logo.png</strong> dans le dossier : <strong>" . realpath('website') . "</strong><br />Le logo sera affiché en haut de la page (idem pour le FTP, uploadez votre logo.png à coté du fichier index.php .<br /></strong>";
 
 
 

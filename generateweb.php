@@ -40,11 +40,11 @@ foreach ($listeEquipes as $equipe) {
 
 //Récupération des infos des phases qualificatives
 $infosPhase = infosPhase();
-
+$tablesPhasesQualifsHTML = '';
 //Récupération du nombre de phases qualificatives
 if ($infosPhase == ''){
 		$nbPhase = 0;
-		$content = "Aucune phase de qualification";
+		$tablesPhasesQualifsHTML = "Aucune phase de qualification";
 }else{
 		$colonnePhase = array_column($infosPhase, 'num_phase');
 		rsort($colonnePhase, SORT_NUMERIC);
@@ -87,7 +87,7 @@ for ($i = 1; $i <= $nbPhase; $i++) {
 }
 
 //insérer dans une variable chaque tableau de résultats des phases qualificatives
-$tablesPhasesQualifsHTML = '';
+
 for ($i = 1; $i <= $nbPhase; $i++) {
     $tablesPhasesQualifsHTML .= '<br /><br /><br /><h3>Phase de Qualification ' . $i . '</h3>';
     $tablesPhasesQualifsHTML .= $tablesPhasesQualifs[$i];

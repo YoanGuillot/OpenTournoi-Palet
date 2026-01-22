@@ -166,7 +166,7 @@
 .uk-progress {
 	height: 3px;
 	margin-bottom: 0.5rem;
-	background-color: rgba(0,0,0,0.23);
+	background-color: rgba(255,255,255,0.6);
 
 }
 * + .uk-progress {
@@ -190,6 +190,7 @@
 .uk-progress.success::-ms-fill {
   background-color: #32d296;
 }
+
 /* Charts */
 .chart-container {
 	position: relative;

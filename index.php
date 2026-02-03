@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 <body>
 	
 <?php
-	if ($page != 'accuei') { ?>
+	if ($page != 'accueil') { ?>
 	<div style="position: fixed;top: 60px; right: 100px;z-index: 1000;">
 		<a href="#" style="background-color: #FFFFFF; color: #000000;border:1px solid #cccccc; border-radius:50%; padding: 16px; box-shadow: 0 5px 25px rgba(0,0,0,.1)" class="uk-icon-link generate-web-btn" title="Générer site Web" data-idtournoi="<?= $idTournoi ?>" data-uk-tooltip data-uk-icon="icon: cloud-upload"></a>
 		</a>
@@ -107,8 +107,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 //renvoi vers le dashboard dashboard
 include 'includes/dashboard.inc.php';
 
+// Afficher le bouton de vérification des mises à jour uniquement sur la page d'accueil
+if ($page === 'accueil') {
 ?>
-
+<!-- Bouton pour vérifier les mises à jour -->
+<div style="position: fixed;top: 5px; right: 100px;z-index: 1000;">
+    <button id="checkUpdateBtn" class="uk-button uk-button-primary" title="Vérifier les mises à jour">
+        <span uk-icon="icon: refresh"></span> Vérifier les mises à jour
+    </button>
+</div>
+<!-- Modal pour affichage du résultat de la vérification/mise à jour -->
+<div id="updateModal" class="uk-flex-top" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <h3 class="uk-modal-title">Mise à jour du logiciel</h3>
+        <div id="updateModalContent" style="max-height:60vh; overflow:auto;"></div>
+        <div class="uk-text-right uk-margin-top">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Fermer</button>
+        </div>
+    </div>
+</div>
+<?php
+}
+?>
 <!-- Modal pour affichage du résultat de generateweb.php -->
 <div id="generateWebModal" class="uk-flex-top" uk-modal>
     <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
@@ -129,8 +150,9 @@ include 'includes/dashboard.inc.php';
 <script>
 // petit helper pour échapper le HTML (afin d'afficher le output brut)
 
-
 $(document).ready(function() {
+    <?php if ($page != 'accueil') { ?>
+    // Génération du site web
     $('.generate-web-btn, .generate-web-btn-gestion').on('click', function(e){
         e.preventDefault();
         var idtournoi = $(this).data('idtournoi');
@@ -138,7 +160,6 @@ $(document).ready(function() {
         // afficher modal et loader
         $('#generateWebModalContent').html('<div class="uk-text-center uk-padding-small"><div uk-spinner="ratio: 1.5"></div><div>Génération en cours, veuillez patienter...</div></div>');
         $modal.show();
-
         // lancer la requête AJAX (GET car generateweb.php lit idtournoi en GET)
         $.ajax({
             url: 'generateweb.php',
@@ -154,6 +175,50 @@ $(document).ready(function() {
                 var msg = 'Erreur lors de la génération (' + status + ')';
                 if (xhr && xhr.responseText) msg += ' : ' + xhr.responseText;
                 $('#generateWebModalContent').html('<div class="uk-alert-danger" uk-alert><p>' + msg + '</p></div>');
+            }
+        });
+    });
+    <?php } ?>
+
+    // Vérification et mise à jour
+    $('#checkUpdateBtn').on('click', function(e){
+        e.preventDefault();
+        var $modal = UIkit.modal('#updateModal');
+        $('#updateModalContent').html('<div class="uk-text-center uk-padding-small"><div uk-spinner="ratio: 1.5"></div><div>Vérification en cours, veuillez patienter...</div></div>');
+        $modal.show();
+        $.ajax({
+            url: 'update.php',
+            method: 'POST',
+            data: { action: 'check' },
+            dataType: 'html',
+            timeout: 60000,
+            success: function(response) {
+                $('#updateModalContent').html(response);
+                // Si un bouton "Mettre à jour" est présent dans la réponse, on gère son clic
+                $('#doUpdateBtn').on('click', function(ev){
+                    ev.preventDefault();
+                    $('#updateModalContent').html('<div class="uk-text-center uk-padding-small"><div uk-spinner="ratio: 1.5"></div><div>Mise à jour en cours...</div></div>');
+                    $.ajax({
+                        url: 'update.php',
+                        method: 'POST',
+                        data: { action: 'update' },
+                        dataType: 'html',
+                        timeout: 300000,
+                        success: function(resp) {
+                            $('#updateModalContent').html(resp);
+                        },
+                        error: function(xhr, status, err) {
+                            var msg = 'Erreur lors de la mise à jour (' + status + ')';
+                            if (xhr && xhr.responseText) msg += ' : ' + xhr.responseText;
+                            $('#updateModalContent').html('<div class="uk-alert-danger" uk-alert><p>' + msg + '</p></div>');
+                        }
+                    });
+                });
+            },
+            error: function(xhr, status, err) {
+                var msg = 'Erreur lors de la vérification (' + status + ')';
+                if (xhr && xhr.responseText) msg += ' : ' + xhr.responseText;
+                $('#updateModalContent').html('<div class="uk-alert-danger" uk-alert><p>' + msg + '</p></div>');
             }
         });
     });

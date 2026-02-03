@@ -74,7 +74,7 @@ if (isset($_GET['idtournoi'])){
 					<div class="uk-navbar-right">
 <?php
 
-	// Si aucun tournoi en cours
+	// Si tournoi en cours
 	if ($page != "accueil"){
 ?>
 						<ul class="uk-navbar-nav">
@@ -102,7 +102,7 @@ if (isset($_GET['idtournoi'])){
 			</div>
 	
 <?php
-	// Si aucun tournoi en cours
+	// Si tournoi en cours
 	if ($page != "accueil"){
 ?>
 

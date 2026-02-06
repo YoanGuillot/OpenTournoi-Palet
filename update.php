@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         if (file_exists($local_version_file)) {
             $local_version = trim(file_get_contents($local_version_file));
         }
-        $remote_base_url = 'https://tournoi.lepaletdutrefle.fr/update/';
+        $remote_base_url = 'http://tournoi.lepaletdutrefle.fr/update/';
         $remote_version_url = $remote_base_url . 'version.txt';
         $remote_version = null;
         $remote_version_content = @file_get_contents($remote_version_url);
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         exit;
     }
     if ($action === 'update') {
-        $remote_zip_url = 'https://tournoi.lepaletdutrefle.fr/update/update.zip';
+        $remote_zip_url = 'http://tournoi.lepaletdutrefle.fr/update/update.zip';
         $local_zip = __DIR__ . '/update.zip';
         $extract_to = __DIR__ . '/';  // Racine du projet
         // Téléchargement du zip

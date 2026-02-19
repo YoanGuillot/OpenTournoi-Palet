@@ -34,3 +34,30 @@ https://www.lepaletdutrefle.fr
 
 Vous aimez ce logiciel, aidez nous en soutenant notre association sportive de palet en nous adressant un don à cette adresse :
 https://www.helloasso.com/associations/le-palet-du-trefle/formulaires/1
+
+
+
+## 📄 Licence et confidentialité
+
+- **Licence** : [MIT License](LICENSE) - Logiciel libre et gratuit
+- **Confidentialité** : [Politique de confidentialité](PRIVACY.md) - Aucune collecte de données
+- **Conditions** : [Conditions d'utilisation](TERMS.md)
+```
+
+## Dans Partner Center - Les URLs à utiliser
+
+Une fois les fichiers créés sur GitHub, utilisez ces URLs dans Partner Center :
+
+### Privacy Policy URL
+```
+https://github.com/YoanGuillot/OpenTournoi-Palet/blob/main/PRIVACY.md
+```
+
+### License/Terms URL
+```
+https://github.com/YoanGuillot/OpenTournoi-Palet/blob/main/LICENSE
+```
+
+### Support Contact
+```
+https://github.com/YoanGuillot/OpenTournoi-Palet/issues

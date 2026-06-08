@@ -65,6 +65,7 @@ for ($i = 1; $i <= $nbPhase; $i++) {
     $tableHTML = '<table>
         <thead>
             <tr>
+                <th style="text-align:center;">N° Plaque</th>
                 <th style="text-align:center;">Équipe 1</th>
                 <th style="text-align:center;">Score 1</th>
                 <th style="text-align:center;">Score 2</th>
@@ -72,14 +73,16 @@ for ($i = 1; $i <= $nbPhase; $i++) {
             </tr>
         </thead>
         <tbody>';
-    
+    $numPlaque = 1;
     foreach ($matchsPhasesQualifs[$i] as $match) {
         $tableHTML .= '<tr>
+            <td style="text-align:center;">' . $numPlaque . '</td>
             <td style="text-align:center;">' . $match['equipe1'] . '</td>
             <td style="text-align:center;">' . $match['score1'] . '</td>
             <td style="text-align:center;">' . $match['score2'] . '</td>
             <td style="text-align:center;">' . $match['equipe2'] . '</td>
         </tr>';
+        $numPlaque = $numPhaseFinale + 1;
     }
     
     $tableHTML .= '</tbody></table>';

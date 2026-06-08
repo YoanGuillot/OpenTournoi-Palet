@@ -82,7 +82,7 @@ for ($i = 1; $i <= $nbPhase; $i++) {
             <td style="text-align:center;">' . $match['score2'] . '</td>
             <td style="text-align:center;">' . $match['equipe2'] . '</td>
         </tr>';
-        $numPlaque = $numPhaseFinale + 1;
+        $numPlaque = $numPlaque + 1;
     }
     
     $tableHTML .= '</tbody></table>';

@@ -4,7 +4,7 @@ if(isset($_POST['action'])){
 	
 	
 		if ($_POST['action'] == 'creationTournoi'){
-				$nomTournoi = $_POST['nomTournoi'];
+				$nomTournoi = $db->escapeString($_POST['nomTournoi']);
 				$idTournoi = date('YmdHis');
 				$idTournoi = intval($idTournoi);
 				copy('./includes/conf/models/idtournoi.db', './includes/conf/'. $idTournoi .'.db');
@@ -19,24 +19,24 @@ if(isset($_POST['action'])){
 		}
 
 		if ($_POST['action'] == 'creationEquipe'){
-					$nomEquipe = $_POST['nomEquipe'];
-					$joueur1 = $_POST['joueur1'];
-					$joueur2 = $_POST['joueur2'];
-					$joueur3 = $_POST['joueur3'];
+					$nomEquipe = $db->escapeString($_POST['nomEquipe']);
+					$joueur1 = $db->escapeString($_POST['joueur1']);
+					$joueur2 = $db->escapeString($_POST['joueur2']);
+					$joueur3 = $db->escapeString($_POST['joueur3']);
 					$db->exec("INSERT INTO equipes (nom_equipe, joueur1, joueur2, joueur3) VALUES ('". $nomEquipe ."', '". $joueur1 ."', '". $joueur2 ."', '". $joueur3 ."')");
 					
 					header("Location: index.php?idtournoi=$idTournoi&page=equipes");
 		}
 
 		if ($_POST['action'] == 'miseajourEquipe'){
-					$idTournoi = $_POST['idTournoi'];
-					$idEquipe = $_POST['idEquipe'];
-					$numEquipe = $_POST['numEquipe'];
-					$nomEquipe = $_POST['nomEquipe'];
-					$joueur1 = $_POST['joueur1'];
-					$joueur2 = $_POST['joueur2'];
-					$joueur3 = $_POST['joueur3'];
-					$bonusQualifs = $_POST['bonusQualifs'];
+					$idTournoi = intval($_POST['idTournoi']);
+					$idEquipe = intval($_POST['idEquipe']);
+					$numEquipe = intval($_POST['numEquipe']);
+					$nomEquipe = $db->escapeString($_POST['nomEquipe']);
+					$joueur1 = $db->escapeString($_POST['joueur1']);
+					$joueur2 = $db->escapeString($_POST['joueur2']);
+					$joueur3 = $db->escapeString($_POST['joueur3']);
+					$bonusQualifs = intval($_POST['bonusQualifs']);
 					$db->exec("UPDATE equipes SET num_equipe = \"$numEquipe\", nom_equipe = \"$nomEquipe\", joueur1 = \"$joueur1\", joueur2 = \"$joueur2\", joueur3 = \"$joueur3\", bonus_qualifs = \"$bonusQualifs\" WHERE id_equipe == '$idEquipe'");
 					
 					header("Location: index.php?idtournoi=$idTournoi&page=equipes");

@@ -117,14 +117,11 @@ if ($page === 'accueil') {
     </button>
 </div>
 <!-- Modal pour affichage du résultat de la vérification/mise à jour -->
-<div id="updateModal" class="uk-flex-top" uk-modal>
+<div id="updateModal" class="uk-flex-top" uk-modal="esc-close: false; bg-close: false">
     <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-        <button class="uk-modal-close-default" type="button" uk-close></button>
         <h3 class="uk-modal-title">Mise à jour du logiciel</h3>
         <div id="updateModalContent" style="max-height:60vh; overflow:auto;"></div>
-        <div class="uk-text-right uk-margin-top">
-            <button class="uk-button uk-button-default uk-modal-close" type="button">Fermer</button>
-        </div>
+        <div id="updateModalFooter" class="uk-text-right uk-margin-top"></div>
     </div>
 </div>
 <?php
@@ -180,12 +177,8 @@ $(document).ready(function() {
     });
     <?php } ?>
 
-    // Vérification et mise à jour
-    $('#checkUpdateBtn').on('click', function(e){
-        e.preventDefault();
-        var $modal = UIkit.modal('#updateModal');
-        $('#updateModalContent').html('<div class="uk-text-center uk-padding-small"><div uk-spinner="ratio: 1.5"></div><div>Vérification en cours, veuillez patienter...</div></div>');
-        $modal.show();
+    // Vérification des mises à jour
+    function checkForUpdate(isAutomatic) {
         $.ajax({
             url: 'update.php',
             method: 'POST',
@@ -193,10 +186,31 @@ $(document).ready(function() {
             dataType: 'html',
             timeout: 60000,
             success: function(response) {
+                var updateAvailable = response.indexOf('doUpdateBtn') !== -1;
+
+                if (isAutomatic && !updateAvailable) {
+                    // Vérification silencieuse en arrière-plan : tout est à jour, on ne dérange pas l'utilisateur
+                    return;
+                }
+
+                var $modal = UIkit.modal('#updateModal');
+
                 $('#updateModalContent').html(response);
-                // Si un bouton "Mettre à jour" est présent dans la réponse, on gère son clic
+
+                if (updateAvailable) {
+                    // Mise à jour disponible : bouton Annuler + bouton Mettre à jour (déjà présent dans response)
+                    $('#updateModalFooter').html('<button class="uk-button uk-button-default" id="cancelUpdateBtn" type="button">Annuler</button>');
+                } else {
+                    // Vérification manuelle, à jour : juste Fermer
+                    $('#updateModalFooter').html('<button class="uk-button uk-button-default" id="cancelUpdateBtn" type="button">Fermer</button>');
+                }
+                $('#cancelUpdateBtn').on('click', function(){ $modal.hide(); });
+
+                $modal.show();
+
                 $('#doUpdateBtn').on('click', function(ev){
                     ev.preventDefault();
+                    $('#updateModalFooter').html('');
                     $('#updateModalContent').html('<div class="uk-text-center uk-padding-small"><div uk-spinner="ratio: 1.5"></div><div>Mise à jour en cours...</div></div>');
                     $.ajax({
                         url: 'update.php',
@@ -206,21 +220,48 @@ $(document).ready(function() {
                         timeout: 300000,
                         success: function(resp) {
                             $('#updateModalContent').html(resp);
+                            $('#updateModalFooter').html('<button class="uk-button uk-button-default" id="cancelUpdateBtn" type="button">Fermer</button>');
+                            $('#cancelUpdateBtn').on('click', function(){ $modal.hide(); });
                         },
                         error: function(xhr, status, err) {
                             var msg = 'Erreur lors de la mise à jour (' + status + ')';
                             if (xhr && xhr.responseText) msg += ' : ' + xhr.responseText;
                             $('#updateModalContent').html('<div class="uk-alert-danger" uk-alert><p>' + msg + '</p></div>');
+                            $('#updateModalFooter').html('<button class="uk-button uk-button-default" id="cancelUpdateBtn" type="button">Fermer</button>');
+                            $('#cancelUpdateBtn').on('click', function(){ $modal.hide(); });
                         }
                     });
                 });
             },
             error: function(xhr, status, err) {
+                if (isAutomatic) {
+                    // Échec silencieux en automatique : pas de connexion, serveur de mise à jour indisponible, etc.
+                    return;
+                }
                 var msg = 'Erreur lors de la vérification (' + status + ')';
                 if (xhr && xhr.responseText) msg += ' : ' + xhr.responseText;
+                var $modal = UIkit.modal('#updateModal');
                 $('#updateModalContent').html('<div class="uk-alert-danger" uk-alert><p>' + msg + '</p></div>');
+                $('#updateModalFooter').html('<button class="uk-button uk-button-default" id="cancelUpdateBtn" type="button">Fermer</button>');
+                $('#cancelUpdateBtn').on('click', function(){ $modal.hide(); });
+                $modal.show();
             }
         });
+    }
+
+    <?php if ($page === 'accueil') { ?>
+    // Vérification automatique au chargement de la page d'accueil uniquement
+    checkForUpdate(true);
+    <?php } ?>
+
+    // Vérification manuelle via le bouton (présent uniquement sur la page d'accueil)
+    $('#checkUpdateBtn').on('click', function(e){
+        e.preventDefault();
+        var $modal = UIkit.modal('#updateModal');
+        $('#updateModalContent').html('<div class="uk-text-center uk-padding-small"><div uk-spinner="ratio: 1.5"></div><div>Vérification en cours, veuillez patienter...</div></div>');
+        $('#updateModalFooter').html('');
+        $modal.show();
+        checkForUpdate(false);
     });
 });
 </script>

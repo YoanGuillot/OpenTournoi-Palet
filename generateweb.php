@@ -2,6 +2,9 @@
 //Interdit l'accès directe
 define( '_LPDT', 1 );
 date_default_timezone_set("Europe/Paris");
+
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 error_reporting(0);
 
 //récupération de l'id du tournoi
@@ -140,6 +143,7 @@ if ($infosPhasesFinales == ''){
     $tablesPhasesFinales = array();
     for ($i = 1; $i <= $numPhaseFinale + 1 ; $i++) {
     
+
         $numPhaseFinale = $i;
         $infosPhaseFinale = infosPhaseFinaleNum($numPhaseFinale);
         $nbEquipes = $infosPhaseFinale['nb_equipes'];
@@ -152,6 +156,7 @@ if ($infosPhasesFinales == ''){
         } 
 
         $numPhaseFinale = $infosPhaseFinale['num_phasefinale'];
+		
         // en cas de poule impaire, on ajoute une équipe fictive pour équilibrer le calcul des plaques
         if($nbEquipes % 2 != 0){
            $nbEquipes = $nbEquipes + 1;
@@ -520,31 +525,36 @@ if ($infosPhasesFinales == ''){
             }    
 
         }
-
+echo $numPlaque;
         if($typePhaseFinale == "poule"){
             //récupérer le nombre de tours de poules
-            $resultats = $db->query("SELECT DISTINCT tour_poule FROM matchs_phasesfinales WHERE id_tournoi = '". $idTournoi ."' AND id_phasefinale = '". $idPhaseFinale ."'");
-            while ($row = $resultats->fetchArray(1)) {
+            
+			$nbTours = array();
+			$matchsTour = array();
+			$resultats = $db->query("SELECT DISTINCT tour_poule FROM matchs_phasesfinales WHERE id_tournoi = '". $idTournoi ."' AND id_phasefinale = '". $idPhaseFinale ."'");
+			while ($row = $resultats->fetchArray(1)) {
                 $nbTours[] = $row['tour_poule'];
             }
             $nbTours = count($nbTours);
 
             $listeTableauxTours = '';
-            for ($i = 1; $i <= $nbTours; $i++) {
+
+            for ($t = 1; $t <= $nbTours; $t++) {
+
                 //Récuperer les matchs de chaque tour
-                $resultats = $db->query("SELECT * FROM matchs_phasesfinales WHERE id_tournoi = '". $idTournoi ."' AND id_phasefinale = '". $idPhaseFinale ."' AND tour_poule = '". $i ."'");
+                $resultats = $db->query("SELECT * FROM matchs_phasesfinales WHERE id_tournoi = '". $idTournoi ."' AND id_phasefinale = '". $idPhaseFinale ."' AND tour_poule = '". $t ."'");
                 while ($row = $resultats->fetchArray(1)) {
-                    $matchsTour[$i][] = $row;
+                    $matchsTour[$t][] = $row;
                 }
 
                 //Générer le tableau des matchs pour chaque tour
-                $tableauTour = constructTableMatchsPouleWeb($idTournoi, "Tour $i", $matchsTour[$i], $numPlaque, $numPhaseFinale, $i);
+                $tableauTour = constructTableMatchsPouleWeb($idTournoi, "Tour $t", $matchsTour[$t], $numPlaque, $numPhaseFinale, $t);
                 $tablesPhasesFinalesHTML .= $tableauTour;
                     
             
             }
                     
-
+		
         }
     }
 }
